@@ -45,6 +45,7 @@
 					{!! trans('messages.finish_help_hint', ['supportUrl' => $supportUrl]) !!}
 				</li>
 			</ul>
+			
 			<p class="mt-4">
 				{!! trans('messages.finish_thanks', ['itemName' => $itemName, 'itemUrl' => $itemUrl, 'itemLinkLabel' => $itemLinkLabel]) !!}
 			</p>

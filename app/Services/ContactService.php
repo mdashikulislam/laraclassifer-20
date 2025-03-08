@@ -27,6 +27,7 @@ use App\Notifications\FormSent;
 use App\Notifications\ReportSent;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Notification;
+use Throwable;
 
 class ContactService extends BaseService
 {
@@ -60,7 +61,7 @@ class ContactService extends BaseService
 			];
 			
 			return apiResponse()->json($data);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 	}
@@ -106,7 +107,7 @@ class ContactService extends BaseService
 			];
 			
 			return apiResponse()->json($data);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 	}

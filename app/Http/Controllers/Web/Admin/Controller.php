@@ -19,6 +19,7 @@ namespace App\Http\Controllers\Web\Admin;
 use App\Http\Controllers\Web\Front\Traits\CommonTrait;
 use App\Http\Controllers\Web\Front\Traits\RobotsTxtTrait;
 use App\Models\Setting;
+use Throwable;
 
 class Controller extends \App\Http\Controllers\Controller
 {
@@ -61,7 +62,7 @@ class Controller extends \App\Http\Controllers\Controller
 				$settings = cache()->remember($cacheId, $cacheExpiration, function () {
 					return Setting::query()->orderBy('lft')->get(['id', 'key', 'name']);
 				});
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		

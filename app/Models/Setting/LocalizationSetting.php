@@ -99,32 +99,32 @@ class LocalizationSetting
 				'value' => trans('admin.localization_geolocation'),
 			],
 			[
-				'name'              => 'geoip_activation',
-				'label'             => trans('admin.geoip_activation_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.geoip_activation_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'geoip_activation',
+				'label'   => trans('admin.geoip_activation_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.geoip_activation_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'geoip_driver',
-				'label'             => trans('admin.geoip_driver_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $geoipDrivers,
-				'hint'              => trans('admin.geoip_driver_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'geoip_driver',
+				'label'   => trans('admin.geoip_driver_label'),
+				'type'    => 'select2_from_array',
+				'options' => $geoipDrivers,
+				'hint'    => trans('admin.geoip_driver_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'geoip_driver_test',
-				'label'             => trans('admin.geoip_driver_test_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.geoip_driver_test_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'geoip_driver_test',
+				'label'   => trans('admin.geoip_driver_test_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.geoip_driver_test_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 mt-3',
 				],
 			],
@@ -134,18 +134,18 @@ class LocalizationSetting
 		if (array_key_exists('ipinfo', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipinfo_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipinfo_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipinfo_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipinfo_info'),
+					'wrapper' => [
 						'class' => 'ipinfo',
 					],
 				],
 				[
-					'name'              => 'ipinfo_token',
-					'label'             => trans('admin.ipinfo_token_label'),
-					'type'              => 'text',
-					'wrapperAttributes' => [
+					'name'    => 'ipinfo_token',
+					'label'   => trans('admin.ipinfo_token_label'),
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'col-md-6 ipinfo',
 					],
 				],
@@ -156,26 +156,26 @@ class LocalizationSetting
 		if (array_key_exists('dbip', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'dbip_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.dbip_info'),
-					'wrapperAttributes' => [
+					'name'    => 'dbip_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.dbip_info'),
+					'wrapper' => [
 						'class' => 'dbip',
 					],
 				],
 				[
-					'name'              => 'dbip_pro',
-					'label'             => trans('admin.geoip_driver_pro_label'),
-					'type'              => 'checkbox_switch',
-					'wrapperAttributes' => [
+					'name'    => 'dbip_pro',
+					'label'   => trans('admin.geoip_driver_pro_label'),
+					'type'    => 'checkbox_switch',
+					'wrapper' => [
 						'class' => 'col-md-6 dbip',
 					],
 				],
 				[
-					'name'              => 'dbip_api_key',
-					'label'             => trans('admin.dbip_api_key_label'),
-					'type'              => 'text',
-					'wrapperAttributes' => [
+					'name'    => 'dbip_api_key',
+					'label'   => trans('admin.dbip_api_key_label'),
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'col-md-6 dbip',
 					],
 				],
@@ -186,19 +186,19 @@ class LocalizationSetting
 		if (array_key_exists('ipbase', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipbase_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipbase_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipbase_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipbase_info'),
+					'wrapper' => [
 						'class' => 'ipbase',
 					],
 				],
 				[
-					'name'              => 'ipbase_api_key',
-					'label'             => trans('admin.ipbase_api_key_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'ipbase_api_key',
+					'label'    => trans('admin.ipbase_api_key_label'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 ipbase',
 					],
 				],
@@ -209,19 +209,19 @@ class LocalizationSetting
 		if (array_key_exists('ip2location', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ip2location_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ip2location_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ip2location_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ip2location_info'),
+					'wrapper' => [
 						'class' => 'ip2location',
 					],
 				],
 				[
-					'name'              => 'ip2location_api_key',
-					'label'             => trans('admin.ip2location_api_key_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'ip2location_api_key',
+					'label'    => trans('admin.ip2location_api_key_label'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 ip2location',
 					],
 				],
@@ -232,18 +232,18 @@ class LocalizationSetting
 		if (array_key_exists('ipapi', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipapi_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipapi_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipapi_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipapi_info'),
+					'wrapper' => [
 						'class' => 'ipapi',
 					],
 				],
 				[
-					'name'              => 'ipapi_pro',
-					'label'             => trans('admin.geoip_driver_pro_label'),
-					'type'              => 'checkbox_switch',
-					'wrapperAttributes' => [
+					'name'    => 'ipapi_pro',
+					'label'   => trans('admin.geoip_driver_pro_label'),
+					'type'    => 'checkbox_switch',
+					'wrapper' => [
 						'class' => 'col-md-6 ipapi',
 					],
 				],
@@ -254,10 +254,10 @@ class LocalizationSetting
 		if (array_key_exists('ipapico', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipapico_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipapico_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipapico_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipapico_info'),
+					'wrapper' => [
 						'class' => 'ipapico',
 					],
 				],
@@ -268,19 +268,19 @@ class LocalizationSetting
 		if (array_key_exists('ipgeolocation', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipgeolocation_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipgeolocation_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipgeolocation_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipgeolocation_info'),
+					'wrapper' => [
 						'class' => 'ipgeolocation',
 					],
 				],
 				[
-					'name'              => 'ipgeolocation_api_key',
-					'label'             => trans('admin.ipgeolocation_api_key_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'ipgeolocation_api_key',
+					'label'    => trans('admin.ipgeolocation_api_key_label'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 ipgeolocation',
 					],
 				],
@@ -291,26 +291,26 @@ class LocalizationSetting
 		if (array_key_exists('iplocation', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'iplocation_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.iplocation_info'),
-					'wrapperAttributes' => [
+					'name'    => 'iplocation_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.iplocation_info'),
+					'wrapper' => [
 						'class' => 'iplocation',
 					],
 				],
 				[
-					'name'              => 'iplocation_pro',
-					'label'             => trans('admin.geoip_driver_pro_label'),
-					'type'              => 'checkbox_switch',
-					'wrapperAttributes' => [
+					'name'    => 'iplocation_pro',
+					'label'   => trans('admin.geoip_driver_pro_label'),
+					'type'    => 'checkbox_switch',
+					'wrapper' => [
 						'class' => 'col-md-6 iplocation',
 					],
 				],
 				[
-					'name'              => 'iplocation_api_key',
-					'label'             => trans('admin.iplocation_api_key_label'),
-					'type'              => 'text',
-					'wrapperAttributes' => [
+					'name'    => 'iplocation_api_key',
+					'label'   => trans('admin.iplocation_api_key_label'),
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'col-md-6 iplocation',
 					],
 				],
@@ -321,26 +321,26 @@ class LocalizationSetting
 		if (array_key_exists('ipstack', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'ipstack_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.ipstack_info'),
-					'wrapperAttributes' => [
+					'name'    => 'ipstack_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.ipstack_info'),
+					'wrapper' => [
 						'class' => 'ipstack',
 					],
 				],
 				[
-					'name'              => 'ipstack_pro',
-					'label'             => trans('admin.geoip_driver_pro_label'),
-					'type'              => 'checkbox_switch',
-					'wrapperAttributes' => [
+					'name'    => 'ipstack_pro',
+					'label'   => trans('admin.geoip_driver_pro_label'),
+					'type'    => 'checkbox_switch',
+					'wrapper' => [
 						'class' => 'col-md-6 ipstack',
 					],
 				],
 				[
-					'name'              => 'ipstack_access_key',
-					'label'             => trans('admin.ipstack_access_key_label'),
-					'type'              => 'text',
-					'wrapperAttributes' => [
+					'name'    => 'ipstack_access_key',
+					'label'   => trans('admin.ipstack_access_key_label'),
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'col-md-6 ipstack',
 					],
 				],
@@ -351,28 +351,28 @@ class LocalizationSetting
 		if (array_key_exists('maxmind_api', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'maxmind_api_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.maxmind_api_info'),
-					'wrapperAttributes' => [
+					'name'    => 'maxmind_api_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.maxmind_api_info'),
+					'wrapper' => [
 						'class' => 'maxmind_api',
 					],
 				],
 				[
-					'name'              => 'maxmind_api_account_id',
-					'label'             => trans('admin.maxmind_api_account_id_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'maxmind_api_account_id',
+					'label'    => trans('admin.maxmind_api_account_id_label'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 maxmind_api',
 					],
 				],
 				[
-					'name'              => 'maxmind_api_license_key',
-					'label'             => trans('admin.maxmind_api_license_key_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'maxmind_api_license_key',
+					'label'    => trans('admin.maxmind_api_license_key_label'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 maxmind_api',
 					],
 				],
@@ -383,18 +383,18 @@ class LocalizationSetting
 		if (array_key_exists('maxmind_database', $geoipDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'maxmind_database_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.maxmind_database_info'),
-					'wrapperAttributes' => [
+					'name'    => 'maxmind_database_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.maxmind_database_info'),
+					'wrapper' => [
 						'class' => 'maxmind_database',
 					],
 				],
 				[
-					'name'              => 'maxmind_database_license_key',
-					'label'             => trans('admin.maxmind_database_license_key_label'),
-					'type'              => 'text',
-					'wrapperAttributes' => [
+					'name'    => 'maxmind_database_license_key',
+					'label'   => trans('admin.maxmind_database_license_key_label'),
+					'type'    => 'text',
+					'wrapper' => [
 						'class' => 'col-md-6 maxmind_database',
 					],
 				],
@@ -409,23 +409,23 @@ class LocalizationSetting
 				'value' => trans('admin.localization_country_region'),
 			],
 			[
-				'name'              => 'default_country_code',
-				'label'             => trans('admin.Default Country'),
-				'type'              => 'select2',
-				'attribute'         => 'name',
-				'model'             => '\App\Models\Country',
-				'allows_null'       => true,
-				'hint'              => trans('admin.default_country_code_hint'),
-				'wrapperAttributes' => [
+				'name'        => 'default_country_code',
+				'label'       => trans('admin.Default Country'),
+				'type'        => 'select2',
+				'attribute'   => 'name',
+				'model'       => '\App\Models\Country',
+				'allows_null' => true,
+				'hint'        => trans('admin.default_country_code_hint'),
+				'wrapper'     => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'local_currency_packages_activation',
-				'label'             => trans('admin.Allow users to pay the Packages in their country currency'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.package_currency_by_country_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'local_currency_packages_activation',
+				'label'   => trans('admin.Allow users to pay the Packages in their country currency'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.package_currency_by_country_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -439,16 +439,16 @@ class LocalizationSetting
 				'value' => trans('admin.localization_language'),
 			],
 			[
-				'name'              => 'show_country_spoken_languages',
-				'label'             => trans('admin.show_country_spoken_languages_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'show_country_spoken_languages',
+				'label'   => trans('admin.show_country_spoken_languages_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'disabled'         => trans('admin.country_spoken_languages_option_0'),
 					'active'           => trans('admin.country_spoken_languages_option_1'),
 					'active_with_en'   => trans('admin.country_spoken_languages_option_2'),
 					'active_with_main' => trans('admin.country_spoken_languages_option_3'),
 				],
-				'hint'              => trans('admin.show_country_spoken_languages_hint', [
+				'hint'    => trans('admin.show_country_spoken_languages_hint', [
 					'field'    => trans('admin.country_spoken_languages_label'),
 					'url'      => admin_url('countries'),
 					'option_0' => trans('admin.country_spoken_languages_option_0'),
@@ -456,22 +456,22 @@ class LocalizationSetting
 					'option_2' => trans('admin.country_spoken_languages_option_2'),
 					'option_3' => trans('admin.country_spoken_languages_option_3'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'auto_detect_language',
-				'label'             => trans('admin.auto_detect_language_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'auto_detect_language',
+				'label'   => trans('admin.auto_detect_language_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'disabled'     => trans('admin.auto_detect_language_option_0'),
 					'from_browser' => trans('admin.auto_detect_language_option_1'),
 					'from_country' => trans('admin.auto_detect_language_option_2'),
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -490,39 +490,39 @@ class LocalizationSetting
 				'value' => trans('admin.localization_front_header'),
 			],
 			[
-				'name'              => 'show_country_flag',
-				'label'             => trans('admin.show_country_flag_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'show_country_flag',
+				'label'   => trans('admin.show_country_flag_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'disabled'     => trans('admin.show_country_flag_option_0'),
 					'in_next_logo' => trans('admin.show_country_flag_option_1'),
 					'in_next_lang' => trans('admin.show_country_flag_option_2'),
 				],
-				'hint'              => trans('admin.show_country_flag_hint', [
+				'hint'    => trans('admin.show_country_flag_hint', [
 					'option_0' => trans('admin.show_country_flag_option_0'),
 					'option_1' => trans('admin.show_country_flag_option_1'),
 					'option_2' => trans('admin.show_country_flag_option_2'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'country_flag_shape',
-				'label'             => trans('admin.country_flag_shape_label'),
-				'type'              => 'select2_from_array',
-				'options'           => getCountryFlagShapes(),
-				'hint'              => trans('admin.country_flag_shape_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'country_flag_shape',
+				'label'   => trans('admin.country_flag_shape_label'),
+				'type'    => 'select2_from_array',
+				'options' => getCountryFlagShapes(),
+				'hint'    => trans('admin.country_flag_shape_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'show_languages_flags',
-				'label'             => trans('admin.show_languages_flags_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.show_languages_flags_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'show_languages_flags',
+				'label'   => trans('admin.show_languages_flags_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.show_languages_flags_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

@@ -19,6 +19,7 @@ namespace App\Rules;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class PurchaseCodeRule implements ValidationRule
 {
@@ -76,8 +77,28 @@ class PurchaseCodeRule implements ValidationRule
 	private function purchaseCodeChecker(string $purchaseCode): array
 	{
 		$data = [];
-		$data['valid'] = true;
-		$data['message'] = 'Verified!';
-		return $data;
+		$endpoint = getPurchaseCodeApiEndpoint($purchaseCode, $this->itemId);
+		try {
+			/*
+			 * Make the request and wait for 30 seconds for response.
+			 * If it does not receive one, wait 5000 milliseconds (5 seconds), and then try again.
+			 * Keep trying up to 2 times, and finally give up and throw an exception.
+			 */
+			$response = Http::withoutVerifying()->timeout(30)->retry(2, 5000)->get($endpoint)->throw();
+			$data = $response->json();
+		} catch (Throwable $e) {
+			$endpoint = (str_starts_with($endpoint, 'https:'))
+				? str_replace('https:', 'http:', $endpoint)
+				: str_replace('http:', 'https:', $endpoint);
+			
+			try {
+				$response = Http::withoutVerifying()->timeout(30)->retry(2, 5000)->get($endpoint)->throw();
+				$data = $response->json();
+			} catch (Throwable $e) {
+				$data['message'] = parseHttpRequestError($e);
+			}
+		}
+		
+		return is_array($data) ? $data : [];
 	}
 }

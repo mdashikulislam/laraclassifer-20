@@ -66,43 +66,43 @@ class StatsSection
 				'value' => trans('admin.count_listings_info'),
 			],
 			[
-				'name'              => 'icon_count_listings',
-				'label'             => trans('admin.Icon'),
-				'type'              => 'icon_picker',
-				'iconset'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
-				'version'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
-				'wrapperAttributes' => [
+				'name'    => 'icon_count_listings',
+				'label'   => trans('admin.Icon'),
+				'type'    => 'icon_picker',
+				'iconset' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
+				'version' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'custom_counts_listings',
-				'label'             => trans('admin.custom_counter_up_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'custom_counts_listings',
+				'label'      => trans('admin.custom_counter_up_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.custom_counter_up_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.custom_counter_up_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'prefix_count_listings',
-				'label'             => trans('admin.prefix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'prefix_count_listings',
+				'label'   => trans('admin.prefix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'suffix_count_listings',
-				'label'             => trans('admin.suffix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'suffix_count_listings',
+				'label'   => trans('admin.suffix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
@@ -114,43 +114,43 @@ class StatsSection
 				'value' => trans('admin.count_users_info'),
 			],
 			[
-				'name'              => 'icon_count_users',
-				'label'             => trans('admin.Icon'),
-				'type'              => 'icon_picker',
-				'iconset'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
-				'version'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
-				'wrapperAttributes' => [
+				'name'    => 'icon_count_users',
+				'label'   => trans('admin.Icon'),
+				'type'    => 'icon_picker',
+				'iconset' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
+				'version' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'custom_counts_users',
-				'label'             => trans('admin.custom_counter_up_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'custom_counts_users',
+				'label'      => trans('admin.custom_counter_up_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.custom_counter_up_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.custom_counter_up_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'prefix_count_users',
-				'label'             => trans('admin.prefix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'prefix_count_users',
+				'label'   => trans('admin.prefix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'suffix_count_users',
-				'label'             => trans('admin.suffix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'suffix_count_users',
+				'label'   => trans('admin.suffix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
@@ -162,43 +162,43 @@ class StatsSection
 				'value' => trans('admin.count_locations_info'),
 			],
 			[
-				'name'              => 'icon_count_locations',
-				'label'             => trans('admin.Icon'),
-				'type'              => 'icon_picker',
-				'iconset'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
-				'version'           => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
-				'wrapperAttributes' => [
+				'name'    => 'icon_count_locations',
+				'label'   => trans('admin.Icon'),
+				'type'    => 'icon_picker',
+				'iconset' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.key'),
+				'version' => config('larapen.core.fontIconSet.' . $defaultFontIconSet . '.version'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'custom_counts_locations',
-				'label'             => trans('admin.custom_counter_up_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'custom_counts_locations',
+				'label'      => trans('admin.custom_counter_up_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.custom_counter_up_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.custom_counter_up_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'prefix_count_locations',
-				'label'             => trans('admin.prefix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'prefix_count_locations',
+				'label'   => trans('admin.prefix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
 			[
-				'name'              => 'suffix_count_locations',
-				'label'             => trans('admin.suffix_counter_up_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.counter_up_prefix_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'suffix_count_locations',
+				'label'   => trans('admin.suffix_counter_up_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.counter_up_prefix_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-2',
 				],
 			],
@@ -209,30 +209,30 @@ class StatsSection
 				'value' => trans('admin.counter_up_options_info'),
 			],
 			[
-				'name'              => 'counter_up_delay',
-				'label'             => trans('admin.counter_up_delay_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'counter_up_delay',
+				'label'      => trans('admin.counter_up_delay_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 50000,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.counter_up_delay_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.counter_up_delay_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'counter_up_time',
-				'label'             => trans('admin.counter_up_time_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'counter_up_time',
+				'label'      => trans('admin.counter_up_time_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 50000,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.counter_up_time_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.counter_up_time_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -249,23 +249,23 @@ class StatsSection
 				'value' => '<hr>',
 			],
 			[
-				'name'  => 'hide_on_mobile',
-				'label' => trans('admin.hide_on_mobile_label'),
-				'type'  => 'checkbox_switch',
-				'hint'  => trans('admin.hide_on_mobile_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'hide_on_mobile',
+				'label'   => trans('admin.hide_on_mobile_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.hide_on_mobile_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'cache_expiration',
-				'label'             => trans('admin.Cache Expiration Time for this section'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'cache_expiration',
+				'label'      => trans('admin.Cache Expiration Time for this section'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '0',
 				],
-				'hint'              => trans('admin.section_cache_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.section_cache_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],

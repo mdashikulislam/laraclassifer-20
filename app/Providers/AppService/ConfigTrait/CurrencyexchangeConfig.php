@@ -16,6 +16,8 @@
 
 namespace App\Providers\AppService\ConfigTrait;
 
+use Throwable;
+
 trait CurrencyexchangeConfig
 {
 	private function updateCurrencyexchangeConfig(?array $settings = []): void
@@ -156,7 +158,7 @@ trait CurrencyexchangeConfig
 					$message = 'Error occurred, but the error message is not a string.';
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 		}
 		

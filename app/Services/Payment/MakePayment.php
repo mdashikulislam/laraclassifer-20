@@ -20,11 +20,12 @@ use App\Helpers\Services\Payment\PaymentUrlsTrait;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\UserResource;
 use App\Models\PaymentMethod;
-use App\Models\Scopes\VerifiedScope;
+use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use Illuminate\Http\Request;
-use App\Models\Post;
+use Throwable;
 
 trait MakePayment
 {
@@ -86,7 +87,7 @@ trait MakePayment
 						// return $plugin->class::{'sendPayment'}($request, $payable, $resData);
 						return call_user_func($plugin->class . '::sendPayment', $request, $payable, $resData);
 						
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$resData['extra']['payment']['message'] = $e->getMessage();
 						$resData['extra']['previousUrl'] = $this->apiUri['previousUrl'] . '?error=pluginLoading';
 						
@@ -201,7 +202,7 @@ trait MakePayment
 		try {
 			// return $plugin->class::{'paymentConfirmation'}($payable, $params);
 			return call_user_func($plugin->class . '::paymentConfirmation', $payable, $params);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			flash($e->getMessage())->error();
 			
 			return redirect()->to('/?error=paymentMethodPluginError');

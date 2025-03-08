@@ -69,7 +69,7 @@ class LazyLoading
 	 */
 	private function applyLazyLoading($buffer)
 	{
-		$lazyCssClassName   = 'lazyload';
+		$lazyCssClassName = 'lazyload';
 		$lazyDataSrcTagName = 'data-src';
 		
 		// HTML elements patterns
@@ -85,7 +85,7 @@ class LazyLoading
 		];
 		
 		$lazyBuffer = '';
-		$i          = 0;
+		$i = 0;
 		foreach ($tags as $tag => $pattern) {
 			if ($i > 0) {
 				$buffer = $lazyBuffer;
@@ -106,11 +106,11 @@ class LazyLoading
 			// dd($elements); // debug!
 			
 			if (!empty($elements)) {
-				$replace  = [];
+				$replace = [];
 				$blankSrc = ($tag == 'img') ? url('images/blank.gif') : '';
 				
 				foreach ($elements as $key => $element) {
-					$image         = preg_replace('/src="([^"]*)"/ui', $lazyDataSrcTagName . '="\1" src="' . $blankSrc . '"', $element);
+					$image = preg_replace('/src="([^"]*)"/ui', $lazyDataSrcTagName . '="\1" src="' . $blankSrc . '"', $element);
 					$replace[$key] = $image;
 				}
 				

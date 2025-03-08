@@ -71,37 +71,37 @@ class SeoSetting
 				'value' => trans('admin.verification_tools_sep_value'),
 			],
 			[
-				'name'              => 'google_site_verification',
-				'label'             => trans('admin.google_site_verification_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.seo_site_verification_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'google_site_verification',
+				'label'   => trans('admin.google_site_verification_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.seo_site_verification_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'msvalidate',
-				'label'             => trans('admin.msvalidate_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.seo_site_verification_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'msvalidate',
+				'label'   => trans('admin.msvalidate_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.seo_site_verification_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'yandex_verification',
-				'label'             => trans('admin.yandex_verification_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.seo_site_verification_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'yandex_verification',
+				'label'   => trans('admin.yandex_verification_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.seo_site_verification_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'twitter_username',
-				'label'             => trans('admin.twitter_username_label'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'twitter_username',
+				'label'   => trans('admin.twitter_username_label'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -128,11 +128,11 @@ class SeoSetting
 				'hint'       => trans('admin.robots_txt_hint'),
 			],
 			[
-				'name'              => 'robots_txt_sm_indexes',
-				'label'             => trans('admin.robots_txt_sm_indexes_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.robots_txt_sm_indexes_hint', ['indexes' => getSitemapsIndexes(true)]),
-				'wrapperAttributes' => [
+				'name'    => 'robots_txt_sm_indexes',
+				'label'   => trans('admin.robots_txt_sm_indexes_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.robots_txt_sm_indexes_hint', ['indexes' => getSitemapsIndexes(true)]),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -145,90 +145,90 @@ class SeoSetting
 				'value' => trans('admin.no_index_title'),
 			],
 			[
-				'name'              => 'no_index_categories',
-				'label'             => trans('admin.no_index_categories_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_categories',
+				'label'   => trans('admin.no_index_categories_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_categories_qs',
-				'label'             => trans('admin.no_index_categories_qs_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_categories_qs',
+				'label'   => trans('admin.no_index_categories_qs_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_cities',
-				'label'             => trans('admin.no_index_cities_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_cities',
+				'label'   => trans('admin.no_index_cities_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_cities_qs',
-				'label'             => trans('admin.no_index_cities_qs_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_cities_qs',
+				'label'   => trans('admin.no_index_cities_qs_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_users',
-				'label'             => trans('admin.no_index_users_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_users',
+				'label'   => trans('admin.no_index_users_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_users_username',
-				'label'             => trans('admin.no_index_users_username_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_users_username',
+				'label'   => trans('admin.no_index_users_username_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_tags',
-				'label'             => trans('admin.no_index_tags_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_tags',
+				'label'   => trans('admin.no_index_tags_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_filters_orders',
-				'label'             => trans('admin.no_index_filters_orders_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_filters_orders',
+				'label'   => trans('admin.no_index_filters_orders_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_no_result',
-				'label'             => trans('admin.no_index_no_result_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_no_result',
+				'label'   => trans('admin.no_index_no_result_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_listing_report',
-				'label'             => trans('admin.no_index_listing_report_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_listing_report',
+				'label'   => trans('admin.no_index_listing_report_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'no_index_all',
-				'label'             => trans('admin.no_index_all_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'no_index_all',
+				'label'   => trans('admin.no_index_all_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-12',
 				],
 			],
@@ -241,20 +241,20 @@ class SeoSetting
 				'value' => trans('admin.listing_id_hashing_title'),
 			],
 			[
-				'name'              => 'listing_hashed_id_enabled',
-				'label'             => trans('admin.listing_hashed_id_enabled_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.listing_hashed_id_enabled_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'listing_hashed_id_enabled',
+				'label'   => trans('admin.listing_hashed_id_enabled_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.listing_hashed_id_enabled_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'listing_hashed_id_seo_redirection',
-				'label'             => trans('admin.listing_hashed_id_seo_redirection_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.listing_hashed_id_seo_redirection_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'listing_hashed_id_seo_redirection',
+				'label'   => trans('admin.listing_hashed_id_seo_redirection_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.listing_hashed_id_seo_redirection_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -278,22 +278,22 @@ class SeoSetting
 				'value' => trans('admin.seo_permalink_warning'),
 			],
 			[
-				'name'              => 'listing_permalink',
-				'label'             => trans('admin.listing_permalink_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $permalinks,
-				'hint'              => trans('admin.listing_permalink_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'listing_permalink',
+				'label'   => trans('admin.listing_permalink_label'),
+				'type'    => 'select2_from_array',
+				'options' => $permalinks,
+				'hint'    => trans('admin.listing_permalink_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'listing_permalink_ext',
-				'label'             => trans('admin.permalink_ext_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::getPermalinkExt(),
-				'hint'              => trans('admin.permalink_ext_hint') . '<br>' . trans('admin.listing_permalink_ext_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'listing_permalink_ext',
+				'label'   => trans('admin.permalink_ext_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::getPermalinkExt(),
+				'hint'    => trans('admin.permalink_ext_hint') . '<br>' . trans('admin.listing_permalink_ext_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

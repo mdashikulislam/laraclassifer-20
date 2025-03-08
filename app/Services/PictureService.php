@@ -23,12 +23,12 @@ if (file_exists($iniConfigFile)) {
 	include_once $iniConfigFile;
 }
 
-use App\Services\Picture\MultiStepsPictures;
-use App\Services\Picture\SingleStepPictures;
 use App\Http\Requests\Front\PhotoRequest;
 use App\Http\Resources\EntityCollection;
 use App\Http\Resources\PictureResource;
 use App\Models\Picture;
+use App\Services\Picture\MultiStepsPictures;
+use App\Services\Picture\SingleStepPictures;
 use Illuminate\Http\JsonResponse;
 
 class PictureService extends BaseService

@@ -20,6 +20,7 @@ use App\Helpers\Common\Cookie;
 use App\Helpers\Common\DBTool\DBEncoding;
 use Illuminate\Support\Facades\DB;
 use Larapen\LaravelDistance\Libraries\mysql\DistanceHelper;
+use Throwable;
 
 trait ListingsListTrait
 {
@@ -79,7 +80,7 @@ trait ListingsListTrait
 					cache()->forget($cacheId);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	

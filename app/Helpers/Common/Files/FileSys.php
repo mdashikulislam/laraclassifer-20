@@ -19,8 +19,9 @@ namespace App\Helpers\Common\Files;
 use App\Helpers\Common\Files\Storage\StorageDisk;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
-use Symfony\Component\Mime\MimeTypes;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
+use Symfony\Component\Mime\MimeTypes;
+use Throwable;
 
 class FileSys
 {
@@ -111,7 +112,8 @@ class FileSys
 		if (method_exists($file, 'get')) {
 			try {
 				return getAsStringOrNull($file->get());
-			} catch (\Throwable $e) {}
+			} catch (Throwable $e) {
+			}
 		}
 		
 		return null;
@@ -286,7 +288,7 @@ class FileSys
 		if (empty($mimeType)) {
 			try {
 				$mimeType = mime_content_type($string);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -306,7 +308,7 @@ class FileSys
 		
 		try {
 			$mimeType = mime_content_type($filePath);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return !empty($mimeType) ? strtolower($mimeType) : null;
@@ -325,7 +327,7 @@ class FileSys
 		
 		try {
 			$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return !empty($mimeType) ? strtolower($mimeType) : null;
@@ -419,9 +421,9 @@ class FileSys
 		if ($files instanceof UploadedFile) {
 			// Return the single UploadedFile instance directly
 			return $files;
-		} elseif (is_array($files)) {
+		} else if (is_array($files)) {
 			// Filter to keep only UploadedFile instances and null items
-			$filteredFiles = array_filter($files, fn($file) => $file instanceof UploadedFile || is_null($file));
+			$filteredFiles = array_filter($files, fn ($file) => $file instanceof UploadedFile || is_null($file));
 			
 			// Ensure the array contains only UploadedFile instances or null values
 			return count($filteredFiles) === count($files) ? $filteredFiles : null;

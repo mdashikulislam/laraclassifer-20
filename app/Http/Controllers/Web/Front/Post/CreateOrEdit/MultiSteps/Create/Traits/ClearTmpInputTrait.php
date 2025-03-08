@@ -16,6 +16,8 @@
 
 namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create\Traits;
 
+use Throwable;
+
 trait ClearTmpInputTrait
 {
 	/**
@@ -34,7 +36,7 @@ trait ClearTmpInputTrait
 					foreach ($picturesInput as $filePath) {
 						$this->removePictureWithItsThumbs($filePath);
 					}
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$message = $e->getMessage();
 					flash($message)->error();
 				}

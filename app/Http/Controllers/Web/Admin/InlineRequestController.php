@@ -25,6 +25,7 @@ if (file_exists($iniConfigFile)) {
 use App\Helpers\Common\DBTool;
 use App\Http\Controllers\Web\Admin\Traits\InlineRequestTrait;
 use App\Models\Permission;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Schema;
 
@@ -33,7 +34,9 @@ class InlineRequestController extends Controller
 	use InlineRequestTrait;
 	
 	protected string $table = '';
+	
 	protected string $columnType = '';
+	
 	protected string|int $modelId = '';
 	
 	/**
@@ -43,7 +46,7 @@ class InlineRequestController extends Controller
 	 * @return \Illuminate\Http\JsonResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function make($table, $column, Request $request): \Illuminate\Http\JsonResponse
+	public function make($table, $column, Request $request): JsonResponse
 	{
 		$modelId = $request->input('dataId');
 		$status = 0;

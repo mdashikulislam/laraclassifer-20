@@ -30,6 +30,7 @@ use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use Laravel\Sanctum\Sanctum;
+use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -65,7 +66,7 @@ class AppServiceProvider extends ServiceProvider
 		// Setup Laravel Sanctum
 		try {
 			Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Setup Storage Symlink
@@ -73,10 +74,10 @@ class AppServiceProvider extends ServiceProvider
 		
 		// Setup ACL system
 		$this->setupAclSystem();
-
+		
 		// Setup Https
-		//$this->setupHttps();
-
+		$this->setupHttps();
+		
 		// Setup Configs
 		$this->setupConfigs();
 		
@@ -85,6 +86,7 @@ class AppServiceProvider extends ServiceProvider
 		
 		// Send Mails Always To
 		$this->setupMailsAlwaysTo();
+		
 		// Add theme views with higher priority
 		$themePath = base_path('extras/themes/customized/views');
 		if (is_dir($themePath)) {
@@ -98,9 +100,9 @@ class AppServiceProvider extends ServiceProvider
 	private function setupHttps()
 	{
 		// Force HTTPS protocol
-//		if (config('larapen.core.forceHttps')) {
-//			URL::forceScheme('https');
-//		}
+		if (config('larapen.core.forceHttps')) {
+			URL::forceScheme('https');
+		}
 	}
 	
 	/**

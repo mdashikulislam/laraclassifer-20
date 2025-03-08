@@ -24,7 +24,12 @@ if (file_exists($iniConfigFile)) {
 }
 
 use App\Helpers\Common\Arr;
+use App\Http\Requests\Front\PostRequest;
 use App\Http\Requests\Front\PostRequest\LimitationCompliance;
+use App\Models\Post;
+use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
+use App\Notifications\PostDeleted;
 use App\Services\Auth\Traits\VerificationTrait;
 use App\Services\Payment\HasPaymentTrigger;
 use App\Services\Payment\Promotion\SingleStepPayment;
@@ -33,15 +38,11 @@ use App\Services\Post\ListTrait;
 use App\Services\Post\ShowTrait;
 use App\Services\Post\StoreTrait;
 use App\Services\Post\UpdateTrait;
-use App\Http\Requests\Front\PostRequest;
-use App\Models\Post;
-use App\Models\Scopes\ReviewedScope;
-use App\Models\Scopes\VerifiedScope;
-use App\Notifications\PostDeleted;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use NotificationChannels\Twilio\TwilioChannel;
+use Throwable;
 
 class PostService extends BaseService
 {
@@ -210,7 +211,7 @@ class PostService extends BaseService
 							: 'vonage';
 						Notification::route($smsChannel, $tmpPost->phone)->notify(new PostDeleted($tmpPost));
 					}
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$extra['mail']['success'] = false;
 					$extra['mail']['message'] = $e->getMessage();
 				}

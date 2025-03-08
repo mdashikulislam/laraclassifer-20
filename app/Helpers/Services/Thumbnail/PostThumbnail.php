@@ -16,8 +16,8 @@
 
 namespace App\Helpers\Services\Thumbnail;
 
-use App\Models\Post;
 use App\Models\Picture;
+use App\Models\Post;
 
 class PostThumbnail
 {

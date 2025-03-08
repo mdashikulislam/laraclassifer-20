@@ -22,6 +22,7 @@ use App\Models\Country;
 use App\Models\Scopes\ActiveScope;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Collection;
+use Throwable;
 
 trait itiTrait
 {
@@ -212,7 +213,7 @@ trait itiTrait
 					
 					return $countries;
 				});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = 'Impossible to get countries from database. Error: ' . $e->getMessage();
 			throw new CustomException($message);
 		}

@@ -32,7 +32,9 @@ use App\Models\User;
 use App\Notifications\PostActivated;
 use App\Notifications\PostNotification;
 use App\Notifications\PostReviewed;
+use extras\plugins\reviews\app\Models\Review;
 use Illuminate\Support\Facades\Notification;
+use Throwable;
 
 class PostObserver
 {
@@ -52,7 +54,7 @@ class PostObserver
 				if ($admins->count() > 0) {
 					Notification::send($admins, new PostNotification($post));
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 	}
@@ -115,13 +117,13 @@ class PostObserver
 		if (config('plugins.reviews.installed')) {
 			try {
 				// Delete the reviews of this Post
-				$reviews = \extras\plugins\reviews\app\Models\Review::where('post_id', $post->id);
+				$reviews = Review::where('post_id', $post->id);
 				if ($reviews->count() > 0) {
 					foreach ($reviews->cursor() as $review) {
 						$review->delete();
 					}
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -152,7 +154,7 @@ class PostObserver
 		if (empty($post->email_verified_at)) {
 			if (empty($post->email_token)) {
 				$post->email_token = md5(microtime() . mt_rand());
-				$post->save();
+				$post->saveQuietly();
 			}
 		}
 		
@@ -160,7 +162,7 @@ class PostObserver
 		if (empty($post->phone_verified_at)) {
 			if (empty($post->phone_token)) {
 				$post->phone_token = mt_rand(100000, 999999);
-				$post->save();
+				$post->saveQuietly();
 			}
 		}
 		
@@ -222,7 +224,7 @@ class PostObserver
 					}
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(500, $e->getMessage());
 		}
 	}
@@ -274,7 +276,7 @@ class PostObserver
 			
 			cache()->forget('posts.similar.category.' . $post->category_id . '.post.' . $post->id);
 			cache()->forget('posts.similar.city.' . $post->city_id . '.post.' . $post->id);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

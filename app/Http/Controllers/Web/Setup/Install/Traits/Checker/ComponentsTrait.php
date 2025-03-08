@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Install\Traits\Checker;
 
 use App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components\ExtensionTrait;
 use App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components\PhpTrait;
+use PDO;
 
 trait ComponentsTrait
 {
@@ -196,8 +197,8 @@ trait ComponentsTrait
 			'required'          => true,
 			'isOk'              => (
 				class_exists('\PDO')
-				&& method_exists(\PDO::class, 'getAvailableDrivers')
-				&& in_array('mysql', \PDO::getAvailableDrivers())
+				&& method_exists(PDO::class, 'getAvailableDrivers')
+				&& in_array('mysql', PDO::getAvailableDrivers())
 			),
 			'permanentChecking' => true,
 			'warning'           => 'MySQL driver for PHP pdo extension is required.',

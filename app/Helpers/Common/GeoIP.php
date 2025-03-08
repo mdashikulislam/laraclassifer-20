@@ -16,7 +16,7 @@
 
 namespace App\Helpers\Common;
 
-use Illuminate\Support\Facades\Log;
+use Exception;
 
 class GeoIP
 {
@@ -52,12 +52,12 @@ class GeoIP
 		
 		try {
 			$data = $this->getDriver()->get($this->ip);
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$message = 'Failed to get GeoIP data';
 			if (!empty($e->getMessage())) {
 				$message = $e->getMessage() . ' ' . $message;
 			}
-			throw new \Exception($message, 0, $e);
+			throw new Exception($message, 0, $e);
 		}
 		
 		/*
@@ -88,11 +88,11 @@ class GeoIP
 			->toString();
 		
 		if (!class_exists($driverClass)) {
-			throw new \Exception(sprintf('Driver [%s] not supported.', $defaultDriver));
+			throw new Exception(sprintf('Driver [%s] not supported.', $defaultDriver));
 		}
 		
 		if (!method_exists($driverClass, 'get')) {
-			throw new \Exception(sprintf('Driver [%s] not fully supported.', $defaultDriver));
+			throw new Exception(sprintf('Driver [%s] not fully supported.', $defaultDriver));
 		}
 		
 		return new $driverClass();

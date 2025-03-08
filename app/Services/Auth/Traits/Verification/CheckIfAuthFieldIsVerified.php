@@ -19,6 +19,7 @@ namespace App\Services\Auth\Traits\Verification;
 use App\Helpers\Common\Arr;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
+use Throwable;
 
 trait CheckIfAuthFieldIsVerified
 {
@@ -199,7 +200,7 @@ trait CheckIfAuthFieldIsVerified
 				
 				// Revoke all tokens
 				$authUser->tokens()->delete();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			
 		} else {

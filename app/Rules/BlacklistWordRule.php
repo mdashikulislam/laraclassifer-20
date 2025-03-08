@@ -19,6 +19,7 @@ namespace App\Rules;
 use App\Models\Blacklist;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Throwable;
 
 class BlacklistWordRule implements ValidationRule
 {
@@ -77,7 +78,7 @@ class BlacklistWordRule implements ValidationRule
 					if (preg_match('|[' . $startPatten . '\\\]+' . $word->entry . '[' . $endPatten . '\\\]+|ui', ' ' . $value . ' ')) {
 						return true;
 					}
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					if (preg_match('|[' . $startPatten . ']+' . $word->entry . '[' . $endPatten . ']+|ui', ' ' . $value . ' ')) {
 						return true;
 					}

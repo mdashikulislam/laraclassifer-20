@@ -16,19 +16,22 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\Package;
-use App\Models\Payment;
-use App\Models\PaymentMethod;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\Request as StoreRequest;
 use App\Http\Requests\Admin\Request as UpdateRequest;
+use App\Models\Package;
+use App\Models\Payment;
+use App\Models\PaymentMethod;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends PanelController
 {
 	protected ?string $type = '';
+	
 	protected bool $isPromoPackage = false;
+	
 	protected bool $isSubsPackage = false;
 	
 	public function setup()
@@ -274,14 +277,14 @@ class PaymentController extends PanelController
 		// FIELDS
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	public function getPackages(): array

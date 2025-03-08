@@ -16,17 +16,20 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\CategoryField;
-use App\Models\Field;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
-use App\Models\Category;
 use App\Http\Requests\Admin\CategoryFieldRequest as StoreRequest;
 use App\Http\Requests\Admin\CategoryFieldRequest as UpdateRequest;
+use App\Models\Category;
+use App\Models\CategoryField;
+use App\Models\Field;
+use Illuminate\Http\RedirectResponse;
 
 class CategoryFieldController extends PanelController
 {
 	public $parentEntity = null;
+	
 	private $categoryId = null;
+	
 	private $fieldId = null;
 	
 	public function setup()
@@ -182,14 +185,14 @@ class CategoryFieldController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	private function fields($selectedEntryId): array

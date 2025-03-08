@@ -58,7 +58,7 @@ trait KeywordFilter
 		// Get valid columns name
 		$searchableColumns = collect($this->searchableColumns)
 			->reject(function ($value, $key) {
-				return  (
+				return (
 					empty($keywords)
 					&& (
 						str_contains($key, 'tCategory.')

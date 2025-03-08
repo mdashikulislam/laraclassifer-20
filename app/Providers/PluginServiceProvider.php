@@ -18,10 +18,10 @@ namespace App\Providers;
 
 use App\Helpers\Common\Files\FileSys;
 use App\Providers\PluginsService\PluginsTrait;
+use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Routing\Router;
 
 class PluginServiceProvider extends ServiceProvider
 {

@@ -34,8 +34,8 @@
 			if (!selectedPackageEl || !paymentMethodEl) {
 				if (packageType === 'promotion') {
 					if (!selectedPackageEl) {
-						if (hasQueryParameter('package')) {
-							let urlWithoutPackage = removeURLParameter('package');
+						if (urlQuery().hasParameter('package')) {
+							let urlWithoutPackage = urlQuery().removeParameter('package').toString();
 							redirect(urlWithoutPackage);
 						}
 					}

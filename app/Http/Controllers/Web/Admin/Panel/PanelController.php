@@ -175,7 +175,7 @@ class PanelController extends Controller
 	 * Update the specified resource in the database.
 	 *
 	 * @param UpdateRequest|null $request
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
 	public function updateCrud(UpdateRequest $request = null)
 	{

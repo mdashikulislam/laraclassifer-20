@@ -16,7 +16,7 @@
 
 namespace App\Observers\Traits;
 
-use App\Helpers\Common\Categories\AdjacentToNested;
+use App\Helpers\Common\HierarchicalData\Library\AdjacentToNested;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
@@ -28,7 +28,7 @@ trait CategoryTrait
 	 * @param $category
 	 * @return mixed
 	 */
-	protected function creatingNestedItem($category)
+	protected function creatingNestedItem($category): mixed
 	{
 		// Find new left position & new depth
 		$newLft = 0;
@@ -79,7 +79,7 @@ trait CategoryTrait
 	 * @param $category
 	 * @return mixed
 	 */
-	protected function updatingNestedItem($category)
+	protected function updatingNestedItem($category): mixed
 	{
 		// Escape from mass update
 		if ($this->isFromMassUpdate()) {
@@ -158,7 +158,7 @@ trait CategoryTrait
 	 *
 	 * @param $category
 	 */
-	protected function deletingNestedItem($category)
+	protected function deletingNestedItem($category): void
 	{
 		$tableName = (new Category())->getTable();
 		
@@ -175,7 +175,7 @@ trait CategoryTrait
 	 *
 	 * @param $category
 	 */
-	protected function deleteChildrenRecursively($category)
+	protected function deleteChildrenRecursively($category): void
 	{
 		if (!empty($category) && isset($category->id)) {
 			$subCats = Category::childrenOf($category->id)->get();
@@ -226,7 +226,7 @@ trait CategoryTrait
 	 * @param $category
 	 * @return mixed
 	 */
-	protected function fixRequiredColumns($category)
+	protected function fixRequiredColumns($category): mixed
 	{
 		// The 'type' column is a not nullable enum, so required
 		if (isset($category->type) && empty($category->type)) {

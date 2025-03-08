@@ -17,8 +17,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use Illuminate\Http\Request;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated as Middleware;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RedirectIfAuthenticated extends Middleware
@@ -53,6 +53,7 @@ class RedirectIfAuthenticated extends Middleware
 				 * Therefore, users should be redirected to another page, such as the homepage.
 				 * Make sure not to apply this middleware (alias: 'guest') to the homepage to prevent an infinite redirect loop.
 				 */
+				
 				return redirect()->to($this->redirectTo($request));
 			}
 		}

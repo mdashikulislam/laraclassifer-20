@@ -22,6 +22,7 @@ use App\Services\Auth\Helpers\ResetsPasswordsForEmail;
 use App\Services\Auth\Helpers\ResetsPasswordsForPhone;
 use App\Services\BaseService;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 class ResetPasswordService extends BaseService
 {
@@ -46,7 +47,7 @@ class ResetPasswordService extends BaseService
 		// Go to the core process (Email)
 		try {
 			$jsonResponse = $this->resetForEmail($request);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		

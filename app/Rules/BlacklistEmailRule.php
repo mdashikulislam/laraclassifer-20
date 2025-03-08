@@ -17,6 +17,7 @@
 namespace App\Rules;
 
 use App\Models\Blacklist;
+use App\Models\Permission;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use Closure;
@@ -51,6 +52,15 @@ class BlacklistEmailRule implements ValidationRule
 		
 		if (!empty($blacklisted)) {
 			return false;
+		}
+		
+		$authUser = auth(getAuthGuard())->user();
+		
+		if (
+			isAdminPanel()
+			&& doesUserHavePermission($authUser, Permission::getStaffPermissions())
+		) {
+			return true;
 		}
 		
 		// Blocked user's email address

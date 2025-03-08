@@ -23,6 +23,9 @@ use App\Http\Controllers\Web\Setup\Install\Traits\Db\MigrationsTrait;
 use App\Models\City;
 use App\Models\Country;
 use Illuminate\Support\Facades\DB;
+use PDO;
+use PDOException;
+use Throwable;
 
 trait DbTrait
 {
@@ -135,7 +138,7 @@ trait DbTrait
 		try {
 			$countCountries = DB::table((new Country())->getTable())->count(); // Latest seeder run
 			$countCities = DB::table((new City())->getTable())->where('country_code', '=', $countryCode)->count();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		if ($countCountries <= 0 || $countCities <= 0) {
 			// Importing the database data is required
@@ -155,7 +158,7 @@ trait DbTrait
 	 * @return void
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	private function dropExistingTables(\PDO $pdo, ?array $tables): void
+	private function dropExistingTables(PDO $pdo, ?array $tables): void
 	{
 		if (empty($tables)) return;
 		
@@ -210,11 +213,11 @@ trait DbTrait
 	 * @return void
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	private function flushTables(\PDO $pdo): void
+	private function flushTables(PDO $pdo): void
 	{
 		try {
 			$pdo->exec('FLUSH TABLES;');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$msg = 'ERROR: No privilege to run: "FLUSH TABLES;" - ' . $e->getMessage();
 			throw new CustomException($msg);
 		}
@@ -247,7 +250,7 @@ trait DbTrait
 					}
 				}
 			}
-		} catch (\PDOException|\Throwable $e) {
+		} catch (PDOException|Throwable $e) {
 			$isAllTablesExist = false;
 		}
 		
@@ -264,7 +267,7 @@ trait DbTrait
 	 * @return \PDO
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	protected function getPdoConnectionWithEnvCheck(array $databaseInfo = []): \PDO
+	protected function getPdoConnectionWithEnvCheck(array $databaseInfo = []): PDO
 	{
 		// The .env file is supposed to have been created at this stage
 		// So check if it exists

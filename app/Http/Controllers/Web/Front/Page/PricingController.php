@@ -19,6 +19,7 @@ namespace App\Http\Controllers\Web\Front\Page;
 use App\Http\Controllers\Web\Front\FrontController;
 use App\Services\PackageService;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Throwable;
 
 class PricingController extends FrontController
 {
@@ -58,7 +59,7 @@ class PricingController extends FrontController
 		// Open Graph
 		try {
 			$this->og->title($title)->description($description)->type('website');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('og', $this->og);
 		

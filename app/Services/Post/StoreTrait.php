@@ -16,12 +16,13 @@
 
 namespace App\Services\Post;
 
-use App\Services\Post\Store\AutoRegistrationTrait;
-use App\Services\Post\Store\StoreFieldValueTrait;
 use App\Http\Resources\PostResource;
 use App\Models\City;
 use App\Models\Post;
+use App\Services\Post\Store\AutoRegistrationTrait;
+use App\Services\Post\Store\StoreFieldValueTrait;
 use Illuminate\Http\Request;
+use Throwable;
 
 trait StoreTrait
 {
@@ -116,7 +117,7 @@ trait StoreTrait
 			
 			$post->save();
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		
@@ -133,7 +134,7 @@ trait StoreTrait
 		$extra['pictures'] = [];
 		try {
 			$extra['pictures'] = $this->singleStepPicturesStore($post->id, $request);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		

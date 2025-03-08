@@ -22,6 +22,7 @@ use App\Models\User;
 use App\Notifications\PaymentApproved;
 use App\Notifications\SubscriptionApproved;
 use App\Observers\Traits\PaymentTrait;
+use Throwable;
 
 class PaymentObserver
 {
@@ -59,7 +60,7 @@ class PaymentObserver
 						if ($isSubscripting) {
 							$payable->notify(new SubscriptionApproved($payment, $payable));
 						}
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						if (!isFromApi()) {
 							flash($e->getMessage())->error();
 						}

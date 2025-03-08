@@ -18,6 +18,8 @@ namespace App\Helpers\Common\DBTool;
 
 use App\Helpers\Common\DBTool;
 use Illuminate\Support\Facades\DB;
+use PDO;
+use Throwable;
 
 class DBFunction
 {
@@ -32,7 +34,7 @@ class DBFunction
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function checkIfFunctionExists(?string $name, \PDO $pdo = null): bool
+	public static function checkIfFunctionExists(?string $name, PDO $pdo = null): bool
 	{
 		if (empty($pdo)) {
 			$pdo = DB::connection()->getPdo();
@@ -52,10 +54,10 @@ class DBFunction
 						AND ROUTINE_TYPE = "FUNCTION"';
 			$query = $pdo->prepare($sql);
 			$query->execute(['databaseName' => $databaseName, 'functionName' => $name]);
-			$entry = $query->fetch(\PDO::FETCH_OBJ);
+			$entry = $query->fetch(PDO::FETCH_OBJ);
 			
 			$exists = ($entry->function_exists > 0);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Check with method #2
@@ -66,11 +68,11 @@ class DBFunction
 						WHERE ROUTINE_SCHEMA = :databaseName AND ROUTINE_TYPE = "FUNCTION"';
 				$query = $pdo->prepare($sql);
 				$query->execute(['databaseName' => $databaseName]);
-				$entries = $query->fetchAll(\PDO::FETCH_OBJ);
+				$entries = $query->fetchAll(PDO::FETCH_OBJ);
 				
 				$entries = collect($entries)->whereStrict('ROUTINE_NAME', $name);
 				$exists = !$entries->isEmpty();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -79,11 +81,11 @@ class DBFunction
 			try {
 				$sql = 'SHOW FUNCTION STATUS;';
 				$query = $pdo->query($sql);
-				$entries = $query->fetchAll(\PDO::FETCH_OBJ);
+				$entries = $query->fetchAll(PDO::FETCH_OBJ);
 				$entries = collect($entries)->whereStrict('Db', $databaseName)->whereStrict('Name', $name);
 				
 				$exists = $entries->isNotEmpty();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -97,7 +99,7 @@ class DBFunction
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function createFunction(string $sql, \PDO $pdo = null): bool
+	public static function createFunction(string $sql, PDO $pdo = null): bool
 	{
 		try {
 			
@@ -114,7 +116,7 @@ class DBFunction
 			// Create the function
 			$pdo->exec($sql);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 		
@@ -128,7 +130,7 @@ class DBFunction
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function dropFunctionIfExists(string $name, \PDO $pdo = null): bool
+	public static function dropFunctionIfExists(string $name, PDO $pdo = null): bool
 	{
 		try {
 			
@@ -140,7 +142,7 @@ class DBFunction
 			$sql = 'DROP FUNCTION IF EXISTS `' . $name . '`;';
 			$pdo->exec($sql);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 		

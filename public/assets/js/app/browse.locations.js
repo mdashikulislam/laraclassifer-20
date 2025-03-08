@@ -164,7 +164,7 @@ function getLocationsBrowsingParameters(countryCode, jsThis = null, adminType = 
 					if ((thisElClass.indexOf('is-admin') !== -1) || (thisElClass.indexOf('page-link') !== -1)) {
 						url = thisEl.data('url');
 						if (!isEmpty(url)) {
-							let urlToSave = removeURLParameter('page', url);
+							let urlToSave = urlQuery(url).removeParameter('page').toString();
 							urlEl.val(urlToSave);
 							
 							let urlArr = url.split('/');
@@ -187,7 +187,7 @@ function getLocationsBrowsingParameters(countryCode, jsThis = null, adminType = 
 			if (thisElTagName === 'button' || thisElTagName === 'a') {
 				query = queryEl.val();
 				if (thisElTagName === 'button') {
-					url = removeURLParameter('page', url);
+					url = urlQuery(url).removeParameter('page').toString();
 				}
 			}
 			if (thisElTagName === 'input' && thisEl.attr('type') === 'text') {

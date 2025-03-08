@@ -1182,6 +1182,10 @@ html[theme=dark] .table {
 	color: #fff;
 	border-color: var(--border-color-20);
 }
+html[theme=dark] .table-striped-columns>:not(caption)>tr>:nth-child(2n),
+html[theme=dark] .table-striped>tbody>tr:nth-of-type(odd)>* {
+	color: #fff;
+}
 html[theme=dark] .bg-light {
 	background-color: var(--background) !important;
 }

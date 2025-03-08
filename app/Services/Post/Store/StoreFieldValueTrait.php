@@ -75,10 +75,10 @@ trait StoreFieldValueTrait
 						}
 						
 						// Get filename & file path
-						$filename    = $file->getClientOriginalName();
-						$extension   = $file->getClientOriginalExtension();
+						$filename = $file->getClientOriginalName();
+						$extension = $file->getClientOriginalExtension();
 						$newFilename = md5($filename . time()) . '.' . $extension;
-						$filePath    = $destinationPath . '/' . $newFilename;
+						$filePath = $destinationPath . '/' . $newFilename;
 						
 						$postValueInfo = [
 							'post_id'  => $post->id,

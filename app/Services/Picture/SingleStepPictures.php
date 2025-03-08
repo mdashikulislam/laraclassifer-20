@@ -84,7 +84,7 @@ trait SingleStepPictures
 			
 			// Upload File
 			$destPath = 'files/' . strtolower($post->country_code) . '/' . $post->id;
-			$picture->file_path = Upload::image($destPath, $file, null, true);
+			$picture->file_path = Upload::image($file, $destPath, null, true);
 			$picture->mime_type = FileSys::getMimeType($file);
 			
 			if (!empty($picture->file_path)) {

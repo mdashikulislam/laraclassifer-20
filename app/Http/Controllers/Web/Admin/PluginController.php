@@ -18,6 +18,8 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Helpers\Common\Arr;
 use App\Http\Requests\Admin\PluginRequest;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class PluginController extends Controller
 {
@@ -67,7 +69,7 @@ class PluginController extends Controller
 								: null;
 						}
 						
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$message = $e->getMessage();
 						if (!empty($message)) {
 							notification($message, 'error');
@@ -77,7 +79,7 @@ class PluginController extends Controller
 					return Arr::toObject($item);
 				})->toArray();
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (!empty($message)) {
 				notification($message, 'error');
@@ -97,7 +99,7 @@ class PluginController extends Controller
 	 * @param \App\Http\Requests\Admin\PluginRequest $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function installWithCode($name, PluginRequest $request): \Illuminate\Http\RedirectResponse
+	public function installWithCode($name, PluginRequest $request): RedirectResponse
 	{
 		$pluginListUrl = admin_url('plugins');
 		
@@ -137,7 +139,7 @@ class PluginController extends Controller
 	 * @param $name
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function installWithoutCode($name): \Illuminate\Http\RedirectResponse
+	public function installWithoutCode($name): RedirectResponse
 	{
 		$pluginListUrl = admin_url('plugins');
 		
@@ -174,7 +176,7 @@ class PluginController extends Controller
 	 * @param $name
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function uninstall($name): \Illuminate\Http\RedirectResponse
+	public function uninstall($name): RedirectResponse
 	{
 		$pluginListUrl = admin_url('plugins');
 		
@@ -214,7 +216,7 @@ class PluginController extends Controller
 	 * @param $plugin
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function delete($plugin): \Illuminate\Http\RedirectResponse
+	public function delete($plugin): RedirectResponse
 	{
 		$pluginListUrl = admin_url('plugins');
 		

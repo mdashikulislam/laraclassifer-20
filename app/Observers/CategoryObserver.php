@@ -21,6 +21,7 @@ use App\Models\Category;
 use App\Models\CategoryField;
 use App\Models\Post;
 use App\Observers\Traits\CategoryTrait;
+use Throwable;
 
 class CategoryObserver
 {
@@ -200,7 +201,7 @@ class CategoryObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

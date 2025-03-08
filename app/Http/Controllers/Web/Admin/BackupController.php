@@ -18,17 +18,19 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Exceptions\Custom\CustomException;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\Local\LocalFilesystemAdapter;
+use Throwable;
 
 class BackupController extends Controller
 {
 	public array $data = [];
 	
 	/**
-	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+	 * @return \Illuminate\Contracts\View\View
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
 	public function index()
@@ -71,7 +73,7 @@ class BackupController extends Controller
 	/**
 	 * @return \Illuminate\Http\JsonResponse|string
 	 */
-	public function create()
+	public function create(): JsonResponse|string
 	{
 		try {
 			ini_set('max_execution_time', 300);
@@ -129,7 +131,7 @@ class BackupController extends Controller
 				} else {
 					Artisan::call('backup:run');
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$data = [
 					'success' => false,
 					'message' => $e->getMessage(),
@@ -184,6 +186,8 @@ class BackupController extends Controller
 	
 	/**
 	 * Downloads a backup zip file.
+	 *
+	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse|void
 	 */
 	public function download()
 	{

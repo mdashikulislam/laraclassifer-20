@@ -18,6 +18,7 @@ namespace App\Http\Requests\Front;
 
 use App\Enums\PostType;
 use App\Helpers\Common\Num;
+use App\Helpers\Services\RemoveFromString;
 use App\Http\Requests\Front\PostRequest\CustomFieldRequest;
 use App\Http\Requests\Front\PostRequest\LimitationCompliance;
 use App\Http\Requests\Request;
@@ -34,7 +35,6 @@ use App\Rules\BlacklistWordRule;
 use App\Rules\MbAlphanumericRule;
 use App\Rules\SluggableRule;
 use App\Rules\UniquenessOfPostRule;
-use App\Helpers\Services\RemoveFromString;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Number;
 use Illuminate\Validation\Rule;
@@ -161,6 +161,19 @@ class PostRequest extends Request
 			}
 		} else {
 			$input['is_permanent'] = 0;
+		}
+		
+		// Set/Capture IP address
+		if (doesRequestIsFromWebClient()) {
+			// create_from_ip
+			if (in_array($this->method(), ['POST', 'CREATE'])) {
+				$input['create_from_ip'] = request()->ip();
+			}
+			
+			// latest_update_ip
+			if (in_array($this->method(), ['PUT', 'PATCH', 'UPDATE'])) {
+				$input['latest_update_ip'] = request()->ip();
+			}
 		}
 		
 		request()->merge($input); // Required!

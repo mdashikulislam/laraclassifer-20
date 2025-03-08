@@ -95,25 +95,25 @@ class BackupSetting
 				'value' => trans('admin.backup_storage_disk_value'),
 			],
 			[
-				'name'              => 'storage_disk',
-				'label'             => trans('admin.storage_disk_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'storage_disk',
+				'label'   => trans('admin.storage_disk_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					0 => trans('admin.storage_disk_option_0'),
 					1 => trans('admin.storage_disk_option_1'),
 					2 => trans('admin.storage_disk_option_2'),
 				],
-				'hint'              => trans('admin.storage_disk_hint'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.storage_disk_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'disable_notifications',
-				'label'             => trans('admin.backup_disable_notifications_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.backup_disable_notifications_hint', ['email' => config('settings.app.email')]),
-				'wrapperAttributes' => [
+				'name'    => 'disable_notifications',
+				'label'   => trans('admin.backup_disable_notifications_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.backup_disable_notifications_hint', ['email' => config('settings.app.email')]),
+				'wrapper' => [
 					'class' => 'col-md-6 mt-3',
 				],
 			],
@@ -143,22 +143,22 @@ class BackupSetting
 				'value' => trans('admin.cron_info_sep_value'),
 			],
 			[
-				'name'              => 'taking_backup',
-				'label'             => trans('admin.taking_backup_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::backupFrequencies(),
-				'hint'              => trans('admin.taking_backup_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'taking_backup',
+				'label'   => trans('admin.taking_backup_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::backupFrequencies(),
+				'hint'    => trans('admin.taking_backup_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'taking_backup_at',
-				'label'             => trans('admin.taking_backup_at_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::backupFrequencyAt(),
-				'hint'              => trans('admin.taking_backup_at_hint', ['timeZone' => Date::getAppTimeZone()]),
-				'wrapperAttributes' => [
+				'name'    => 'taking_backup_at',
+				'label'   => trans('admin.taking_backup_at_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::backupFrequencyAt(),
+				'hint'    => trans('admin.taking_backup_at_hint', ['timeZone' => Date::getAppTimeZone()]),
+				'wrapper' => [
 					'class' => 'col-md-6 taking-backup-field',
 				],
 			],
@@ -174,56 +174,56 @@ class BackupSetting
 				'value' => trans('admin.backup_cleanup_rules_value'),
 			],
 			[
-				'name'              => 'keep_all_backups_for_days',
-				'label'             => trans('admin.keep_all_backups_for_days_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.keep_all_backups_for_days_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'keep_all_backups_for_days',
+				'label'   => trans('admin.keep_all_backups_for_days_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.keep_all_backups_for_days_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'keep_daily_backups_for_days',
-				'label'             => trans('admin.keep_daily_backups_for_days_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.keep_daily_backups_for_days_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'keep_daily_backups_for_days',
+				'label'   => trans('admin.keep_daily_backups_for_days_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.keep_daily_backups_for_days_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'keep_weekly_backups_for_weeks',
-				'label'             => trans('admin.keep_weekly_backups_for_weeks_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.keep_weekly_backups_for_weeks_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'keep_weekly_backups_for_weeks',
+				'label'   => trans('admin.keep_weekly_backups_for_weeks_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.keep_weekly_backups_for_weeks_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'keep_monthly_backups_for_months',
-				'label'             => trans('admin.keep_monthly_backups_for_months_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.keep_monthly_backups_for_months_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'keep_monthly_backups_for_months',
+				'label'   => trans('admin.keep_monthly_backups_for_months_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.keep_monthly_backups_for_months_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'keep_yearly_backups_for_years',
-				'label'             => trans('admin.keep_yearly_backups_for_years_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.keep_yearly_backups_for_years_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'keep_yearly_backups_for_years',
+				'label'   => trans('admin.keep_yearly_backups_for_years_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.keep_yearly_backups_for_years_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'maximum_storage_in_megabytes',
-				'label'             => trans('admin.maximum_storage_in_megabytes_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.maximum_storage_in_megabytes_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'maximum_storage_in_megabytes',
+				'label'   => trans('admin.maximum_storage_in_megabytes_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.maximum_storage_in_megabytes_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

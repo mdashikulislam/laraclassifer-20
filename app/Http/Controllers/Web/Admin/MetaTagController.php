@@ -16,10 +16,10 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\MetaTag;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\MetaTagRequest as StoreRequest;
 use App\Http\Requests\Admin\MetaTagRequest as UpdateRequest;
+use App\Models\MetaTag;
 
 class MetaTagController extends PanelController
 {

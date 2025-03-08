@@ -19,11 +19,11 @@ namespace App\Services\Auth\Helpers;
 use App\Http\Requests\Front\ResetPasswordRequest;
 use App\Models\Permission;
 use App\Models\User;
+use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
-use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Support\Str;
 
 trait ResetsPasswordsForEmail
 {

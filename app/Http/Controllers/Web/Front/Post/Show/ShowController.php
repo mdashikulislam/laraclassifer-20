@@ -26,6 +26,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 use Larapen\TextToImage\Facades\TextToImage;
+use Throwable;
 
 class ShowController extends FrontController
 {
@@ -182,7 +183,7 @@ class ShowController extends FrontController
 					}
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('og', $this->og);
 		
@@ -230,6 +231,7 @@ class ShowController extends FrontController
 		// Error Found
 		if (!data_get($data, 'success')) {
 			$message = $message ?? t('unknown_error');
+			
 			return ajaxResponse()->json(['message' => $message], $status);
 		}
 		
@@ -248,7 +250,7 @@ class ShowController extends FrontController
 		if ($phoneNumberCanBeConvertedInToImg) {
 			try {
 				$phone = TextToImage::make($phoneIntl, config('larapen.core.textToImage'));
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$phone = data_get($post, 'phone_intl');
 			}
 		}

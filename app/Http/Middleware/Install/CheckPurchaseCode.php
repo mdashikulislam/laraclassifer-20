@@ -19,6 +19,7 @@ namespace App\Http\Middleware\Install;
 use App\Exceptions\Custom\InvalidPurchaseCode;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 trait CheckPurchaseCode
 {
@@ -36,7 +37,6 @@ trait CheckPurchaseCode
 	 */
 	protected function checkPurchaseCode(): void
 	{
-		return;
 		if (!$this->isPurchaseCodeVerificationRequired()) {
 			return;
 		}
@@ -56,7 +56,7 @@ trait CheckPurchaseCode
 				->get($endpoint)
 				->throw();
 			$data = $response->json();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$endpoint = (str_starts_with($endpoint, 'https:'))
 				? str_replace('https:', 'http:', $endpoint)
 				: str_replace('http:', 'https:', $endpoint);
@@ -68,7 +68,7 @@ trait CheckPurchaseCode
 					->get($endpoint)
 					->throw();
 				$data = $response->json();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$data['message'] = parseHttpRequestError($e);
 			}
 		}

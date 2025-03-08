@@ -36,16 +36,24 @@ class EntityCollection extends ResourceCollection
 		
 		$this->params = $params;
 		
+		// Get the service short class name & the remaining namespace
+		$serviceClassName = class_basename($serviceName);
+		$serviceRemainingNamespace = str($serviceName)->replaceLast($serviceClassName, '')->toString();
+		
 		// Get the service resource class name
-		$serviceName = class_basename($serviceName);
-		$this->resourceClass = str($serviceName)->replaceLast('Service', 'Resource')->toString();
-		if (!str_ends_with($this->resourceClass, 'Resource')) {
-			$this->resourceClass = str($serviceName)->replaceLast('Controller', 'Resource')->toString();
+		$resourceClassName = str($serviceClassName)->replaceLast('Service', 'Resource')->toString();
+		if (!str_ends_with($resourceClassName, 'Resource')) {
+			$resourceClassName = str($serviceClassName)->replaceLast('Controller', 'Resource')->toString();
 		}
 		
 		// Get the service resource full qualified class name
-		if (!str_starts_with($this->resourceClass, '\\')) {
-			$this->resourceClass = '\\' . __NAMESPACE__ . '\\' . $this->resourceClass;
+		if (!str_starts_with($resourceClassName, '\\')) {
+			$this->resourceClass = $serviceRemainingNamespace . $resourceClassName;
+			if (!class_exists($this->resourceClass)) {
+				$this->resourceClass = '\\' . __NAMESPACE__ . '\\' . $resourceClassName;
+			}
+		} else {
+			$this->resourceClass = $resourceClassName;
 		}
 	}
 	

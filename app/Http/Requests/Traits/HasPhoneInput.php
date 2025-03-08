@@ -31,7 +31,7 @@ trait HasPhoneInput
 	 * @param bool $isForAuth
 	 * @return array
 	 */
-	function preparePhoneForValidation(FormRequest $request, array $input= [], string $field = 'phone', bool $isForAuth = false): array
+	function preparePhoneForValidation(FormRequest $request, array $input = [], string $field = 'phone', bool $isForAuth = false): array
 	{
 		$phoneNationalField = $field . '_national';
 		

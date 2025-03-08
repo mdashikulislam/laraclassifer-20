@@ -16,6 +16,8 @@
 
 namespace App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components\Extension;
 
+use Intervention\Image\Drivers\Imagick\Driver;
+
 trait ImageTrait
 {
 	/**
@@ -70,7 +72,7 @@ trait ImageTrait
 			return [];
 		}
 		
-		$driver = \Intervention\Image\Drivers\Imagick\Driver::class;
+		$driver = Driver::class;
 		$supportedFormats = getServerSupportedImageFormats($driver);
 		$installedFormats = getServerInstalledImageFormats($driver);
 		

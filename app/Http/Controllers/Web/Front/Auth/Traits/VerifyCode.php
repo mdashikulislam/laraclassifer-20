@@ -152,7 +152,7 @@ trait VerifyCode
 	{
 		// If the token field is not filled, back to the token form
 		$rules = [
-			'code' => ['required', 'string']
+			'code' => ['required', 'string'],
 		];
 		$validator = Validator::make($request->all(), $rules);
 		if ($validator->fails()) {

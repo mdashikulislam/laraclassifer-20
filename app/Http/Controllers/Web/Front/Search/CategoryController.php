@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Front\Search;
 
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Throwable;
 
 class CategoryController extends BaseController
 {
@@ -68,7 +69,7 @@ class CategoryController extends BaseController
 		// Open Graph
 		try {
 			$this->og->title($title)->description($description)->type('website');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('og', $this->og);
 		

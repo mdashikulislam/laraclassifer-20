@@ -24,7 +24,11 @@ mix.options({
 mix.combine(['public/assets/resources/css/app.css'], 'public/dist/front/styles.css');
 mix.combine(['public/assets/resources/css/app.rtl.css'], 'public/dist/front/styles.rtl.css');
 mix.combine([
-	'public/assets/js/vanilla.js',
+	'public/assets/js/helpers/vanilla.js',
+	'public/assets/js/helpers/UrlQuery.js',
+	'public/assets/js/helpers/global.js',
+	'public/assets/js/helpers/http.request.js',
+	
 	'public/assets/plugins/jquery/3.3.1/jquery.min.js',
 	'public/assets/plugins/jqueryui/1.13.2/jquery-ui.min.js',
 	// 'public/assets/plugins/popper.js/2.9.3/popper.min.js',
@@ -49,8 +53,6 @@ mix.combine([
 	'public/assets/plugins/larapen/bootstrap-row-columns-reorder/bootstrap-row-columns-reorder.js',
 	
 	'public/assets/js/ajaxSetup.js',
-	'public/assets/js/global.js',
-	'public/assets/js/http.request.js',
 	'public/assets/js/script.js',
 	'public/assets/js/app/autocomplete.cities.js',
 	'public/assets/js/app/auth-fields.js',
@@ -63,7 +65,11 @@ mix.combine([
 /* CSS & JS Files Combination (Concatenation) */
 mix.combine(['public/assets/resources/css/admin.css'], 'public/dist/admin/styles.css');
 mix.combine([
-	'public/assets/js/vanilla.js',
+	'public/assets/js/helpers/vanilla.js',
+	'public/assets/js/helpers/UrlQuery.js',
+	'public/assets/js/helpers/global.js',
+	'public/assets/js/helpers/http.request.js',
+	
 	'public/assets/plugins/jquery/3.3.1/jquery.min.js',
 	'public/assets/plugins/popper.js/2.9.3/popper.min.js',
 	'public/assets/bootstrap/5.2.2/js/bootstrap.min.js',
@@ -84,8 +90,6 @@ mix.combine([
 	'public/assets/plugins/busy-load/0.1.2/app.min.js',
 	
 	'public/assets/js/ajaxSetup.js',
-	'public/assets/js/global.js',
-	'public/assets/js/http.request.js',
 	'public/assets/js/app/auth-fields.js'
 ], 'public/dist/admin/scripts.js');
 

@@ -17,6 +17,7 @@
 namespace App\Observers;
 
 use App\Models\Advertising;
+use Throwable;
 
 class AdvertisingObserver
 {
@@ -56,6 +57,7 @@ class AdvertisingObserver
 			cache()->forget('advertising.top');
 			cache()->forget('advertising.bottom');
 			cache()->forget('advertising.auto');
-		} catch (\Exception $e) {}
+		} catch (Throwable $e) {
+		}
 	}
 }

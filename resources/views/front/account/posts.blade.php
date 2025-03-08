@@ -20,6 +20,9 @@
 	$totalPosts = (int)data_get($apiResult, 'meta.total', 0);
 	$pagePath ??= null;
 	
+	$countPromotionPackages ??= 0;
+	$countPaymentMethods ??= 0;
+	
 	$pageData = [
 		'list' => [
 			'icon'     => 'fa-solid fa-bullhorn',
@@ -74,7 +77,7 @@
 							<i class="{{ $pageIcon }}"></i> {{ $pageTitle }}
 						</h2>
 						
-						<div class="table-responsive">
+						<div class="table-responsive" style="min-height: 600px;">
 							<form name="listForm" method="POST" action="{{ url($basePath . '/delete') }}">
 								{!! csrf_field() !!}
 								<div class="table-action">
@@ -114,7 +117,7 @@
 										<th>{{ t('Photo') }}</th>
 										<th data-sort-ignore="true">{{ t('listing_details') }}</th>
 										<th data-type="numeric">--</th>
-										<th>{{ t('Option') }}</th>
+										<th>{{ t('action') }}</th>
 									</tr>
 									</thead>
 									<tbody>
@@ -125,11 +128,24 @@
 												$postUrl = urlGen()->post($post);
 												$deletingUrl = url($basePath . '/' . data_get($post, 'id') . '/delete');
 												
-												$isEditingAllowed = (
+												$isForOwnerEdition = (
 													in_array($pagePath, ['list', 'pending-approval'])
 													&& isset($authUser, $authUser->id)
 													&& $authUser->id == data_get($post, 'user_id')
+												);
+												
+												$isEditingAllowed = (
+													$isForOwnerEdition
 													&& empty(data_get($post, 'archived_at'))
+												);
+												$isPhotoEditingAllowed = (
+													$isForOwnerEdition
+													&& isMultipleStepsFormEnabled()
+												);
+												$isPlanPaymentAllowed = (
+													$isForOwnerEdition
+													&& isMultipleStepsFormEnabled()
+													&& $countPromotionPackages > 0 && $countPaymentMethods > 0
 												);
 												$isArchivingAllowed = (
 													$pagePath == 'list'
@@ -144,6 +160,8 @@
 												);
 												
 												$editingUrl = urlGen()->editPost($post);
+												$photoEditingUrl = url('posts/' . data_get($post, 'id') . '/photos');
+												$planPaymentUrl = url('posts/' . data_get($post, 'id') . '/payment');
 												$archivingUrl = url($basePath . '/' . data_get($post, 'id') . '/offline');
 												$repostingUrl = url($basePath . '/' . data_get($post, 'id') . '/repost');
 											@endphp
@@ -233,32 +251,60 @@
 												</td>
 												<td style="width:10%" class="action-td">
 													<div>
-														@if ($isEditingAllowed)
-															<p>
-																<a class="btn btn-primary btn-sm" href="{{ $editingUrl }}">
-																	<i class="fa-regular fa-pen-to-square"></i> {{ t('Edit') }}
-																</a>
-															</p>
-														@endif
-														@if ($isArchivingAllowed)
-															<p>
-																<a class="btn btn-warning btn-sm confirm-simple-action" href="{{ $archivingUrl }}">
-																	<i class="fa-solid fa-eye-slash"></i> {{ t('Offline') }}
-																</a>
-															</p>
-														@endif
-														@if ($isRepostingAllowed)
-															<p>
-																<a class="btn btn-info btn-sm confirm-simple-action" href="{{ $repostingUrl }}">
-																	<i class="fa-solid fa-recycle"></i> {{ t('Repost') }}
-																</a>
-															</p>
-														@endif
-														<p>
-															<a class="btn btn-danger btn-sm confirm-simple-action" href="{{ $deletingUrl }}">
-																<i class="fa-regular fa-trash-can"></i> {{ t('Delete') }}
-															</a>
-														</p>
+														<div class="btn-group">
+															<button type="button"
+															        class="btn btn-sm btn-default dropdown-toggle"
+															        data-bs-toggle="dropdown"
+															        aria-expanded="false"
+															>
+																{{ t('action') }}
+															</button>
+															<ul class="dropdown-menu">
+																@if ($isEditingAllowed)
+																	<li>
+																		<a class="dropdown-item" href="{{ $editingUrl }}">
+																			<i class="fa-regular fa-pen-to-square"></i> {{ t('Edit') }}
+																		</a>
+																	</li>
+																@endif
+																@if ($isPhotoEditingAllowed)
+																	<li>
+																		<a class="dropdown-item" href="{{ $photoEditingUrl }}">
+																			<i class="bi bi-camera"></i> {{ t('Update Photos') }}
+																		</a>
+																	</li>
+																@endif
+																@if ($isPlanPaymentAllowed)
+																	<li>
+																		<a class="dropdown-item" href="{{ $planPaymentUrl }}">
+																			<i class="fa-regular fa-circle-check"></i> {{ t('Make It Premium') }}
+																		</a>
+																	</li>
+																@endif
+																@if ($isArchivingAllowed)
+																	<li>
+																		<a class="dropdown-item confirm-simple-action" href="{{ $archivingUrl }}">
+																			<i class="fa-solid fa-eye-slash"></i> {{ t('put_it_offline') }}
+																		</a>
+																	</li>
+																@endif
+																@if ($isRepostingAllowed)
+																	<li>
+																		<a class="dropdown-item confirm-simple-action" href="{{ $repostingUrl }}">
+																			<i class="fa-solid fa-recycle"></i> {{ t('re_post_it') }}
+																		</a>
+																	</li>
+																@endif
+																<li>
+																	<a class="dropdown-item confirm-simple-action"
+																	   href="{{ $deletingUrl }}"
+																	   style="color: red !important;"
+																	>
+																		<i class="fa-regular fa-trash-can"></i> {{ t('Delete') }}
+																	</a>
+																</li>
+															</ul>
+														</div>
 													</div>
 												</td>
 											</tr>

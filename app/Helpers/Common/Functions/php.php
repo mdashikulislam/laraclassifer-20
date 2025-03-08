@@ -700,7 +700,7 @@ function mb_parse_url(?string $url, int $component = -1)
 	$parts = parse_url($encodedUrl, $component);
 	
 	if ($parts === false) {
-		throw new \InvalidArgumentException('Malformed URL: ' . $url);
+		throw new InvalidArgumentException('Malformed URL: ' . $url);
 	}
 	
 	if (is_array($parts) && count($parts) > 0) {
@@ -865,7 +865,7 @@ function isExecFunctionEnabled(): bool
 		exec('ls');
 		
 		return (isFunctionEnabled('exec') && function_exists('exec'));
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		return false;
 	}
 }
@@ -882,7 +882,7 @@ function isFunctionEnabled(string $name): bool
 		$disabled = array_map('trim', explode(',', ini_get('disable_functions')));
 		
 		return !in_array($name, $disabled);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		return false;
 	}
 }
@@ -900,7 +900,7 @@ function isExifExtensionEnabled(): bool
 		}
 		
 		return false;
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		return false;
 	}
 }
@@ -1166,7 +1166,7 @@ function printCss(?string $code): string
  */
 function lineCount(string $path): int
 {
-	$file = new \SplFileObject($path, 'r');
+	$file = new SplFileObject($path, 'r');
 	$file->seek(PHP_INT_MAX);
 	
 	return $file->key() + 1;
@@ -1530,9 +1530,9 @@ function zipDirectory($sourceDir, $zipFile): bool
 		}
 		
 		// Zip the file
-		$zip = new \ZipArchive();
+		$zip = new ZipArchive();
 		
-		if ($zip->open($zipFile, \ZipArchive::CREATE | \ZipArchive::OVERWRITE) !== true) {
+		if ($zip->open($zipFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
 			return false;
 		}
 		
@@ -1556,7 +1556,7 @@ function zipDirectory($sourceDir, $zipFile): bool
 		$zip->close();
 		
 		return file_exists($zipFile);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return false;
@@ -1580,13 +1580,13 @@ function extractZip($zipFile, $extractTo): bool
 	}
 	
 	try {
-		$zip = new \ZipArchive();
+		$zip = new ZipArchive();
 		$zip->open($zipFile);
 		$zip->extractTo($extractTo);
 		$zip->close();
 		
 		return true;
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return false;
@@ -1831,7 +1831,7 @@ function findEmailAddresses($string): array
  * @param \Throwable $e
  * @return string
  */
-function getExceptionMessage(\Throwable $e): string
+function getExceptionMessage(Throwable $e): string
 {
 	$message = $e->getMessage();
 	

@@ -17,11 +17,11 @@
 namespace App\Services;
 
 use App\Helpers\Services\Search\PostQueries;
-use App\Services\Post\List\Search\CategoryTrait;
-use App\Services\Post\List\Search\LocationTrait;
 use App\Http\Resources\EntityCollection;
 use App\Http\Resources\SavedSearchResource;
 use App\Models\SavedSearch;
+use App\Services\Post\List\Search\CategoryTrait;
+use App\Services\Post\List\Search\LocationTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

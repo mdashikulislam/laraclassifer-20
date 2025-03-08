@@ -24,6 +24,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class Clearance
 {
@@ -50,7 +51,7 @@ class Clearance
 					return $next($request);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return $next($request);
 		}
 		
@@ -109,7 +110,7 @@ class Clearance
 							if (!empty($user)) {
 								return $this->forbidden($request);
 							}
-						} catch (\Throwable $e) {
+						} catch (Throwable $e) {
 						}
 					}
 				}

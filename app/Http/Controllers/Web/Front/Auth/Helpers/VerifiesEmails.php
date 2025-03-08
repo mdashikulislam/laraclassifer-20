@@ -16,9 +16,9 @@
 
 namespace App\Http\Controllers\Web\Front\Auth\Helpers;
 
-use Illuminate\Http\Request;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Verified;
+use Illuminate\Http\Request;
 
 trait VerifiesEmails
 {

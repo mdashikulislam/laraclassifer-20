@@ -37,11 +37,13 @@ selectbox       => {"name":"value","label":"Value","type":"select_from_array","o
 ------------------------------------------------------------------------------------
 */
 
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Controllers\Web\Admin\Traits\SettingsTrait;
 use App\Http\Requests\Admin\SettingRequest as StoreRequest;
 use App\Http\Requests\Admin\SettingRequest as UpdateRequest;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Models\Setting;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class SettingController extends PanelController
 {
@@ -92,7 +94,7 @@ class SettingController extends PanelController
 		// ...
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		return parent::storeCrud($request);
 	}
@@ -134,7 +136,7 @@ class SettingController extends PanelController
 	 * @param $key
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function find($key): \Illuminate\Http\RedirectResponse
+	public function find($key): RedirectResponse
 	{
 		$setting = Setting::where('key', $key)->first();
 		if (empty($setting)) {
@@ -156,7 +158,7 @@ class SettingController extends PanelController
 	 * @param $key
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function reset($key): \Illuminate\Http\RedirectResponse
+	public function reset($key): RedirectResponse
 	{
 		// Allow only the 'pagination' setting (for the moment... waiting the full feature)
 		if ($key != 'pagination') {
@@ -188,7 +190,7 @@ class SettingController extends PanelController
 				$message = trans('admin.setting_not_found', ['setting' => $key]);
 				notification($message, 'warning');
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'warning');
 		}
 		

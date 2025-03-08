@@ -16,12 +16,15 @@
 
 namespace App\Http\Controllers\Web\Admin\Traits;
 
+use Illuminate\Http\RedirectResponse;
+use Throwable;
+
 trait SettingsTrait
 {
 	/**
 	 * @param $id
 	 * @param null $childId
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 * @return \Illuminate\View\View
 	 */
 	public function edit($id, $childId = null)
 	{
@@ -55,9 +58,9 @@ trait SettingsTrait
 	
 	/**
 	 * @param $request
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function updateTrait($request)
+	public function updateTrait($request): RedirectResponse
 	{
 		$this->data['entry'] = $this->xPanel->getEntry($request->input('id'));
 		
@@ -75,8 +78,9 @@ trait SettingsTrait
 	 * Add fake fields as an array of the default json
 	 *
 	 * @param $fieldColValue
+	 * @return void
 	 */
-	public function addField($fieldColValue)
+	public function addField($fieldColValue): void
 	{
 		// Get the fake feature items
 		$fakeFeatureItems = [
@@ -92,7 +96,7 @@ trait SettingsTrait
 				try {
 					$fieldColItemFull = array_merge($fieldColItem, $fakeFeatureItems);
 					$this->addField($fieldColItemFull);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		} else {

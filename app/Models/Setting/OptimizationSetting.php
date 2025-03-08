@@ -166,21 +166,21 @@ class OptimizationSetting
 				'value' => trans('admin.caching_system_sep_value'),
 			],
 			[
-				'name'              => 'cache_driver',
-				'label'             => trans('admin.cache_driver_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $cacheDrivers,
-				'hint'              => trans('admin.cache_driver_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'cache_driver',
+				'label'   => trans('admin.cache_driver_label'),
+				'type'    => 'select2_from_array',
+				'options' => $cacheDrivers,
+				'hint'    => trans('admin.cache_driver_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'cache_expiration',
-				'label'             => trans('admin.cache_expiration_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.cache_expiration_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'cache_expiration',
+				'label'   => trans('admin.cache_expiration_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.cache_expiration_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 cache-enabled',
 				],
 			],
@@ -191,103 +191,103 @@ class OptimizationSetting
 			],
 			
 			[
-				'name'              => 'memcached_sep',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.memcached_sep_value'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_sep',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.memcached_sep_value'),
+				'wrapper' => [
 					'class' => 'col-md-12 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_persistent_id',
-				'label'             => trans('admin.memcached_persistent_id_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.memcached_persistent_id_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_persistent_id',
+				'label'   => trans('admin.memcached_persistent_id_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.memcached_persistent_id_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'separator_clear_1',
-				'type'              => 'custom_html',
-				'value'             => '<div style="clear: both;"></div>',
-				'wrapperAttributes' => [
+				'name'    => 'separator_clear_1',
+				'type'    => 'custom_html',
+				'value'   => '<div style="clear: both;"></div>',
+				'wrapper' => [
 					'class' => 'col-md-12 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_sasl_username',
-				'label'             => trans('admin.memcached_sasl_username_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.memcached_sasl_username_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_sasl_username',
+				'label'   => trans('admin.memcached_sasl_username_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.memcached_sasl_username_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_sasl_password',
-				'label'             => trans('admin.memcached_sasl_password_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.memcached_sasl_password_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_sasl_password',
+				'label'   => trans('admin.memcached_sasl_password_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.memcached_sasl_password_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_sep',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.memcached_servers_sep_value'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_sep',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.memcached_servers_sep_value'),
+				'wrapper' => [
 					'class' => 'col-md-12 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_1_host',
-				'label'             => trans('admin.memcached_servers_host_label', ['num' => 1]),
-				'type'              => 'text',
-				'hint'              => trans('admin.memcached_servers_host_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_1_host',
+				'label'   => trans('admin.memcached_servers_host_label', ['num' => 1]),
+				'type'    => 'text',
+				'hint'    => trans('admin.memcached_servers_host_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_1_port',
-				'label'             => trans('admin.memcached_servers_port_label', ['num' => 1]),
-				'type'              => 'number',
-				'hint'              => trans('admin.memcached_servers_port_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_1_port',
+				'label'   => trans('admin.memcached_servers_port_label', ['num' => 1]),
+				'type'    => 'number',
+				'hint'    => trans('admin.memcached_servers_port_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_2_host',
-				'label'             => trans('admin.memcached_servers_host_label', ['num' => 2]) . ' (' . trans('admin.Optional') . ')',
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_2_host',
+				'label'   => trans('admin.memcached_servers_host_label', ['num' => 2]) . ' (' . trans('admin.Optional') . ')',
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_2_port',
-				'label'             => trans('admin.memcached_servers_port_label', ['num' => 2]) . ' (' . trans('admin.Optional') . ')',
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_2_port',
+				'label'   => trans('admin.memcached_servers_port_label', ['num' => 2]) . ' (' . trans('admin.Optional') . ')',
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_3_host',
-				'label'             => trans('admin.memcached_servers_host_label', ['num' => 3]) . ' (' . trans('admin.Optional') . ')',
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_3_host',
+				'label'   => trans('admin.memcached_servers_host_label', ['num' => 3]) . ' (' . trans('admin.Optional') . ')',
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
 			[
-				'name'              => 'memcached_servers_3_port',
-				'label'             => trans('admin.memcached_servers_port_label', ['num' => 3]) . ' (' . trans('admin.Optional') . ')',
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'memcached_servers_3_port',
+				'label'   => trans('admin.memcached_servers_port_label', ['num' => 3]) . ' (' . trans('admin.Optional') . ')',
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6 memcached',
 				],
 			],
@@ -298,96 +298,96 @@ class OptimizationSetting
 				'value' => trans('admin.queue_title'),
 			],
 			[
-				'name'              => 'queue_driver',
-				'label'             => trans('admin.queue_driver_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $queueDrivers,
-				'hint'              => trans('admin.queue_driver_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'queue_driver',
+				'label'   => trans('admin.queue_driver_label'),
+				'type'    => 'select2_from_array',
+				'options' => $queueDrivers,
+				'hint'    => trans('admin.queue_driver_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'queue_driver_info',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.card_light_warning', [
+				'name'    => 'queue_driver_info',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.card_light_warning', [
 					'content' => trans('admin.queue_driver_info', [
 						'cmd' => getRightPathsForCmd('php artisan queue:work --queue=mail,sms,thumbs,default', wrapped: false),
 					]),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			
 			[
-				'name'              => 'sqs_title',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.sqs_title'),
-				'wrapperAttributes' => [
+				'name'    => 'sqs_title',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.sqs_title'),
+				'wrapper' => [
 					'class' => 'col-md-12 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_key',
-				'label'             => trans('admin.sqs_key_label'),
-				'type'              => 'text',
-				'required'          => true,
-				'hint'              => trans('admin.sqs_key_hint'),
-				'wrapperAttributes' => [
+				'name'     => 'sqs_key',
+				'label'    => trans('admin.sqs_key_label'),
+				'type'     => 'text',
+				'required' => true,
+				'hint'     => trans('admin.sqs_key_hint'),
+				'wrapper'  => [
 					'class' => 'col-md-6 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_secret',
-				'label'             => trans('admin.sqs_secret_label'),
-				'type'              => 'text',
-				'required'          => true,
-				'hint'              => trans('admin.sqs_secret_hint'),
-				'wrapperAttributes' => [
+				'name'     => 'sqs_secret',
+				'label'    => trans('admin.sqs_secret_label'),
+				'type'     => 'text',
+				'required' => true,
+				'hint'     => trans('admin.sqs_secret_hint'),
+				'wrapper'  => [
 					'class' => 'col-md-6 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_prefix',
-				'label'             => trans('admin.sqs_prefix_label'),
-				'type'              => 'text',
-				'default'           => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
-				'hint'              => trans('admin.sqs_prefix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'sqs_prefix',
+				'label'   => trans('admin.sqs_prefix_label'),
+				'type'    => 'text',
+				'default' => 'https://sqs.us-east-1.amazonaws.com/your-account-id',
+				'hint'    => trans('admin.sqs_prefix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_queue',
-				'label'             => trans('admin.sqs_queue_label'),
-				'type'              => 'text',
-				'default'           => $queue,
-				'attributes'        => [
+				'name'       => 'sqs_queue',
+				'label'      => trans('admin.sqs_queue_label'),
+				'type'       => 'text',
+				'default'    => $queue,
+				'attributes' => [
 					'disabled' => true,
 				],
-				'hint'              => trans('admin.sqs_queue_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.sqs_queue_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_suffix',
-				'label'             => trans('admin.sqs_suffix_label'),
-				'type'              => 'text',
-				'default'           => '',
-				'hint'              => trans('admin.sqs_suffix_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'sqs_suffix',
+				'label'   => trans('admin.sqs_suffix_label'),
+				'type'    => 'text',
+				'default' => '',
+				'hint'    => trans('admin.sqs_suffix_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 sqs',
 				],
 			],
 			[
-				'name'              => 'sqs_region',
-				'label'             => trans('admin.sqs_region_label'),
-				'type'              => 'text',
-				'default'           => 'us-east-1',
-				'hint'              => trans('admin.sqs_region_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'sqs_region',
+				'label'   => trans('admin.sqs_region_label'),
+				'type'    => 'text',
+				'default' => 'us-east-1',
+				'hint'    => trans('admin.sqs_region_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 sqs',
 				],
 			],

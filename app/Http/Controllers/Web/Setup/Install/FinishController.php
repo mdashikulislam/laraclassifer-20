@@ -21,6 +21,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 class FinishController extends BaseController
 {
@@ -41,7 +42,7 @@ class FinishController extends BaseController
 		// Check if the database connection is ok
 		try {
 			$this->getPdoConnectionWithEnvCheck();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			flash($e->getMessage())->error();
 			
 			// Get the DB info step URL
@@ -54,7 +55,7 @@ class FinishController extends BaseController
 		// Create the "installed" file
 		try {
 			createTheInstalledFile(true);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(400, $e->getMessage());
 		}
 		

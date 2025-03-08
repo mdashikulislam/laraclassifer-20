@@ -17,6 +17,8 @@
 namespace App\Helpers\Common\Files\Response;
 
 use Illuminate\Filesystem\FilesystemAdapter;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use Throwable;
 
 class FileContentResponseCreator
 {
@@ -77,7 +79,7 @@ class FileContentResponseCreator
 	 * @param string|null $filePath
 	 * @return \Symfony\Component\HttpFoundation\StreamedResponse
 	 */
-	private static function createBasicResponse($disk, ?string $filePath): \Symfony\Component\HttpFoundation\StreamedResponse
+	private static function createBasicResponse($disk, ?string $filePath): StreamedResponse
 	{
 		if (!$disk instanceof FilesystemAdapter) {
 			abort(404);
@@ -91,7 +93,7 @@ class FileContentResponseCreator
 		$mime = $disk->mimeType($filePath);
 		try {
 			$size = $disk->fileSize($filePath);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$size = 0;
 		}
 		$shortName = last(explode(DIRECTORY_SEPARATOR, $filePath));
@@ -101,7 +103,9 @@ class FileContentResponseCreator
 			"Content-Length"      => $size,
 			"Content-disposition" => "inline; filename=\"" . $shortName . "\"",
 		];
-		$callback = function () use ($stream) { fpassthru($stream); };
+		$callback = function () use ($stream) {
+			fpassthru($stream);
+		};
 		
 		return response()->stream($callback, 200, $headers);
 	}

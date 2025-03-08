@@ -18,25 +18,25 @@ namespace App\Helpers\Common\Files;
 
 use App\Helpers\Common\Files\Storage\StorageDisk;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Http\File as HttpFile;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
-use Illuminate\Http\File as HttpFile;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
+use Throwable;
 
 class Upload
 {
 	/**
-	 * @param string|null $destPath
 	 * @param $file
+	 * @param string|null $destPath
 	 * @param string|array|null $param
 	 * @param bool $withWatermark
 	 * @return string|null
-	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public static function image(?string $destPath, $file, string|array|null $param = null, bool $withWatermark = false): ?string
+	public static function image($file, ?string $destPath, string|array|null $param = null, bool $withWatermark = false): ?string
 	{
 		if (empty($file)) {
 			return null;
@@ -152,8 +152,8 @@ class Upload
 			unset($image);
 			
 			// Generate the filename
-			$filename = md5($origFilename . random_int(1, 9999) . time());
-			$filename = !empty($prefix) ? uniqid($prefix) : $filename;
+			$prefix = !empty($prefix) ? uniqid($prefix) : null;
+			$filename = normalizeFilename($origFilename, $prefix);
 			$filename = $filename . '.' . $extension;
 			
 			// Get the file path
@@ -165,18 +165,18 @@ class Upload
 			
 			// Save this path to the database
 			return $filePath;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return self::showError($e);
 		}
 	}
 	
 	/**
-	 * @param string|null $destPath
 	 * @param $file
+	 * @param string|null $destPath
 	 * @param string|null $diskName
 	 * @return string|null
 	 */
-	public static function file(?string $destPath, $file, ?string $diskName = null): ?string
+	public static function file($file, ?string $destPath, ?string $diskName = null): ?string
 	{
 		if (empty($file)) {
 			return null;
@@ -206,7 +206,7 @@ class Upload
 			$origExtension = $file->getClientOriginalExtension();
 			
 			// Generate a filename
-			$filename = md5($origFilename . random_int(1, 9999) . time());
+			$filename = normalizeFilename($origFilename);
 			$filename = $filename . '.' . $origExtension;
 			
 			// Get filepath
@@ -217,7 +217,7 @@ class Upload
 			
 			// Return the path (to the database later)
 			return $filePath;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return self::showError($e);
 		}
 	}
@@ -290,7 +290,7 @@ class Upload
 	 * @param \Throwable $e
 	 * @return null
 	 */
-	private static function showError(\Throwable $e): null
+	private static function showError(Throwable $e): null
 	{
 		if (!isFromApi()) {
 			notification($e->getMessage(), 'error');

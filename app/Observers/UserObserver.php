@@ -31,7 +31,9 @@ use App\Models\ThreadParticipant;
 use App\Models\User;
 use App\Notifications\UserActivated;
 use App\Notifications\UserNotification;
+use extras\plugins\reviews\app\Models\Review;
 use Illuminate\Support\Facades\Notification;
+use Throwable;
 
 class UserObserver
 {
@@ -51,7 +53,7 @@ class UserObserver
 				if ($admins->count() > 0) {
 					Notification::send($admins, new UserNotification($user));
 				}
-			} catch (\Throwable $t) {
+			} catch (Throwable $t) {
 			}
 		}
 	}
@@ -67,7 +69,7 @@ class UserObserver
 		// Revoke all the user's tokens
 		try {
 			$user->tokens()->delete();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Storage Disk Init.
@@ -137,13 +139,13 @@ class UserObserver
 		if (config('plugins.reviews.installed')) {
 			try {
 				// Delete the reviews of this User
-				$reviews = \extras\plugins\reviews\app\Models\Review::where('user_id', $user->id);
+				$reviews = Review::where('user_id', $user->id);
 				if ($reviews->count() > 0) {
 					foreach ($reviews->cursor() as $review) {
 						$review->delete();
 					}
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -165,7 +167,7 @@ class UserObserver
 		if (empty($user->email_verified_at)) {
 			if (empty($user->email_token)) {
 				$user->email_token = md5(microtime() . mt_rand());
-				$user->save();
+				$user->saveQuietly();
 			}
 		}
 		
@@ -173,7 +175,7 @@ class UserObserver
 		if (empty($user->phone_verified_at)) {
 			if (empty($user->phone_token)) {
 				$user->phone_token = mt_rand(100000, 999999);
-				$user->save();
+				$user->saveQuietly();
 			}
 		}
 		
@@ -207,7 +209,7 @@ class UserObserver
 			if ($userHasJustBeenVerified) {
 				$user->notify(new UserActivated($user));
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(500, $e->getMessage());
 		}
 	}
@@ -222,7 +224,7 @@ class UserObserver
 	{
 		try {
 			cache()->forget('count.users');
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

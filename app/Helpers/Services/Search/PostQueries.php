@@ -18,8 +18,6 @@ namespace App\Helpers\Services\Search;
 
 use App\Enums\PostType;
 use App\Helpers\Common\DBTool;
-use App\Http\Resources\PostResource;
-use App\Jobs\GeneratePostCollectionThumbnails;
 use App\Helpers\Services\Search\Traits\Filters;
 use App\Helpers\Services\Search\Traits\GroupBy;
 use App\Helpers\Services\Search\Traits\Having;
@@ -27,9 +25,12 @@ use App\Helpers\Services\Search\Traits\OrderBy;
 use App\Helpers\Services\Search\Traits\Relations;
 use App\Helpers\Services\Search\Traits\Select;
 use App\Http\Resources\EntityCollection;
+use App\Http\Resources\PostResource;
+use App\Jobs\GeneratePostCollectionThumbnails;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 class PostQueries
 {
@@ -216,7 +217,7 @@ class PostQueries
 			try {
 				$sql = 'SELECT COUNT(*) AS total FROM (' . $sql . ') AS x';
 				$result = DB::select($sql);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				// dd($e->getMessage()); // Debug!
 				$result = null;
 			}

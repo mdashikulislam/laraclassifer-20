@@ -17,14 +17,14 @@
 namespace App\Services\Payment\Promotion;
 
 use App\Helpers\Services\Payment as PaymentHelper;
-use App\Services\Payment\HasPaymentTrigger;
-use App\Services\Payment\RetrievePackageFeatures;
 use App\Http\Requests\Front\PackageRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Package;
 use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
+use App\Services\Payment\HasPaymentTrigger;
+use App\Services\Payment\RetrievePackageFeatures;
 
 trait MultiStepsPayment
 {

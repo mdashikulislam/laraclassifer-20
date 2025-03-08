@@ -66,12 +66,19 @@
 										{{-- category_id --}}
 										@php
 											$categoryIdError = (isset($errors) && $errors->has('category_id')) ? ' is-invalid' : '';
+											$catSelectionUrl = url('browsing/categories/select');
 										@endphp
 										<div class="row mb-3 required">
-											<label class="col-md-3 col-form-label{{ $categoryIdError }}">{{ t('category') }} <sup>*</sup></label>
+											<label class="col-md-3 col-form-label{{ $categoryIdError }}">
+												{{ t('category') }} <sup>*</sup>
+											</label>
 											<div class="col-md-8">
 												<div id="catsContainer" class="rounded{{ $categoryIdError }}">
-													<a href="#browseCategories" data-bs-toggle="modal" class="cat-link" data-id="0">
+													<a href="#browseCategories"
+													   data-bs-toggle="modal"
+													   class="cat-link open-selection-url"
+													   data-selection-url="{{ $catSelectionUrl }}"
+													>
 														{{ t('select_a_category') }}
 													</a>
 												</div>
@@ -95,7 +102,9 @@
 												$postTypeId = old('post_type_id', data_get($post, 'post_type_id'));
 											@endphp
 											<div id="postTypeBloc" class="row mb-3 required">
-												<label class="col-md-3 col-form-label{{ $postTypeIdError }}">{{ t('type') }} <sup>*</sup></label>
+												<label class="col-md-3 col-form-label{{ $postTypeIdError }}">
+													{{ t('type') }} <sup>*</sup>
+												</label>
 												<div class="col-md-8">
 													@foreach ($postTypes as $postType)
 														<div class="form-check form-check-inline">

@@ -22,6 +22,7 @@ use App\Models\Country;
 use App\Models\Scopes\ActiveScope;
 use App\Services\Country\itiTrait;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 class CountryService extends BaseService
 {
@@ -47,7 +48,7 @@ class CountryService extends BaseService
 		if ($isIti) {
 			try {
 				return $this->getItiCountries();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return apiResponse()->error($e->getMessage());
 			}
 		}

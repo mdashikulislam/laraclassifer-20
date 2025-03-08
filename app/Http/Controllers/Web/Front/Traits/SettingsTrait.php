@@ -17,15 +17,16 @@
 namespace App\Http\Controllers\Web\Front\Traits;
 
 use App\Helpers\Common\Cookie;
+use App\Helpers\Services\Localization\Country as CountryLocalization;
 use App\Models\Advertising;
 use App\Models\Page;
 use App\Models\PaymentMethod;
 use App\Models\Permission;
-use App\Helpers\Services\Localization\Country as CountryLocalization;
 use ChrisKonnertz\OpenGraph\OpenGraph;
 use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Support\Collection;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Throwable;
 
 trait SettingsTrait
 {
@@ -83,7 +84,7 @@ trait SettingsTrait
 						'height' => (int)config('settings.social_share.og_image_height', 630),
 					]);
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			view()->share('og', $this->og);
 		}
@@ -138,7 +139,7 @@ trait SettingsTrait
 			$pages = cache()->remember($cacheId, $this->cacheExpiration, function () {
 				return Page::columnIsEmpty('excluded_from_footer')->orderBy('lft')->get();
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('pages', $pages);
 		
@@ -169,7 +170,7 @@ trait SettingsTrait
 				$autoAdvertising = cache()->remember('advertising.auto', $this->cacheExpiration, function () {
 					return Advertising::where('integration', 'autoFit')->where('slug', 'auto')->first();
 				});
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			view()->share('topAdvertising', $topAdvertising);
 			view()->share('bottomAdvertising', $bottomAdvertising);
@@ -187,7 +188,7 @@ trait SettingsTrait
 							->orWhereNull('countries')->orWhere('countries', '');
 					})->orderBy('lft')->get();
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		$this->countPaymentMethods = $this->paymentMethods->count();
 		view()->share('paymentMethods', $this->paymentMethods);

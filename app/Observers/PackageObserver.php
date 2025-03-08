@@ -18,6 +18,7 @@ namespace App\Observers;
 
 use App\Models\Package;
 use App\Models\Payment;
+use Throwable;
 use Illuminate\Support\Facades\DB;
 
 class PackageObserver
@@ -89,7 +90,7 @@ class PackageObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

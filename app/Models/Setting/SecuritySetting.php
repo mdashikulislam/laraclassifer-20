@@ -157,13 +157,13 @@ class SecuritySetting
 				'value' => trans('admin.csrf_protection_title'),
 			],
 			[
-				'name'  => 'csrf_protection',
-				'label' => trans('admin.csrf_protection_label'),
-				'type'  => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'csrf_protection',
+				'label'   => trans('admin.csrf_protection_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
-				'hint'  => trans('admin.csrf_protection_hint'),
+				'hint'    => trans('admin.csrf_protection_hint'),
 			],
 			
 			[
@@ -172,82 +172,82 @@ class SecuritySetting
 				'value' => trans('admin.honeypot_title'),
 			],
 			[
-				'name'  => 'honeypot_enabled',
-				'label' => trans('admin.honeypot_enabled_label'),
-				'type'  => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_enabled',
+				'label'   => trans('admin.honeypot_enabled_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
-				'hint'  => trans('admin.honeypot_enabled_hint'),
+				'hint'    => trans('admin.honeypot_enabled_hint'),
 			],
 			[
-				'name'              => 'honeypot_name_field_name',
-				'label'             => trans('admin.honeypot_name_field_name_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.honeypot_name_field_name_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_name_field_name',
+				'label'   => trans('admin.honeypot_name_field_name_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.honeypot_name_field_name_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 honeypot-el',
 				],
 			],
 			[
-				'name'              => 'honeypot_respond_to_spam_with',
-				'label'             => trans('admin.honeypot_respond_to_spam_with_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'honeypot_respond_to_spam_with',
+				'label'   => trans('admin.honeypot_respond_to_spam_with_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'blank_page'     => 'Blank Page',
 					'http_error_500' => 'HTTP Error 500',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6 honeypot-el',
 				],
-				'hint'              => trans('admin.honeypot_respond_to_spam_with_hint'),
+				'hint'    => trans('admin.honeypot_respond_to_spam_with_hint'),
 			],
 			[
-				'name'              => 'honeypot_separator_1',
-				'type'              => 'custom_html',
-				'value'             => '<div style="clear: both;"></div>',
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_separator_1',
+				'type'    => 'custom_html',
+				'value'   => '<div style="clear: both;"></div>',
+				'wrapper' => [
 					'class' => 'col-md-12 extended honeypot-el',
 				],
 			],
 			[
-				'name'              => 'honeypot_randomize_name_field_name',
-				'label'             => trans('admin.honeypot_randomize_name_field_name_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.honeypot_randomize_name_field_name_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_randomize_name_field_name',
+				'label'   => trans('admin.honeypot_randomize_name_field_name_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.honeypot_randomize_name_field_name_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 honeypot-el',
 				],
 			],
 			[
-				'name'              => 'honeypot_valid_from_timestamp',
-				'label'             => trans('admin.honeypot_valid_from_timestamp_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.honeypot_valid_from_timestamp_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_valid_from_timestamp',
+				'label'   => trans('admin.honeypot_valid_from_timestamp_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.honeypot_valid_from_timestamp_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 honeypot-el',
 				],
 			],
 			[
-				'name'              => 'honeypot_valid_from_field_name',
-				'label'             => trans('admin.honeypot_valid_from_field_name_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.honeypot_valid_from_field_name_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'honeypot_valid_from_field_name',
+				'label'   => trans('admin.honeypot_valid_from_field_name_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.honeypot_valid_from_field_name_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 honeypot-el honeypot-timestamp-el',
 				],
 			],
 			[
-				'name'              => 'honeypot_amount_of_seconds',
-				'label'             => trans('admin.honeypot_amount_of_seconds_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'honeypot_amount_of_seconds',
+				'label'      => trans('admin.honeypot_amount_of_seconds_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => 3600,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.honeypot_amount_of_seconds_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.honeypot_amount_of_seconds_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6 honeypot-el honeypot-timestamp-el',
 				],
 			],
@@ -258,10 +258,10 @@ class SecuritySetting
 				'value' => trans('admin.captcha_title'),
 			],
 			[
-				'name'              => 'captcha',
-				'label'             => trans('admin.captcha_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'captcha',
+				'label'   => trans('admin.captcha_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					''          => 'Disabled',
 					'default'   => 'Simple Captcha (Default)',
 					'math'      => 'Simple Captcha (Math)',
@@ -271,16 +271,16 @@ class SecuritySetting
 					'custom'    => 'Simple Captcha (Custom)',
 					'recaptcha' => 'Google reCAPTCHA',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'hint'              => trans('admin.captcha_hint'),
+				'hint'    => trans('admin.captcha_hint'),
 			],
 			[
-				'name'              => 'captcha_delay',
-				'label'             => trans('admin.captcha_delay_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'captcha_delay',
+				'label'   => trans('admin.captcha_delay_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					1000 => '1000ms',
 					1100 => '1100ms',
 					1200 => '1200ms',
@@ -295,282 +295,282 @@ class SecuritySetting
 					2500 => '2500ms',
 					3000 => '3000ms',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6 s-captcha',
 				],
-				'hint'              => trans('admin.captcha_delay_hint'),
+				'hint'    => trans('admin.captcha_delay_hint'),
 			],
 			[
-				'name'              => 'captcha_custom',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.captcha_custom'),
-				'wrapperAttributes' => [
+				'name'    => 'captcha_custom',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.captcha_custom'),
+				'wrapper' => [
 					'class' => 'col-md-12 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_custom_info',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.captcha_custom_info'),
-				'wrapperAttributes' => [
+				'name'    => 'captcha_custom_info',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.captcha_custom_info'),
+				'wrapper' => [
 					'class' => 'col-md-12 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_width',
-				'label'             => trans('admin.captcha_width_label', ['max' => 300]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_width',
+				'label'      => trans('admin.captcha_width_label', ['max' => 300]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 100,
 					'max'  => 300,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_height',
-				'label'             => trans('admin.captcha_height_label', ['max' => 150]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_height',
+				'label'      => trans('admin.captcha_height_label', ['max' => 150]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 30,
 					'max'  => 150,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_length',
-				'label'             => trans('admin.captcha_length_label', ['max' => 8]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_length',
+				'label'      => trans('admin.captcha_length_label', ['max' => 8]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 3,
 					'max'  => 8,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_quality',
-				'label'             => trans('admin.captcha_quality_label', ['max' => 100]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_quality',
+				'label'      => trans('admin.captcha_quality_label', ['max' => 100]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => 100,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_bgImage',
-				'label'             => trans('admin.captcha_bgImage_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'captcha_bgImage',
+				'label'   => trans('admin.captcha_bgImage_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12 s-captcha s-captcha-custom',
 				],
-				'hint'              => trans('admin.captcha_bgImage_hint'),
+				'hint'    => trans('admin.captcha_bgImage_hint'),
 			],
 			[
-				'name'              => 'captcha_bgColor',
-				'label'             => trans('admin.captcha_bgColor_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'captcha_bgColor',
+				'label'      => trans('admin.captcha_bgColor_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_lines',
-				'label'             => trans('admin.captcha_lines_label', ['max' => 20]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_lines',
+				'label'      => trans('admin.captcha_lines_label', ['max' => 20]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 20,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_angle',
-				'label'             => trans('admin.captcha_angle_label', ['max' => 180]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_angle',
+				'label'      => trans('admin.captcha_angle_label', ['max' => 180]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 180,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_sharpen',
-				'label'             => trans('admin.captcha_sharpen_label', ['max' => 20]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_sharpen',
+				'label'      => trans('admin.captcha_sharpen_label', ['max' => 20]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 20,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_blur',
-				'label'             => trans('admin.captcha_blur_label', ['max' => 20]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_blur',
+				'label'      => trans('admin.captcha_blur_label', ['max' => 20]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'max'  => 20,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_contrast',
-				'label'             => trans('admin.captcha_contrast_label', ['max' => 50]),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_contrast',
+				'label'      => trans('admin.captcha_contrast_label', ['max' => 50]),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => -50,
 					'max'  => 50,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_expire',
-				'label'             => trans('admin.captcha_expire_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'captcha_expire',
+				'label'      => trans('admin.captcha_expire_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-3 s-captcha s-captcha-custom',
 				],
 			],
 			[
-				'name'              => 'captcha_math',
-				'label'             => trans('admin.captcha_math_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'captcha_math',
+				'label'   => trans('admin.captcha_math_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 s-captcha s-captcha-custom',
 				],
-				'hint'              => trans('admin.captcha_math_hint'),
+				'hint'    => trans('admin.captcha_math_hint'),
 			],
 			[
-				'name'              => 'captcha_encrypt',
-				'label'             => trans('admin.captcha_encrypt_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'captcha_encrypt',
+				'label'   => trans('admin.captcha_encrypt_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 s-captcha s-captcha-custom',
 				],
-				'hint'              => trans('admin.captcha_encrypt_hint'),
+				'hint'    => trans('admin.captcha_encrypt_hint'),
 			],
 			[
-				'name'              => 'captcha_sensitive',
-				'label'             => trans('admin.captcha_sensitive_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'captcha_sensitive',
+				'label'   => trans('admin.captcha_sensitive_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 s-captcha s-captcha-custom',
 				],
-				'hint'              => trans('admin.captcha_sensitive_hint'),
+				'hint'    => trans('admin.captcha_sensitive_hint'),
 			],
 			[
-				'name'              => 'captcha_invert',
-				'label'             => trans('admin.captcha_invert_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'captcha_invert',
+				'label'   => trans('admin.captcha_invert_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 s-captcha s-captcha-custom',
 				],
-				'hint'              => trans('admin.captcha_invert_hint'),
+				'hint'    => trans('admin.captcha_invert_hint'),
 			],
 			
 			// ==========
 			
 			[
-				'name'              => 'recaptcha_sep_info',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.recaptcha_sep_info_value'),
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_sep_info',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.recaptcha_sep_info_value'),
+				'wrapper' => [
 					'class' => 'col-md-12 recaptcha',
 				],
 			],
 			[
-				'name'              => 'recaptcha_version',
-				'label'             => trans('admin.recaptcha_version_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'recaptcha_version',
+				'label'   => trans('admin.recaptcha_version_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'v2' => 'v2 (Checkbox)',
 					'v3' => 'v3',
 				],
-				'hint'              => trans('admin.recaptcha_version_hint'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.recaptcha_version_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha',
 				],
 			],
 			[
-				'name'              => 'separator_clear_recaptcha',
-				'type'              => 'custom_html',
-				'value'             => '<div style="clear: both;"></div>',
-				'wrapperAttributes' => [
+				'name'    => 'separator_clear_recaptcha',
+				'type'    => 'custom_html',
+				'value'   => '<div style="clear: both;"></div>',
+				'wrapper' => [
 					'class' => 'col-md-12 recaptcha',
 				],
 			],
 			[
-				'name'              => 'recaptcha_v2_site_key',
-				'label'             => trans('admin.recaptcha_v2_site_key_label'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_v2_site_key',
+				'label'   => trans('admin.recaptcha_v2_site_key_label'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha recaptcha-v2',
 				],
 			],
 			[
-				'name'              => 'recaptcha_v2_secret_key',
-				'label'             => trans('admin.recaptcha_v2_secret_key_label'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_v2_secret_key',
+				'label'   => trans('admin.recaptcha_v2_secret_key_label'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha recaptcha-v2',
 				],
 			],
 			[
-				'name'              => 'recaptcha_v3_site_key',
-				'label'             => trans('admin.recaptcha_v3_site_key_label'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_v3_site_key',
+				'label'   => trans('admin.recaptcha_v3_site_key_label'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha recaptcha-v3',
 				],
 			],
 			[
-				'name'              => 'recaptcha_v3_secret_key',
-				'label'             => trans('admin.recaptcha_v3_secret_key_label'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_v3_secret_key',
+				'label'   => trans('admin.recaptcha_v3_secret_key_label'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha recaptcha-v3',
 				],
 			],
 			[
-				'name'              => 'recaptcha_skip_ips',
-				'label'             => trans('admin.recaptcha_skip_ips_label'),
-				'type'              => 'textarea',
-				'hint'              => trans('admin.recaptcha_skip_ips_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'recaptcha_skip_ips',
+				'label'   => trans('admin.recaptcha_skip_ips_label'),
+				'type'    => 'textarea',
+				'hint'    => trans('admin.recaptcha_skip_ips_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 recaptcha',
 				],
 			],
@@ -589,10 +589,10 @@ class SecuritySetting
 				'hint'  => trans('admin.Open the top login link into Modal'),
 			],
 			[
-				'name'              => 'login_max_attempts',
-				'label'             => trans('admin.Max Attempts'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'login_max_attempts',
+				'label'   => trans('admin.Max Attempts'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					30 => '30',
 					20 => '20',
 					10 => '10',
@@ -602,16 +602,16 @@ class SecuritySetting
 					2  => '2',
 					1  => '1',
 				],
-				'hint'              => trans('admin.The maximum number of attempts to allow'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.The maximum number of attempts to allow'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'login_decay_minutes',
-				'label'             => trans('admin.Decay Minutes'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'login_decay_minutes',
+				'label'   => trans('admin.Decay Minutes'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					1440 => '1440',
 					720  => '720',
 					60   => '60',
@@ -625,8 +625,8 @@ class SecuritySetting
 					2    => '2',
 					1    => '1',
 				],
-				'hint'              => trans('admin.The number of minutes to throttle for'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.The number of minutes to throttle for'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -637,89 +637,89 @@ class SecuritySetting
 				'value' => trans('admin.password_validator_title_value'),
 			],
 			[
-				'name'              => 'password_min_length',
-				'label'             => trans('admin.password_min_length_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'password_min_length',
+				'label'      => trans('admin.password_min_length_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 					'max'  => 100,
 				],
-				'hint'              => trans('admin.password_min_length_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.password_min_length_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_max_length',
-				'label'             => trans('admin.password_max_length_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'password_max_length',
+				'label'      => trans('admin.password_max_length_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 					'max'  => 100,
 				],
-				'hint'              => trans('admin.password_max_length_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.password_max_length_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_letters_required',
-				'label'             => trans('admin.password_letters_required_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.password_letters_required_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'password_letters_required',
+				'label'   => trans('admin.password_letters_required_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.password_letters_required_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_mixedCase_required',
-				'label'             => trans('admin.password_mixedCase_required_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.password_mixedCase_required_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'password_mixedCase_required',
+				'label'   => trans('admin.password_mixedCase_required_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.password_mixedCase_required_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_numbers_required',
-				'label'             => trans('admin.password_numbers_required_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.password_numbers_required_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'password_numbers_required',
+				'label'   => trans('admin.password_numbers_required_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.password_numbers_required_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_symbols_required',
-				'label'             => trans('admin.password_symbols_required_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.password_symbols_required_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'password_symbols_required',
+				'label'   => trans('admin.password_symbols_required_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.password_symbols_required_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_uncompromised_required',
-				'label'             => trans('admin.password_uncompromised_required_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.password_uncompromised_required_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'password_uncompromised_required',
+				'label'   => trans('admin.password_uncompromised_required_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.password_uncompromised_required_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'password_uncompromised_threshold',
-				'label'             => trans('admin.password_uncompromised_threshold_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'password_uncompromised_threshold',
+				'label'      => trans('admin.password_uncompromised_threshold_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 					'max'  => 10,
 				],
-				'hint'              => trans('admin.password_uncompromised_threshold_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.password_uncompromised_threshold_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6 mt-4',
 				],
 			],
@@ -730,47 +730,47 @@ class SecuritySetting
 				'value' => trans('admin.email_validator_title_value'),
 			],
 			[
-				'name'              => 'email_validator_rfc',
-				'label'             => trans('admin.email_validator_rfc_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.email_validator_rfc_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'email_validator_rfc',
+				'label'   => trans('admin.email_validator_rfc_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.email_validator_rfc_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'email_validator_strict',
-				'label'             => trans('admin.email_validator_strict_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.email_validator_strict_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'email_validator_strict',
+				'label'   => trans('admin.email_validator_strict_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.email_validator_strict_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'email_validator_dns',
-				'label'             => trans('admin.email_validator_dns_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.email_validator_dns_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'email_validator_dns',
+				'label'   => trans('admin.email_validator_dns_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.email_validator_dns_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'email_validator_spoof',
-				'label'             => trans('admin.email_validator_spoof_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.email_validator_spoof_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'email_validator_spoof',
+				'label'   => trans('admin.email_validator_spoof_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.email_validator_spoof_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'email_validator_filter',
-				'label'             => trans('admin.email_validator_filter_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.email_validator_filter_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'email_validator_filter',
+				'label'   => trans('admin.email_validator_filter_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.email_validator_filter_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

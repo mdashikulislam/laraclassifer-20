@@ -20,6 +20,7 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Notifications\ExampleSms;
 use Illuminate\Support\Facades\Notification;
+use Throwable;
 
 trait SmsConfig
 {
@@ -109,7 +110,7 @@ trait SmsConfig
 					$message = trans('admin.sms_to_missing');
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 		}
 		

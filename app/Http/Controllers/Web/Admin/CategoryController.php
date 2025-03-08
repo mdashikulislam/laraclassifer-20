@@ -16,18 +16,20 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Helpers\Common\Categories\AdjacentToNested;
 use App\Helpers\Common\Files\Upload;
-use App\Http\Requests\Admin\Request;
-use App\Models\Category;
+use App\Helpers\Common\HierarchicalData\Library\AdjacentToNested;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\CategoryRequest as StoreRequest;
 use App\Http\Requests\Admin\CategoryRequest as UpdateRequest;
+use App\Http\Requests\Admin\Request;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class CategoryController extends PanelController
 {
 	public $parentId = 0;
+	
 	public $entryId = null;
 	
 	public function setup()
@@ -204,36 +206,36 @@ class CategoryController extends PanelController
 		// FIELDS
 		$skippedId = (is_numeric($this->entryId)) ? $this->entryId : -1;
 		$this->xPanel->addField([
-			'name'              => 'parent_id',
-			'label'             => 'Parent',
-			'type'              => 'select2_from_array',
-			'options'           => Category::selectBoxTree($skippedId),
-			'allows_null'       => false,
-			'value'             => $this->parentId,
-			'wrapperAttributes' => [
+			'name'        => 'parent_id',
+			'label'       => 'Parent',
+			'type'        => 'select2_from_array',
+			'options'     => Category::selectBoxTree($skippedId),
+			'allows_null' => false,
+			'value'       => $this->parentId,
+			'wrapper'     => [
 				'class' => 'col-md-12',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'slug',
-			'label'             => trans('admin.Slug'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'slug',
+			'label'      => trans('admin.Slug'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Will be automatically generated from your name, if left empty'),
 			],
-			'hint'              => trans('admin.Will be automatically generated from your name, if left empty'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.Will be automatically generated from your name, if left empty'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -258,26 +260,26 @@ class CategoryController extends PanelController
 		$wysiwygEditor = config('settings.other.wysiwyg_editor');
 		$wysiwygEditorViewPath = '/views/admin/panel/fields/' . $wysiwygEditor . '.blade.php';
 		$this->xPanel->addField([
-			'name'              => 'description',
-			'label'             => trans('admin.Description'),
-			'type'              => ($wysiwygEditor != 'none' && file_exists(resource_path() . $wysiwygEditorViewPath))
+			'name'       => 'description',
+			'label'      => trans('admin.Description'),
+			'type'       => ($wysiwygEditor != 'none' && file_exists(resource_path() . $wysiwygEditorViewPath))
 				? $wysiwygEditor
 				: 'textarea',
-			'attributes'        => [
+			'attributes' => [
 				'id'   => 'description',
 				'rows' => 5,
 			],
-			'hint'              => trans('admin.cat_description_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.cat_description_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-12',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'hide_description',
-			'label'             => trans('admin.hide_cat_description_label'),
-			'type'              => 'checkbox_switch',
-			'hint'              => trans('admin.hide_cat_description_hint'),
-			'wrapperAttributes' => [
+			'name'    => 'hide_description',
+			'label'   => trans('admin.hide_cat_description_label'),
+			'type'    => 'checkbox_switch',
+			'hint'    => trans('admin.hide_cat_description_hint'),
+			'wrapper' => [
 				'class' => 'col-md-12 mb-4',
 				'style' => 'margin-top: -15px;',
 			],
@@ -368,7 +370,7 @@ class CategoryController extends PanelController
 	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -377,10 +379,10 @@ class CategoryController extends PanelController
 	
 	/**
 	 * @param \App\Http\Requests\Admin\CategoryRequest $request
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -401,7 +403,7 @@ class CategoryController extends PanelController
 		$file = $request->file($attribute, $request->input($attribute));
 		
 		// Upload the image & get its local path
-		$imagePath = Upload::image($destPath, $file, 'cat');
+		$imagePath = Upload::image($file, $destPath, 'cat');
 		
 		// Set the local path in the input
 		$request->merge([$attribute => $imagePath]);
@@ -433,7 +435,7 @@ class CategoryController extends PanelController
 			$transformer->getAndSetAdjacentItemsIds();
 			$transformer->convertChildrenRecursively(0);
 			$transformer->setNodesDepth();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}

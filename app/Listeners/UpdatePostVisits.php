@@ -17,8 +17,7 @@
 namespace App\Listeners;
 
 use App\Events\PostWasVisited;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use Throwable;
 
 class UpdatePostVisits
 {
@@ -80,7 +79,7 @@ class UpdatePostVisits
 			// Increment the listing's visit count
 			$post->visits = $post->visits + 1;
 			$post->save();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

@@ -3,9 +3,9 @@
 return [
 	
 	'paypal' => [
-		'mode'         => env('PAYPAL_MODE', 'sandbox'),
-		'clientId'     => env('PAYPAL_CLIENT_ID', ''),
-		'clientSecret' => env('PAYPAL_CLIENT_SECRET', ''),
+		'mode'           => env('PAYPAL_MODE', 'sandbox'),
+		'clientId'       => env('PAYPAL_CLIENT_ID', ''),
+		'clientSecret'   => env('PAYPAL_CLIENT_SECRET', ''),
 		
 		/*
 		 * Referrers' hosts
@@ -13,5 +13,5 @@ return [
 		 */
 		'referrersHosts' => ['paypal.com'],
 	],
-	
+
 ];

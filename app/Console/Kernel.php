@@ -18,6 +18,7 @@ namespace App\Console;
 
 use App\Helpers\Common\Date;
 use Illuminate\Console\Scheduling\Schedule;
+use Throwable;
 
 class Kernel
 {
@@ -30,7 +31,7 @@ class Kernel
 		// Delete all batches that finished over 48 hours ago
 		try {
 			$schedule->command('queue:prune-batches --hours=48 --unfinished=72')->daily();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Deleting Expired Tokens (Resetting Password)

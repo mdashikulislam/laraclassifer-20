@@ -48,47 +48,47 @@ class FooterSetting
 	{
 		$fields = [
 			[
-				'name'              => 'hide_links',
-				'label'             => trans('admin.Hide Links'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'hide_links',
+				'label'   => trans('admin.Hide Links'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			[
-				'name'              => 'hide_payment_plugins_logos',
-				'label'             => trans('admin.Hide Payment Plugins Logos'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'hide_payment_plugins_logos',
+				'label'   => trans('admin.Hide Payment Plugins Logos'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			[
-				'name'              => 'hide_powered_by',
-				'label'             => trans('admin.Hide Powered by Info'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'hide_powered_by',
+				'label'   => trans('admin.Hide Powered by Info'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-5 mt-3',
 				],
 			],
 			[
-				'name'              => 'powered_by_info',
-				'label'             => trans('admin.Powered by'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'powered_by_info',
+				'label'   => trans('admin.Powered by'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-7 powered-by-field',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			[
-				'name'              => 'tracking_code',
-				'label'             => trans('admin.Tracking Code'),
-				'type'              => 'textarea',
-				'attributes'        => [
+				'name'       => 'tracking_code',
+				'label'      => trans('admin.Tracking Code'),
+				'type'       => 'textarea',
+				'attributes' => [
 					'rows' => '15',
 				],
-				'hint'              => trans('admin.tracking_code_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.tracking_code_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-12',
 				],
 			],

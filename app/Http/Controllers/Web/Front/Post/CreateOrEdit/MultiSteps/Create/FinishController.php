@@ -17,8 +17,8 @@
 namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create;
 
 use App\Models\Post;
-use App\Models\Scopes\VerifiedScope;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use Illuminate\Http\Request;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 

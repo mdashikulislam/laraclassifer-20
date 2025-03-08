@@ -19,6 +19,7 @@ namespace App\Observers;
 use App\Helpers\Services\Lang\LangManager;
 use App\Models\Language;
 use App\Observers\Traits\LanguageTrait;
+use Throwable;
 
 class LanguageObserver
 {
@@ -161,7 +162,8 @@ class LanguageObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {}
+		} catch (Throwable $e) {
+		}
 	}
 	
 	/**

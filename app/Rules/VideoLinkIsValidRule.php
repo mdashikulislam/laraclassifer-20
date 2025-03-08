@@ -20,6 +20,7 @@ use App\Helpers\Common\VideoEmbedder;
 use App\Helpers\Common\VideoIdExtractor;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Throwable;
 
 class VideoLinkIsValidRule implements ValidationRule
 {
@@ -55,7 +56,7 @@ class VideoLinkIsValidRule implements ValidationRule
 		// Get the video standard link
 		try {
 			$extracted = VideoIdExtractor::extractId($value);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(500, $e->getMessage());
 		}
 		

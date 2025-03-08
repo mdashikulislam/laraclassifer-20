@@ -20,10 +20,12 @@ use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\PackageRequest as StoreRequest;
 use App\Http\Requests\Admin\PackageRequest as UpdateRequest;
 use App\Models\Package;
+use Illuminate\Http\RedirectResponse;
 
 class PackageController extends PanelController
 {
 	protected bool $isPromoPackage = false;
+	
 	protected bool $isSubsPackage = false;
 	
 	public function setup()
@@ -136,203 +138,203 @@ class PackageController extends PanelController
 			'default' => $type,
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'short_name',
-			'label'             => trans('admin.short_name_label'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'short_name',
+			'label'      => trans('admin.short_name_label'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.short_name_label'),
 			],
-			'hint'              => trans('admin.short_name_hint_detailed'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.short_name_hint_detailed'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		if ($this->isPromoPackage) {
 			$this->xPanel->addField([
-				'name'              => 'ribbon',
-				'label'             => trans('admin.Ribbon'),
-				'type'              => 'enum',
-				'hint'              => trans('admin.Show listings with ribbon when viewing listings in search results list'),
-				'wrapperAttributes' => [
+				'name'    => 'ribbon',
+				'label'   => trans('admin.Ribbon'),
+				'type'    => 'enum',
+				'hint'    => trans('admin.Show listings with ribbon when viewing listings in search results list'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			]);
 			$this->xPanel->addField([
-				'name'              => 'has_badge',
-				'label'             => trans('admin.Show listings with a badge'),
-				'type'              => 'checkbox_switch',
-				'hint'              => '<br><br>',
-				'wrapperAttributes' => [
+				'name'    => 'has_badge',
+				'label'   => trans('admin.Show listings with a badge'),
+				'type'    => 'checkbox_switch',
+				'hint'    => '<br><br>',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			]);
 		}
 		$this->xPanel->addField([
-			'name'              => 'price',
-			'label'             => trans('admin.Price'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'price',
+			'label'      => trans('admin.Price'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Price'),
 			],
-			'hint'              => trans('admin.package_price_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.package_price_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'label'             => trans('admin.Currency'),
-			'name'              => 'currency_code',
-			'model'             => 'App\Models\Currency',
-			'entity'            => 'currency',
-			'attribute'         => 'code',
-			'type'              => 'select2',
-			'wrapperAttributes' => [
+			'label'     => trans('admin.Currency'),
+			'name'      => 'currency_code',
+			'model'     => 'App\Models\Currency',
+			'entity'    => 'currency',
+			'attribute' => 'code',
+			'type'      => 'select2',
+			'wrapper'   => [
 				'class' => 'col-md-6',
 			],
 		]);
 		if ($this->isPromoPackage) {
 			$this->xPanel->addField([
-				'name'              => 'promotion_time',
-				'label'             => trans('admin.promotion_time'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'promotion_time',
+				'label'      => trans('admin.promotion_time'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => trans('admin.promotion_time_in_days'),
 					'min'         => 0,
 					'step'        => 1,
 				],
-				'hint'              => trans('admin.promotion_time_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.promotion_time_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			]);
 		}
 		if ($this->isSubsPackage) {
 			$this->xPanel->addField([
-				'name'              => 'interval',
-				'label'             => trans('admin.interval_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $this->getIntervalOptions(),
-				'allows_null'       => true,
-				'default'           => 'month',
-				'hint'              => trans('admin.interval_hint'),
-				'wrapperAttributes' => [
+				'name'        => 'interval',
+				'label'       => trans('admin.interval_label'),
+				'type'        => 'select2_from_array',
+				'options'     => $this->getIntervalOptions(),
+				'allows_null' => true,
+				'default'     => 'month',
+				'hint'        => trans('admin.interval_hint'),
+				'wrapper'     => [
 					'class' => 'col-md-6',
 				],
 			]);
 			$this->xPanel->addField([
-				'name'              => 'listings_limit',
-				'label'             => trans('admin.subs_listings_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'listings_limit',
+				'label'      => trans('admin.subs_listings_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => trans('admin.subs_listings_limit_label'),
 					'min'         => 0,
 					'step'        => 1,
 				],
-				'default'           => config('settings.listing_form.listings_limit', 5),
-				'hint'              => trans('admin.subs_listings_limit_hint'),
-				'wrapperAttributes' => [
+				'default'    => config('settings.listing_form.listings_limit', 5),
+				'hint'       => trans('admin.subs_listings_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			]);
 		}
 		$this->xPanel->addField([
-			'name'              => 'pictures_limit',
-			'label'             => trans('admin.pictures_limit_label'),
-			'type'              => 'number',
-			'attributes'        => [
+			'name'       => 'pictures_limit',
+			'label'      => trans('admin.pictures_limit_label'),
+			'type'       => 'number',
+			'attributes' => [
 				'placeholder' => trans('admin.pictures_limit_label'),
 				'min'         => 0,
 				'step'        => 1,
 			],
-			'default'           => config('settings.listing_form.pictures_limit', 5),
-			'hint'              => ($this->isSubsPackage)
+			'default'    => config('settings.listing_form.pictures_limit', 5),
+			'hint'       => ($this->isSubsPackage)
 				? trans('admin.subs_pictures_limit_hint')
 				: trans('admin.package_pictures_limit_hint'),
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'expiration_time',
-			'label'             => trans('admin.expiration_time_label'),
-			'type'              => 'number',
-			'attributes'        => [
+			'name'       => 'expiration_time',
+			'label'      => trans('admin.expiration_time_label'),
+			'type'       => 'number',
+			'attributes' => [
 				'placeholder' => trans('admin.expiration_time_in_days'),
 				'min'         => 0,
 				'step'        => 1,
 			],
-			'default'           => config('settings.cron.activated_listings_expiration', 30),
-			'hint'              => trans('admin.expiration_time_hint'),
-			'wrapperAttributes' => [
+			'default'    => config('settings.cron.activated_listings_expiration', 30),
+			'hint'       => trans('admin.expiration_time_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => true,
+			'newline'    => true,
 		]);
 		
 		if ($this->isPromoPackage) {
 			$this->xPanel->addField([
-				'name'              => 'facebook_ads_duration',
-				'label'             => trans('admin.facebook_ads_duration'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'facebook_ads_duration',
+				'label'      => trans('admin.facebook_ads_duration'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.external_sponsored_listings_hint', ['provider' => 'Facebook']),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.external_sponsored_listings_hint', ['provider' => 'Facebook']),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
 			]);
 			$this->xPanel->addField([
-				'name'              => 'google_ads_duration',
-				'label'             => trans('admin.google_ads_duration'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'google_ads_duration',
+				'label'      => trans('admin.google_ads_duration'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.external_sponsored_listings_hint', ['provider' => 'Google']),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.external_sponsored_listings_hint', ['provider' => 'Google']),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
 			]);
 			$this->xPanel->addField([
-				'name'              => 'twitter_ads_duration',
-				'label'             => trans('admin.twitter_ads_duration'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'twitter_ads_duration',
+				'label'      => trans('admin.twitter_ads_duration'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.external_sponsored_listings_hint', ['provider' => 'Twitter']),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.external_sponsored_listings_hint', ['provider' => 'Twitter']),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
 			]);
 			$this->xPanel->addField([
-				'name'              => 'linkedin_ads_duration',
-				'label'             => trans('admin.linkedin_ads_duration'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'linkedin_ads_duration',
+				'label'      => trans('admin.linkedin_ads_duration'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.external_sponsored_listings_hint', ['provider' => 'LinkedIn']),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.external_sponsored_listings_hint', ['provider' => 'LinkedIn']),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
-				'newline'           => true,
+				'newline'    => true,
 			]);
 		}
 		
@@ -347,60 +349,60 @@ class PackageController extends PanelController
 			'hint'       => trans('admin.package_description_hint'),
 		]);
 		$this->xPanel->addField([
-			'name'              => 'lft',
-			'label'             => trans('admin.Position'),
-			'type'              => 'number',
-			'attributes'        => [
+			'name'       => 'lft',
+			'label'      => trans('admin.Position'),
+			'type'       => 'number',
+			'attributes' => [
 				'min'  => 0,
 				'step' => 1,
 			],
-			'hint'              => trans('admin.Quick Reorder') . ': '
+			'hint'       => trans('admin.Quick Reorder') . ': '
 				. trans('admin.Enter a position number') . ' '
 				. trans('admin.position_number_note'),
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => true,
+			'newline'    => true,
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'recommended',
-			'label'             => trans('admin.recommended'),
-			'type'              => 'checkbox_switch',
-			'hint'              => trans('admin.recommended_hint'),
-			'wrapperAttributes' => [
+			'name'    => 'recommended',
+			'label'   => trans('admin.recommended'),
+			'type'    => 'checkbox_switch',
+			'hint'    => trans('admin.recommended_hint'),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'active',
-			'label'             => trans('admin.Active'),
-			'type'              => 'checkbox_switch',
-			'default'           => '1',
-			'hint'              => '<br><br>',
-			'wrapperAttributes' => [
+			'name'    => 'active',
+			'label'   => trans('admin.Active'),
+			'type'    => 'checkbox_switch',
+			'default' => '1',
+			'hint'    => '<br><br>',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		], 'create');
 		$this->xPanel->addField([
-			'name'              => 'active',
-			'label'             => trans('admin.Active'),
-			'type'              => 'checkbox_switch',
-			'hint'              => '<br><br>',
-			'wrapperAttributes' => [
+			'name'    => 'active',
+			'label'   => trans('admin.Active'),
+			'type'    => 'checkbox_switch',
+			'hint'    => '<br><br>',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		], 'update');
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	private function getIntervalOptions(): array

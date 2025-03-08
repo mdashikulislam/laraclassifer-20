@@ -16,9 +16,9 @@
 
 namespace App\Http\Requests\Admin;
 
-use App\Rules\CustomFieldUniqueRule;
 use App\Rules\CustomFieldUniqueChildrenRule;
 use App\Rules\CustomFieldUniqueParentRule;
+use App\Rules\CustomFieldUniqueRule;
 
 class CategoryFieldRequest extends Request
 {

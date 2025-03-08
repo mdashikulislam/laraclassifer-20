@@ -106,7 +106,7 @@ function getLocales(?string $from = null, bool $includeNonLocales = false): arra
 	if ($isFromInstalled || $isFromMerged) {
 		try {
 			exec('locale -a', $locales);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	
@@ -254,7 +254,7 @@ function getCountryRefList(): array
 		if (file_exists($path)) {
 			$array = (array)include realpath($path);
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return $array;
@@ -272,7 +272,7 @@ function getReferrerList(string $referrer): array
 		if (file_exists($path)) {
 			$array = (array)include realpath($path);
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return $array;

@@ -18,10 +18,11 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Enums\PostType;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
-use App\Models\Post;
-use App\Models\Category;
 use App\Http\Requests\Admin\PostRequest as StoreRequest;
 use App\Http\Requests\Admin\PostRequest as UpdateRequest;
+use App\Models\Category;
+use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends PanelController
 {
@@ -52,7 +53,7 @@ class PostController extends PanelController
 		$this->xPanel->denyAccess(['create']);
 		if (!request()->input('order')) {
 			if (config('settings.listing_form.listings_review_activation') == '1') {
-				$this->xPanel->orderBy('reviewed_at');
+				$this->xPanel->query->orderByUnreviewedFirst();
 			}
 			$this->xPanel->orderByDesc('created_at');
 		}
@@ -310,7 +311,7 @@ class PostController extends PanelController
 				'function_name' => 'getVerifiedPhoneHtml',
 			]);
 		}
-		if (config('settings.listing_form.listings_review_activation')) {
+		if (config('settings.listing_form.listings_review_activation') == '1') {
 			$this->xPanel->addColumn([
 				'name'          => 'reviewed_at',
 				'label'         => trans('admin.Reviewed'),
@@ -352,24 +353,24 @@ class PostController extends PanelController
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'price',
-			'label'             => mb_ucfirst(trans('admin.Price')),
-			'type'              => 'number',
-			'attributes'        => [
+			'name'       => 'price',
+			'label'      => mb_ucfirst(trans('admin.Price')),
+			'type'       => 'number',
+			'attributes' => [
 				'min'         => 0,
 				'step'        => getInputNumberStep((int)config('currency.decimal_places', 2)),
 				'placeholder' => trans('admin.Enter a Price'),
 			],
-			'hint'              => t('price_hint'),
-			'wrapperAttributes' => [
+			'hint'       => t('price_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'negotiable',
-			'label'             => trans('admin.Negotiable Price'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'negotiable',
+			'label'   => trans('admin.Negotiable Price'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -382,129 +383,129 @@ class PostController extends PanelController
 			'disk'      => 'public',
 		]);
 		$this->xPanel->addField([
-			'name'              => 'contact_name',
-			'label'             => trans('admin.User Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'contact_name',
+			'label'      => trans('admin.User Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.User Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'auth_field',
-			'label'             => t('notifications_channel'),
-			'type'              => 'select2_from_array',
-			'options'           => getAuthFields(),
-			'allows_null'       => true,
-			'default'           => getAuthField($entity),
-			'hint'              => t('notifications_channel_hint'),
-			'wrapperAttributes' => [
+			'name'        => 'auth_field',
+			'label'       => t('notifications_channel'),
+			'type'        => 'select2_from_array',
+			'options'     => getAuthFields(),
+			'allows_null' => true,
+			'default'     => getAuthField($entity),
+			'hint'        => t('notifications_channel_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'email',
-			'label'             => trans('admin.User Email'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'email',
+			'label'      => trans('admin.User Email'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.User Email'),
 			],
-			'prefix'            => '<i class="fa-regular fa-envelope"></i>',
-			'wrapperAttributes' => [
+			'prefix'     => '<i class="fa-regular fa-envelope"></i>',
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$phoneCountry = (!empty($entity) && isset($entity->phone_country)) ? strtolower($entity->phone_country) : 'us';
 		$this->xPanel->addField([
-			'name'              => 'phone',
-			'label'             => trans('admin.User Phone'),
-			'type'              => 'intl_tel_input',
-			'phone_country'     => $phoneCountry,
-			'wrapperAttributes' => [
+			'name'          => 'phone',
+			'label'         => trans('admin.User Phone'),
+			'type'          => 'intl_tel_input',
+			'phone_country' => $phoneCountry,
+			'wrapper'       => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone_hidden',
-			'label'             => trans('admin.Hide seller phone'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'phone_hidden',
+			'label'   => trans('admin.Hide seller phone'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'label'             => trans('admin.Listing Type'),
-			'name'              => 'post_type_id',
-			'type'              => 'select2_from_array',
-			'options'           => $this->postType(),
-			'allows_null'       => false,
-			'wrapperAttributes' => [
+			'label'       => trans('admin.Listing Type'),
+			'name'        => 'post_type_id',
+			'type'        => 'select2_from_array',
+			'options'     => $this->postType(),
+			'allows_null' => false,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$tags = (!empty($entity) && isset($entity->tags)) ? (array)$entity->tags : [];
 		$this->xPanel->addField([
-			'name'              => 'tags',
-			'label'             => trans('admin.Tags'),
-			'type'              => 'select2_tagging_from_array',
-			'options'           => $tags,
-			'allows_multiple'   => true,
-			'hint'              => t('tags_hint', [
+			'name'            => 'tags',
+			'label'           => trans('admin.Tags'),
+			'type'            => 'select2_tagging_from_array',
+			'options'         => $tags,
+			'allows_multiple' => true,
+			'hint'            => t('tags_hint', [
 				'limit' => (int)config('settings.listing_form.tags_limit', 15),
 				'min'   => (int)config('settings.listing_form.tags_min_length', 2),
 				'max'   => (int)config('settings.listing_form.tags_max_length', 30),
 			]),
-			'wrapperAttributes' => [
+			'wrapper'         => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => true,
+			'newline'         => true,
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'email_verified_at',
-			'label'             => trans('admin.Verified Email'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'email_verified_at',
+			'label'   => trans('admin.Verified Email'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone_verified_at',
-			'label'             => trans('admin.Verified Phone'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'phone_verified_at',
+			'label'   => trans('admin.Verified Phone'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
-		if (config('settings.listing_form.listings_review_activation')) {
+		if (config('settings.listing_form.listings_review_activation') == '1') {
 			$this->xPanel->addField([
-				'name'              => 'reviewed_at',
-				'label'             => trans('admin.Reviewed'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'reviewed_at',
+				'label'   => trans('admin.Reviewed'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			]);
 		}
 		$this->xPanel->addField([
-			'name'              => 'archived_at',
-			'label'             => trans('admin.Archived'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'archived_at',
+			'label'   => trans('admin.Archived'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'is_permanent',
-			'label'             => t('is_permanent_label'),
-			'type'              => 'checkbox_switch',
-			'hint'              => t('is_permanent_hint'),
-			'wrapperAttributes' => [
+			'name'    => 'is_permanent',
+			'label'   => t('is_permanent_label'),
+			'type'    => 'checkbox_switch',
+			'hint'    => t('is_permanent_hint'),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => !empty($entity),
+			'newline' => !empty($entity),
 		]);
 		
 		if (!empty($entity)) {
@@ -518,10 +519,10 @@ class PostController extends PanelController
 				$ipLink = $emptyIp;
 			}
 			$this->xPanel->addField([
-				'name'              => 'create_from_ip',
-				'type'              => 'custom_html',
-				'value'             => '<h5>' . $label . ' ' . $ipLink . '</h5>',
-				'wrapperAttributes' => [
+				'name'    => 'create_from_ip',
+				'type'    => 'custom_html',
+				'value'   => '<h5>' . $label . ' ' . $ipLink . '</h5>',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			], 'update');
@@ -534,10 +535,10 @@ class PostController extends PanelController
 				$ipLink = $emptyIp;
 			}
 			$this->xPanel->addField([
-				'name'              => 'latest_update_ip',
-				'type'              => 'custom_html',
-				'value'             => '<h5>' . $label . ' ' . $ipLink . '</h5>',
-				'wrapperAttributes' => [
+				'name'    => 'latest_update_ip',
+				'type'    => 'custom_html',
+				'value'   => '<h5>' . $label . ' ' . $ipLink . '</h5>',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 				'newline' => true,
@@ -566,10 +567,10 @@ class PostController extends PanelController
 				
 				$btnLink = '<a href="' . $btnUrl . '" class="btn btn-danger confirm-simple-action"' . $tooltip . '>' . $btnText . '</a>';
 				$this->xPanel->addField([
-					'name'              => 'ban_button',
-					'type'              => 'custom_html',
-					'value'             => $btnLink,
-					'wrapperAttributes' => [
+					'name'    => 'ban_button',
+					'type'    => 'custom_html',
+					'value'   => $btnLink,
+					'wrapper' => [
 						'style' => 'text-align:center;',
 					],
 				], 'update');
@@ -577,17 +578,17 @@ class PostController extends PanelController
 		}
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
-	public function postType(): array
+	private function postType(): array
 	{
 		$entries = PostType::all();
 		

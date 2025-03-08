@@ -62,33 +62,50 @@ function getCategories(siteUrl, languageCode, jsThis = null) {
 	let csrfToken = $('input[name=_token]').val();
 	
 	/* Get Request URL */
-	let url = `${siteUrl}/browsing/categories/select`;
+	let url;
 	
-	let selectedCatId = $('#categoryId').val();
-	let catId;
+	let selectedId = $('#categoryId').val();
+	let beingSelectedId;
 	
 	if (!isDefined(jsThis) || jsThis === null) {
-		catId = !isEmpty(selectedCatId) ? selectedCatId : 0;
+		/* On page load, without click on the modal link */
+		// ---
+		beingSelectedId = !isEmpty(selectedId) ? selectedId : 0;
+		
+		/* Set the global selection URL */
+		url = `${siteUrl}/browsing/categories/select`;
+		
+		return false;
+		
 	} else {
+		/* Click on the modal link */
+		// ---
 		let thisEl = $(jsThis);
 		
-		let thisElClass = thisEl.attr('class');
-		if (thisElClass === 'page-link') {
-			
-			url = thisEl.attr('href');
+		/* Get the category selection URL */
+		url = thisEl.attr('href');
+		
+		if (thisEl.hasClass('page-link')) {
+			/* Get URL from pagination link */
+			// ---
 			
 			/* Extract the category ID */
-			catId = 0;
+			beingSelectedId = 0;
 			if (!isEmpty(url)) {
-				let queryString = getQueryParams(url);
-				catId = isDefined(queryString.catId) ? queryString.catId : 0;
+				beingSelectedId = urlQuery(url).getParameter('parentId') ?? 0;
 			}
 			
 		} else {
+			/* Get URL from data-selection-url */
+			// ---
 			
-			/* Get the category ID */
-			catId = thisEl.data('id');
-			catId = !isEmpty(catId) ? catId : 0;
+			if (thisEl.hasClass('open-selection-url')) {
+				url = thisEl.data('selection-url');
+			} else {
+				/* Get the category ID */
+				beingSelectedId = thisEl.data('id');
+				beingSelectedId = !isEmpty(beingSelectedId) ? beingSelectedId : 0;
+			}
 			
 		}
 		
@@ -100,30 +117,34 @@ function getCategories(siteUrl, languageCode, jsThis = null) {
 		if (isDefined(hasChildren) && (hasChildren === 0 || hasChildren === '0')) {
 			let catName = thisEl.text();
 			let catType = thisEl.data('type');
-			let parentId = thisEl.data('parent-id');
+			let catParentId = thisEl.data('parent-id');
+			let catParentUrl = urlQuery(url).setParameters({parentId: catParentId}).toString();
 			
-			let linkText = '<i class="fa-regular fa-pen-to-square"></i> ' + editLabel;
+			let linkText = `<i class="fa-regular fa-pen-to-square"></i> ${editLabel}`;
 			let outputHtml = catName
-				+ '[ <a href="#browseCategories" data-bs-toggle="modal" class="cat-link" data-id="' + parentId + '" >'
-				+ linkText
-				+ '</a> ]';
+				+ `[ <a href="#browseCategories"
+						data-bs-toggle="modal"
+						class="cat-link open-selection-url"
+						data-selection-url="${catParentUrl}"
+					>${linkText}</a> ]`;
 			
-			return appendSelectedCategory(siteUrl, languageCode, catId, catType, outputHtml);
+			return appendSelectedCategory(siteUrl, languageCode, beingSelectedId, catType, outputHtml);
 		}
 	}
 	
 	const payload = {
-		'_token': csrfToken,
-		'selectedCatId': selectedCatId,
-		'catId': catId
+		'parentId': beingSelectedId
 	};
+	if (!isEmpty(selectedId)) {
+		payload['selectedId'] = selectedId;
+	}
 	
 	/* Reorder the category list */
 	/* const categoryListReorder = new BsRowColumnsReorder('#modalCategoryList', {defaultColumns: 6}); */
 	
 	/* AJAX Call */
 	let ajax = $.ajax({
-		method: 'POST',
+		method: 'GET',
 		url: url,
 		data: payload,
 		beforeSend: function() {

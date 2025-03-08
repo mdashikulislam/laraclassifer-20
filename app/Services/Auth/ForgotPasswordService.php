@@ -22,35 +22,36 @@ use App\Services\Auth\Helpers\SendsPasswordResetSms;
 use App\Services\Auth\Traits\VerificationTrait;
 use App\Services\BaseService;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 class ForgotPasswordService extends BaseService
 {
 	use VerificationTrait;
-    use SendsPasswordResetEmails, SendsPasswordResetSms;
-    
-    /**
-     * Forgot password
-     *
+	use SendsPasswordResetEmails, SendsPasswordResetSms;
+	
+	/**
+	 * Forgot password
+	 *
 	 * @param \App\Http\Requests\Front\ForgotPasswordRequest $request
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-    public function sendResetLink(ForgotPasswordRequest $request): JsonResponse
+	public function sendResetLink(ForgotPasswordRequest $request): JsonResponse
 	{
 		// Get the right auth field
 		$authField = getAuthField();
-        
-        // Send the Token by SMS
-        if ($authField == 'phone') {
-            return $this->sendResetTokenSms($request);
-        }
-        
-        // Go to the core process
+		
+		// Send the Token by SMS
+		if ($authField == 'phone') {
+			return $this->sendResetTokenSms($request);
+		}
+		
+		// Go to the core process
 		try {
 			$jsonResponse = $this->sendResetLinkEmail($request);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		
 		return $jsonResponse;
-    }
+	}
 }

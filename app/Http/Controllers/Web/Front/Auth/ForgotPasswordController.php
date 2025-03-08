@@ -17,8 +17,8 @@
 namespace App\Http\Controllers\Web\Front\Auth;
 
 use App\Http\Controllers\Web\Front\Auth\Traits\ShowReSendVerificationCodeButton;
-use App\Http\Requests\Front\ForgotPasswordRequest;
 use App\Http\Controllers\Web\Front\FrontController;
+use App\Http\Requests\Front\ForgotPasswordRequest;
 use App\Services\Auth\ForgotPasswordService;
 use Illuminate\Http\RedirectResponse;
 use Larapen\LaravelMetaTags\Facades\MetaTag;

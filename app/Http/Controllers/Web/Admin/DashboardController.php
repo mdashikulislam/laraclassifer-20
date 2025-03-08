@@ -16,12 +16,14 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Controllers\Web\Admin\Traits\Charts\ChartjsTrait;
 use App\Http\Controllers\Web\Admin\Traits\Charts\MorrisTrait;
-use App\Models\Post;
 use App\Models\Country;
+use App\Models\Post;
 use App\Models\User;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class DashboardController extends PanelController
 {
@@ -46,7 +48,7 @@ class DashboardController extends PanelController
 			$countUnactivatedUsers = User::doesntHave('permissions')->unverified()->withoutAppends()->count();
 			$countUsers = User::doesntHave('permissions')->withoutAppends()->count();
 			$this->countCountries = Country::where('active', 1)->withoutAppends()->count();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		view()->share('countActivatedPosts', $countActivatedPosts ?? 0);
@@ -70,7 +72,7 @@ class DashboardController extends PanelController
 	/**
 	 * Show the admin dashboard.
 	 *
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 * @return \Illuminate\View\View
 	 */
 	public function dashboard()
 	{
@@ -152,7 +154,7 @@ class DashboardController extends PanelController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function redirect(): \Illuminate\Http\RedirectResponse
+	public function redirect(): RedirectResponse
 	{
 		// The '/admin' route is not to be used as a page, because it breaks the menu's active state.
 		return redirect()->to(admin_uri('dashboard'));

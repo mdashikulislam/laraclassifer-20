@@ -16,6 +16,8 @@
 
 namespace App\Http\Controllers\Web\Admin\Traits\InlineRequest;
 
+use Illuminate\Http\JsonResponse;
+
 trait PayableTrait
 {
 	/**
@@ -26,7 +28,7 @@ trait PayableTrait
 	 * @param $column
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	protected function updatePayableData($payable, $column): \Illuminate\Http\JsonResponse
+	protected function updatePayableData($payable, $column): JsonResponse
 	{
 		$opTool = '\extras\plugins\offlinepayment\app\Helpers\OpTools';
 		$isOfflinePaymentInstalled = (config('plugins.offlinepayment.installed') && class_exists($opTool));

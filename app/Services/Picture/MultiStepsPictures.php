@@ -29,6 +29,7 @@ use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 trait MultiStepsPictures
 {
@@ -118,9 +119,9 @@ trait MultiStepsPictures
 					// Upload File
 					try {
 						$destPath = 'files/' . strtolower($post->country_code) . '/' . $post->id;
-						$picture->file_path = Upload::image($destPath, $file, null, true);
+						$picture->file_path = Upload::image($file, $destPath, null, true);
 						$picture->mime_type = FileSys::getMimeType($file);
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$data = [
 							'success' => false,
 							'message' => $e->getMessage(),
@@ -207,7 +208,7 @@ trait MultiStepsPictures
 						$fileSize = $this->disk->exists($picture->file_path)
 							? $this->disk->size($picture->file_path)
 							: 0;
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$fileSize = 0;
 					}
 					

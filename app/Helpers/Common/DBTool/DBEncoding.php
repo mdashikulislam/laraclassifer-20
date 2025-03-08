@@ -19,6 +19,9 @@ namespace App\Helpers\Common\DBTool;
 use App\Helpers\Common\DBTool;
 use App\Helpers\Common\DotenvEditor;
 use Illuminate\Support\Facades\DB;
+use PDO;
+use PDOException;
+use Throwable;
 
 class DBEncoding
 {
@@ -61,7 +64,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return array
 	 */
-	public static function findConnectionCharsetAndCollation(\PDO $pdo = null): array
+	public static function findConnectionCharsetAndCollation(PDO $pdo = null): array
 	{
 		// Get default charset & collation
 		$defaultCharset = config('larapen.core.database.encoding.default.charset', 'utf8mb4');
@@ -102,7 +105,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return array|null
 	 */
-	public static function getFirstValidRecommendedCharsetAndCollation(\PDO $pdo = null): ?array
+	public static function getFirstValidRecommendedCharsetAndCollation(PDO $pdo = null): ?array
 	{
 		$recommendedEncodings = (array)config('larapen.core.database.encoding.recommended');
 		if (empty($recommendedEncodings)) return null;
@@ -127,7 +130,7 @@ class DBEncoding
 					}
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return null;
@@ -199,7 +202,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return array
 	 */
-	public static function getServerCharsetAndCollation(\PDO $pdo = null): array
+	public static function getServerCharsetAndCollation(PDO $pdo = null): array
 	{
 		$charsetAndCollation = [];
 		
@@ -214,24 +217,24 @@ class DBEncoding
 			$query = $pdo->query($sql);
 			
 			// Fetch the result as an associative array
-			$charsetAndCollation = $query->fetch(\PDO::FETCH_ASSOC);
+			$charsetAndCollation = $query->fetch(PDO::FETCH_ASSOC);
 			
 			if (empty($charsetAndCollation['charset'])) {
 				$charsetSql = "SHOW VARIABLES LIKE 'character_set_server'";
-				$charset = $pdo->query($charsetSql)->fetch(\PDO::FETCH_ASSOC);
+				$charset = $pdo->query($charsetSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['charset'] = $charset['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['collation'])) {
 				$collationSql = "SHOW VARIABLES LIKE 'collation_server'";
-				$collation = $pdo->query($collationSql)->fetch(\PDO::FETCH_ASSOC);
+				$collation = $pdo->query($collationSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['collation'] = $collation['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['charset']) || empty($charsetAndCollation['collation'])) {
 				return [];
 			}
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 		}
 		
 		return $charsetAndCollation;
@@ -243,7 +246,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return array
 	 */
-	public static function getDatabaseCharsetAndCollation(\PDO $pdo = null): array
+	public static function getDatabaseCharsetAndCollation(PDO $pdo = null): array
 	{
 		$charsetAndCollation = [];
 		
@@ -258,24 +261,24 @@ class DBEncoding
 			$query = $pdo->query($sql);
 			
 			// Fetch the result as an associative array
-			$charsetAndCollation = $query->fetch(\PDO::FETCH_ASSOC);
+			$charsetAndCollation = $query->fetch(PDO::FETCH_ASSOC);
 			
 			if (empty($charsetAndCollation['charset'])) {
 				$charsetSql = "SHOW VARIABLES LIKE 'character_set_database'";
-				$charset = $pdo->query($charsetSql)->fetch(\PDO::FETCH_ASSOC);
+				$charset = $pdo->query($charsetSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['charset'] = $charset['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['collation'])) {
 				$collationSql = "SHOW VARIABLES LIKE 'collation_database'";
-				$collation = $pdo->query($collationSql)->fetch(\PDO::FETCH_ASSOC);
+				$collation = $pdo->query($collationSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['collation'] = $collation['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['charset']) || empty($charsetAndCollation['collation'])) {
 				return [];
 			}
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 		}
 		
 		return $charsetAndCollation;
@@ -288,7 +291,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return array
 	 */
-	public static function getConnectionCharsetAndCollation(\PDO $pdo = null): array
+	public static function getConnectionCharsetAndCollation(PDO $pdo = null): array
 	{
 		$charsetAndCollation = [];
 		
@@ -303,24 +306,24 @@ class DBEncoding
 			$query = $pdo->query($sql);
 			
 			// Fetch the result as an associative array
-			$charsetAndCollation = $query->fetch(\PDO::FETCH_ASSOC);
+			$charsetAndCollation = $query->fetch(PDO::FETCH_ASSOC);
 			
 			if (empty($charsetAndCollation['charset'])) {
 				$charsetSql = "SHOW VARIABLES LIKE 'character_set_connection'";
-				$charset = $pdo->query($charsetSql)->fetch(\PDO::FETCH_ASSOC);
+				$charset = $pdo->query($charsetSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['charset'] = $charset['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['collation'])) {
 				$collationSql = "SHOW VARIABLES LIKE 'collation_connection'";
-				$collation = $pdo->query($collationSql)->fetch(\PDO::FETCH_ASSOC);
+				$collation = $pdo->query($collationSql)->fetch(PDO::FETCH_ASSOC);
 				$charsetAndCollation['collation'] = $collation['Value'] ?? null;
 			}
 			
 			if (empty($charsetAndCollation['charset']) || empty($charsetAndCollation['collation'])) {
 				return [];
 			}
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 		}
 		
 		return $charsetAndCollation;
@@ -344,7 +347,7 @@ class DBEncoding
 	 * @param bool $alterDatabase
 	 * @return void
 	 */
-	public static function tryToFixConnectionCharsetAndCollation(\PDO $pdo = null, bool $alterDatabase = true): void
+	public static function tryToFixConnectionCharsetAndCollation(PDO $pdo = null, bool $alterDatabase = true): void
 	{
 		$isCharsetNeedToBeUpdated = false;
 		
@@ -368,7 +371,7 @@ class DBEncoding
 			$envCollation = $envCharsetAndCollation['collation'] ?? null;
 			
 			$isCharsetNeedToBeUpdated = ($charset != $envCharset || $collation != $envCollation);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		if (!$isCharsetNeedToBeUpdated) return;
@@ -387,7 +390,7 @@ class DBEncoding
 			if ($needToBeSaved) {
 				DotenvEditor::save();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		if (!$alterDatabase) return;
@@ -403,7 +406,7 @@ class DBEncoding
 				// Perform the Query
 				$pdo->exec($sql);
 			}
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 		}
 	}
 	
@@ -414,7 +417,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function isValidCharset(string $charset, \PDO $pdo = null): bool
+	public static function isValidCharset(string $charset, PDO $pdo = null): bool
 	{
 		try {
 			if (empty($pdo)) {
@@ -426,7 +429,7 @@ class DBEncoding
 			$query->execute(['charset' => $charset]);
 			
 			return !empty($query->fetchColumn());
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return false;
@@ -441,7 +444,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function isValidCollation(string $collation, ?string $charset = null, \PDO $pdo = null): bool
+	public static function isValidCollation(string $collation, ?string $charset = null, PDO $pdo = null): bool
 	{
 		try {
 			if (empty($pdo)) {
@@ -455,7 +458,7 @@ class DBEncoding
 			$isValidCollation = $query->fetchColumn();
 			
 			return !empty($isValidCollation);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return false;
@@ -465,7 +468,7 @@ class DBEncoding
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function isValidCharsetAndCollation(\PDO $pdo = null): bool
+	public static function isValidCharsetAndCollation(PDO $pdo = null): bool
 	{
 		try {
 			if (empty($pdo)) {
@@ -475,7 +478,7 @@ class DBEncoding
 			// Get all charset variables
 			$sql = "SHOW VARIABLES LIKE 'character_set%'";
 			$query = $pdo->query($sql);
-			$charsetVars = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$charsetVars = $query->fetchAll(PDO::FETCH_ASSOC);
 			if (!empty($charsetVars)) {
 				$charsetVars = collect($charsetVars)
 					->mapWithKeys(fn ($item) => [$item['Variable_name'] => $item['Value']])
@@ -485,7 +488,7 @@ class DBEncoding
 			// Get all collation variables
 			$sql = "SHOW VARIABLES LIKE 'collation%'";
 			$query = $pdo->query($sql);
-			$collationVars = $query->fetchAll(\PDO::FETCH_ASSOC);
+			$collationVars = $query->fetchAll(PDO::FETCH_ASSOC);
 			if (!empty($collationVars)) {
 				$collationVars = collect($collationVars)
 					->mapWithKeys(fn ($item) => [$item['Variable_name'] => $item['Value']])
@@ -524,7 +527,7 @@ class DBEncoding
 				
 				return $isValidCharset && $isValidCollation;
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 		

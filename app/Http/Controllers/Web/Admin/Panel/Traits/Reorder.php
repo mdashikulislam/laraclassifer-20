@@ -16,7 +16,7 @@
 
 namespace App\Http\Controllers\Web\Admin\Panel\Traits;
 
-use App\Helpers\Common\Categories\AdjacentToNested;
+use App\Helpers\Common\HierarchicalData\Library\AdjacentToNested;
 use App\Models\Category;
 
 trait Reorder

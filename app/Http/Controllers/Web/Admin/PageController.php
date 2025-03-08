@@ -22,6 +22,7 @@ use App\Http\Requests\Admin\PageRequest as StoreRequest;
 use App\Http\Requests\Admin\PageRequest as UpdateRequest;
 use App\Http\Requests\Admin\Request;
 use App\Models\Page;
+use Illuminate\Http\RedirectResponse;
 
 class PageController extends PanelController
 {
@@ -124,28 +125,28 @@ class PageController extends PanelController
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'slug',
-			'label'             => trans('admin.Slug'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'slug',
+			'label'      => trans('admin.Slug'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Will be automatically generated from your name, if left empty'),
 			],
-			'hint'              => trans('admin.Will be automatically generated from your name, if left empty'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.Will be automatically generated from your name, if left empty'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'external_link',
-			'label'             => trans('admin.External Link'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'external_link',
+			'label'      => trans('admin.External Link'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => "http://",
 			],
-			'hint'              => trans('admin.Redirect this page to the URL above')
+			'hint'       => trans('admin.Redirect this page to the URL above')
 				. ' '
 				. trans('admin.Leave this field empty if you do not want redirect this page'),
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -185,18 +186,18 @@ class PageController extends PanelController
 			'disk'   => 'public',
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name_color',
-			'label'             => trans('admin.Page Name Color'),
-			'type'              => 'color_picker',
-			'wrapperAttributes' => [
+			'name'    => 'name_color',
+			'label'   => trans('admin.Page Name Color'),
+			'type'    => 'color_picker',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'title_color',
-			'label'             => trans('admin.Page Title Color'),
-			'type'              => 'color_picker',
-			'wrapperAttributes' => [
+			'name'    => 'title_color',
+			'label'   => trans('admin.Page Title Color'),
+			'type'    => 'color_picker',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -272,7 +273,7 @@ class PageController extends PanelController
 	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -281,10 +282,10 @@ class PageController extends PanelController
 	
 	/**
 	 * @param \App\Http\Requests\Admin\PageRequest $request
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -313,7 +314,7 @@ class PageController extends PanelController
 			$file = $request->file($param['attribute'], $request->input($param['attribute']));
 			
 			// Upload the image & get its local path
-			$imagePath = Upload::image($param['destPath'], $file, $param);
+			$imagePath = Upload::image($file, $param['destPath'], $param);
 			
 			// Set the local path in the input
 			$request->merge([$param['attribute'] => $imagePath]);

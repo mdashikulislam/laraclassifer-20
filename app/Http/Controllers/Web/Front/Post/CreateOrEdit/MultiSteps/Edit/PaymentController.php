@@ -16,13 +16,13 @@
 
 namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Edit;
 
-use App\Services\Payment\Promotion\MultiStepsPayment;
 use App\Http\Controllers\Web\Front\Payment\HasPaymentRedirection;
 use App\Http\Requests\Front\PackageRequest;
 use App\Models\PaymentMethod;
 use App\Models\Post;
-use App\Models\Scopes\VerifiedScope;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
+use App\Services\Payment\Promotion\MultiStepsPayment;
 use App\Services\PostService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;

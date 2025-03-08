@@ -18,6 +18,7 @@ namespace App\Helpers\Common\GeoIP\Drivers;
 
 use App\Helpers\Common\GeoIP\AbstractDriver;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class Ipgeolocation extends AbstractDriver
 {
@@ -66,7 +67,7 @@ class Ipgeolocation extends AbstractDriver
 			if ($response->successful()) {
 				return $response->json();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$response = $e;
 		}
 		

@@ -98,7 +98,7 @@ class PostController extends BaseController
 							continue;
 						}
 						
-						$postInput['cf'][$field->id] = TmpUpload::file($this->cfTmpUploadDir, $file);
+						$postInput['cf'][$field->id] = TmpUpload::file($file, $this->cfTmpUploadDir);
 					}
 				}
 			}

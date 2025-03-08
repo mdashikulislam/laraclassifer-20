@@ -24,9 +24,11 @@ if (file_exists($iniConfigFile)) {
 
 use App\Helpers\Common\DBTool\DBEncoding;
 use App\Helpers\Common\Files\Tools\FileStorage;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 class ActionController extends Controller
 {
@@ -35,7 +37,7 @@ class ActionController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function clearCache(): \Illuminate\Http\RedirectResponse
+	public function clearCache(): RedirectResponse
 	{
 		$errorFound = false;
 		
@@ -47,7 +49,7 @@ class ActionController extends Controller
 		// Removing all the cache
 		try {
 			cache()->flush();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -58,7 +60,7 @@ class ActionController extends Controller
 		// Removing all Views Cache
 		try {
 			Artisan::call('view:clear');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -74,7 +76,7 @@ class ActionController extends Controller
 			if (File::exists($debugBarPath)) {
 				File::delete(File::glob($debugBarPath . DIRECTORY_SEPARATOR . '*.json'));
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -93,7 +95,7 @@ class ActionController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function clearImagesThumbnails(): \Illuminate\Http\RedirectResponse
+	public function clearImagesThumbnails(): RedirectResponse
 	{
 		$errorFound = false;
 		
@@ -117,7 +119,7 @@ class ActionController extends Controller
 			try {
 				$directoryName = 'thumbnails';
 				FileStorage::removeSubDirRecursive($this->disk, $uploadPath, $directoryName);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				notification($e->getMessage(), 'error');
 				$errorFound = true;
 				break;
@@ -127,7 +129,7 @@ class ActionController extends Controller
 			try {
 				$pattern = '~thumb-.*\.[a-z]*~ui';
 				FileStorage::removeMatchedFilesRecursive($this->disk, $uploadPath, $pattern);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				notification($e->getMessage(), 'error');
 				$errorFound = true;
 				break;
@@ -151,7 +153,7 @@ class ActionController extends Controller
 					
 					// Removing all empty subdirectories
 					FileStorage::removeEmptySubDirs($this->disk, $uploadPath);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					notification($e->getMessage(), 'error');
 					$errorFound = true;
 					break;
@@ -162,7 +164,7 @@ class ActionController extends Controller
 		// Removing all the cache
 		try {
 			cache()->flush();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -183,7 +185,7 @@ class ActionController extends Controller
 	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function maintenance($mode, Request $request): \Illuminate\Http\RedirectResponse
+	public function maintenance($mode, Request $request): RedirectResponse
 	{
 		$messageFilePath = storage_path('framework/down-message');
 		
@@ -207,7 +209,7 @@ class ActionController extends Controller
 		// Go to maintenance with DOWN status
 		try {
 			Artisan::call($mode);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -228,14 +230,14 @@ class ActionController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function updateDBConnectionCharsetAndCollation(): \Illuminate\Http\RedirectResponse
+	public function updateDBConnectionCharsetAndCollation(): RedirectResponse
 	{
 		$errorFound = false;
 		
 		// Run the Cron Job command manually
 		try {
 			DBEncoding::tryToFixConnectionCharsetAndCollation();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -254,14 +256,14 @@ class ActionController extends Controller
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function callAdsCleanerCommand(): \Illuminate\Http\RedirectResponse
+	public function callAdsCleanerCommand(): RedirectResponse
 	{
 		$errorFound = false;
 		
 		// Run the Cron Job command manually
 		try {
 			Artisan::call('listings:purge');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}

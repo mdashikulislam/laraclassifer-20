@@ -23,13 +23,15 @@ if (file_exists($iniConfigFile)) {
 }
 
 use App\Helpers\Services\Lang\LangManager;
+use App\Http\Controllers\Web\Admin\Panel\Library\Helpers\LanguageFiles;
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\LanguageRequest as StoreRequest;
 use App\Http\Requests\Admin\LanguageRequest as UpdateRequest;
 use App\Models\Language;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Web\Admin\Panel\Library\Helpers\LanguageFiles;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use Illuminate\Support\Facades\Artisan;
+use Throwable;
 
 class LanguageController extends PanelController
 {
@@ -147,29 +149,29 @@ class LanguageController extends PanelController
 		$codeHint = trans('admin.language_code_field_hint', ['languages' => '<br>' . $includedLanguages]);
 		$codeHint .= '<br>' . trans('admin.language_locale_hint');
 		$this->xPanel->addField([
-			'label'             => mb_ucwords(trans('admin.language')),
-			'name'              => 'code',
-			'type'              => 'select2_from_array',
-			'options'           => $this->getLanguageList(),
-			'allows_null'       => true,
-			'hint'              => $codeHint,
-			'wrapperAttributes' => [
+			'label'       => mb_ucwords(trans('admin.language')),
+			'name'        => 'code',
+			'type'        => 'select2_from_array',
+			'options'     => $this->getLanguageList(),
+			'allows_null' => true,
+			'hint'        => $codeHint,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		], 'create');
 		
 		$this->xPanel->addField([
-			'name'              => 'native',
-			'label'             => mb_ucwords(trans('admin.native_name')),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'native',
+			'label'      => mb_ucwords(trans('admin.native_name')),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => mb_ucwords(trans('admin.native_name')),
 			],
-			'hint'              => trans('admin.language_native_name_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.language_native_name_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => true,
+			'newline'    => true,
 		]);
 		
 		/*
@@ -180,76 +182,76 @@ class LanguageController extends PanelController
 		 * To fix that, a locale with codeset need to be set instead, like "tr_TR.UTF-8", "tr_TR.utf8", etc.
 		 */
 		$this->xPanel->addField([
-			'label'             => trans('admin.locale'),
-			'name'              => 'locale',
-			'type'              => 'select2_from_array',
-			'options'           => getLocalesWithName(),
-			'allows_null'       => true,
-			'hint'              => trans('admin.locale_code_hint_bj'),
-			'wrapperAttributes' => [
+			'label'       => trans('admin.locale'),
+			'name'        => 'locale',
+			'type'        => 'select2_from_array',
+			'options'     => getLocalesWithName(),
+			'allows_null' => true,
+			'hint'        => trans('admin.locale_code_hint_bj'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		], 'update');
 		
 		$this->xPanel->addField([
-			'label'             => trans('admin.lang_script_label') . ' (' . trans('admin.Optional') . ')',
-			'name'              => 'script',
-			'type'              => 'select2_from_array',
-			'options'           => getLanguageScriptRefList(),
-			'allows_null'       => true,
-			'hint'              => trans('admin.lang_script_hint'),
-			'wrapperAttributes' => [
+			'label'       => trans('admin.lang_script_label') . ' (' . trans('admin.Optional') . ')',
+			'name'        => 'script',
+			'type'        => 'select2_from_array',
+			'options'     => getLanguageScriptRefList(),
+			'allows_null' => true,
+			'hint'        => trans('admin.lang_script_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		], 'update');
 		
 		$this->xPanel->addField([
-			'name'              => 'flag',
-			'label'             => trans('admin.flag'),
-			'type'              => 'icon_picker',
-			'iconset'           => 'flagicon',
-			'version'           => '3.5.0',
-			'wrapperAttributes' => [
+			'name'    => 'flag',
+			'label'   => trans('admin.flag'),
+			'type'    => 'icon_picker',
+			'iconset' => 'flagicon',
+			'version' => '3.5.0',
+			'wrapper' => [
 				'class' => 'col-md-3',
 			],
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'direction',
-			'label'             => trans('admin.Direction'),
-			'type'              => 'enum',
-			'wrapperAttributes' => [
+			'name'    => 'direction',
+			'label'   => trans('admin.Direction'),
+			'type'    => 'enum',
+			'wrapper' => [
 				'class' => 'col-md-3',
 			],
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'russian_pluralization',
-			'label'             => trans('admin.Russian Pluralization'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'russian_pluralization',
+			'label'   => trans('admin.Russian Pluralization'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 				'style' => 'margin-top: 25px;',
 			],
-			'newline'           => 'create',
+			'newline' => 'create',
 		]);
 		
 		$dateFormatHint = (config('settings.app.php_specific_date_format')) ? 'php_date_format_hint_bj' : 'iso_date_format_hint_bj';
 		$this->xPanel->addField([
-			'name'              => 'date_format',
-			'label'             => trans('admin.date_format_label'),
-			'type'              => 'text',
-			'hint'              => trans('admin.' . $dateFormatHint, ['year' => date('Y')]),
-			'wrapperAttributes' => [
+			'name'    => 'date_format',
+			'label'   => trans('admin.date_format_label'),
+			'type'    => 'text',
+			'hint'    => trans('admin.' . $dateFormatHint, ['year' => date('Y')]),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'datetime_format',
-			'label'             => trans('admin.datetime_format_label'),
-			'type'              => 'text',
-			'hint'              => trans('admin.' . $dateFormatHint, ['year' => date('Y')]),
-			'wrapperAttributes' => [
+			'name'    => 'datetime_format',
+			'label'   => trans('admin.datetime_format_label'),
+			'type'    => 'text',
+			'hint'    => trans('admin.' . $dateFormatHint, ['year' => date('Y')]),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -338,31 +340,31 @@ class LanguageController extends PanelController
 		return parent::edit($id, $childId);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		if (request()->filled('code')) {
+		if ($request->filled('code')) {
 			// Set or Remove Db Fallback Locale
 			$fallbackLocaleEnabled = (
-				request()->filled('is_db_fallback_locale')
-				&& request()->input('is_db_fallback_locale') == '1'
+				$request->filled('is_db_fallback_locale')
+				&& $request->input('is_db_fallback_locale') == '1'
 			);
 			if ($fallbackLocaleEnabled) {
-				setDbFallbackLocale(request()->input('code'));
+				setDbFallbackLocale($request->input('code'));
 			} else {
-				if (request()->input('code') == config('translatable.fallback_locale')) {
+				if ($request->input('code') == config('translatable.fallback_locale')) {
 					removeDbFallbackLocale();
 				}
 			}
 			
 			// Add missing translations
 			$fillMissingTransEnabled = (
-				request()->filled('fill_missing_trans_texts')
-				&& request()->input('fill_missing_trans_texts') == '1'
+				$request->filled('fill_missing_trans_texts')
+				&& $request->input('fill_missing_trans_texts') == '1'
 			);
 			if ($fillMissingTransEnabled) {
 				if (!$fallbackLocaleEnabled) {
@@ -375,14 +377,14 @@ class LanguageController extends PanelController
 				// Go to maintenance with DOWN status
 				Artisan::call('down');
 				
-				addMissingTranslations(request()->input('code'));
+				addMissingTranslations($request->input('code'));
 				
 				// Restore system UP status
 				Artisan::call('up');
 			}
 		}
 		
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	/**
@@ -390,7 +392,7 @@ class LanguageController extends PanelController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function syncFilesLines()
+	public function syncFilesLines(): RedirectResponse
 	{
 		$errorFound = false;
 		
@@ -408,7 +410,7 @@ class LanguageController extends PanelController
 					$manager->syncLines($defaultLang->code, $locale);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}
@@ -427,7 +429,7 @@ class LanguageController extends PanelController
 	 * @param \App\Models\Language $languages
 	 * @param string $lang
 	 * @param string $file
-	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
 	 */
 	public function showTexts(LanguageFiles $langFile, Language $languages, string $lang = '', string $file = 'site')
 	{
@@ -475,7 +477,7 @@ class LanguageController extends PanelController
 	 * @param string $file
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function updateTexts(LanguageFiles $langFile, Request $request, string $lang = '', string $file = 'site')
+	public function updateTexts(LanguageFiles $langFile, Request $request, string $lang = '', string $file = 'site'): RedirectResponse
 	{
 		// SECURITY
 		// Check if that file isn't forbidden in the config file
@@ -536,7 +538,7 @@ class LanguageController extends PanelController
 					$errorFound = true;
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$errorFound = true;
 		}

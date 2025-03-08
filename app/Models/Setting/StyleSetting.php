@@ -53,7 +53,7 @@ class StyleSetting
 				? $request->file($param['attribute'])
 				: $request->input($param['attribute']);
 			
-			$request->request->set($param['attribute'], Upload::image($param['destPath'], $file, $param));
+			$request->request->set($param['attribute'], Upload::image($file, $param['destPath'], $param));
 		}
 		
 		return $request;
@@ -186,24 +186,24 @@ class StyleSetting
 				'value' => trans('admin.style_html_frontend'),
 			],
 			[
-				'name'              => 'skin',
-				'label'             => trans('admin.Front Skin'),
-				'type'              => 'select2_from_skins',
-				'options'           => $skinsByName,
-				'skins'             => json_encode($skins),
-				'wrapperAttributes' => [
+				'name'    => 'skin',
+				'label'   => trans('admin.Front Skin'),
+				'type'    => 'select2_from_skins',
+				'options' => $skinsByName,
+				'skins'   => json_encode($skins),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'custom_skin_color',
-				'label'             => trans('admin.custom_skin_color_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'custom_skin_color',
+				'label'      => trans('admin.custom_skin_color_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'hint'              => trans('admin.custom_skin_color_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.custom_skin_color_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -218,99 +218,99 @@ class StyleSetting
 				'value' => trans('admin.style_html_customize_front_global'),
 			],
 			[
-				'name'              => 'body_background_color',
-				'label'             => trans('admin.Body Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'body_background_color',
+				'label'      => trans('admin.Body Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'body_text_color',
-				'label'             => trans('admin.Body Text Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'body_text_color',
+				'label'      => trans('admin.Body Text Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#292B2C',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'body_background_image_path',
-				'label'             => trans('admin.Body Background Image'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => null,
-				'wrapperAttributes' => [
+				'name'    => 'body_background_image_path',
+				'label'   => trans('admin.Body Background Image'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => null,
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'body_background_image_fixed',
-				'label'             => trans('admin.Body Background Image Fixed'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'body_background_image_fixed',
+				'label'   => trans('admin.Body Background Image Fixed'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'page_width',
-				'label'             => trans('admin.Page Width'),
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'page_width',
+				'label'   => trans('admin.Page Width'),
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'title_color',
-				'label'             => trans('admin.Titles Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'title_color',
+				'label'      => trans('admin.Titles Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#292B2C',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'progress_background_color',
-				'label'             => trans('admin.Progress Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'progress_background_color',
+				'label'      => trans('admin.Progress Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'link_color',
-				'label'             => trans('admin.Links Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'link_color',
+				'label'      => trans('admin.Links Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#4682B4',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'link_color_hover',
-				'label'             => trans('admin.Links Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'link_color_hover',
+				'label'      => trans('admin.Links Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FF8C00',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -325,62 +325,62 @@ class StyleSetting
 				'type'  => 'checkbox_switch',
 			],
 			[
-				'name'              => 'header_height',
-				'label'             => trans('admin.Header Height'),
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'header_height',
+				'label'   => trans('admin.Header Height'),
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'header_background_color',
-				'label'             => trans('admin.Header Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'header_background_color',
+				'label'      => trans('admin.Header Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#F8F8F8',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'header_bottom_border_width',
-				'label'             => trans('admin.Header Bottom Border Width'),
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'header_bottom_border_width',
+				'label'   => trans('admin.Header Bottom Border Width'),
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'header_bottom_border_color',
-				'label'             => trans('admin.Header Bottom Border Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'header_bottom_border_color',
+				'label'      => trans('admin.Header Bottom Border Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#E8E8E8',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'header_link_color',
-				'label'             => trans('admin.Header Links Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'header_link_color',
+				'label'      => trans('admin.Header Links Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#333',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'header_link_color_hover',
-				'label'             => trans('admin.Header Links Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'header_link_color_hover',
+				'label'      => trans('admin.Header Links Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#000',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -391,29 +391,29 @@ class StyleSetting
 				'value' => trans('admin.style_logo_title'),
 			],
 			[
-				'name'              => 'logo_width',
-				'label'             => trans('admin.logo_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.logo_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'logo_width',
+				'label'   => trans('admin.logo_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.logo_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'logo_height',
-				'label'             => trans('admin.logo_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.logo_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'logo_height',
+				'label'   => trans('admin.logo_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.logo_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'logo_aspect_ratio',
-				'label'             => trans('admin.logo_aspect_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.logo_aspect_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'logo_aspect_ratio',
+				'label'   => trans('admin.logo_aspect_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.logo_aspect_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -424,97 +424,97 @@ class StyleSetting
 				'value' => trans('admin.style_html_customize_footer'),
 			],
 			[
-				'name'              => 'footer_background_color',
-				'label'             => trans('admin.Footer Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'footer_background_color',
+				'label'      => trans('admin.Footer Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#F5F5F5',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'footer_text_color',
-				'label'             => trans('admin.Footer Text Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'footer_text_color',
+				'label'      => trans('admin.Footer Text Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#333',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'footer_title_color',
-				'label'             => trans('admin.Footer Titles Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'footer_title_color',
+				'label'      => trans('admin.Footer Titles Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#000',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline'    => true,
 			],
 			
 			[
-				'name'              => 'footer_link_color',
-				'label'             => trans('admin.Footer Links Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'footer_link_color',
+				'label'      => trans('admin.Footer Links Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#333',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'footer_link_color_hover',
-				'label'             => trans('admin.Footer Links Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'footer_link_color_hover',
+				'label'      => trans('admin.Footer Links Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#333',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'payment_icon_top_border_width',
-				'label'             => trans('admin.Payment Methods Icons Top Border Width'),
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'payment_icon_top_border_width',
+				'label'   => trans('admin.Payment Methods Icons Top Border Width'),
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'payment_icon_top_border_color',
-				'label'             => trans('admin.Payment Methods Icons Top Border Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'payment_icon_top_border_color',
+				'label'      => trans('admin.Payment Methods Icons Top Border Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#DDD',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'payment_icon_bottom_border_width',
-				'label'             => trans('admin.Payment Methods Icons Bottom Border Width'),
-				'type'              => 'number',
-				'wrapperAttributes' => [
+				'name'    => 'payment_icon_bottom_border_width',
+				'label'   => trans('admin.Payment Methods Icons Bottom Border Width'),
+				'type'    => 'number',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'payment_icon_bottom_border_color',
-				'label'             => trans('admin.Payment Methods Icons Bottom Border Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'payment_icon_bottom_border_color',
+				'label'      => trans('admin.Payment Methods Icons Bottom Border Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#DDD',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -524,90 +524,90 @@ class StyleSetting
 				'value' => trans('admin.style_html_customize_button_al'),
 			],
 			[
-				'name'              => 'btn_listing_bg_top_color',
-				'label'             => trans('admin.Gradient Background Top Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_bg_top_color',
+				'label'      => trans('admin.Gradient Background Top Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#ffeb43',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_bg_bottom_color',
-				'label'             => trans('admin.Gradient Background Bottom Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_bg_bottom_color',
+				'label'      => trans('admin.Gradient Background Bottom Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#fcde11',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_border_color',
-				'label'             => trans('admin.Button Border Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_border_color',
+				'label'      => trans('admin.Button Border Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#f6d80f',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_text_color',
-				'label'             => trans('admin.Button Text Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_text_color',
+				'label'      => trans('admin.Button Text Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#292b2c',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_bg_top_color_hover',
-				'label'             => trans('admin.Gradient Background Top Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_bg_top_color_hover',
+				'label'      => trans('admin.Gradient Background Top Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#fff860',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_bg_bottom_color_hover',
-				'label'             => trans('admin.Gradient Background Bottom Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_bg_bottom_color_hover',
+				'label'      => trans('admin.Gradient Background Bottom Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#ffeb43',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_border_color_hover',
-				'label'             => trans('admin.Button Border Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_border_color_hover',
+				'label'      => trans('admin.Button Border Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#fcde11',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'btn_listing_text_color_hover',
-				'label'             => trans('admin.Button Text Color Hover'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'btn_listing_text_color_hover',
+				'label'      => trans('admin.Button Text Color Hover'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#1b1d1e',
 				],
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -636,24 +636,24 @@ class StyleSetting
 				'value' => trans('admin.backend_title_separator'),
 			],
 			[
-				'name'              => 'login_bg_image_path',
-				'label'             => trans('admin.login_bg_image_label'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => config('larapen.admin.login_bg_image'),
-				'hint'              => trans('admin.login_bg_image_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'login_bg_image_path',
+				'label'   => trans('admin.login_bg_image_label'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => config('larapen.admin.login_bg_image'),
+				'hint'    => trans('admin.login_bg_image_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'admin_logo_bg',
-				'label'             => trans('admin.admin_logo_bg_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'admin_logo_bg',
+				'label'   => trans('admin.admin_logo_bg_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'skin1' => 'Green',
 					'skin2' => 'Red',
 					'skin3' => 'Blue',
@@ -661,15 +661,15 @@ class StyleSetting
 					'skin5' => 'Black',
 					'skin6' => 'White',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_navbar_bg',
-				'label'             => trans('admin.admin_navbar_bg_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'admin_navbar_bg',
+				'label'   => trans('admin.admin_navbar_bg_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'skin1' => 'Green',
 					'skin2' => 'Red',
 					'skin3' => 'Blue',
@@ -677,30 +677,30 @@ class StyleSetting
 					'skin5' => 'Black',
 					'skin6' => 'White',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_sidebar_type',
-				'label'             => trans('admin.admin_sidebar_type_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'admin_sidebar_type',
+				'label'   => trans('admin.admin_sidebar_type_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'full'         => 'Full',
 					'mini-sidebar' => 'Mini Sidebar',
 					'iconbar'      => 'Icon Bbar',
 					'overlay'      => 'Overlay',
 				],
-				'hint'              => trans('admin.admin_sidebar_type_hint'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.admin_sidebar_type_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_sidebar_bg',
-				'label'             => trans('admin.admin_sidebar_bg_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'admin_sidebar_bg',
+				'label'   => trans('admin.admin_sidebar_bg_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'skin1' => 'Green',
 					'skin2' => 'Red',
 					'skin3' => 'Blue',
@@ -708,45 +708,45 @@ class StyleSetting
 					'skin5' => 'Black',
 					'skin6' => 'White',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'admin_sidebar_position',
-				'label'             => trans('admin.admin_sidebar_position_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.admin_sidebar_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'admin_sidebar_position',
+				'label'   => trans('admin.admin_sidebar_position_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.admin_sidebar_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_header_position',
-				'label'             => trans('admin.admin_header_position_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.admin_header_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'admin_header_position',
+				'label'   => trans('admin.admin_header_position_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.admin_header_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_boxed_layout',
-				'label'             => trans('admin.admin_boxed_layout_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.admin_boxed_layout_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'admin_boxed_layout',
+				'label'   => trans('admin.admin_boxed_layout_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.admin_boxed_layout_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'admin_dark_theme',
-				'label'             => trans('admin.admin_dark_theme_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.admin_dark_theme_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'admin_dark_theme',
+				'label'   => trans('admin.admin_dark_theme_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.admin_dark_theme_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

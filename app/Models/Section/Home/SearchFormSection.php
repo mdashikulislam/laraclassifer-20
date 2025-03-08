@@ -41,7 +41,7 @@ class SearchFormSection
 				? $request->file($param['attribute'])
 				: $request->input($param['attribute']);
 			
-			$request->request->set($param['attribute'], Upload::image($param['destPath'], $file, $param));
+			$request->request->set($param['attribute'], Upload::image($file, $param['destPath'], $param));
 		}
 		
 		return $request;
@@ -110,82 +110,82 @@ class SearchFormSection
 	{
 		$fields = [
 			[
-				'name'  => 'enable_extended_form_area',
-				'label' => trans('admin.enable_extended_form_area_label'),
-				'type'  => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'enable_extended_form_area',
+				'label'   => trans('admin.enable_extended_form_area_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
-				'hint'  => trans('admin.enable_extended_form_area_hint'),
+				'hint'    => trans('admin.enable_extended_form_area_hint'),
 			],
 			[
-				'name'              => 'separator_1',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.search_form_html_background'),
-				'wrapperAttributes' => [
+				'name'    => 'separator_1',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.search_form_html_background'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'background_color',
-				'label'             => trans('admin.Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'background_color',
+				'label'      => trans('admin.Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#444',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'background_image_path',
-				'label'             => trans('admin.Background Image'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'hint'              => trans('admin.search_form_background_image_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'background_image_path',
+				'label'   => trans('admin.Background Image'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'hint'    => trans('admin.search_form_background_image_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'background_image_darken',
-				'label'             => trans('admin.background_image_darken_label'),
-				'type'              => 'range',
-				'attributes'        => [
+				'name'       => 'background_image_darken',
+				'label'      => trans('admin.background_image_darken_label'),
+				'type'       => 'range',
+				'attributes' => [
 					'placeholder' => '0.5',
 					'min'         => 0,
 					'max'         => 1,
 					'step'        => 0.05,
 					'style'       => 'padding: 0;',
 				],
-				'default'           => 0,
-				'hint'              => trans('admin.background_image_darken_hint'),
-				'wrapperAttributes' => [
+				'default'    => 0,
+				'hint'       => trans('admin.background_image_darken_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-4 extended',
 				],
 			],
 			[
-				'name'              => 'height',
-				'label'             => trans('admin.Height'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'height',
+				'label'      => trans('admin.Height'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '450',
 					'min'         => 45,
 					'max'         => 2000,
 					'step'        => 1,
 				],
-				'hint'              => trans('admin.Enter a value greater than 50px'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a value greater than 50px'),
+				'wrapper'    => [
 					'class' => 'col-md-4 extended',
 				],
 			],
 			[
-				'name'              => 'parallax',
-				'label'             => trans('admin.Enable Parallax Effect'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'parallax',
+				'label'   => trans('admin.Enable Parallax Effect'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-4 extended',
 				],
 			],
@@ -195,108 +195,108 @@ class SearchFormSection
 				'value' => trans('admin.search_form_html_search_form'),
 			],
 			[
-				'name'              => 'hide_form',
-				'label'             => trans('admin.Hide the Form'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'hide_form',
+				'label'   => trans('admin.Hide the Form'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'form_border_color',
-				'label'             => trans('admin.Form Border Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'form_border_color',
+				'label'      => trans('admin.Form Border Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#333',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'form_border_width',
-				'label'             => trans('admin.Form Border Width'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'form_border_width',
+				'label'      => trans('admin.Form Border Width'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '5',
 					'min'         => 0,
 					'max'         => 10,
 					'step'        => 1,
 				],
-				'hint'              => trans('admin.Enter a number with unit'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a number with unit'),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'form_border_radius',
-				'label'             => trans('admin.Form Border Radius'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'form_border_radius',
+				'label'      => trans('admin.Form Border Radius'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '5',
 					'min'         => 0,
 					'max'         => 30,
 					'step'        => 1,
 				],
-				'hint'              => trans('admin.Enter a number with unit'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a number with unit'),
+				'wrapper'    => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'form_btn_background_color',
-				'label'             => trans('admin.Form Button Background Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'form_btn_background_color',
+				'label'      => trans('admin.Form Button Background Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#4682B4',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'form_btn_text_color',
-				'label'             => trans('admin.Form Button Text Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'form_btn_text_color',
+				'label'      => trans('admin.Form Button Text Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFF',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'separator_3',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.search_form_html_titles'),
-				'wrapperAttributes' => [
+				'name'    => 'separator_3',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.search_form_html_titles'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'hide_titles',
-				'label'             => trans('admin.Hide Titles'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'hide_titles',
+				'label'   => trans('admin.Hide Titles'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'separator_3_1',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.search_form_html_titles_content'),
-				'wrapperAttributes' => [
+				'name'    => 'separator_3_1',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.search_form_html_titles_content'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'separator_3_2',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.dynamic_variables_stats_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'separator_3_2',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.dynamic_variables_stats_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
@@ -307,22 +307,22 @@ class SearchFormSection
 			$titlesFields = [];
 			foreach ($languages as $language) {
 				$titlesFields[] = [
-					'name'              => 'title_' . $language->code,
-					'label'             => mb_ucfirst(trans('admin.title')) . ' (' . $language->name . ')',
-					'attributes'        => [
+					'name'       => 'title_' . $language->code,
+					'label'      => mb_ucfirst(trans('admin.title')) . ' (' . $language->name . ')',
+					'attributes' => [
 						'placeholder' => t('homepage_title_text', [], 'global', $language->code),
 					],
-					'wrapperAttributes' => [
+					'wrapper'    => [
 						'class' => 'col-md-6 extended',
 					],
 				];
 				$titlesFields[] = [
-					'name'              => 'sub_title_' . $language->code,
-					'label'             => trans('admin.Sub Title') . ' (' . $language->name . ')',
-					'attributes'        => [
+					'name'       => 'sub_title_' . $language->code,
+					'label'      => trans('admin.Sub Title') . ' (' . $language->name . ')',
+					'attributes' => [
 						'placeholder' => t('simple_fast_and_efficient', [], 'global', $language->code),
 					],
-					'wrapperAttributes' => [
+					'wrapper'    => [
 						'class' => 'col-md-6 extended',
 					],
 				];
@@ -333,34 +333,34 @@ class SearchFormSection
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'separator_3_3',
-				'type'              => 'custom_html',
-				'value'             => trans('admin.search_form_html_titles_color'),
-				'wrapperAttributes' => [
+				'name'    => 'separator_3_3',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.search_form_html_titles_color'),
+				'wrapper' => [
 					'class' => 'col-md-12 extended',
 				],
 			],
 			[
-				'name'              => 'big_title_color',
-				'label'             => trans('admin.Big Title Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'big_title_color',
+				'label'      => trans('admin.Big Title Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFF',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-6 extended',
 				],
 			],
 			[
-				'name'              => 'sub_title_color',
-				'label'             => trans('admin.Sub Title Color'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'sub_title_color',
+				'label'      => trans('admin.Sub Title Color'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFF',
 				],
-				'hint'              => trans('admin.Enter a RGB color code'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.Enter a RGB color code'),
+				'wrapper'    => [
 					'class' => 'col-md-6 extended',
 				],
 			],

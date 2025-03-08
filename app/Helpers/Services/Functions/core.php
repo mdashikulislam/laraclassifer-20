@@ -17,18 +17,25 @@
 use App\Helpers\Common\Arr;
 use App\Helpers\Common\DBTool;
 use App\Helpers\Common\DotenvEditor;
-use App\Models\Language;
-use App\Models\Page;
+use App\Helpers\Common\Files\Storage\StorageDisk;
 use App\Helpers\Services\Localization\Country as CountryHelper;
-use App\Models\Section;
+use App\Helpers\Services\Localization\Helpers\Country;
+use App\Models\Language;
+use App\Models\MetaTag;
 use App\Models\Package;
-use App\Models\Post;
-use App\Models\User;
+use App\Models\Page;
 use App\Models\Permission;
+use App\Models\Post;
+use App\Models\Section;
+use App\Models\User;
+use extras\plugins\domainmapping\Domainmapping;
+use Hashids\Hashids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Number;
 use Intervention\Image\Laravel\Facades\Image as FacadeImage;
+use Larapen\LaravelDistance\Helper;
+use Larapen\TextToImage\Facades\TextToImage;
 use Mews\Purifier\Facades\Purifier;
 
 /**
@@ -349,7 +356,7 @@ function getValidCountry(Collection|string|null $country): ?Collection
 	}
 	
 	// Country collection is required to continue
-	if (!($country instanceof \Illuminate\Support\Collection)) {
+	if (!($country instanceof Collection)) {
 		return null;
 	}
 	
@@ -499,7 +506,7 @@ function isAdminPanel(string $url = null): bool
 				str_starts_with($urlPath, $adminUri)
 				|| str_starts_with($urlPath, '/impersonate')
 			);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$isValid = false;
 		}
 	}
@@ -627,7 +634,7 @@ function getDemoSkinColorImage($skin): ?string
 			// Save the file in png format
 			$image->save($filePath);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return null;
 		}
 	}
@@ -651,7 +658,7 @@ function doesUserHavePermission($authUser, array|string $permission, bool $force
 			&& method_exists($authUser, 'can')
 			&& $authUser->can($permission)
 		);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		return $forceToFallbackOnErrorOccurred;
 	}
 }
@@ -734,13 +741,20 @@ function isFromUrlAlwaysContainingCountryCode(string $url = null): bool
  */
 function isUtf8mb4Available(): bool
 {
+	// Get the default charset & collation
 	$defaultConnection = config('database.default');
 	$databaseCharset = config("database.connections.{$defaultConnection}.charset");
 	$databaseCollation = config("database.connections.{$defaultConnection}.collation");
 	
+	// Get the 4-Byte charset & collations
+	$configDbEncodingKey = 'larapen.core.database.encoding';
+	$fourBytesCharset = config("{$configDbEncodingKey}.default.charset", 'utf8mb4');
+	$fourBytesCollations = config("{$configDbEncodingKey}.recommended.{$fourBytesCharset}");
+	$fourBytesCollations = $fourBytesCollations ?? ['utf8mb4_unicode_ci'];
+	
 	// Allow Emojis when the database charset is 'utf8mb4'
-	// and the database collation is 'utf8mb4_unicode_ci'
-	if ($databaseCharset == 'utf8mb4' && $databaseCollation == 'utf8mb4_unicode_ci') {
+	// and the database collation is 'utf8mb4_unicode_ci' or 'utf8mb4_0900_ai_ci'
+	if ($databaseCharset == $fourBytesCharset && in_array($databaseCollation, $fourBytesCollations)) {
 		return true;
 	}
 	
@@ -793,7 +807,7 @@ function htmlPurifierCleaner(?string $string): string
 	if (isWysiwygEnabled()) {
 		try {
 			$string = Purifier::clean($string);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		$string = stripUtf8mb4CharsIfNotEnabled($string);
 	} else {
@@ -911,7 +925,7 @@ function getSupportedLanguages(): array
 		if ($supportedLanguages->isNotEmpty()) {
 			$supportedLanguages = $supportedLanguages->keyBy('code');
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		/*
 		 * Database or tables don't exist.
 		 * The script will display an error or will start the installation.
@@ -957,7 +971,7 @@ function detectLocale(): string
 /**
  * @return \Illuminate\Support\Collection
  */
-function detectLanguage(): \Illuminate\Support\Collection
+function detectLanguage(): Collection
 {
 	$obj = new App\Helpers\Services\Localization\Language();
 	
@@ -1099,11 +1113,11 @@ function normalizeSeparatedList(array|string|null $value, ?string $separator = '
 function fileUrl(?string $filePath): string
 {
 	// Storage Disk Init.
-	$disk = \App\Helpers\Common\Files\Storage\StorageDisk::getDisk();
+	$disk = StorageDisk::getDisk();
 	
 	try {
 		$url = $disk->url($filePath);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$url = url('common/file?path=' . $filePath);
 	}
 	
@@ -1408,7 +1422,7 @@ function replaceGlobalPatterns(?string $string, bool $removeUnmatchedPatterns = 
 	if (str_contains($string, '{count.listings}')) {
 		try {
 			$countPosts = Post::query()->inCountry()->has('country')->unarchived()->count();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$countPosts = 0;
 		}
 		$string = str_replace('{count.listings}', $countPosts, $string);
@@ -1416,7 +1430,7 @@ function replaceGlobalPatterns(?string $string, bool $removeUnmatchedPatterns = 
 	if (str_contains($string, '{count.users}')) {
 		try {
 			$countUsers = User::query()->count();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$countUsers = 0;
 		}
 		$string = str_replace('{count.users}', $countUsers, $string);
@@ -1441,7 +1455,7 @@ function getMetaTag(?string $page): array
 	
 	// Check if the Domain Mapping plugin is available
 	if (config('plugins.domainmapping.installed')) {
-		$metaTag = \extras\plugins\domainmapping\Domainmapping::getMetaTag($page);
+		$metaTag = Domainmapping::getMetaTag($page);
 		if (!empty($metaTag) && !isArrayOfEmptyElements($metaTag)) {
 			return $metaTag;
 		}
@@ -1457,7 +1471,7 @@ function getMetaTag(?string $page): array
 		$cacheExpiration = (int)config('settings.optimization.cache_expiration', 86400);
 		$cacheId = 'metaTag.' . $languageCode . '.' . $page;
 		$model = cache()->remember($cacheId, $cacheExpiration, function () use ($languageCode, $page) {
-			$model = \App\Models\MetaTag::where('page', $page)->first(['title', 'description', 'keywords']);
+			$model = MetaTag::where('page', $page)->first(['title', 'description', 'keywords']);
 			
 			if (!empty($model)) {
 				$model->setLocale($languageCode);
@@ -1466,7 +1480,7 @@ function getMetaTag(?string $page): array
 			
 			return $model;
 		});
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	if (!empty($model)) {
@@ -1523,7 +1537,7 @@ function getDistanceUnit(string $countryCode = null): string
 	if (empty($countryCode)) {
 		$countryCode = config('country.code');
 	}
-	$unit = \Larapen\LaravelDistance\Helper::getDistanceUnit($countryCode);
+	$unit = Helper::getDistanceUnit($countryCode);
 	$unit = t($unit);
 	
 	return getAsString($unit);
@@ -1571,7 +1585,7 @@ function hashId($in, bool $toNum = false, bool $withPrefix = true, int $minHashL
 	$hidPrefix = $withPrefix ? config('larapen.core.hashableIdPrefix') : '';
 	$hidPrefix = is_string($hidPrefix) ? $hidPrefix : '';
 	
-	$hashIds = new \Hashids\Hashids($salt, $minHashLength);
+	$hashIds = new Hashids($salt, $minHashLength);
 	
 	if (!$toNum) {
 		$out = $hidPrefix . $hashIds->encode($in);
@@ -1676,7 +1690,7 @@ function getSitemapsIndexes(bool $htmlFormat = false): string
 {
 	$out = '';
 	
-	$countries = \App\Helpers\Services\Localization\Helpers\Country::transAll(CountryHelper::getCountries());
+	$countries = Country::transAll(CountryHelper::getCountries());
 	if (!$countries->isEmpty()) {
 		if ($htmlFormat) {
 			$cmFieldStyle = ($countries->count() > 10) ? ' style="height: 205px; overflow-y: scroll;"' : '';
@@ -1799,7 +1813,7 @@ function doesGuestHaveAbilityToCreateListings($authUser = null): bool
 		try {
 			$guard = getAuthGuard();
 			$authUser = auth($guard)->check() ? auth($guard)->user() : null;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	
@@ -1896,6 +1910,7 @@ function genPhoneNumberBtn($post, bool $btnBlock = false): string
 	
 	$whatsAppPreFilledMessage = $isPreFilledWhatsappMessageEnabled
 		? '?text=' . rawurlencode(t('whatsapp_pre_filled_message', [
+			'url'     => urlGen()->post($post),
 			'title'   => $post->title,
 			'appName' => config('app.name'),
 		])) : '';
@@ -1931,8 +1946,8 @@ function genPhoneNumberBtn($post, bool $btnBlock = false): string
 		$btnClass = '';
 		if ($isPhoneNumberToImgEnabled) {
 			try {
-				$phone = \Larapen\TextToImage\Facades\TextToImage::make($phone, config('larapen.core.textToImage'));
-			} catch (\Throwable $e) {
+				$phone = TextToImage::make($phone, config('larapen.core.textToImage'));
+			} catch (Throwable $e) {
 				$phone = $post->phone;
 			}
 		}
@@ -2152,7 +2167,7 @@ function setDbFallbackLocale(?string $locale): void
 	try {
 		DotenvEditor::setKey('FALLBACK_LOCALE_FOR_DB', $locale);
 		DotenvEditor::save();
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 }
 
@@ -2166,7 +2181,7 @@ function removeDbFallbackLocale(): void
 	try {
 		DotenvEditor::setKey('FALLBACK_LOCALE_FOR_DB', 'null');
 		DotenvEditor::save();
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 }
 

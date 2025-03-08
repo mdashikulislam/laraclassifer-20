@@ -18,6 +18,7 @@ namespace App\Services\Auth\Traits\Verification;
 
 use App\Notifications\EmailVerification;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 trait EmailVerificationTrait
 {
@@ -143,7 +144,7 @@ trait EmailVerificationTrait
 			$data['emailVerificationSent'] = true;
 			
 			return $data;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = replaceNewlinesWithSpace($e->getMessage());
 			
 			$data['success'] = false;

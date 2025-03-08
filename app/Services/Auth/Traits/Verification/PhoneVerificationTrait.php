@@ -18,6 +18,7 @@ namespace App\Services\Auth\Traits\Verification;
 
 use App\Notifications\PhoneVerification;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 trait PhoneVerificationTrait
 {
@@ -143,7 +144,7 @@ trait PhoneVerificationTrait
 			$data['phoneVerificationSent'] = true;
 			
 			return $data;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = replaceNewlinesWithSpace($e->getMessage());
 			
 			$data['success'] = false;

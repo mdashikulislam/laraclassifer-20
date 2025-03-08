@@ -18,6 +18,7 @@ namespace App\Observers;
 
 use App\Helpers\Common\Files\Storage\StorageDisk;
 use App\Models\Page;
+use Throwable;
 
 class PageObserver
 {
@@ -74,7 +75,7 @@ class PageObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

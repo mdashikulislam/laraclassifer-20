@@ -18,16 +18,16 @@ namespace App\Http\Requests\Admin;
 
 class CurrencyRequest extends Request
 {
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules(): array
-    {
-        return [
-            'code' => ['required', 'min:3', 'max:3'],
-            'name' => ['required', 'min:2', 'max:255'],
-        ];
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules(): array
+	{
+		return [
+			'code' => ['required', 'min:3', 'max:3'],
+			'name' => ['required', 'min:2', 'max:255'],
+		];
+	}
 }

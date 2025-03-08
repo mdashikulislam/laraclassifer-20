@@ -17,10 +17,10 @@
 namespace App\Providers;
 
 use Illuminate\Filesystem\FilesystemAdapter;
-use Illuminate\Support\Facades\Storage;
-use League\Flysystem\Filesystem;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\ServiceProvider;
+use League\Flysystem\Filesystem;
 use Spatie\Dropbox\Client as DropboxClient;
 use Spatie\FlysystemDropbox\DropboxAdapter;
 use Symfony\Component\Mailer\Bridge\Brevo\Transport\BrevoTransportFactory;

@@ -19,6 +19,7 @@ namespace App\Helpers\Services\Search\Traits\Relations;
 use App\Helpers\Common\Date;
 use App\Models\Package;
 use App\Models\Payment;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -84,7 +85,7 @@ trait PaymentRelation
 	/*
 	 * Get (a possible) valid & active payment builder
 	 */
-	private function getPaymentBuilder($tablesPrefix, $paymentsTable): \Illuminate\Database\Query\Builder
+	private function getPaymentBuilder($tablesPrefix, $paymentsTable): Builder
 	{
 		// Get the current Datetime
 		$today = Carbon::now(Date::getAppTimeZone());

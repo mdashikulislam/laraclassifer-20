@@ -16,10 +16,11 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\Field;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\FieldRequest as StoreRequest;
 use App\Http\Requests\Admin\FieldRequest as UpdateRequest;
+use App\Models\Field;
+use Illuminate\Http\RedirectResponse;
 
 class FieldController extends PanelController
 {
@@ -115,95 +116,95 @@ class FieldController extends PanelController
 			'value' => 'post',
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'type',
-			'label'             => trans('admin.type'),
-			'type'              => 'select_from_array',
-			'options'           => Field::fieldTypes(),
-			'allows_null'       => false,
-			'wrapperAttributes' => [
+			'name'        => 'type',
+			'label'       => trans('admin.type'),
+			'type'        => 'select_from_array',
+			'options'     => Field::fieldTypes(),
+			'allows_null' => false,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'max',
-			'label'             => trans('admin.Field Length'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'max',
+			'label'      => trans('admin.Field Length'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Field Length'),
 			],
-			'hint'              => trans('admin.field_length_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.field_length_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'default_value',
-			'label'             => trans('admin.Default value'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'default_value',
+			'label'      => trans('admin.Default value'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Default value'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'required',
-			'label'             => trans('admin.Required'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'required',
+			'label'   => trans('admin.Required'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'help',
-			'label'             => trans('admin.Help'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'help',
+			'label'      => trans('admin.Help'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Help'),
 			],
-			'hint'              => trans('admin.cf_help_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.cf_help_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'use_as_filter',
-			'label'             => trans('admin.cf_use_as_filter_label'),
-			'type'              => 'checkbox_switch',
-			'hint'              => trans('admin.cf_use_as_filter_hint'),
-			'wrapperAttributes' => [
+			'name'    => 'use_as_filter',
+			'label'   => trans('admin.cf_use_as_filter_label'),
+			'type'    => 'checkbox_switch',
+			'hint'    => trans('admin.cf_use_as_filter_hint'),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'active',
-			'label'             => trans('admin.Active'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'active',
+			'label'   => trans('admin.Active'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

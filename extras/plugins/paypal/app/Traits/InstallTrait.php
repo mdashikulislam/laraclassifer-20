@@ -3,6 +3,7 @@
 namespace extras\plugins\paypal\app\Traits;
 
 use App\Models\PaymentMethod;
+use Throwable;
 
 trait InstallTrait
 {
@@ -71,7 +72,7 @@ trait InstallTrait
 			if (empty($paymentMethod)) {
 				return false;
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 		
@@ -85,7 +86,7 @@ trait InstallTrait
 	{
 		try {
 			cache()->forget('plugins.paypal.installed');
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		$paymentMethod = PaymentMethod::where('name', 'paypal')->first();

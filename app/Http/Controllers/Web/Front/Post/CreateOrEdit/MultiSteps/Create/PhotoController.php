@@ -21,6 +21,7 @@ use App\Http\Requests\Front\PhotoRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class PhotoController extends BaseController
 {
@@ -119,7 +120,7 @@ class PhotoController extends BaseController
 					continue;
 				}
 				
-				$picturesInput[] = TmpUpload::image($this->tmpUploadDir, $file);
+				$picturesInput[] = TmpUpload::image($file, $this->tmpUploadDir);
 				
 				// Check the picture number limit
 				if ($key >= ($picturesLimit - 1)) {
@@ -150,7 +151,7 @@ class PhotoController extends BaseController
 					
 					try {
 						$fileSize = $this->disk->exists($filePath) ? (int)$this->disk->size($filePath) : 0;
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$fileSize = 0;
 					}
 					
@@ -214,7 +215,7 @@ class PhotoController extends BaseController
 			$res = true;
 			try {
 				$this->removePictureWithItsThumbs($picturesInput[$pictureId]);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$res = false;
 			}
 			

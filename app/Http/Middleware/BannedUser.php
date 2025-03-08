@@ -111,7 +111,7 @@ class BannedUser
 		
 		// Check if the user's email address has been banned
 		$cacheId = 'blacklist.email.' . $authUser->email;
-		$bannedUser = cache()->remember($cacheId, $cacheExpiration, function () use($authUser) {
+		$bannedUser = cache()->remember($cacheId, $cacheExpiration, function () use ($authUser) {
 			return Blacklist::ofType('email')->where('entry', $authUser->email)->first();
 		});
 		

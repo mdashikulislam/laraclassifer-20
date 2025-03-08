@@ -15,6 +15,7 @@ use PayPalCheckoutSdk\Core\SandboxEnvironment;
 use PayPalCheckoutSdk\Orders\OrdersCaptureRequest;
 use PayPalCheckoutSdk\Orders\OrdersCreateRequest;
 use PayPalHttp\HttpException;
+use Throwable;
 
 class Paypal extends Payment
 {
@@ -159,7 +160,7 @@ class Paypal extends Payment
 				return parent::paymentFailureActions($payable, 'Error during PayPal order creation.');
 				
 			}
-		} catch (HttpException|\Throwable $e) {
+		} catch (HttpException|Throwable $e) {
 			
 			// Apply actions when API failed
 			return parent::paymentApiErrorActions($payable, $e);
@@ -228,7 +229,7 @@ class Paypal extends Payment
 				return parent::paymentFailureActions($payable);
 				
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			
 			// Apply actions when API failed
 			return parent::paymentApiErrorActions($payable, $e);

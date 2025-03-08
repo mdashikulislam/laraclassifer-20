@@ -56,6 +56,10 @@ class UrlQuery
 		}
 	}
 	
+	/* ---------------------------------------------------------------------------
+	 *                              PARAMETER METHODS
+	 * -------------------------------------------------------------------------*/
+	
 	/**
 	 * Set (add or update) the given query parameters
 	 *
@@ -75,49 +79,14 @@ class UrlQuery
 	}
 	
 	/**
-	 * Get all the query parameters
+	 * Remove a single parameter by key.
 	 *
-	 * @return array<string, string|array>
+	 * @param string $parameterKey
+	 * @return $this
 	 */
-	public function getParameters(): array
+	public function removeParameter(string $parameterKey): static
 	{
-		return $this->parameters;
-	}
-	
-	/**
-	 * Get query parameters by excluding some ones
-	 *
-	 * @param array<int, string> $parameters
-	 * @return array<string, string|array>
-	 */
-	public function getParametersExcluding(array $parameters): array
-	{
-		$filteredParameters = $this->parameters;
-		
-		foreach ($parameters as $parameter) {
-			Arr::forget($filteredParameters, $parameter);
-		}
-		
-		return $filteredParameters;
-	}
-	
-	/**
-	 * Get specific query parameters (if they exist)
-	 *
-	 * @param array<int, string> $parameters
-	 * @return array<string, string|array>
-	 */
-	public function getSpecificParameters(array $parameters): array
-	{
-		$result = [];
-		foreach ($parameters as $parameter) {
-			$value = Arr::get($this->parameters, $parameter);
-			if ($value !== null) {
-				Arr::set($result, $parameter, $value);
-			}
-		}
-		
-		return $result;
+		return $this->removeParameters([$parameterKey]);
 	}
 	
 	/**
@@ -135,6 +104,18 @@ class UrlQuery
 		foreach ($parameters as $parameter) {
 			Arr::forget($this->parameters, $parameter);
 		}
+		
+		return $this;
+	}
+	
+	/**
+	 * Remove all the query parameters
+	 *
+	 * @return $this
+	 */
+	public function removeAllParameters(): static
+	{
+		$this->parameters = [];
 		
 		return $this;
 	}
@@ -168,17 +149,111 @@ class UrlQuery
 		}, ARRAY_FILTER_USE_BOTH);
 	}
 	
+	/* ---------------------------------------------------------------------------
+	 *                           PARAMETER CHECKS/GETTERS
+	 * -------------------------------------------------------------------------*/
+	
 	/**
-	 * Remove all the query parameters
+	 * Check if a single parameter exists.
 	 *
-	 * @return $this
+	 * @param string $parameterKey
+	 * @return bool
 	 */
-	public function removeAllParameters(): static
+	public function hasParameter(string $parameterKey): bool
 	{
-		$this->parameters = [];
-		
-		return $this;
+		return !empty($this->getParameter($parameterKey));
 	}
+	
+	/**
+	 * Check if ALL listed parameters exist.
+	 *
+	 * @param array $parameterKeys
+	 * @return bool
+	 */
+	public function hasParameters(array $parameterKeys): bool
+	{
+		return !empty($this->getParameters($parameterKeys));
+	}
+	
+	/**
+	 * Throw an error if the parameter is missing; otherwise return its value.
+	 *
+	 * @param string $parameterKey
+	 * @return array|string
+	 * @throws \Exception
+	 */
+	public function requireParameter(string $parameterKey): array|string
+	{
+		$value = $this->getParameter($parameterKey);
+		if (empty($value)) {
+			throw new \Exception("Parameter '$parameterKey' is required but missing.");
+		}
+		
+		return $value;
+	}
+	
+	/**
+	 * Get a single parameter's value or null if not found.
+	 *
+	 * @param string $parameterKey
+	 * @return array|string|null
+	 */
+	public function getParameter(string $parameterKey): array|string|null
+	{
+		$value = $this->getParameters([$parameterKey]);
+		
+		return $value[$parameterKey] ?? null;
+	}
+	
+	/**
+	 * Get specific query parameters (if they exist)
+	 *
+	 * @param array<int, string> $parameterKeys
+	 * @return array<string, string|array>
+	 */
+	public function getParameters(array $parameterKeys): array
+	{
+		$result = [];
+		foreach ($parameterKeys as $key) {
+			$value = Arr::get($this->parameters, $key);
+			if ($value !== null) {
+				Arr::set($result, $key, $value);
+			}
+		}
+		
+		return $result;
+	}
+	
+	/**
+	 * Get query parameters by excluding some ones
+	 *
+	 * @param array<int, string> $parameterKeys
+	 * @return array<string, string|array>
+	 */
+	public function getParametersExcluding(array $parameterKeys): array
+	{
+		$filteredParameters = $this->parameters;
+		
+		foreach ($parameterKeys as $key) {
+			Arr::forget($filteredParameters, $key);
+		}
+		
+		return $filteredParameters;
+	}
+	
+	/**
+	 * Get all the query parameters
+	 *
+	 * @return array<string, string|array>
+	 */
+	public function getAllParameters(): array
+	{
+		return $this->parameters;
+	}
+	
+	/* ---------------------------------------------------------------------------
+	 *                         URL BUILDING AND MANIPULATION
+	 * -------------------------------------------------------------------------*/
 	
 	/**
 	 * Build new URL with the updated query parameters
@@ -223,5 +298,112 @@ class UrlQuery
 	public function __toString(): string
 	{
 		return $this->buildUrl();
+	}
+	
+	/**
+	 * Build a relative URL (path + query + fragment).
+	 *
+	 * @return string
+	 */
+	public function buildRelativeUrl(): string
+	{
+		$path = $this->parsedUrl['path'] ?? '';
+		$newQueryString = Arr::query($this->parameters);
+		
+		$relativeUrl = $path;
+		
+		if (!empty($newQueryString)) {
+			$relativeUrl .= '?' . $newQueryString;
+		}
+		
+		if (isset($this->parsedUrl['fragment'])) {
+			$relativeUrl .= '#' . $this->parsedUrl['fragment'];
+		}
+		
+		return $relativeUrl;
+	}
+	
+	/**
+	 * Get the current path component of the URL.
+	 *
+	 * @return string
+	 */
+	public function getPath(): string
+	{
+		return $this->parsedUrl['path'] ?? '';
+	}
+	
+	/**
+	 * Set the path component of the URL.
+	 *
+	 * @param string $path
+	 * @return static
+	 */
+	public function setPath(string $path): static
+	{
+		$this->parsedUrl['path'] = $path;
+		
+		return $this;
+	}
+	
+	/**
+	 * Get the host component of the URL.
+	 *
+	 * @return string
+	 */
+	public function getHost(): string
+	{
+		return $this->parsedUrl['host'] ?? '';
+	}
+	
+	/**
+	 * Set the host component of the URL.
+	 *
+	 * @param string $host
+	 * @return static
+	 */
+	public function setHost(string $host): static
+	{
+		$this->parsedUrl['host'] = $host;
+		
+		return $this;
+	}
+	
+	/**
+	 * Set the fragment/hash (without '#').
+	 *
+	 * @param string $fragment
+	 * @return static
+	 */
+	public function setFragment(string $fragment): static
+	{
+		// Just in case, strip any leading '#' characters
+		$fragment = ltrim($fragment, '#');
+		$this->parsedUrl['fragment'] = $fragment;
+		
+		return $this;
+	}
+	
+	/**
+	 * Remove the fragment/hash from the URL.
+	 *
+	 * @return static
+	 */
+	public function removeFragment(): static
+	{
+		unset($this->parsedUrl['fragment']);
+		
+		return $this;
+	}
+	
+	/**
+	 * Clone the current UrlQuery instance as a new object with the same data.
+	 *
+	 * @return static
+	 */
+	public function clone(): static
+	{
+		// Re-instantiate with the same URL (including current parameters)
+		return new static($this->buildUrl());
 	}
 }

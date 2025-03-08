@@ -17,6 +17,7 @@
 namespace App\Observers;
 
 use App\Models\Currency;
+use Throwable;
 
 class CurrencyObserver
 {
@@ -54,6 +55,7 @@ class CurrencyObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {}
+		} catch (Throwable $e) {
+		}
 	}
 }

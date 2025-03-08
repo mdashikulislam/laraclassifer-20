@@ -17,13 +17,14 @@
 namespace App\Http\Controllers\Web\Front\Post;
 
 use App\Helpers\Services\Referrer;
-use App\Http\Requests\Front\ReportRequest;
 use App\Http\Controllers\Web\Front\FrontController;
+use App\Http\Requests\Front\ReportRequest;
 use App\Services\ContactService;
 use App\Services\PostService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\Middleware;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Throwable;
 
 class ReportController extends FrontController
 {
@@ -94,7 +95,7 @@ class ReportController extends FrontController
 		// Open Graph
 		try {
 			$this->og->title($title)->description($description);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('og', $this->og);
 		

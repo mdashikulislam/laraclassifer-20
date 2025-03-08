@@ -33,6 +33,7 @@ use App\Models\Setting;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use Throwable;
 
 class Country
 {
@@ -236,7 +237,7 @@ class Country
 					return self::getCountryInfo($country->code);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return collect();
@@ -259,7 +260,7 @@ class Country
 			// If only one country is activated, auto-select it as the default country.
 			try {
 				$countries = CountryModel::all();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$countries = collect();
 			}
 			if ($countries->count() == 1) {
@@ -360,7 +361,7 @@ class Country
 					->where('id', $postId)
 					->first();
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		if (empty($post)) {
@@ -553,7 +554,7 @@ class Country
 				// Set data in cookie
 				Cookie::set('ipCountryCode', $countryCode);
 				
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return null;
 			}
 		}
@@ -582,7 +583,7 @@ class Country
 			if (is_array($country)) {
 				$country = collect($country);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$country = collect();
 		}
 		
@@ -617,7 +618,7 @@ class Country
 				DB::table((new CountryModel())->getTable())
 					->where('code', '=', $countryCode)
 					->update(['time_zone' => $timeZone]);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -633,7 +634,7 @@ class Country
 				$currency = cache()->remember($cacheId, self::$cacheExpiration, function () use ($currencyCode) {
 					return Currency::find($currencyCode);
 				});
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -751,7 +752,7 @@ class Country
 				
 				return $countries;
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// To prevent HTTP 500 Error when site is not installed.
 			$fallbackCountry = [
 				'code'           => 'US',
@@ -852,7 +853,7 @@ class Country
 				
 				flash($msg)->warning();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

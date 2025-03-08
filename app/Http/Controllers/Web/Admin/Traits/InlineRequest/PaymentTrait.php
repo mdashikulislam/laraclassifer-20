@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Admin\Traits\InlineRequest;
 
 use App\Helpers\Services\Payment as PaymentHelper;
 use App\Models\Payment;
+use Illuminate\Http\JsonResponse;
 
 trait PaymentTrait
 {
@@ -28,7 +29,7 @@ trait PaymentTrait
 	 * @param $column
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	protected function updatePaymentData($payment, $column): \Illuminate\Http\JsonResponse
+	protected function updatePaymentData($payment, $column): JsonResponse
 	{
 		$isValidCondition = ($this->table == 'payments' && $column == 'active' && !empty($payment));
 		if (!$isValidCondition) {

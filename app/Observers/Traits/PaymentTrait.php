@@ -18,6 +18,7 @@ namespace App\Observers\Traits;
 
 use App\Models\Language;
 use App\Models\Scopes\ActiveScope;
+use Throwable;
 
 trait PaymentTrait
 {
@@ -62,7 +63,7 @@ trait PaymentTrait
 			
 			cache()->forget('posts.similar.category.' . $post->category_id . '.post.' . $post->id);
 			cache()->forget('posts.similar.city.' . $post->city_id . '.post.' . $post->id);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	

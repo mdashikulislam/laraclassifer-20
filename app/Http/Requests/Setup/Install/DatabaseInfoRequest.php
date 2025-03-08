@@ -19,6 +19,7 @@ namespace App\Http\Requests\Setup\Install;
 use App\Helpers\Common\DBTool;
 use App\Http\Requests\Request;
 use App\Rules\AlphaPlusRule;
+use Throwable;
 
 class DatabaseInfoRequest extends Request
 {
@@ -96,7 +97,7 @@ class DatabaseInfoRequest extends Request
 			try {
 				$pdo = DBTool::getPdoConnection($inputData);
 				$this->connexionErrorMessage = null;
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$this->connexionErrorMessage = $e->getMessage();
 			}
 			
@@ -131,7 +132,7 @@ class DatabaseInfoRequest extends Request
 					try {
 						$pdo = DBTool::getPdoConnection($inputData);
 						$this->connexionErrorMessage = null;
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$this->connexionErrorMessage = $e->getMessage();
 					}
 				}

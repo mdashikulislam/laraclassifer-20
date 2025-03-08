@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Front\Account;
 
 use App\Http\Requests\Front\PostRequest\LimitationCompliance;
+use App\Models\Package;
 use App\Services\PostService;
 use App\Services\UserService;
 use Illuminate\Http\RedirectResponse;
@@ -35,6 +36,10 @@ class PostsController extends AccountBaseController
 		parent::__construct($userService);
 		
 		$this->postService = $postService;
+		
+		// Count Promotion Packages
+		$countPromotionPackages = Package::query()->promotion()->applyCurrency()->count();
+		view()->share('countPromotionPackages', $countPromotionPackages);
 	}
 	
 	/**

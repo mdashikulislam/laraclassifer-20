@@ -60,6 +60,7 @@ class Kernel
 			\App\Http\Middleware\ReferrerChecker::class,
 			\App\Http\Middleware\IsVerifiedUser::class,
 			\App\Http\Middleware\BannedUser::class,
+			\App\Http\Middleware\LastUserActivity::class,
 			\App\Http\Middleware\HttpsProtocol::class,
 			\App\Http\Middleware\ResourceHints::class,
 			\App\Http\Middleware\LazyLoading::class,

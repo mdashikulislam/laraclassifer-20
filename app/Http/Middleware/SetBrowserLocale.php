@@ -22,6 +22,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use Throwable;
 
 class SetBrowserLocale
 {
@@ -72,7 +73,7 @@ class SetBrowserLocale
 				// Get the user's country info (by the user's IP address) \w the country's language
 				try {
 					$country = Language::getCountryFromIP();
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$country = collect();
 				}
 				
@@ -116,7 +117,7 @@ class SetBrowserLocale
 							$isAvailableLang = cache()->remember($cacheId, $cacheExpiration, function () use ($browserLangCode) {
 								return LanguageModel::where('code', '=', $browserLangCode)->first();
 							});
-						} catch (\Throwable $e) {
+						} catch (Throwable $e) {
 							$isAvailableLang = [];
 						}
 						$isAvailableLang = collect($isAvailableLang);

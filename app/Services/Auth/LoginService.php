@@ -27,6 +27,7 @@ use App\Services\Auth\Traits\Verification\CheckIfAuthFieldIsVerified;
 use App\Services\BaseService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
+use Throwable;
 
 class LoginService extends BaseService
 {
@@ -137,7 +138,7 @@ class LoginService extends BaseService
 				
 				return apiResponse()->json($data);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$errorMessage = $e->getMessage();
 		}
 		

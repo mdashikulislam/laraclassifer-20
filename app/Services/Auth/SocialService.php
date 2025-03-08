@@ -21,6 +21,7 @@ use App\Services\Auth\Social\SaveProviderData;
 use App\Services\BaseService;
 use Illuminate\Http\JsonResponse;
 use Laravel\Socialite\Facades\Socialite;
+use Throwable;
 
 class SocialService extends BaseService
 {
@@ -98,7 +99,7 @@ class SocialService extends BaseService
 			$socialiteObj = Socialite::driver($serviceKey)->stateless();
 			
 			return $socialiteObj->redirect()->getTargetUrl();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
 				$message = $this->serviceError;
@@ -141,7 +142,7 @@ class SocialService extends BaseService
 				
 				return apiResponse()->error($message);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
 				$message = $this->serviceError;

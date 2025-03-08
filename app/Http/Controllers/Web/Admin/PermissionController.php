@@ -17,12 +17,14 @@
 namespace App\Http\Controllers\Web\Admin;
 
 use App\Helpers\Common\DBTool;
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\PermissionRequest as StoreRequest;
 use App\Http\Requests\Admin\PermissionRequest as UpdateRequest;
+use App\Http\Requests\Admin\Request;
 use App\Models\Permission;
 use App\Models\Role;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
 
 class PermissionController extends PanelController
 {
@@ -107,18 +109,18 @@ class PermissionController extends PanelController
 		}
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		$this->setPermissionDefaultRoles();
+		$request = $this->setPermissionDefaultRoles($request);
 		
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		$this->setPermissionDefaultRoles();
+		$request = $this->setPermissionDefaultRoles($request);
 		
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	/**
@@ -126,7 +128,7 @@ class PermissionController extends PanelController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function createDefaultEntries()
+	public function createDefaultEntries(): RedirectResponse
 	{
 		$success = false;
 		
@@ -163,15 +165,18 @@ class PermissionController extends PanelController
 	
 	/**
 	 * Set permission's default (or required) roles
+	 *
+	 * @param \App\Http\Requests\Admin\Request $request
+	 * @return \App\Http\Requests\Admin\Request
 	 */
-	private function setPermissionDefaultRoles(): void
+	private function setPermissionDefaultRoles(Request $request): Request
 	{
 		// Get request roles
-		$roleIds = request()->input('roles');
+		$roleIds = $request->input('roles');
 		$roleIds = collect($roleIds)->map(fn ($item, $key) => (int)$item)->toArray();
 		
 		// Set the 'super-admin' role for the permission (if needed),
-		$permission = Permission::find(request()->segment(3));
+		$permission = Permission::find($request->segment(3));
 		if (!empty($permission)) {
 			// Get all the default Super Admin permissions
 			$superAdminPermissionsArr = Permission::getSuperAdminPermissions();
@@ -191,6 +196,9 @@ class PermissionController extends PanelController
 		}
 		
 		// Update the request value
-		request()->request->set('roles', $roleIds);
+		// $request->request->set('roles', $roleIds);
+		$request->merge(['roles' => $roleIds]);
+		
+		return $request;
 	}
 }

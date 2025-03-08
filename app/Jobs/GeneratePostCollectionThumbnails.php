@@ -18,10 +18,10 @@ namespace App\Jobs;
 
 use App\Helpers\Services\Thumbnail\PostThumbnail;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Foundation\Queue\Queueable;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
-use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 
 /*
  * Running the Queue Worker

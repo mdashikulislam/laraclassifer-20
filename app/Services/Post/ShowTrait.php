@@ -17,14 +17,14 @@
 namespace App\Services\Post;
 
 use App\Events\PostWasVisited;
-use App\Services\Post\Show\DetailedTrait;
-use App\Services\Post\Show\ShowFieldValueTrait;
 use App\Http\Resources\PostResource;
 use App\Jobs\GeneratePostThumbnails;
 use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\StrictActiveScope;
 use App\Models\Scopes\VerifiedScope;
+use App\Services\Post\Show\DetailedTrait;
+use App\Services\Post\Show\ShowFieldValueTrait;
 use Illuminate\Http\JsonResponse;
 
 trait ShowTrait

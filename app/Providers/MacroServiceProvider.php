@@ -16,7 +16,6 @@
 
 namespace App\Providers;
 
-use App\Exceptions\Custom\CustomException;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 

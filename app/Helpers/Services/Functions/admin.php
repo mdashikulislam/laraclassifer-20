@@ -15,6 +15,7 @@
  */
 
 use App\Helpers\Common\Arr;
+use App\Models\Permission;
 
 /**
  * @param string|null $path
@@ -237,7 +238,7 @@ function isVerifiedUser($user): bool
 function userHasSuperAdminPermissions(): bool
 {
 	if (auth()->check()) {
-		$permissions = \App\Models\Permission::getSuperAdminPermissions();
+		$permissions = Permission::getSuperAdminPermissions();
 		
 		// Remove the standard admin permission
 		$permissions = collect($permissions)

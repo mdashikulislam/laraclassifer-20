@@ -74,7 +74,7 @@ trait GetAdminLocalization
 	 *
 	 * @return \Illuminate\Support\Collection
 	 */
-	private function getCountryFromDomain(): \Illuminate\Support\Collection
+	private function getCountryFromDomain(): Collection
 	{
 		if (config('plugins.domainmapping.installed')) {
 			if (!config('settings.domainmapping.share_session')) {

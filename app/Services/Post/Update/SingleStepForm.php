@@ -22,6 +22,7 @@ use App\Models\City;
 use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
+use Throwable;
 
 trait SingleStepForm
 {
@@ -120,7 +121,7 @@ trait SingleStepForm
 		$extra['pictures'] = [];
 		try {
 			$extra['pictures'] = $this->singleStepPicturesStore($post->id, $request);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$data['success'] = false;
 			$data['message'] = $e->getMessage();
 			

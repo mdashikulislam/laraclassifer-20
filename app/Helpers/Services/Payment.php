@@ -18,18 +18,19 @@ namespace App\Helpers\Services;
 
 use App\Helpers\Services\Payment\PaymentTrait;
 use App\Http\Resources\PaymentResource;
-use App\Models\Permission;
-use App\Models\Post;
 use App\Models\Package;
 use App\Models\Payment as PaymentModel;
+use App\Models\Permission;
+use App\Models\Post;
+use App\Models\User;
 use App\Notifications\PaymentNotification;
 use App\Notifications\PaymentSent;
-use App\Models\User;
 use App\Notifications\SubscriptionNotification;
 use App\Notifications\SubscriptionPurchased;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class Payment
 {
@@ -126,12 +127,12 @@ class Payment
 	 * @param string|null $message
 	 * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
 	 */
-	public static function paymentApiErrorActions(Post|User $payable, ?\Throwable $e, ?string $message = null)
+	public static function paymentApiErrorActions(Post|User $payable, ?Throwable $e, ?string $message = null)
 	{
 		// Remove the entry
 		self::removeEntry($payable);
 		
-		$message = ($e instanceof \Throwable) ? $e->getMessage() : $message;
+		$message = ($e instanceof Throwable) ? $e->getMessage() : $message;
 		
 		if (isFromApi()) {
 			$data = [
@@ -257,7 +258,7 @@ class Payment
 				if ($isSubscripting) {
 					$payable->notify(new SubscriptionPurchased($payment, $payable));
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				// Not Necessary To Notify
 			}
 			
@@ -271,7 +272,7 @@ class Payment
 						Notification::send($admins, new SubscriptionNotification($payment, $payable));
 					}
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				// Not Necessary To Notify
 			}
 		}

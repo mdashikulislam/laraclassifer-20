@@ -44,7 +44,7 @@ class SocialShareSetting
 				? $request->file($param['attribute'])
 				: $request->input($param['attribute']);
 			
-			$request->request->set($param['attribute'], Upload::image($param['destPath'], $file, $param));
+			$request->request->set($param['attribute'], Upload::image($file, $param['destPath'], $param));
 		}
 		
 		return $request;
@@ -143,11 +143,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'facebook',
-				'label'             => 'Facebook',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.facebook_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'facebook',
+				'label'   => 'Facebook',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.facebook_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -155,11 +155,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'twitter',
-				'label'             => 'X (Twitter)',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.twitter_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'twitter',
+				'label'   => 'X (Twitter)',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.twitter_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -167,11 +167,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'linkedin',
-				'label'             => 'LinkedIn',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.linkedin_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'linkedin',
+				'label'   => 'LinkedIn',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.linkedin_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -179,11 +179,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'whatsapp',
-				'label'             => 'WhatsApp',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.whatsapp_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'whatsapp',
+				'label'   => 'WhatsApp',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.whatsapp_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -191,11 +191,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'telegram',
-				'label'             => 'Telegram',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.telegram_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'telegram',
+				'label'   => 'Telegram',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.telegram_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -203,11 +203,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'snapchat',
-				'label'             => 'Snapchat',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.snapchat_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'snapchat',
+				'label'   => 'Snapchat',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.snapchat_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -215,20 +215,20 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'messenger',
-				'label'             => 'Facebook Messenger',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.messenger_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'messenger',
+				'label'   => 'Facebook Messenger',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.messenger_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'facebook_app_id',
-				'label'             => trans('admin.facebook_app_id'),
-				'type'              => 'text',
-				'hint'              => trans('admin.facebook_app_id_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'facebook_app_id',
+				'label'   => trans('admin.facebook_app_id'),
+				'type'    => 'text',
+				'hint'    => trans('admin.facebook_app_id_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 messenger',
 				],
 			],
@@ -236,11 +236,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'pinterest',
-				'label'             => 'Pinterest',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.pinterest_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'pinterest',
+				'label'   => 'Pinterest',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.pinterest_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -248,11 +248,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'vk',
-				'label'             => 'VK (VKontakte)',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.vk_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'vk',
+				'label'   => 'VK (VKontakte)',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.vk_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -260,11 +260,11 @@ class SocialShareSetting
 		
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'tumblr',
-				'label'             => 'Tumblr',
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.tumblr_share_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'tumblr',
+				'label'   => 'Tumblr',
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.tumblr_share_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -290,26 +290,26 @@ class SocialShareSetting
 				'hint'   => trans('admin.og_image_hint'),
 			],
 			[
-				'name'              => 'og_image_width',
-				'label'             => trans('admin.width_label') . ' (' . trans('admin.og_image_label') . ')',
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'og_image_width',
+				'label'      => trans('admin.width_label') . ' (' . trans('admin.og_image_label') . ')',
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '1200',
 				],
-				'hint'              => trans('admin.width_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.width_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'og_image_height',
-				'label'             => trans('admin.height_label') . ' (' . trans('admin.og_image_label') . ')',
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'og_image_height',
+				'label'      => trans('admin.height_label') . ' (' . trans('admin.og_image_label') . ')',
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '630',
 				],
-				'hint'              => trans('admin.height_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.height_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],

@@ -60,6 +60,7 @@ class ThumbnailService
 		$filePath = $this->params['filePath'] ?? null;
 		
 		thumbImage($filePath, $this->filePathFallback)->resize($this->params, $webpFormat);
+		
 		// if (!str_contains($filePath, 'default')) dd($filePath); // debug!
 		
 		return $this;

@@ -16,6 +16,9 @@
 
 namespace App\Helpers\Common;
 
+use Closure;
+use DateInterval;
+use DateTimeInterface;
 use Illuminate\Support\Facades\Cache;
 
 class CustomCache
@@ -53,7 +56,7 @@ class CustomCache
 	 * @param \DateInterval|\DateTimeInterface|int|\Closure|null $ttl
 	 * @return bool
 	 */
-	public function put(string $key, mixed $value, \DateInterval|\DateTimeInterface|int|\Closure|null $ttl = null): bool
+	public function put(string $key, mixed $value, DateInterval|DateTimeInterface|int|Closure|null $ttl = null): bool
 	{
 		if ($this->supportsTags() && $this->tags) {
 			return Cache::tags($this->tags)->put($key, $value, $ttl);
@@ -90,7 +93,7 @@ class CustomCache
 	 * @param \Closure $callback
 	 * @return mixed
 	 */
-	public function remember(string $key, \DateInterval|\DateTimeInterface|int|\Closure|null $ttl, \Closure $callback): mixed
+	public function remember(string $key, DateInterval|DateTimeInterface|int|Closure|null $ttl, Closure $callback): mixed
 	{
 		if ($this->supportsTags()) {
 			return Cache::tags($this->tags)->remember($key, $ttl, $callback);

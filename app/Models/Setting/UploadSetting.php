@@ -239,29 +239,29 @@ class UploadSetting
 				'value' => trans('admin.upload_files_sep_value'),
 			],
 			[
-				'name'              => 'file_types',
-				'label'             => trans('admin.file_types_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.file_types_hint', ['fileTypes' => $defaultFileTypes]),
-				'wrapperAttributes' => [
+				'name'    => 'file_types',
+				'label'   => trans('admin.file_types_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.file_types_hint', ['fileTypes' => $defaultFileTypes]),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'min_file_size',
-				'label'             => trans('admin.min_file_size_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.min_file_size_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'min_file_size',
+				'label'   => trans('admin.min_file_size_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.min_file_size_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'max_file_size',
-				'label'             => trans('admin.max_file_size_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.max_file_size_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'max_file_size',
+				'label'   => trans('admin.max_file_size_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.max_file_size_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
@@ -271,70 +271,70 @@ class UploadSetting
 				'value' => trans('admin.upload_images_sep_value'),
 			],
 			[
-				'name'              => 'image_types',
-				'label'             => trans('admin.image_types_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.image_types_hint', ['imageTypes' => $defaultImageTypes]),
-				'wrapperAttributes' => [
+				'name'    => 'image_types',
+				'label'   => trans('admin.image_types_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.image_types_hint', ['imageTypes' => $defaultImageTypes]),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'image_quality',
-				'label'             => trans('admin.image_quality_label'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(generateNumberRange(10, 100, 10))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
-				'hint'              => trans('admin.image_quality_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'image_quality',
+				'label'   => trans('admin.image_quality_label'),
+				'type'    => 'select2_from_array',
+				'options' => collect(generateNumberRange(10, 100, 10))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
+				'hint'    => trans('admin.image_quality_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'image_trimming_tolerance',
-				'label'             => trans('admin.image_trimming_tolerance_label'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(generateNumberRange(0, 20, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
-				'hint'              => trans('admin.image_trimming_tolerance_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'image_trimming_tolerance',
+				'label'   => trans('admin.image_trimming_tolerance_label'),
+				'type'    => 'select2_from_array',
+				'options' => collect(generateNumberRange(0, 20, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
+				'hint'    => trans('admin.image_trimming_tolerance_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'client_image_types',
-				'label'             => trans('admin.client_image_types_label'),
-				'type'              => 'text',
-				'hint'              => trans('admin.client_image_types_hint', [
+				'name'    => 'client_image_types',
+				'label'   => trans('admin.client_image_types_label'),
+				'type'    => 'text',
+				'hint'    => trans('admin.client_image_types_hint', [
 					'fallbackExtension' => $clientImageFallbackExtension,
 					'clientImageTypes'  => $defaultClientImageTypes,
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'min_image_size',
-				'label'             => trans('admin.min_image_size_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.min_image_size_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'min_image_size',
+				'label'   => trans('admin.min_image_size_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.min_image_size_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'max_image_size',
-				'label'             => trans('admin.max_image_size_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.max_image_size_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'max_image_size',
+				'label'   => trans('admin.max_image_size_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.max_image_size_hint'),
+				'wrapper' => [
 					'class' => 'col-md-3',
 				],
 			],
 			[
-				'name'              => 'image_progressive',
-				'label'             => trans('admin.image_progressive_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.image_progressive_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'image_progressive',
+				'label'   => trans('admin.image_progressive_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.image_progressive_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -350,38 +350,38 @@ class UploadSetting
 				'value' => trans('admin.img_resize_default_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_default_width',
-				'label'             => trans('admin.img_resize_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_default_width',
+				'label'   => trans('admin.img_resize_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_default_height',
-				'label'             => trans('admin.img_resize_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_default_height',
+				'label'   => trans('admin.img_resize_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_default_ratio',
-				'label'             => trans('admin.img_resize_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_default_ratio',
+				'label'   => trans('admin.img_resize_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_default_upsize',
-				'label'             => trans('admin.img_resize_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_default_upsize',
+				'label'   => trans('admin.img_resize_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -393,81 +393,81 @@ class UploadSetting
 				'value' => trans('admin.img_resize_logo_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_logo_method',
-				'label'             => trans('admin.img_resize_type_resize_method_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizeMethods(),
-				'hint'              => trans('admin.img_resize_type_resize_method_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_method',
+				'label'   => trans('admin.img_resize_type_resize_method_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizeMethods(),
+				'hint'    => trans('admin.img_resize_type_resize_method_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'img_resize_logo_width',
-				'label'             => trans('admin.img_resize_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_width',
+				'label'   => trans('admin.img_resize_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_height',
-				'label'             => trans('admin.img_resize_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_height',
+				'label'   => trans('admin.img_resize_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_ratio',
-				'label'             => trans('admin.img_resize_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_ratio',
+				'label'   => trans('admin.img_resize_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_upsize',
-				'label'             => trans('admin.img_resize_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_upsize',
+				'label'   => trans('admin.img_resize_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_position',
-				'label'             => trans('admin.img_resize_type_position_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizePositions(),
-				'hint'              => trans('admin.img_resize_type_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_position',
+				'label'   => trans('admin.img_resize_type_position_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizePositions(),
+				'hint'    => trans('admin.img_resize_type_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_relative',
-				'label'             => trans('admin.img_resize_type_relative_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_relative_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_logo_relative',
+				'label'   => trans('admin.img_resize_type_relative_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_relative_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_logo_bgColor',
-				'label'             => trans('admin.img_resize_type_bgColor_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'img_resize_logo_bgColor',
+				'label'      => trans('admin.img_resize_type_bgColor_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'hint'              => trans('admin.img_resize_type_bg_color_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.img_resize_type_bg_color_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -485,7 +485,7 @@ class UploadSetting
 				'type'              => 'select2_from_array',
 				'options'           => self::resizeMethods(),
 				'hint'              => trans('admin.img_resize_type_resize_method_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 				'newline' => true,
@@ -495,7 +495,7 @@ class UploadSetting
 				'label'             => trans('admin.img_resize_width_label'),
 				'type'              => 'number',
 				'hint'              => trans('admin.img_resize_width_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -504,7 +504,7 @@ class UploadSetting
 				'label'             => trans('admin.img_resize_height_label'),
 				'type'              => 'number',
 				'hint'              => trans('admin.img_resize_height_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -513,7 +513,7 @@ class UploadSetting
 				'label'             => trans('admin.img_resize_ratio_label'),
 				'type'              => 'checkbox_switch',
 				'hint'              => trans('admin.img_resize_ratio_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -522,7 +522,7 @@ class UploadSetting
 				'label'             => trans('admin.img_resize_upsize_label'),
 				'type'              => 'checkbox_switch',
 				'hint'              => trans('admin.img_resize_upsize_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -532,7 +532,7 @@ class UploadSetting
 				'type'              => 'select2_from_array',
 				'options'           => self::resizePositions(),
 				'hint'              => trans('admin.img_resize_type_position_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -541,7 +541,7 @@ class UploadSetting
 				'label'             => trans('admin.img_resize_type_relative_label'),
 				'type'              => 'checkbox_switch',
 				'hint'              => trans('admin.img_resize_type_relative_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -553,7 +553,7 @@ class UploadSetting
 					'placeholder' => '#FFFFFF',
 				],
 				'hint'              => trans('admin.img_resize_type_bg_color_hint'),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -566,38 +566,38 @@ class UploadSetting
 				'value' => trans('admin.img_resize_cat_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_cat_width',
-				'label'             => trans('admin.img_resize_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_cat_width',
+				'label'   => trans('admin.img_resize_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_cat_height',
-				'label'             => trans('admin.img_resize_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_cat_height',
+				'label'   => trans('admin.img_resize_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_cat_ratio',
-				'label'             => trans('admin.img_resize_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_cat_ratio',
+				'label'   => trans('admin.img_resize_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_cat_upsize',
-				'label'             => trans('admin.img_resize_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_cat_upsize',
+				'label'   => trans('admin.img_resize_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -612,81 +612,81 @@ class UploadSetting
 				'value' => trans('admin.img_resize_small_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_picture_sm_method',
-				'label'             => trans('admin.img_resize_type_resize_method_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizeMethods(),
-				'hint'              => trans('admin.img_resize_type_resize_method_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_method',
+				'label'   => trans('admin.img_resize_type_resize_method_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizeMethods(),
+				'hint'    => trans('admin.img_resize_type_resize_method_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'img_resize_picture_sm_width',
-				'label'             => trans('admin.img_resize_type_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_width',
+				'label'   => trans('admin.img_resize_type_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_height',
-				'label'             => trans('admin.img_resize_type_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_height',
+				'label'   => trans('admin.img_resize_type_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_ratio',
-				'label'             => trans('admin.img_resize_type_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_ratio',
+				'label'   => trans('admin.img_resize_type_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_upsize',
-				'label'             => trans('admin.img_resize_type_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_upsize',
+				'label'   => trans('admin.img_resize_type_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_position',
-				'label'             => trans('admin.img_resize_type_position_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizePositions(),
-				'hint'              => trans('admin.img_resize_type_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_position',
+				'label'   => trans('admin.img_resize_type_position_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizePositions(),
+				'hint'    => trans('admin.img_resize_type_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_relative',
-				'label'             => trans('admin.img_resize_type_relative_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_relative_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_sm_relative',
+				'label'   => trans('admin.img_resize_type_relative_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_relative_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_sm_bgColor',
-				'label'             => trans('admin.img_resize_type_bgColor_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'img_resize_picture_sm_bgColor',
+				'label'      => trans('admin.img_resize_type_bgColor_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'hint'              => trans('admin.img_resize_type_bg_color_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.img_resize_type_bg_color_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -696,81 +696,81 @@ class UploadSetting
 				'value' => trans('admin.img_resize_medium_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_picture_md_method',
-				'label'             => trans('admin.img_resize_type_resize_method_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizeMethods(),
-				'hint'              => trans('admin.img_resize_type_resize_method_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_method',
+				'label'   => trans('admin.img_resize_type_resize_method_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizeMethods(),
+				'hint'    => trans('admin.img_resize_type_resize_method_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'img_resize_picture_md_width',
-				'label'             => trans('admin.img_resize_type_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_width',
+				'label'   => trans('admin.img_resize_type_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_height',
-				'label'             => trans('admin.img_resize_type_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_height',
+				'label'   => trans('admin.img_resize_type_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_ratio',
-				'label'             => trans('admin.img_resize_type_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_ratio',
+				'label'   => trans('admin.img_resize_type_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_upsize',
-				'label'             => trans('admin.img_resize_type_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_upsize',
+				'label'   => trans('admin.img_resize_type_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_position',
-				'label'             => trans('admin.img_resize_type_position_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizePositions(),
-				'hint'              => trans('admin.img_resize_type_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_position',
+				'label'   => trans('admin.img_resize_type_position_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizePositions(),
+				'hint'    => trans('admin.img_resize_type_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_relative',
-				'label'             => trans('admin.img_resize_type_relative_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_relative_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_md_relative',
+				'label'   => trans('admin.img_resize_type_relative_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_relative_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_md_bgColor',
-				'label'             => trans('admin.img_resize_type_bgColor_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'img_resize_picture_md_bgColor',
+				'label'      => trans('admin.img_resize_type_bgColor_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'hint'              => trans('admin.img_resize_type_bg_color_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.img_resize_type_bg_color_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-4',
 				],
 			],
@@ -780,81 +780,81 @@ class UploadSetting
 				'value' => trans('admin.img_resize_large_sep_value'),
 			],
 			[
-				'name'              => 'img_resize_picture_lg_method',
-				'label'             => trans('admin.img_resize_type_resize_method_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizeMethods(),
-				'hint'              => trans('admin.img_resize_type_resize_method_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_method',
+				'label'   => trans('admin.img_resize_type_resize_method_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizeMethods(),
+				'hint'    => trans('admin.img_resize_type_resize_method_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'img_resize_picture_lg_width',
-				'label'             => trans('admin.img_resize_type_width_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_width_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_width',
+				'label'   => trans('admin.img_resize_type_width_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_width_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_height',
-				'label'             => trans('admin.img_resize_type_height_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.img_resize_type_height_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_height',
+				'label'   => trans('admin.img_resize_type_height_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.img_resize_type_height_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_ratio',
-				'label'             => trans('admin.img_resize_type_ratio_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_ratio_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_ratio',
+				'label'   => trans('admin.img_resize_type_ratio_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_ratio_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_upsize',
-				'label'             => trans('admin.img_resize_type_upsize_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_upsize_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_upsize',
+				'label'   => trans('admin.img_resize_type_upsize_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_upsize_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_position',
-				'label'             => trans('admin.img_resize_type_position_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::resizePositions(),
-				'hint'              => trans('admin.img_resize_type_position_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_position',
+				'label'   => trans('admin.img_resize_type_position_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::resizePositions(),
+				'hint'    => trans('admin.img_resize_type_position_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_relative',
-				'label'             => trans('admin.img_resize_type_relative_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.img_resize_type_relative_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'img_resize_picture_lg_relative',
+				'label'   => trans('admin.img_resize_type_relative_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.img_resize_type_relative_hint'),
+				'wrapper' => [
 					'class' => 'col-md-4',
 				],
 			],
 			[
-				'name'              => 'img_resize_picture_lg_bgColor',
-				'label'             => trans('admin.img_resize_type_bgColor_label'),
-				'type'              => 'color_picker',
-				'attributes'        => [
+				'name'       => 'img_resize_picture_lg_bgColor',
+				'label'      => trans('admin.img_resize_type_bgColor_label'),
+				'type'       => 'color_picker',
+				'attributes' => [
 					'placeholder' => '#FFFFFF',
 				],
-				'hint'              => trans('admin.img_resize_type_bg_color_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.img_resize_type_bg_color_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-4',
 				],
 			],

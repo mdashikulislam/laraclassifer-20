@@ -60,10 +60,10 @@ class CategoriesSection
 	{
 		$fields = [
 			[
-				'name'              => 'cat_display_type',
-				'label'             => trans('admin.cat_display_type_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'        => 'cat_display_type',
+				'label'       => trans('admin.cat_display_type_label'),
+				'type'        => 'select2_from_array',
+				'options'     => [
 					'c_normal_list'    => trans('admin.cat_display_type_op_1'),
 					'c_border_list'    => trans('admin.cat_display_type_op_2'),
 					'c_bigIcon_list'   => trans('admin.cat_display_type_op_3'),
@@ -71,44 +71,44 @@ class CategoriesSection
 					'cc_normal_list'   => trans('admin.cat_display_type_op_5'),
 					'cc_normal_list_s' => trans('admin.cat_display_type_op_6'),
 				],
-				'allows_null'       => false,
-				'hint'              => trans('admin.cat_display_type_hint', [
+				'allows_null' => false,
+				'hint'        => trans('admin.cat_display_type_hint', [
 					'type_1' => trans('admin.cat_display_type_op_5'),
 					'type_2' => trans('admin.cat_display_type_op_6'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper'     => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'max_items',
-				'label'             => trans('admin.max_categories_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.max_categories_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'max_items',
+				'label'   => trans('admin.max_categories_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.max_categories_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 normal-type',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'max_sub_cats',
-				'label'             => trans('admin.Max subcategories displayed by default'),
-				'type'              => 'number',
-				'hint'              => trans('admin.max_sub_cats_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'max_sub_cats',
+				'label'   => trans('admin.Max subcategories displayed by default'),
+				'type'    => 'number',
+				'hint'    => trans('admin.max_sub_cats_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 nested-type',
 				],
 			],
 			[
-				'name'              => 'cache_expiration',
-				'label'             => trans('admin.Cache Expiration Time for this section'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'cache_expiration',
+				'label'      => trans('admin.Cache Expiration Time for this section'),
+				'type'       => 'number',
+				'attributes' => [
 					'placeholder' => '0',
 				],
-				'hint'              => trans('admin.section_cache_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.section_cache_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],

@@ -25,6 +25,7 @@ if (file_exists($iniConfigFile)) {
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 class DbImportController extends BaseController
 {
@@ -51,7 +52,7 @@ class DbImportController extends BaseController
 		// Check if the database connection is ok
 		try {
 			$this->getPdoConnectionWithEnvCheck($databaseInfo);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			flash($e->getMessage())->error();
 			
 			return redirect()->to($previousStepUrl);
@@ -110,7 +111,7 @@ class DbImportController extends BaseController
 			// Import the required data
 			$this->submitDatabaseImport($siteInfo, $databaseInfo);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			flash($e->getMessage())->error();
 			
 			// Get the DB import step URL

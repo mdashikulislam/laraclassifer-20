@@ -51,33 +51,33 @@ class TextAreaSection
 				$bodyLabel = trans('admin.body_label') . ' (' . $language->name . ')';
 				
 				$txtFields[] = [
-					'name'              => 'title_' . $language->code,
-					'label'             => $titleLabel,
-					'type'              => 'text',
-					'attributes'        => [
+					'name'       => 'title_' . $language->code,
+					'label'      => $titleLabel,
+					'type'       => 'text',
+					'attributes' => [
 						'placeholder' => $titleLabel,
 					],
-					'wrapperAttributes' => [
+					'wrapper'    => [
 						'class' => 'col-md-12',
 					],
-					'tab' => $language->name,
+					'tab'        => $language->name,
 				];
 				$txtFields[] = [
-					'name'              => 'body_' . $language->code,
-					'label'             => $bodyLabel,
-					'type'              => ($wysiwygEditor != 'none' && file_exists(resource_path($wysiwygEditorViewPath)))
+					'name'       => 'body_' . $language->code,
+					'label'      => $bodyLabel,
+					'type'       => ($wysiwygEditor != 'none' && file_exists(resource_path($wysiwygEditorViewPath)))
 						? $wysiwygEditor
 						: 'textarea',
-					'attributes'        => [
+					'attributes' => [
 						'placeholder' => $bodyLabel,
 						'id'          => 'description',
 						'rows'        => 5,
 					],
-					'hint'              => trans('admin.body_hint') . ' (' . $language->name . ')',
-					'wrapperAttributes' => [
+					'hint'       => trans('admin.body_hint') . ' (' . $language->name . ')',
+					'wrapper'    => [
 						'class' => 'col-md-12',
 					],
-					'tab' => $language->name,
+					'tab'        => $language->name,
 				];
 				
 				$txtFields[] = [

@@ -16,14 +16,14 @@
 
 namespace App\Services\Post;
 
-use App\Http\Resources\PostResource;
-use App\Services\Post\List\SearchTrait;
-use App\Services\Post\List\SimilarTrait;
 use App\Http\Resources\EntityCollection;
+use App\Http\Resources\PostResource;
 use App\Jobs\GeneratePostCollectionThumbnails;
 use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
+use App\Services\Post\List\SearchTrait;
+use App\Services\Post\List\SimilarTrait;
 use Illuminate\Http\JsonResponse;
 
 trait ListTrait

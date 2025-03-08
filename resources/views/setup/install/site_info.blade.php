@@ -27,19 +27,6 @@
 	$formActionUrl ??= request()->fullUrl();
 	$nextStepUrl ??= url('/');
 	$nextStepLabel ??= trans('messages.next');
-    function generateRandomCode() {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-        $code = '';
-        for ($i = 0; $i < 36; $i++) {
-            if (in_array($i, [8, 13, 18, 23])) {
-                $code .= '-';
-            } else {
-                $code .= $characters[rand(0, strlen($characters) - 1)];
-            }
-        }
-        return $code;
-    }
-    $randomCode = generateRandomCode();
 @endphp
 @section('content')
 	<form method="POST" name="siteInfoForm" action="{{ $formActionUrl }}" novalidate>
@@ -86,7 +73,10 @@
 					'label'    => trans('messages.settings_app_purchase_code'),
 					'type'     => 'text',
 					'name'     => 'settings[app][purchase_code]',
-					'value'    => $randomCode,
+					'value'    => data_get($siteInfo, 'settings.app.purchase_code'),
+					'hint'     => trans('admin.find_my_purchase_code', [
+						'purchaseCodeFindingUrl' => config('larapen.core.purchaseCodeFindingUrl'),
+					]),
 					'required' => true,
 				])
 			</div>

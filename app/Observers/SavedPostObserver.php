@@ -17,6 +17,7 @@
 namespace App\Observers;
 
 use App\Models\SavedPost;
+use Throwable;
 
 class SavedPostObserver
 {
@@ -54,7 +55,7 @@ class SavedPostObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

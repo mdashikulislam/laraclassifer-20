@@ -22,6 +22,7 @@ use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 trait Photo
 {
@@ -65,8 +66,8 @@ trait Photo
 			'upsize'   => config('larapen.media.resize.namedOptions.avatar.upsize', '0'),
 		];
 		try {
-			$user->photo_path = Upload::image($param['destPath'], $file, $param);
-		} catch (\Throwable $e) {
+			$user->photo_path = Upload::image($file, $param['destPath'], $param);
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		$user->save();
@@ -93,7 +94,7 @@ trait Photo
 					$fileSize = $this->disk->exists($user->photo_path)
 						? (int)$this->disk->size($user->photo_path)
 						: 0;
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$fileSize = 0;
 				}
 				

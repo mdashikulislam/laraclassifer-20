@@ -19,6 +19,7 @@ namespace App\Helpers\Common\DBTool;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class DBIndex
 {
@@ -143,7 +144,7 @@ class DBIndex
 					$table->dropIndex($indexName);
 				}
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Drop custom naming index with '->dropUnique($indexName)'
@@ -155,7 +156,7 @@ class DBIndex
 					$table->dropIndex($indexName);
 				}
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// If the custom naming index is still not drop, use raw SQL to drop it

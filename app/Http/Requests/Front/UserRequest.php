@@ -73,6 +73,19 @@ class UserRequest extends Request
 		// phone
 		$input = $this->preparePhoneForValidation($this, $input);
 		
+		// Set/Capture IP address
+		if (doesRequestIsFromWebClient()) {
+			// create_from_ip
+			if (in_array($this->method(), ['POST', 'CREATE'])) {
+				$input['create_from_ip'] = request()->ip();
+			}
+			
+			// latest_update_ip
+			if (in_array($this->method(), ['PUT', 'PATCH', 'UPDATE'])) {
+				$input['latest_update_ip'] = request()->ip();
+			}
+		}
+		
 		request()->merge($input); // Required!
 		$this->merge($input);
 	}

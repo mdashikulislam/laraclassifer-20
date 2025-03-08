@@ -18,6 +18,7 @@ namespace App\Observers;
 
 use App\Models\Permission;
 use App\Models\Role;
+use Throwable;
 
 class PermissionObserver
 {
@@ -100,7 +101,7 @@ class PermissionObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

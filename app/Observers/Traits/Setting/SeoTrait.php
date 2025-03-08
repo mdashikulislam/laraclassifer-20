@@ -18,6 +18,7 @@ namespace App\Observers\Traits\Setting;
 
 use App\Helpers\Common\PhpArrayFile;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 trait SeoTrait
 {
@@ -181,7 +182,7 @@ trait SeoTrait
 			// Create or Update the "config/routes.php" file
 			$filePath = config_path('routes.php');
 			PhpArrayFile::writeFile($filePath, $origRoutes);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			notification($e->getMessage(), 'error');
 			$doneSuccessfully = false;
 		}

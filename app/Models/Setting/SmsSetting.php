@@ -141,38 +141,38 @@ class SmsSetting
 		
 		$fields = [
 			[
-				'name'              => 'enable_phone_as_auth_field',
-				'label'             => trans('admin.enable_phone_as_auth_field_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.card_light_inverse', [
+				'name'    => 'enable_phone_as_auth_field',
+				'label'   => trans('admin.enable_phone_as_auth_field_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.card_light_inverse', [
 					'content' => trans('admin.enable_phone_as_auth_field_hint', [
 						'phone_verification_label' => trans('admin.phone_verification_label'),
 					]),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6 mt-3',
 				],
 			],
 			[
-				'name'              => 'default_auth_field',
-				'label'             => trans('admin.default_auth_field_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'default_auth_field',
+				'label'   => trans('admin.default_auth_field_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'email' => t('email_address'),
 					'phone' => t('phone_number'),
 				],
-				'default'           => 'email',
-				'hint'              => trans('admin.card_light_inverse', [
+				'default' => 'email',
+				'hint'    => trans('admin.card_light_inverse', [
 					'content' => trans('admin.default_auth_field_hint', [
 						'enable_phone_as_auth_field_label' => trans('admin.enable_phone_as_auth_field_label'),
 						'email'                            => t('email_address'),
 						'phone'                            => t('phone_number'),
 					]),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6 auth-field-el',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 		];
 		
@@ -190,37 +190,37 @@ class SmsSetting
 		];
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'phone_of_countries',
-				'label'             => trans('admin.phone_of_countries_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $phoneOfCountriesOptions,
-				'hint'              => trans('admin.card_light_inverse', [
+				'name'    => 'phone_of_countries',
+				'label'   => trans('admin.phone_of_countries_label'),
+				'type'    => 'select2_from_array',
+				'options' => $phoneOfCountriesOptions,
+				'hint'    => trans('admin.card_light_inverse', [
 					'content' => trans('admin.phone_of_countries_hint', $phoneOfCountriesOptions),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'phone_validator',
-				'label'             => trans('admin.phone_validator_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $phoneValidatorOptions,
-				'hint'              => trans('admin.card_light_inverse', [
+				'name'    => 'phone_validator',
+				'label'   => trans('admin.phone_validator_label'),
+				'type'    => 'select2_from_array',
+				'options' => $phoneValidatorOptions,
+				'hint'    => trans('admin.card_light_inverse', [
 					'content' => trans('admin.phone_validator_hint', array_merge($phoneValidatorOptions, [
 						'enable_phone_as_auth_field_label' => trans('admin.enable_phone_as_auth_field_label'),
 					])),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			
 			[
-				'name'              => 'default_auth_field_sep',
-				'type'              => 'custom_html',
-				'value'             => '<hr style="border: 1px dashed #EFEFEF;" class="my-3">',
-				'wrapperAttributes' => [
+				'name'    => 'default_auth_field_sep',
+				'type'    => 'custom_html',
+				'value'   => '<hr style="border: 1px dashed #EFEFEF;" class="my-3">',
+				'wrapper' => [
 					'class' => 'col-12',
 				],
 			],
@@ -229,14 +229,14 @@ class SmsSetting
 		// driver
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'driver',
-				'label'             => trans('admin.SMS Driver'),
-				'type'              => 'select2_from_array',
-				'options'           => $smsDrivers,
-				'wrapperAttributes' => [
+				'name'    => 'driver',
+				'label'   => trans('admin.SMS Driver'),
+				'type'    => 'select2_from_array',
+				'options' => $smsDrivers,
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 		]);
 		
@@ -244,54 +244,54 @@ class SmsSetting
 		if (array_key_exists('vonage', $smsDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'driver_vonage_title',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.driver_vonage_title'),
-					'wrapperAttributes' => [
+					'name'    => 'driver_vonage_title',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.driver_vonage_title'),
+					'wrapper' => [
 						'class' => 'col-md-12 vonage',
 					],
 				],
 				[
-					'name'              => 'driver_vonage_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.driver_vonage_info'),
-					'wrapperAttributes' => [
+					'name'    => 'driver_vonage_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.driver_vonage_info'),
+					'wrapper' => [
 						'class' => 'col-md-12 vonage',
 					],
 				],
 				[
-					'name'              => 'vonage_key',
-					'label'             => trans('admin.Vonage Key'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'vonage_key',
+					'label'    => trans('admin.Vonage Key'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 vonage',
 					],
 				],
 				[
-					'name'              => 'vonage_secret',
-					'label'             => trans('admin.Vonage Secret'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'vonage_secret',
+					'label'    => trans('admin.Vonage Secret'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 vonage',
 					],
 				],
 				[
-					'name'              => 'vonage_application_id',
-					'label'             => trans('admin.vonage_application_id'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'vonage_application_id',
+					'label'    => trans('admin.vonage_application_id'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 vonage',
 					],
 				],
 				[
-					'name'              => 'vonage_from',
-					'label'             => trans('admin.Vonage From'),
-					'type'              => 'text',
-					'required'          => true,
-					'wrapperAttributes' => [
+					'name'     => 'vonage_from',
+					'label'    => trans('admin.Vonage From'),
+					'type'     => 'text',
+					'required' => true,
+					'wrapper'  => [
 						'class' => 'col-md-6 vonage',
 					],
 				],
@@ -302,96 +302,96 @@ class SmsSetting
 		if (array_key_exists('twilio', $smsDrivers)) {
 			$fields = array_merge($fields, [
 				[
-					'name'              => 'driver_twilio_title',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.driver_twilio_title'),
-					'wrapperAttributes' => [
+					'name'    => 'driver_twilio_title',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.driver_twilio_title'),
+					'wrapper' => [
 						'class' => 'col-md-12 twilio',
 					],
 				],
 				[
-					'name'              => 'driver_twilio_info',
-					'type'              => 'custom_html',
-					'value'             => trans('admin.driver_twilio_info'),
-					'wrapperAttributes' => [
+					'name'    => 'driver_twilio_info',
+					'type'    => 'custom_html',
+					'value'   => trans('admin.driver_twilio_info'),
+					'wrapper' => [
 						'class' => 'col-md-12 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_username',
-					'label'             => trans('admin.twilio_username_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_username_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_username',
+					'label'    => trans('admin.twilio_username_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_username_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_password',
-					'label'             => trans('admin.twilio_password_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_password_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_password',
+					'label'    => trans('admin.twilio_password_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_password_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_account_sid',
-					'label'             => trans('admin.twilio_account_sid_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_account_sid_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_account_sid',
+					'label'    => trans('admin.twilio_account_sid_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_account_sid_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_auth_token',
-					'label'             => trans('admin.twilio_auth_token_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_auth_token_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_auth_token',
+					'label'    => trans('admin.twilio_auth_token_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_auth_token_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_from',
-					'label'             => trans('admin.twilio_from_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_from_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_from',
+					'label'    => trans('admin.twilio_from_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_from_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_alpha_sender',
-					'label'             => trans('admin.twilio_alpha_sender_label'),
-					'type'              => 'text',
-					'hint'              => trans('admin.twilio_alpha_sender_hint'),
-					'wrapperAttributes' => [
+					'name'    => 'twilio_alpha_sender',
+					'label'   => trans('admin.twilio_alpha_sender_label'),
+					'type'    => 'text',
+					'hint'    => trans('admin.twilio_alpha_sender_hint'),
+					'wrapper' => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_sms_service_sid',
-					'label'             => trans('admin.twilio_sms_service_sid_label'),
-					'type'              => 'text',
-					'required'          => true,
-					'hint'              => trans('admin.twilio_sms_service_sid_hint'),
-					'wrapperAttributes' => [
+					'name'     => 'twilio_sms_service_sid',
+					'label'    => trans('admin.twilio_sms_service_sid_label'),
+					'type'     => 'text',
+					'required' => true,
+					'hint'     => trans('admin.twilio_sms_service_sid_hint'),
+					'wrapper'  => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
 				[
-					'name'              => 'twilio_debug_to',
-					'label'             => trans('admin.twilio_debug_to_label'),
-					'type'              => 'text',
-					'hint'              => trans('admin.twilio_debug_to_hint'),
-					'wrapperAttributes' => [
+					'name'    => 'twilio_debug_to',
+					'label'   => trans('admin.twilio_debug_to_label'),
+					'type'    => 'text',
+					'hint'    => trans('admin.twilio_debug_to_hint'),
+					'wrapper' => [
 						'class' => 'col-md-6 twilio',
 					],
 				],
@@ -412,22 +412,22 @@ class SmsSetting
 				]),
 			],
 			[
-				'name'              => 'driver_test',
-				'label'             => trans('admin.driver_test_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.sms_driver_test_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'driver_test',
+				'label'   => trans('admin.driver_test_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.sms_driver_test_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 mt-2',
 				],
 			],
 			[
-				'name'              => 'sms_to',
-				'label'             => trans('admin.sms_to_label'),
-				'type'              => 'tel',
-				'default'           => config('settings.app.phone_number'),
-				'required'          => true,
-				'hint'              => trans('admin.sms_to_hint', ['option' => trans('admin.driver_test_label')]),
-				'wrapperAttributes' => [
+				'name'     => 'sms_to',
+				'label'    => trans('admin.sms_to_label'),
+				'type'     => 'tel',
+				'default'  => config('settings.app.phone_number'),
+				'required' => true,
+				'hint'     => trans('admin.sms_to_hint', ['option' => trans('admin.driver_test_label')]),
+				'wrapper'  => [
 					'class' => 'col-md-6 driver-test',
 				],
 			],
@@ -441,7 +441,7 @@ class SmsSetting
 					'value' => trans('admin.card_light_warning', [
 						'content' => trans('admin.queue_notifications', ['queueOptionUrl' => admin_url('settings/find/optimization')]),
 					]),
-				]
+				],
 			]);
 		}
 		

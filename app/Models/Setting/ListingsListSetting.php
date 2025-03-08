@@ -130,79 +130,79 @@ class ListingsListSetting
 				'value' => trans('admin.list_html_displaying'),
 			],
 			[
-				'name'              => 'display_browse_listings_link',
-				'label'             => trans('admin.browse_listings_link_in_header_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.browse_listings_link_in_header_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'display_browse_listings_link',
+				'label'   => trans('admin.browse_listings_link_in_header_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.browse_listings_link_in_header_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 mb-4',
 				],
 			],
 			[
-				'name'              => 'display_states_search_tip',
-				'label'             => trans('admin.display_states_search_tip_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.display_states_search_tip_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'display_states_search_tip',
+				'label'   => trans('admin.display_states_search_tip_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.display_states_search_tip_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 mb-4',
 				],
 			],
 			[
-				'name'              => 'display_mode',
-				'label'             => trans('admin.Listing Page Display Mode'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(getDisplayModeList())
+				'name'    => 'display_mode',
+				'label'   => trans('admin.Listing Page Display Mode'),
+				'type'    => 'select2_from_array',
+				'options' => collect(getDisplayModeList())
 					->flip()
 					->map(fn ($item) => ucfirst($item))
 					->sort()
 					->toArray(),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'grid_view_cols',
-				'label'             => trans('admin.Grid View Columns'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'grid_view_cols',
+				'label'   => trans('admin.Grid View Columns'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					4 => '4',
 					3 => '3',
 					2 => '2',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6 make-grid',
 				],
 			],
 			[
-				'name'              => 'fake_locations_results',
-				'label'             => trans('admin.fake_locations_results_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'fake_locations_results',
+				'label'   => trans('admin.fake_locations_results_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					0 => trans('admin.fake_locations_results_op_1'),
 					1 => trans('admin.fake_locations_results_op_2'),
 					2 => trans('admin.fake_locations_results_op_3'),
 				],
-				'hint'              => trans('admin.fake_locations_results_hint'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.fake_locations_results_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'show_cats_in_top',
-				'label'             => trans('admin.show_cats_in_top_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.show_cats_in_top_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'show_cats_in_top',
+				'label'   => trans('admin.show_cats_in_top_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.show_cats_in_top_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'show_category_icon',
-				'label'             => trans('admin.show_category_icon_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'show_category_icon',
+				'label'   => trans('admin.show_category_icon_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					1 => trans('admin.show_category_icon_op_1'),
 					2 => trans('admin.show_category_icon_op_2'),
 					3 => trans('admin.show_category_icon_op_3'),
@@ -212,69 +212,69 @@ class ListingsListSetting
 					7 => trans('admin.show_category_icon_op_7'),
 					8 => trans('admin.show_category_icon_op_8'),
 				],
-				'hint'              => trans('admin.show_category_icon_hint'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.show_category_icon_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'show_listings_tags',
-				'label'             => trans('admin.show_listings_tags_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.show_listings_tags_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'show_listings_tags',
+				'label'   => trans('admin.show_listings_tags_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.show_listings_tags_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'left_sidebar',
-				'label'             => trans('admin.Listing Page Left Sidebar'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'left_sidebar',
+				'label'   => trans('admin.Listing Page Left Sidebar'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			
 			[
-				'name'              => 'min_price',
-				'label'             => trans('admin.min_price_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'min_price',
+				'label'      => trans('admin.min_price_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 0,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.min_price_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.min_price_hint'),
+				'wrapper'    => [
 					'class' => 'col-lg-4 col-md-6',
 				],
 			],
 			[
-				'name'              => 'max_price',
-				'label'             => trans('admin.max_price_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'max_price',
+				'label'      => trans('admin.max_price_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.max_price_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.max_price_hint'),
+				'wrapper'    => [
 					'class' => 'col-lg-4 col-md-6',
 				],
 			],
 			[
-				'name'              => 'price_slider_step',
-				'label'             => trans('admin.price_slider_step_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'price_slider_step',
+				'label'      => trans('admin.price_slider_step_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.price_slider_step_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.price_slider_step_hint'),
+				'wrapper'    => [
 					'class' => 'col-lg-4 col-md-6',
 				],
 			],
@@ -285,24 +285,24 @@ class ListingsListSetting
 				'value' => trans('admin.count_listings_title'),
 			],
 			[
-				'name'              => 'count_categories_listings',
-				'label'             => trans('admin.count_categories_listings_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.count_categories_listings_hint', [
-					'extendedSearches' => trans('admin.cities_extended_searches_label')
+				'name'    => 'count_categories_listings',
+				'label'   => trans('admin.count_categories_listings_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.count_categories_listings_hint', [
+					'extendedSearches' => trans('admin.cities_extended_searches_label'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'count_cities_listings',
-				'label'             => trans('admin.count_cities_listings_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.count_cities_listings_hint', [
-					'extendedSearches' => trans('admin.cities_extended_searches_label')
+				'name'    => 'count_cities_listings',
+				'label'   => trans('admin.count_cities_listings_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.count_cities_listings_hint', [
+					'extendedSearches' => trans('admin.cities_extended_searches_label'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -313,32 +313,32 @@ class ListingsListSetting
 				'value' => trans('admin.dates_title'),
 			],
 			[
-				'name'              => 'hide_date',
-				'label'             => trans('admin.hide_date_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.listing_hide_date_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'hide_date',
+				'label'   => trans('admin.hide_date_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.listing_hide_date_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'  => 'php_specific_date_format',
-				'type'  => 'custom_html',
-				'value' => trans('admin.php_specific_date_format_info'),
-				'wrapperAttributes' => [
+				'name'    => 'php_specific_date_format',
+				'type'    => 'custom_html',
+				'value'   => trans('admin.php_specific_date_format_info'),
+				'wrapper' => [
 					'class' => 'col-md-12 date-field',
 				],
 			],
 			[
-				'name'              => 'date_from_now',
-				'label'             => trans('admin.date_from_now_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.listing_date_from_now_hint', [
+				'name'    => 'date_from_now',
+				'label'   => trans('admin.date_from_now_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.listing_date_from_now_hint', [
 					'app'          => trans('settings.app'),
 					'appUrl'       => admin_url('settings/find/app'),
 					'languagesUrl' => admin_url('languages'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-12 date-field',
 				],
 			],
@@ -354,31 +354,31 @@ class ListingsListSetting
 				'value' => trans('admin.listing_info_description'),
 			],
 			[
-				'name'              => 'hide_post_type',
-				'label'             => trans('admin.hide_post_type_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.hide_post_type_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'hide_post_type',
+				'label'   => trans('admin.hide_post_type_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.hide_post_type_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'hide_category',
-				'label'             => trans('admin.hide_category_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.hide_category_hint')
+				'name'    => 'hide_category',
+				'label'   => trans('admin.hide_category_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.hide_category_hint')
 					. '<br>'
 					. trans('admin.hide_category_hint_note', ['defaultValue' => t('Contact us')]),
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'hide_location',
-				'label'             => trans('admin.hide_location_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.hide_location_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'hide_location',
+				'label'   => trans('admin.hide_location_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.hide_location_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -389,20 +389,20 @@ class ListingsListSetting
 				'value' => trans('admin.search_title'),
 			],
 			[
-				'name'              => 'enable_cities_autocompletion',
-				'label'             => trans('admin.enable_cities_autocompletion_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.enable_cities_autocompletion_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'enable_cities_autocompletion',
+				'label'   => trans('admin.enable_cities_autocompletion_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.enable_cities_autocompletion_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			[
-				'name'              => 'enable_diacritics',
-				'label'             => trans('admin.enable_diacritics_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.enable_diacritics_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'enable_diacritics',
+				'label'   => trans('admin.enable_diacritics_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.enable_diacritics_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -413,29 +413,29 @@ class ListingsListSetting
 				'value' => trans('admin.extended_searches_title'),
 			],
 			[
-				'name'              => 'cities_extended_searches',
-				'label'             => trans('admin.cities_extended_searches_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.cities_extended_searches_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'cities_extended_searches',
+				'label'   => trans('admin.cities_extended_searches_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.cities_extended_searches_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			[
-				'name'              => 'distance_calculation_formula',
-				'label'             => trans('admin.distance_calculation_formula_label'),
-				'type'              => 'select2_from_array',
-				'options'           => DistanceHelper::getDistanceCalculationFormula(),
-				'hint'              => trans('admin.distance_calculation_formula_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'distance_calculation_formula',
+				'label'   => trans('admin.distance_calculation_formula_label'),
+				'type'    => 'select2_from_array',
+				'options' => DistanceHelper::getDistanceCalculationFormula(),
+				'hint'    => trans('admin.distance_calculation_formula_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 extended-searches',
 				],
 			],
 			[
-				'name'              => 'search_distance_default',
-				'label'             => trans('admin.Default Search Distance'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'search_distance_default',
+				'label'   => trans('admin.Default Search Distance'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					200 => '200',
 					100 => '100',
 					50  => '50',
@@ -444,24 +444,24 @@ class ListingsListSetting
 					10  => '10',
 					0   => '0',
 				],
-				'hint'              => trans('admin.Default search radius distance'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.Default search radius distance'),
+				'wrapper' => [
 					'class' => 'col-md-6 extended-searches',
 				],
 			],
 			[
-				'name'              => 'separator_3',
-				'type'              => 'custom_html',
-				'value'             => '<div style="clear: both;"></div>',
-				'wrapperAttributes' => [
+				'name'    => 'separator_3',
+				'type'    => 'custom_html',
+				'value'   => '<div style="clear: both;"></div>',
+				'wrapper' => [
 					'class' => 'col-md-12 extended-searches',
 				],
 			],
 			[
-				'name'              => 'search_distance_max',
-				'label'             => trans('admin.Max Search Distance'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'search_distance_max',
+				'label'   => trans('admin.Max Search Distance'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					1000 => '1000',
 					900  => '900',
 					800  => '800',
@@ -475,16 +475,16 @@ class ListingsListSetting
 					50   => '50',
 					0    => '0',
 				],
-				'hint'              => trans('admin.Max search radius distance'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.Max search radius distance'),
+				'wrapper' => [
 					'class' => 'col-md-6 extended-searches',
 				],
 			],
 			[
-				'name'              => 'search_distance_interval',
-				'label'             => trans('admin.Distance Interval'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'search_distance_interval',
+				'label'   => trans('admin.Distance Interval'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					250 => '250',
 					200 => '200',
 					100 => '100',
@@ -494,8 +494,8 @@ class ListingsListSetting
 					10  => '10',
 					5   => '5',
 				],
-				'hint'              => trans('admin.The interval between filter distances'),
-				'wrapperAttributes' => [
+				'hint'    => trans('admin.The interval between filter distances'),
+				'wrapper' => [
 					'class' => 'col-md-6 extended-searches',
 				],
 			],
@@ -516,29 +516,29 @@ class ListingsListSetting
 				'value' => trans('admin.premium_listings_in_searches_title'),
 			],
 			[
-				'name'              => 'premium_first',
-				'label'             => trans('admin.premium_first_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.premium_first_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'premium_first',
+				'label'   => trans('admin.premium_first_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.premium_first_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'premium_first_category',
-				'label'             => trans('admin.premium_first_category_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.premium_first_category_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'premium_first_category',
+				'label'   => trans('admin.premium_first_category_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.premium_first_category_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'premium_first_location',
-				'label'             => trans('admin.premium_first_location_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.premium_first_location_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'premium_first_location',
+				'label'   => trans('admin.premium_first_location_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.premium_first_location_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -548,11 +548,11 @@ class ListingsListSetting
 				'value' => trans('admin.free_listings_in_premium_title'),
 			],
 			[
-				'name'              => 'free_listings_in_premium',
-				'label'             => trans('admin.free_listings_in_premium_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.free_listings_in_premium_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'free_listings_in_premium',
+				'label'   => trans('admin.free_listings_in_premium_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.free_listings_in_premium_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],

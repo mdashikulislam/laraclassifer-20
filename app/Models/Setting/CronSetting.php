@@ -95,62 +95,62 @@ class CronSetting
 				'name'  => 'cron_listings_clear_info',
 				'type'  => 'custom_html',
 				'value' => trans('admin.cron_listings_clear_info_value', [
-					'cmd' => getRightPathsForCmd('php artisan listings:purge', schedule: '', withHint: false)
+					'cmd' => getRightPathsForCmd('php artisan listings:purge', schedule: '', withHint: false),
 				]),
 			],
 			[
-				'name'              => 'unactivated_listings_expiration',
-				'label'             => trans('admin.unactivated_listings_expiration_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'unactivated_listings_expiration',
+				'label'      => trans('admin.unactivated_listings_expiration_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.unactivated_listings_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.unactivated_listings_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'activated_listings_expiration',
-				'label'             => trans('admin.activated_listings_expiration_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'activated_listings_expiration',
+				'label'      => trans('admin.activated_listings_expiration_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.activated_listings_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.activated_listings_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'archived_listings_expiration',
-				'label'             => trans('admin.archived_listings_expiration_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'archived_listings_expiration',
+				'label'      => trans('admin.archived_listings_expiration_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.archived_listings_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.archived_listings_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'manually_archived_listings_expiration',
-				'label'             => trans('admin.manually_archived_listings_expiration_label'),
-				'type'              => 'number',
-				'required'          => true,
-				'attributes'        => [
+				'name'       => 'manually_archived_listings_expiration',
+				'label'      => trans('admin.manually_archived_listings_expiration_label'),
+				'type'       => 'number',
+				'required'   => true,
+				'attributes' => [
 					'min'  => 1,
 					'step' => 1,
 				],
-				'hint'              => trans('admin.manually_archived_listings_expiration_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.manually_archived_listings_expiration_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],

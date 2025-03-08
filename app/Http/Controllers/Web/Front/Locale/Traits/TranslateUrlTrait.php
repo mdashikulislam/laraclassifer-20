@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Front\Locale\Traits;
 
 use App\Http\Controllers\Web\Front\Traits\Sluggable\CategoryBySlug;
 use App\Http\Controllers\Web\Front\Traits\Sluggable\PageBySlug;
+use Throwable;
 
 trait TranslateUrlTrait
 {
@@ -80,7 +81,7 @@ trait TranslateUrlTrait
 			$translatedUrl = str_replace($search, $replace, $prevUriPattern);
 			
 			return urlQuery($translatedUrl)->setParameters($requestParams)->toString();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return $defaultUrl;

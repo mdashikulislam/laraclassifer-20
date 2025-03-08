@@ -18,6 +18,7 @@ namespace App\Helpers\Common\GeoIP\Drivers;
 
 use App\Helpers\Common\GeoIP\AbstractDriver;
 use GeoIp2\Database\Reader;
+use Throwable;
 
 class MaxmindDatabase extends AbstractDriver
 {
@@ -69,7 +70,7 @@ class MaxmindDatabase extends AbstractDriver
 			$maxmind = new Reader($database);
 			
 			return $maxmind->city($ip);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return 'Impossible to read the Maxmind database file.';

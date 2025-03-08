@@ -22,6 +22,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 trait DbTrait
 {
@@ -161,7 +162,7 @@ trait DbTrait
 					$adminUserFound = false;
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$adminUserFound = false;
 		}
 		

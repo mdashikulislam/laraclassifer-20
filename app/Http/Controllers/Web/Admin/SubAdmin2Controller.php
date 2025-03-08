@@ -16,20 +16,23 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Http\Controllers\Web\Admin\Traits\SubAdminTrait;
-use App\Models\Country;
-use App\Models\SubAdmin1;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use App\Http\Controllers\Web\Admin\Traits\SubAdminTrait;
 use App\Http\Requests\Admin\SubAdmin2Request as StoreRequest;
 use App\Http\Requests\Admin\SubAdmin2Request as UpdateRequest;
+use App\Models\Country;
+use App\Models\SubAdmin1;
 use App\Models\SubAdmin2;
+use Illuminate\Http\RedirectResponse;
 
 class SubAdmin2Controller extends PanelController
 {
 	use SubAdminTrait;
 	
 	public $parentEntity = null;
+	
 	public $countryCode = null;
+	
 	public $admin1Code = null;
 	
 	public function setup()
@@ -95,9 +98,9 @@ class SubAdmin2Controller extends PanelController
 		*/
 		// COLUMNS
 		$this->xPanel->addColumn([
-			'name'  => 'id',
-			'label' => '',
-			'type'  => 'checkbox',
+			'name'      => 'id',
+			'label'     => '',
+			'type'      => 'checkbox',
 			'orderable' => false,
 		]);
 		$this->xPanel->addColumn([
@@ -134,13 +137,13 @@ class SubAdmin2Controller extends PanelController
 			'default' => $this->autoIncrementCode($this->admin1Code . '.'),
 		], 'create');
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -151,13 +154,13 @@ class SubAdmin2Controller extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

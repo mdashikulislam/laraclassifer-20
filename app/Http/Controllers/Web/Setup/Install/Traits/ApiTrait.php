@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Install\Traits;
 
 use App\Helpers\Common\Cookie;
 use App\Helpers\Common\GeoIP;
+use Throwable;
 
 trait ApiTrait
 {
@@ -58,7 +59,7 @@ trait ApiTrait
 						break;
 					}
 				}
-			} catch (\Throwable $t) {
+			} catch (Throwable $t) {
 				return null;
 			}
 			

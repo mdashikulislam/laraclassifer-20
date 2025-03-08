@@ -18,6 +18,7 @@ namespace App\Helpers\Common\GeoIP\Drivers;
 
 use App\Helpers\Common\GeoIP\AbstractDriver;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class Ipstack extends AbstractDriver
 {
@@ -70,7 +71,7 @@ class Ipstack extends AbstractDriver
 			if ($response->successful()) {
 				return $response->json();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$response = $e;
 		}
 		

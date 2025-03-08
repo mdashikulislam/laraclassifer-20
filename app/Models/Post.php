@@ -381,6 +381,19 @@ class Post extends BaseModel implements Feedable
 		}
 	}
 	
+	/*
+	 * Display the unreviewed entries first
+	 * ->orderByUnreviewedFirst()
+	 */
+	public function scopeOrderByUnreviewedFirst(Builder $builder): Builder
+	{
+		if (config('settings.listing_form.listings_review_activation') == '1') {
+			return $builder->orderByRaw('CASE WHEN reviewed_at IS NULL THEN 0 ELSE 1 END ASC');
+		}
+		
+		return $builder;
+	}
+	
 	public function scopeWithCountryFix(Builder $builder): Builder
 	{
 		// Check the Domain Mapping Plugin

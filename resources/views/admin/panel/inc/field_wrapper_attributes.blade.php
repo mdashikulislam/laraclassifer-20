@@ -12,9 +12,9 @@
 	
 	// Get Attributes Output
 	$attr = '';
-	if (isset($field['wrapperAttributes'])) {
-		// wrapperAttributes option is defined
-		foreach ($field['wrapperAttributes'] as $attribute => $value) {
+	if (isset($field['wrapper'])) {
+		// wrapper option is defined
+		foreach ($field['wrapper'] as $attribute => $value) {
 			if (is_string($attribute)) {
 				if ($attribute == 'class') {
 					if (isset($field['type'])) {
@@ -35,8 +35,8 @@
 			}
 		}
 		
-		// class attribute is not set in wrapperAttributes
-		if (!isset($field['wrapperAttributes']['class'])) {
+		// class attribute is not set in wrapper
+		if (!isset($field['wrapper']['class'])) {
 			// Add the class attribute (with some default values) related to the 'type' of field
 			if (isset($field['type'])) {
 				$attr .= 'class="mb-3 col-md-12';
@@ -53,7 +53,7 @@
 		}
 		
 	} else {
-		// wrapperAttributes option is not defined
+		// wrapper option is not defined
 		// Add the class attribute (with some default values) related to the 'type' of field
 		if (isset($field['type'])) {
 			$attr .= 'class="mb-3 col-md-12';

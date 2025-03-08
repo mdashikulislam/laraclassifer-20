@@ -30,14 +30,14 @@ class HttpsProtocol
 	 */
 	public function handle(Request $request, Closure $next)
 	{
-//		if (config('larapen.core.forceHttps')) {
-//			// $request->setTrustedProxies([$request->getClientIp()], $request::HEADER_X_FORWARDED_ALL);
-//			if (!$request->secure()) {
-//				/* $request->server('HTTP_X_FORWARDED_PROTO') != 'https' */
-//				// Production is not currently secure
-//				// return redirect()->secure($request->getRequestUri());
-//			}
-//		}
+		if (config('larapen.core.forceHttps')) {
+			// $request->setTrustedProxies([$request->getClientIp()], $request::HEADER_X_FORWARDED_ALL);
+			if (!$request->secure()) {
+				/* $request->server('HTTP_X_FORWARDED_PROTO') != 'https' */
+				// Production is not currently secure
+				// return redirect()->secure($request->getRequestUri());
+			}
+		}
 		
 		return $next($request);
 	}

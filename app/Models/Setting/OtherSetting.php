@@ -75,11 +75,11 @@ class OtherSetting
 				'value' => trans('admin.account_option_title'),
 			],
 			[
-				'name'              => 'account_closure_enabled',
-				'label'             => trans('admin.account_closure_enabled_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.account_closure_enabled_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'account_closure_enabled',
+				'label'   => trans('admin.account_closure_enabled_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.account_closure_enabled_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -90,20 +90,20 @@ class OtherSetting
 				'value' => trans('admin.other_html_alerts_boxes'),
 			],
 			[
-				'name'              => 'cookie_consent_enabled',
-				'label'             => trans('admin.Cookie Consent Enabled'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.Enable Cookie Consent Alert to comply for EU law'),
-				'wrapperAttributes' => [
+				'name'    => 'cookie_consent_enabled',
+				'label'   => trans('admin.Cookie Consent Enabled'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.Enable Cookie Consent Alert to comply for EU law'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'show_tips_messages',
-				'label'             => trans('admin.Show Tips Notification Messages'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.show_tips_messages_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'show_tips_messages',
+				'label'   => trans('admin.Show Tips Notification Messages'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.show_tips_messages_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -113,10 +113,10 @@ class OtherSetting
 				'value' => trans('admin.other_html_google_maps'),
 			],
 			[
-				'name'              => 'googlemaps_key',
-				'label'             => trans('admin.Google Maps Key'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'googlemaps_key',
+				'label'   => trans('admin.Google Maps Key'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -126,16 +126,16 @@ class OtherSetting
 				'value' => trans('admin.other_html_messenger'),
 			],
 			[
-				'name'              => 'timer_new_messages_checking',
-				'label'             => trans('admin.Timer for New Messages Checking'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'timer_new_messages_checking',
+				'label'      => trans('admin.Timer for New Messages Checking'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'      => 0,
 					'step'     => 2000,
 					'required' => true,
 				],
-				'hint'              => trans('admin.timer_new_messages_checking_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.timer_new_messages_checking_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -145,12 +145,12 @@ class OtherSetting
 				'value' => trans('admin.textarea_editor_h3'),
 			],
 			[
-				'name'              => 'wysiwyg_editor',
-				'label'             => trans('admin.wysiwyg_editor_label'),
-				'type'              => 'select2_from_array',
-				'options'           => $wysiwygEditors,
-				'hint'              => trans('admin.wysiwyg_editor_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'wysiwyg_editor',
+				'label'   => trans('admin.wysiwyg_editor_label'),
+				'type'    => 'select2_from_array',
+				'options' => $wysiwygEditors,
+				'hint'    => trans('admin.wysiwyg_editor_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -160,20 +160,20 @@ class OtherSetting
 				'value' => trans('admin.other_html_mobile_app'),
 			],
 			[
-				'name'              => 'ios_app_url',
-				'label'             => trans('admin.App Store'),
-				'type'              => 'text',
-				'hint'              => trans('admin.Available on the App Store with the given URL'),
-				'wrapperAttributes' => [
+				'name'    => 'ios_app_url',
+				'label'   => trans('admin.App Store'),
+				'type'    => 'text',
+				'hint'    => trans('admin.Available on the App Store with the given URL'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'android_app_url',
-				'label'             => trans('admin.Google Play'),
-				'type'              => 'text',
-				'hint'              => trans('admin.Available on Google Play with the given URL'),
-				'wrapperAttributes' => [
+				'name'    => 'android_app_url',
+				'label'   => trans('admin.Google Play'),
+				'type'    => 'text',
+				'hint'    => trans('admin.Available on Google Play with the given URL'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -193,11 +193,11 @@ class OtherSetting
 				'value' => trans('admin.cookie_sep_value'),
 			],
 			[
-				'name'              => 'cookie_expiration',
-				'label'             => trans('admin.cookie_expiration_label'),
-				'type'              => 'number',
-				'hint'              => trans('admin.cookie_expiration_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'cookie_expiration',
+				'label'   => trans('admin.cookie_expiration_label'),
+				'type'    => 'number',
+				'hint'    => trans('admin.cookie_expiration_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],

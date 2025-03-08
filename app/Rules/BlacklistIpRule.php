@@ -16,8 +16,8 @@
 
 namespace App\Rules;
 
-use App\Models\Blacklist;
 use App\Helpers\Common\Ip;
+use App\Models\Blacklist;
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
 

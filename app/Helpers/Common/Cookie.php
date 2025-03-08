@@ -17,6 +17,7 @@
 namespace App\Helpers\Common;
 
 use Illuminate\Http\Response;
+use Throwable;
 
 class Cookie
 {
@@ -40,7 +41,7 @@ class Cookie
 		try {
 			$cookieObj = cookie()->make($name, $value, $expires, $path, $domain, $secure, $httpOnly, false, $sameSite);
 			cookie()->queue($cookieObj);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(400, $e->getMessage());
 		}
 	}

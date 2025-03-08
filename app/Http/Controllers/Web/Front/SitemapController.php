@@ -40,7 +40,7 @@ class SitemapController extends FrontController
 				->with([
 					'parent',
 					'children' => fn (Builder $query) => $query->orderBy('lft')->limit($categoriesLimit),
-					'children.parent'
+					'children.parent',
 				])
 				->orderBy('lft')
 				->take($categoriesLimit)

@@ -24,6 +24,7 @@ use App\Http\Requests\Admin\PictureRequest as UpdateRequest;
 use App\Http\Requests\Admin\Request;
 use App\Models\Picture;
 use App\Models\Post;
+use Illuminate\Http\RedirectResponse;
 
 class PictureController extends PanelController
 {
@@ -173,7 +174,7 @@ class PictureController extends PanelController
 	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -182,10 +183,10 @@ class PictureController extends PanelController
 	
 	/**
 	 * @param \App\Http\Requests\Admin\PictureRequest $request
-	 * @return mixed
+	 * @return \Illuminate\Http\RedirectResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -227,7 +228,7 @@ class PictureController extends PanelController
 			
 			if (!empty($file)) {
 				// Upload the image & get its local path
-				$filePath = Upload::image($destPath, $file, null, true);
+				$filePath = Upload::image($file, $destPath, null, true);
 				
 				// Add the mime type in the input (to save it in the database)
 				$mimeType = FileSys::getMimeType($file);

@@ -2348,5 +2348,7 @@ To enable diacritics-insensitive searches, one of collations like: <code>utf8mb4
 	'account_option_title' => '<h3>User account</h3>',
 	'account_closure_enabled_label' => 'Enabled account closure in the user area',
 	'account_closure_enabled_hint' => 'This option enables or restricts users from closing their accounts independently. If disabled, it\'s essential to outline the account closure procedure in the website\'s terms of use or general conditions.',
+	'activating_whatsapp_btn' => 'The Hide Phone Number option value has been set to Disabled, since the WhatsApp number will be shown.',
+	'activating_hide_phone_number' => 'The WhatsApp button feature has been disabled since users phone number need to be hidden.',
 
 ];

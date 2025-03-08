@@ -144,172 +144,172 @@ class PaginationSetting
 				'value' => trans('admin.per_page_title'),
 			],
 			[
-				'name'              => 'per_page',
-				'label'             => trans('admin.per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'per_page',
+				'label'      => trans('admin.per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline'    => true,
 			],
 			
 			[
-				'name'              => 'categories_per_page',
-				'label'             => trans('admin.categories_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'categories_per_page',
+				'label'      => trans('admin.categories_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'cities_per_page',
-				'label'             => trans('admin.cities_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'cities_per_page',
+				'label'      => trans('admin.cities_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'posts_per_page',
-				'label'             => trans('admin.posts_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'posts_per_page',
+				'label'      => trans('admin.posts_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage('posts'),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'payments_per_page',
-				'label'             => trans('admin.payments_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'payments_per_page',
+				'label'      => trans('admin.payments_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'saved_posts_per_page',
-				'label'             => trans('admin.saved_posts_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'saved_posts_per_page',
+				'label'      => trans('admin.saved_posts_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'saved_search_per_page',
-				'label'             => trans('admin.saved_search_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'saved_search_per_page',
+				'label'      => trans('admin.saved_search_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'subadmin1_per_page',
-				'label'             => trans('admin.subadmin1_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'subadmin1_per_page',
+				'label'      => trans('admin.subadmin1_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'subadmin2_per_page',
-				'label'             => trans('admin.subadmin2_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'subadmin2_per_page',
+				'label'      => trans('admin.subadmin2_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'subscriptions_per_page',
-				'label'             => trans('admin.subscriptions_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'subscriptions_per_page',
+				'label'      => trans('admin.subscriptions_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'threads_per_page',
-				'label'             => trans('admin.threads_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'threads_per_page',
+				'label'      => trans('admin.threads_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'threads_messages_per_page',
-				'label'             => trans('admin.threads_messages_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'threads_messages_per_page',
+				'label'      => trans('admin.threads_messages_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -317,16 +317,16 @@ class PaginationSetting
 		
 		if (plugin_exists('reviews')) {
 			$fields[] = [
-				'name'              => 'reviews_per_page',
-				'label'             => trans('reviews::messages.reviews_per_page_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'reviews_per_page',
+				'label'      => trans('reviews::messages.reviews_per_page_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_per_page_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_per_page_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			];
@@ -351,58 +351,58 @@ class PaginationSetting
 				]),
 			],
 			[
-				'name'              => 'similar_posts_limit',
-				'label'             => trans('admin.similar_posts_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'similar_posts_limit',
+				'label'      => trans('admin.similar_posts_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage('posts'),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.similar_posts_limit_hint', ['url' => $singleUrl]),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.similar_posts_limit_hint', ['url' => $singleUrl]),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'categories_limit',
-				'label'             => trans('admin.categories_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'categories_limit',
+				'label'      => trans('admin.categories_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.categories_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.categories_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'cities_limit',
-				'label'             => trans('admin.cities_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'cities_limit',
+				'label'      => trans('admin.cities_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.cities_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.cities_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'auto_complete_cities_limit',
-				'label'             => trans('admin.auto_complete_cities_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'auto_complete_cities_limit',
+				'label'      => trans('admin.auto_complete_cities_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.auto_complete_cities_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.auto_complete_cities_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -418,44 +418,44 @@ class PaginationSetting
 				'value' => trans('admin.pagination_limit_location_info', ['url' => $singleUrl]),
 			],
 			[
-				'name'              => 'subadmin1_select_limit',
-				'label'             => trans('admin.subadmin1_select_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'subadmin1_select_limit',
+				'label'      => trans('admin.subadmin1_select_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage('subadmin1_select'),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'subadmin2_select_limit',
-				'label'             => trans('admin.subadmin2_select_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'subadmin2_select_limit',
+				'label'      => trans('admin.subadmin2_select_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage('subadmin2_select'),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'cities_select_limit',
-				'label'             => trans('admin.cities_select_limit_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'cities_select_limit',
+				'label'      => trans('admin.cities_select_limit_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'min'  => 1,
 					'max'  => getMaxItemsPerPage(),
 					'step' => 1,
 				],
-				'hint'              => trans('admin.specific_limit_hint'),
-				'wrapperAttributes' => [
+				'hint'       => trans('admin.specific_limit_hint'),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			],

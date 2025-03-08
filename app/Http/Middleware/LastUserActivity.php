@@ -49,7 +49,7 @@ class LastUserActivity
 		$user = auth($guard)->user();
 		
 		if (config('settings.optimization.cache_driver') == 'array') {
-			if (Schema::hasColumn('users', 'last_activity')) {
+			if (!Schema::hasColumn('users', 'last_activity')) {
 				return $next($request);
 			}
 			

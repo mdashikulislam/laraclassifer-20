@@ -25,7 +25,7 @@ trait SearchTrait
 	
 	public array $searchQueryKeys = [
 		'c', 'sc', 'l', 'location', 'r', 'q', 'distance', 'postedDate',
-		'minPrice', 'maxPrice', 'cf', 'filterBy', 'orderBy', 'sort'
+		'minPrice', 'maxPrice', 'cf', 'filterBy', 'orderBy', 'sort',
 	];
 	
 	/**

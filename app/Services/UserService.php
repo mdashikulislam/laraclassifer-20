@@ -16,6 +16,14 @@
 
 namespace App\Services;
 
+use App\Http\Requests\Front\AvatarRequest;
+use App\Http\Requests\Front\UserRequest;
+use App\Http\Requests\Front\UserSettingsRequest;
+use App\Http\Resources\UserResource;
+use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\StrictActiveScope;
+use App\Models\Scopes\VerifiedScope;
+use App\Models\User;
 use App\Services\Auth\Traits\VerificationTrait;
 use App\Services\User\Delete;
 use App\Services\User\Register;
@@ -24,15 +32,6 @@ use App\Services\User\Update;
 use App\Services\User\Update\DarkMode;
 use App\Services\User\Update\Photo;
 use App\Services\User\Update\Settings;
-use App\Http\Requests\Front\AvatarRequest;
-use App\Http\Requests\Front\UserRequest;
-use App\Http\Requests\Front\UserSettingsRequest;
-use App\Http\Resources\EntityCollection;
-use App\Http\Resources\UserResource;
-use App\Models\Scopes\ReviewedScope;
-use App\Models\Scopes\StrictActiveScope;
-use App\Models\Scopes\VerifiedScope;
-use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

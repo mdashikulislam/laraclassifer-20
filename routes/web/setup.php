@@ -24,7 +24,7 @@ use App\Http\Controllers\Web\Setup\Install\RequirementsController;
 use App\Http\Controllers\Web\Setup\Update\UpdateController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('guest')
+Route::middleware(['no.http.cache'])
 	->group(function () {
 		// upgrade
 		Route::prefix('upgrade')

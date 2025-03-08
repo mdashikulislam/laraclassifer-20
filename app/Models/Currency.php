@@ -106,13 +106,6 @@ class Currency extends BaseModel
 		];
 	}
 	
-	protected static function boot()
-	{
-		parent::boot();
-		
-		Currency::observe(CurrencyObserver::class);
-	}
-	
 	/*
 	|--------------------------------------------------------------------------
 	| RELATIONS

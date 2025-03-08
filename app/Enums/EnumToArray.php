@@ -17,6 +17,7 @@
 namespace App\Enums;
 
 use App\Helpers\Common\Arr;
+use Throwable;
 
 trait EnumToArray
 {
@@ -37,7 +38,7 @@ trait EnumToArray
 		
 		try {
 			$entries = Arr::mbSortBy($entries, $orderBy, $order);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return $entries;

@@ -16,6 +16,9 @@
 
 namespace App\Providers\AppService\ConfigTrait;
 
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays;
+use Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes;
+
 trait BackupConfig
 {
 	private function updateBackupConfig(?array $settings = []): void
@@ -79,8 +82,8 @@ trait BackupConfig
 				'name'          => config('app.name'),
 				'disks'         => $disks,
 				'health_checks' => [
-					\Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumAgeInDays::class          => $maximumAgeInDays,
-					\Spatie\Backup\Tasks\Monitor\HealthChecks\MaximumStorageInMegabytes::class => $maximumStorageInMegabytes,
+					MaximumAgeInDays::class          => $maximumAgeInDays,
+					MaximumStorageInMegabytes::class => $maximumStorageInMegabytes,
 				],
 			],
 		];

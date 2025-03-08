@@ -38,30 +38,28 @@ class CategoryController extends FrontController
 		$perPage = getNumberOfItemsPerPage('categories');
 		$page = $request->integer('page', 1);
 		$languageCode = $request->input('languageCode', config('app.locale'));
-		$selectedCatId = $request->input('selectedCatId');
-		$catId = $request->input('catId');
-		$catId = !empty($catId) ? $catId : null; // Change 0 to null
+		$selectedId = $request->input('selectedId');
+		$parentId = $request->input('parentId');
+		$parentId = !empty($parentId) ? $parentId : null; // Change 0 to null
 		
 		// Update global vars
 		$this->catDisplayType = config('settings.listing_form.cat_display_type', 'c_bigIcon_list');
 		
 		// Get category by ID
-		$category = $this->getCategoryById($catId, $languageCode);
+		$category = $this->getCategoryById($parentId, $languageCode);
 		
 		// Get categories
 		$queryParams = [
-			'perPage'         => $perPage,
-			'parentId'        => $catId, // as fallback
-			'nestedIncluded'  => false,
-			'embed'           => 'children,parent',
-			'sort'            => '-lft',
-			'languageCode'    => $languageCode,
-			'cacheExpiration' => $this->cacheExpiration,
+			'perPage'        => $perPage,
+			'parentId'       => $parentId, // as fallback
+			'nestedIncluded' => false,
+			'embed'          => 'children,parent',
+			'sort'           => '-lft',
 		];
 		if (!empty($page)) {
 			$queryParams['page'] = $page;
 		}
-		$data = getServiceData((new CategoryService())->getEntries($catId, $queryParams));
+		$data = getServiceData((new CategoryService())->getEntries($parentId, $queryParams));
 		
 		$apiMessage = data_get($data, 'message');
 		$apiResult = data_get($data, 'result');
@@ -70,15 +68,15 @@ class CategoryController extends FrontController
 		$categories = data_get($apiResult, 'data', []);
 		
 		// Format the categories:
-		// If $catId is null, get list of categories
-		// If $catId is not null, get the selected category's list of subcategories
+		// If $parentId is null, get list of categories
+		// If $parentId is not null, get the selected category's list of subcategories
 		$categories = collect($categories);
 		if ($categories->count() > 0) {
 			$categories = $categories->keyBy('id');
 		}
 		
 		$hasChildren = (
-			empty($catId)
+			empty($parentId)
 			|| (!empty($category) && !empty($category['children']))
 		);
 		
@@ -89,7 +87,7 @@ class CategoryController extends FrontController
 			'categories'     => $categories, // Adjacent Categories (Children)
 			'category'       => $category,
 			'hasChildren'    => $hasChildren,
-			'catId'          => $selectedCatId,
+			'selectedId'     => $selectedId,
 		];
 		
 		// Get categories list buffer

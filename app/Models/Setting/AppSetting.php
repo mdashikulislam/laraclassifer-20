@@ -71,7 +71,7 @@ class AppSetting
 				? $request->file($param['attribute'])
 				: $request->input($param['attribute']);
 			
-			$request->request->set($param['attribute'], Upload::image($param['destPath'], $file, $param));
+			$request->request->set($param['attribute'], Upload::image($file, $param['destPath'], $param));
 		}
 		
 		return $request;
@@ -248,18 +248,18 @@ class AppSetting
 				]),
 			],
 			[
-				'name'              => 'name',
-				'label'             => trans('admin.App Name'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'name',
+				'label'   => trans('admin.App Name'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'slogan',
-				'label'             => trans('admin.App Slogan'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'slogan',
+				'label'   => trans('admin.App Slogan'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -268,79 +268,79 @@ class AppSetting
 		// App's Logo
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'dark_mode',
-				'label'             => trans('admin.dark_mode_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.dark_mode_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'dark_mode',
+				'label'   => trans('admin.dark_mode_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.dark_mode_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
 			[
-				'name'              => 'logo',
-				'label'             => trans('admin.App Logo'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => config('larapen.media.logo'),
-				'wrapperAttributes' => [
+				'name'    => 'logo',
+				'label'   => trans('admin.App Logo'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => config('larapen.media.logo'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'favicon',
-				'label'             => trans('admin.Favicon'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => config('larapen.media.favicon'),
-				'wrapperAttributes' => [
+				'name'    => 'favicon',
+				'label'   => trans('admin.Favicon'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => config('larapen.media.favicon'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'logo_dark',
-				'label'             => trans('admin.logo_dark_label'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => config('larapen.media.logo-dark'),
-				'hint'              => trans('admin.logo_dark_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'logo_dark',
+				'label'   => trans('admin.logo_dark_label'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => config('larapen.media.logo-dark'),
+				'hint'    => trans('admin.logo_dark_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 dark-mode-field',
 				],
 			],
 			[
-				'name'              => 'logo_light',
-				'label'             => trans('admin.logo_light_label'),
-				'type'              => 'image',
-				'upload'            => true,
-				'disk'              => $diskName,
-				'default'           => config('larapen.media.logo-light'),
-				'hint'              => trans('admin.logo_light_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'logo_light',
+				'label'   => trans('admin.logo_light_label'),
+				'type'    => 'image',
+				'upload'  => true,
+				'disk'    => $diskName,
+				'default' => config('larapen.media.logo-light'),
+				'hint'    => trans('admin.logo_light_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 dark-mode-field',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 		]);
 		
 		// App's Contact Info
 		$fields = array_merge($fields, [
 			[
-				'name'              => 'email',
-				'label'             => trans('admin.Email'),
-				'type'              => 'email',
-				'hint'              => trans('admin.The email address that all emails from the contact form will go to'),
-				'wrapperAttributes' => [
+				'name'    => 'email',
+				'label'   => trans('admin.Email'),
+				'type'    => 'email',
+				'hint'    => trans('admin.The email address that all emails from the contact form will go to'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'phone_number',
-				'label'             => trans('admin.Phone number'),
-				'type'              => 'text',
-				'wrapperAttributes' => [
+				'name'    => 'phone_number',
+				'label'   => trans('admin.Phone number'),
+				'type'    => 'text',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -372,11 +372,11 @@ class AppSetting
 				'value' => trans('admin.dates_title'),
 			],
 			[
-				'name'              => 'php_specific_date_format',
-				'label'             => trans('admin.php_specific_date_format_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.php_specific_date_format_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'php_specific_date_format',
+				'label'   => trans('admin.php_specific_date_format_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.php_specific_date_format_hint'),
+				'wrapper' => [
 					'class' => 'col-md-12',
 				],
 			],
@@ -386,22 +386,22 @@ class AppSetting
 				'value' => trans('admin.php_specific_date_format_info'),
 			],
 			[
-				'name'              => 'date_format',
-				'label'             => trans('admin.date_format_label'),
-				'type'              => 'text',
-				'default'           => $dateFormat,
-				'hint'              => $dateFormatHint . ' ' . trans('admin.app_date_format_hint_help'),
-				'wrapperAttributes' => [
+				'name'    => 'date_format',
+				'label'   => trans('admin.date_format_label'),
+				'type'    => 'text',
+				'default' => $dateFormat,
+				'hint'    => $dateFormatHint . ' ' . trans('admin.app_date_format_hint_help'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'datetime_format',
-				'label'             => trans('admin.datetime_format_label'),
-				'type'              => 'text',
-				'default'           => $datetimeFormat,
-				'hint'              => $dateFormatHint . ' ' . trans('admin.app_date_format_hint_help'),
-				'wrapperAttributes' => [
+				'name'    => 'datetime_format',
+				'label'   => trans('admin.datetime_format_label'),
+				'type'    => 'text',
+				'default' => $datetimeFormat,
+				'hint'    => $dateFormatHint . ' ' . trans('admin.app_date_format_hint_help'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
@@ -424,21 +424,21 @@ class AppSetting
 				]),
 			],
 			[
-				'name'              => 'date_from_now_modifier',
-				'label'             => trans('admin.date_from_now_modifier_label'),
-				'type'              => 'select2_from_array',
-				'options'           => self::getDateFromNowModifiers(),
-				'hint'              => trans('admin.date_from_now_modifier_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'date_from_now_modifier',
+				'label'   => trans('admin.date_from_now_modifier_label'),
+				'type'    => 'select2_from_array',
+				'options' => self::getDateFromNowModifiers(),
+				'hint'    => trans('admin.date_from_now_modifier_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'date_from_now_short',
-				'label'             => trans('admin.date_from_now_short_label'),
-				'type'              => 'checkbox_switch',
-				'hint'              => trans('admin.date_from_now_short_hint'),
-				'wrapperAttributes' => [
+				'name'    => 'date_from_now_short',
+				'label'   => trans('admin.date_from_now_short_label'),
+				'type'    => 'checkbox_switch',
+				'hint'    => trans('admin.date_from_now_short_hint'),
+				'wrapper' => [
 					'class' => 'col-md-6 mt-4',
 				],
 			],
@@ -457,58 +457,58 @@ class AppSetting
 				'value' => trans('admin.settings_app_dashboard_sep'),
 			],
 			[
-				'name'              => 'vector_charts_type',
-				'label'             => trans('admin.vector_charts_type_label'),
-				'type'              => 'select2_from_array',
-				'options'           => [
+				'name'    => 'vector_charts_type',
+				'label'   => trans('admin.vector_charts_type_label'),
+				'type'    => 'select2_from_array',
+				'options' => [
 					'morris_bar'  => 'Morris - Bar Charts',
 					'morris_line' => 'Morris - Line Charts',
 				],
-				'wrapperAttributes' => [
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'vector_charts_limit',
-				'label'             => trans('admin.vector_charts_limit_label'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(generateNumberRange(2, 15, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
-				'wrapperAttributes' => [
+				'name'    => 'vector_charts_limit',
+				'label'   => trans('admin.vector_charts_limit_label'),
+				'type'    => 'select2_from_array',
+				'options' => collect(generateNumberRange(2, 15, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'show_countries_charts',
-				'label'             => trans('admin.show_countries_charts_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'show_countries_charts',
+				'label'   => trans('admin.show_countries_charts_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 mt-4',
 				],
 			],
 			[
-				'name'              => 'countries_charts_limit',
-				'label'             => trans('admin.countries_charts_limit_label'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(generateNumberRange(2, 10, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
-				'wrapperAttributes' => [
+				'name'    => 'countries_charts_limit',
+				'label'   => trans('admin.countries_charts_limit_label'),
+				'type'    => 'select2_from_array',
+				'options' => collect(generateNumberRange(2, 10, 1))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
+				'wrapper' => [
 					'class' => 'col-md-6 countries-charts-field',
 				],
-				'newline'           => true,
+				'newline' => true,
 			],
 			[
-				'name'              => 'latest_entries_limit',
-				'label'             => trans('admin.settings_app_latest_entries_limit_label'),
-				'type'              => 'select2_from_array',
-				'options'           => collect(generateNumberRange(5, 25, 5))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
-				'wrapperAttributes' => [
+				'name'    => 'latest_entries_limit',
+				'label'   => trans('admin.settings_app_latest_entries_limit_label'),
+				'type'    => 'select2_from_array',
+				'options' => collect(generateNumberRange(5, 25, 5))->mapWithKeys(fn ($i) => [$i => $i])->toArray(),
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			],
 			[
-				'name'              => 'general_settings_as_submenu_in_sidebar',
-				'label'             => trans('admin.general_settings_as_submenu_in_sidebar_label'),
-				'type'              => 'checkbox_switch',
-				'wrapperAttributes' => [
+				'name'    => 'general_settings_as_submenu_in_sidebar',
+				'label'   => trans('admin.general_settings_as_submenu_in_sidebar_label'),
+				'type'    => 'checkbox_switch',
+				'wrapper' => [
 					'class' => 'col-md-6 mt-4',
 				],
 			],

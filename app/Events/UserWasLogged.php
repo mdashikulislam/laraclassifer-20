@@ -24,13 +24,13 @@ use Illuminate\Queue\SerializesModels;
 class UserWasLogged extends Event
 {
 	use Dispatchable, InteractsWithSockets, SerializesModels;
-    
-    /**
-     * Create a new event instance.
+	
+	/**
+	 * Create a new event instance.
 	 *
 	 * @param User $user
 	 */
-    public function __construct(public User $user)
-    {
-    }
+	public function __construct(public User $user)
+	{
+	}
 }

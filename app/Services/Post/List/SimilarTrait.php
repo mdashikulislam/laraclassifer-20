@@ -16,14 +16,14 @@
 
 namespace App\Services\Post\List;
 
-use App\Services\Post\List\Search\CategoryTrait;
-use App\Services\Post\List\Search\LocationTrait;
-use App\Services\Post\List\Search\SidebarTrait;
 use App\Http\Resources\EntityCollection;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
+use App\Services\Post\List\Search\CategoryTrait;
+use App\Services\Post\List\Search\LocationTrait;
+use App\Services\Post\List\Search\SidebarTrait;
 use Illuminate\Http\JsonResponse;
 use Larapen\LaravelDistance\Libraries\mysql\DistanceHelper;
 

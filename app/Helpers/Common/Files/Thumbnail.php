@@ -17,8 +17,9 @@
 namespace App\Helpers\Common\Files;
 
 use App\Helpers\Common\Files\Storage\StorageDisk;
-use Intervention\Image\Laravel\Facades\Image;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Intervention\Image\Laravel\Facades\Image;
+use Throwable;
 
 class Thumbnail
 {
@@ -229,7 +230,7 @@ class Thumbnail
 			$encodedImage = $image->encodeByExtension($extension, progressive: $isProgressive, quality: $imageQuality);
 			unset($image);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return;
 		}
 		

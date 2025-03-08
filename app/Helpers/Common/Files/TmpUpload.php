@@ -17,19 +17,20 @@
 namespace App\Helpers\Common\Files;
 
 use App\Helpers\Common\Files\Storage\StorageDisk;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
+use Throwable;
 
 class TmpUpload
 {
 	/**
-	 * @param $tmpUploadDir
 	 * @param $file
+	 * @param string $tmpUploadDir
+	 * @param string|null $filename
 	 * @return string|null
 	 */
-	public static function image($tmpUploadDir, $file): ?string
+	public static function image($file, string $tmpUploadDir, ?string $filename = null): ?string
 	{
 		if (!$file instanceof SymfonyUploadedFile) {
 			return null;
@@ -98,7 +99,7 @@ class TmpUpload
 			unset($image);
 			
 			// Generate the filename
-			$filename = md5($origFilename . time());
+			$filename = normalizeFilename($origFilename, $filename);
 			$filename = $filename . '.' . $extension;
 			
 			// Get the file path
@@ -110,17 +111,18 @@ class TmpUpload
 			
 			// Return the path (to the database later)
 			return $filePath;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(500, $e->getMessage());
 		}
 	}
 	
 	/**
-	 * @param $tmpUploadDir
 	 * @param $file
+	 * @param string $tmpUploadDir
+	 * @param string|null $filename
 	 * @return string|null
 	 */
-	public static function file($tmpUploadDir, $file): ?string
+	public static function file($file, string $tmpUploadDir, ?string $filename = null): ?string
 	{
 		if (!$file instanceof SymfonyUploadedFile) {
 			return null;
@@ -134,7 +136,8 @@ class TmpUpload
 			$origExtension = $file->getClientOriginalExtension();
 			
 			// Generate a filename
-			$filename = md5($origFilename . time()) . '.' . $origExtension;
+			$filename = normalizeFilename($origFilename, $filename);
+			$filename = $filename . '.' . $origExtension;
 			
 			// Get filepath
 			$filePath = $tmpUploadDir . '/' . $filename;
@@ -144,7 +147,7 @@ class TmpUpload
 			
 			// Return the path (to the database later)
 			return $filePath;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return null;

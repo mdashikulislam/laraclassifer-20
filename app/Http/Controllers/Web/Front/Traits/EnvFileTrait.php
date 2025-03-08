@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Front\Traits;
 
 use App\Helpers\Common\DotenvEditor;
+use Throwable;
 
 trait EnvFileTrait
 {
@@ -85,7 +86,7 @@ trait EnvFileTrait
 		if ($isChanged) {
 			try {
 				DotenvEditor::save();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				abort(400, $e->getMessage());
 			}
 		}

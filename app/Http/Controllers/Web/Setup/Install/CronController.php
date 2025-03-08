@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Install;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class CronController extends BaseController
 {
@@ -38,7 +39,7 @@ class CronController extends BaseController
 		// Check if the database connection is ok
 		try {
 			$this->getPdoConnectionWithEnvCheck();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			flash($e->getMessage())->error();
 			
 			// Get the DB info step URL

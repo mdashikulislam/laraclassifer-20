@@ -18,6 +18,7 @@ namespace App\Helpers\Common\GeoIP\Drivers;
 
 use App\Helpers\Common\GeoIP\AbstractDriver;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 class Ipinfo extends AbstractDriver
 {
@@ -66,7 +67,7 @@ class Ipinfo extends AbstractDriver
 			if ($response->successful()) {
 				return $response->json();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$response = $e;
 		}
 		

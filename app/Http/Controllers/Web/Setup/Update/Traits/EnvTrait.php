@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Setup\Update\Traits;
 
 use App\Helpers\Common\DotenvEditor;
+use Throwable;
 
 trait EnvTrait
 {
@@ -31,7 +32,7 @@ trait EnvTrait
 		DotenvEditor::setKey('APP_VERSION', $last);
 		try {
 			DotenvEditor::save();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(400, $e->getMessage());
 		}
 	}

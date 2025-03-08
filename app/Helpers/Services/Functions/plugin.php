@@ -54,7 +54,7 @@ function plugin_list(string $category = null, bool $checkInstalled = false): arr
 				$plugin->installed = ($plugin->is_compatible)
 					? call_user_func($plugin->class . '::installed')
 					: false;
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				continue;
 			}
 			
@@ -124,7 +124,7 @@ function load_plugin(?string $name)
 		];
 		$plugin = Arr::toObject($plugin);
 		
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$plugin = null;
 	}
 	
@@ -153,7 +153,7 @@ function load_installed_plugin(string $name)
 			$installed = call_user_func($plugin->class . '::installed');
 			
 			return ($installed) ? $plugin : null;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return null;
 		}
 	} else {
@@ -237,7 +237,16 @@ function plugin_check_purchase_code($plugin): bool
 	if (File::exists($pluginFile)) {
 		$purchaseCode = file_get_contents($pluginFile);
 		if (!empty($purchaseCode)) {
-			return true;
+			$pattern = '#([a-z0-9]{8})-?([a-z0-9]{4})-?([a-z0-9]{4})-?([a-z0-9]{4})-?([a-z0-9]{12})#';
+			$replacement = '$1-$2-$3-$4-$5';
+			$purchaseCode = preg_replace($pattern, $replacement, strtolower($purchaseCode));
+			if (strlen($purchaseCode) == 36) {
+				$res = true;
+			} else {
+				$res = false;
+			}
+			
+			return $res;
 		}
 	}
 	
@@ -262,7 +271,7 @@ function plugin_setting_value_html($setting, ?string $out)
 				foreach ($pluginMethodNames as $method) {
 					try {
 						$out = call_user_func($plugin->class . '::' . $method, $setting, $out);
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						continue;
 					}
 				}
@@ -292,7 +301,7 @@ function plugin_set_setting_value($value, $setting)
 				foreach ($pluginMethodNames as $method) {
 					try {
 						$value = call_user_func($plugin->class . '::' . $method, $value, $setting);
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						continue;
 					}
 				}
@@ -565,7 +574,7 @@ function getNextSettingPosition(?string $orderBy = 'id'): int
 		if (!empty($latestSetting)) {
 			$lft = (int)$latestSetting->lft + 2;
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return $lft;

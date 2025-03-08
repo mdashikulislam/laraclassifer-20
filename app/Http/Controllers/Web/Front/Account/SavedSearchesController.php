@@ -54,6 +54,7 @@ class SavedSearchesController extends AccountBaseController
 		// Error Found
 		if (!data_get($data, 'success')) {
 			$message = $message ?? t('unknown_error');
+			
 			return ajaxResponse()->json(['message' => $message], $status);
 		}
 		

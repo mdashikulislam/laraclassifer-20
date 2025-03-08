@@ -86,7 +86,8 @@ class CategoryService extends BaseService
 				return $categories;
 			}
 			
-			return $categories->paginate($perPage);
+			// Adding the withQueryString() to apply filters for AJAX request
+			return $categories->paginate($perPage)->withQueryString();
 		});
 		
 		// If the request is made from the app's Web environment,

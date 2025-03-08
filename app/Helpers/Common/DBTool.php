@@ -20,6 +20,9 @@ use App\Exceptions\Custom\CustomException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
+use PDO;
+use PDOException;
+use Throwable;
 
 class DBTool
 {
@@ -30,7 +33,7 @@ class DBTool
 	 * @return \PDO
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public static function getPdoConnection(?array $config = []): \PDO
+	public static function getPdoConnection(?array $config = []): PDO
 	{
 		// Retrieve Database Parameters from the /.env file,
 		// If they are not set during the function call.
@@ -51,10 +54,10 @@ class DBTool
 			$driver = $config['driver'] ?? 'mysql';
 			$charset = $config['charset'] ?? null;
 			$options = $config['options'] ?? [
-				\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
-				\PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-				\PDO::ATTR_EMULATE_PREPARES   => true,
-				\PDO::ATTR_CURSOR             => \PDO::CURSOR_FWDONLY,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+				PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_EMULATE_PREPARES   => true,
+				PDO::ATTR_CURSOR             => PDO::CURSOR_FWDONLY,
 			];
 			
 			// Get the connexion's host info
@@ -69,12 +72,12 @@ class DBTool
 			$dsn = $driver . ':' . $hostInfo . ';dbname=' . $database . $charsetInfo;
 			
 			// Connect to the database server
-			return new \PDO($dsn, $username, $password, $options);
+			return new PDO($dsn, $username, $password, $options);
 			
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			$errorMessage = trans('messages.database_pdo_connection_failed');
 			$exceptionMessage = $e->getMessage();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$errorMessage = trans('messages.database_connection_failed');
 			$exceptionMessage = $e->getMessage();
 		}
@@ -106,10 +109,10 @@ class DBTool
 			$databaseParams['port'] = (int)$databaseParams['port'];
 			$databaseParams['socket'] = $databaseParams['unix_socket'];
 			$databaseParams['options'] = [
-				\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_OBJ,
-				\PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
-				\PDO::ATTR_EMULATE_PREPARES   => true,
-				\PDO::ATTR_CURSOR             => \PDO::CURSOR_FWDONLY,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+				PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_EMULATE_PREPARES   => true,
+				PDO::ATTR_CURSOR             => PDO::CURSOR_FWDONLY,
 			];
 		}
 		
@@ -127,7 +130,10 @@ class DBTool
 	 */
 	public static function getLaravelDatabaseConfig(): array
 	{
-		return (array)include realpath(__DIR__ . '/../../config/database.php');
+		$path = __DIR__ . '/../../../config/database.php';
+		if (!file_exists($path)) return [];
+		
+		return (array)include realpath($path);
 	}
 	
 	/**
@@ -193,7 +199,7 @@ class DBTool
 	 * @param \PDO $pdo
 	 * @return string
 	 */
-	public static function getRawDatabaseName(\PDO $pdo): string
+	public static function getRawDatabaseName(PDO $pdo): string
 	{
 		$query = $pdo->query("SELECT DATABASE()");
 		$databaseName = $query->fetchColumn();
@@ -209,7 +215,7 @@ class DBTool
 	 * @param string|null $tablesPrefix
 	 * @return bool
 	 */
-	public static function rawTableExists(\PDO $pdo, string $table, string $tablesPrefix = null): bool
+	public static function rawTableExists(PDO $pdo, string $table, string $tablesPrefix = null): bool
 	{
 		// Try a select statement against the table
 		// Run it in try/catch in case PDO is in ERRMODE_EXCEPTION.
@@ -219,7 +225,7 @@ class DBTool
 			} else {
 				$result = $pdo->query('SELECT 1 FROM ' . $table . ' LIMIT 1');
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// We got an exception == table not found
 			return false;
 		}
@@ -237,7 +243,7 @@ class DBTool
 	 * @return array
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public static function getRawDatabaseTables(\PDO $pdo, string $database, string $tablesPrefix = null): array
+	public static function getRawDatabaseTables(PDO $pdo, string $database, string $tablesPrefix = null): array
 	{
 		$tables = [];
 		
@@ -254,7 +260,7 @@ class DBTool
 			if (isset($obj->table_names)) {
 				$tables = array_merge($tables, explode(',', $obj->table_names));
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			throw new CustomException($e->getMessage());
 		}
 		
@@ -308,7 +314,7 @@ class DBTool
 	 * @param \PDO|null $pdo
 	 * @return string
 	 */
-	public static function getMySqlFullVersion(\PDO $pdo = null): string
+	public static function getMySqlFullVersion(PDO $pdo = null): string
 	{
 		$version = '0';
 		
@@ -317,10 +323,10 @@ class DBTool
 				$pdo = DB::connection()->getPdo();
 			}
 			
-			if ($pdo instanceof \PDO) {
+			if ($pdo instanceof PDO) {
 				$version = $pdo->query('SELECT VERSION()')->fetchColumn();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return getAsString($version);
@@ -332,7 +338,7 @@ class DBTool
 	 * @param \PDO|null $pdo
 	 * @return string
 	 */
-	public static function getMySqlVersion(\PDO $pdo = null): string
+	public static function getMySqlVersion(PDO $pdo = null): string
 	{
 		$version = self::getMySqlFullVersion($pdo);
 		
@@ -362,7 +368,7 @@ class DBTool
 	 * @param \PDO|null $pdo
 	 * @return bool
 	 */
-	public static function isMariaDB(\PDO $pdo = null): bool
+	public static function isMariaDB(PDO $pdo = null): bool
 	{
 		$version = self::getMySqlFullVersion($pdo);
 		
@@ -375,7 +381,7 @@ class DBTool
 	 * @param \PDO|null $pdo
 	 * @return array An associative array with 'max_connections' and 'max_user_connections' values.
 	 */
-	public static function getMySQLConnectionLimits(\PDO $pdo = null): array
+	public static function getMySQLConnectionLimits(PDO $pdo = null): array
 	{
 		try {
 			if (empty($pdo)) {
@@ -385,14 +391,14 @@ class DBTool
 			// Query to get max_connections and max_user_connections
 			$query = "SHOW VARIABLES WHERE Variable_name IN ('max_connections', 'max_user_connections')";
 			$stmt = $pdo->query($query);
-			$variables = $stmt->fetchAll(\PDO::FETCH_KEY_PAIR);
+			$variables = $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
 			
 			// Return the values as an associative array
 			return [
 				'max_connections'      => $variables['max_connections'] ?? null,
 				'max_user_connections' => $variables['max_user_connections'] ?? null,
 			];
-		} catch (\PDOException $e) {
+		} catch (PDOException $e) {
 			return [];
 		}
 	}
@@ -407,10 +413,10 @@ class DBTool
 	 * @return void
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	public static function importSqlFile(\PDO $pdo, string $sqlFile, string $tablePrefix = null, string $InFilePath = null): void
+	public static function importSqlFile(PDO $pdo, string $sqlFile, string $tablePrefix = null, string $InFilePath = null): void
 	{
 		// Enable LOAD LOCAL INFILE
-		$pdo->setAttribute(\PDO::MYSQL_ATTR_LOCAL_INFILE, true);
+		$pdo->setAttribute(PDO::MYSQL_ATTR_LOCAL_INFILE, true);
 		
 		$errorDetect = false;
 		$errors = '';
@@ -440,7 +446,7 @@ class DBTool
 				try {
 					// Perform the Query
 					$pdo->exec($tmpLine);
-				} catch (\PDOException $e) {
+				} catch (PDOException $e) {
 					$errors .= 'Error occurred in the file: ' . $sqlFile;
 					$errors .= ' with the query: "' . $tmpLine . '" - Info: ' . $e->getMessage() . "\n";
 					$errorDetect = true;
@@ -480,7 +486,7 @@ class DBTool
 					$modelFiles[] = $filePath;
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return $modelFiles;
@@ -518,7 +524,7 @@ class DBTool
 					$model = new $modelClass;
 					
 					return (method_exists($model, 'translationEnabledForModel') && $model->translationEnabledForModel());
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					return false;
 				}
 			};
@@ -542,7 +548,7 @@ class DBTool
 			$model = new $modelClass;
 			
 			return $model instanceof Model;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 	}

@@ -16,12 +16,14 @@
 
 namespace App\Helpers\Common;
 
+use Throwable;
+
 class Curl
 {
 	public static string $userAgent = "Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.3) Gecko/20070309 Firefox/2.0.0.3";
 	public static array $httpHeader = [
 		'Accept-Charset: utf-8',
-		'Accept-Language: en-us,en;q=0.7,bn-bd;q=0.3'
+		'Accept-Language: en-us,en;q=0.7,bn-bd;q=0.3',
 	];
 	
 	/**
@@ -91,12 +93,13 @@ class Curl
 	{
 		try {
 			$buffer = file_get_contents($url);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$buffer = $e->getMessage();
 			if (empty($buffer)) {
 				$buffer = t('unknown_error');
 			}
 		}
+		
 		return $buffer;
 	}
 	
@@ -143,7 +146,7 @@ class Curl
 	 * @param null $cookies
 	 * @return string|bool
 	 */
-	public static function getContent($url, $cookies= null)
+	public static function getContent($url, $cookies = null)
 	{
 		$ch = curl_init();
 		if (str_contains(strtolower($url), 'https://')) {
@@ -236,7 +239,7 @@ class Curl
 		$shortFilename = array_pop($tmp);
 		
 		$filePath = '';
-		foreach($tmp as $path) {
+		foreach ($tmp as $path) {
 			$filePath .= '/' . $path;
 			if (!is_dir($filePath)) {
 				mkdir($filePath);

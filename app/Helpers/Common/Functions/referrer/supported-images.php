@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\Drivers\Imagick\Driver;
+
 return [
 	
 	/*
@@ -23,7 +25,7 @@ return [
 			'webp' => 'image/webp', // 'Animated WebP' is not supported
 		],
 		
-		\Intervention\Image\Drivers\Imagick\Driver::class => [
+		Driver::class => [
 			'jpg'  => 'image/jpeg',
 			'jpeg' => 'image/jpeg',
 			'gif'  => 'image/gif',

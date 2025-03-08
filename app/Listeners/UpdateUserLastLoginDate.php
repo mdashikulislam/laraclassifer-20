@@ -18,9 +18,8 @@ namespace App\Listeners;
 
 use App\Events\UserWasLogged;
 use App\Helpers\Common\Date;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 class UpdateUserLastLoginDate
 {
@@ -54,7 +53,7 @@ class UpdateUserLastLoginDate
 		try {
 			$user->last_login_at = Carbon::now(Date::getAppTimeZone());
 			$user->save();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

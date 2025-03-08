@@ -18,6 +18,7 @@ namespace App\Observers;
 
 use App\Models\City;
 use App\Models\Post;
+use Throwable;
 
 class CityObserver
 {
@@ -91,7 +92,7 @@ class CityObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

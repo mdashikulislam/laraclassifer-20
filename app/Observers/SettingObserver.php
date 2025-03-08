@@ -28,6 +28,7 @@ use App\Observers\Traits\Setting\SeoTrait;
 use App\Observers\Traits\Setting\SmsTrait;
 use App\Observers\Traits\Setting\SocialShareTrait;
 use App\Observers\Traits\Setting\StyleTrait;
+use Throwable;
 
 class SettingObserver
 {
@@ -116,7 +117,7 @@ class SettingObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	

@@ -18,6 +18,8 @@ namespace App\Helpers\Common;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use stdClass;
+use Throwable;
 
 class Arr extends \Illuminate\Support\Arr
 {
@@ -45,7 +47,7 @@ class Arr extends \Illuminate\Support\Arr
 	 * @param bool $keepIndex
 	 * @return array|\Illuminate\Support\Collection|\stdClass
 	 */
-	public static function sortBy($array, string $field, string $order = 'asc', bool $keepIndex = true): array|Collection|\stdClass
+	public static function sortBy($array, string $field, string $order = 'asc', bool $keepIndex = true): array|Collection|stdClass
 	{
 		$isLaravelCollection = false;
 		$isObject = false;
@@ -110,7 +112,7 @@ class Arr extends \Illuminate\Support\Arr
 		string $locale = 'en_US',
 		string $order = 'asc',
 		bool $keepIndex = true
-	): array|Collection|\stdClass
+	): array|Collection|stdClass
 	{
 		$isLaravelCollection = false;
 		$isObject = false;
@@ -142,7 +144,7 @@ class Arr extends \Illuminate\Support\Arr
 		
 		try {
 			$collator = \Collator::create($locale);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$array = $isLaravelCollection ? self::toCollection($array) : ($isObject ? self::toObject($array) : $array);
 			
 			return self::sortBy($array, $field, $order, $keepIndex);
@@ -290,7 +292,7 @@ class Arr extends \Illuminate\Support\Arr
 		}
 		
 		// Convert the array to an object
-		$object = new \stdClass();
+		$object = new stdClass();
 		foreach ($array as $key => $value) {
 			if (is_array($value)) {
 				// Recursively convert nested arrays to objects
@@ -335,7 +337,7 @@ class Arr extends \Illuminate\Support\Arr
 	 * @param $array
 	 * @return array|\Illuminate\Support\Collection|\stdClass
 	 */
-	public static function unique($array): array|Collection|\stdClass
+	public static function unique($array): array|Collection|stdClass
 	{
 		if (!is_array($array) && !is_object($array)) {
 			return [];
@@ -587,7 +589,7 @@ class Arr extends \Illuminate\Support\Arr
 			return array_key_exists($key, $object);
 		}
 		
-		if ($object instanceof \stdClass) {
+		if ($object instanceof stdClass) {
 			return array_key_exists($key, Arr::fromObject($object));
 		}
 		

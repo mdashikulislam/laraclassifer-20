@@ -21,6 +21,7 @@ use App\Models\User;
 use App\Notifications\ResetPasswordNotification;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Throwable;
 
 trait SendsPasswordResetSms
 {
@@ -64,7 +65,7 @@ trait SendsPasswordResetSms
 		try {
 			// Send the token by SMS
 			$passwordReset->notify(new ResetPasswordNotification($user, $token, 'phone'));
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		

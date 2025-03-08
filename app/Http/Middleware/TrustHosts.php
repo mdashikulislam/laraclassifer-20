@@ -17,6 +17,7 @@
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Middleware\TrustHosts as Middleware;
+use Throwable;
 
 class TrustHosts extends Middleware
 {
@@ -52,7 +53,7 @@ class TrustHosts extends Middleware
 						->toArray();
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return array_merge($hosts, $domains);

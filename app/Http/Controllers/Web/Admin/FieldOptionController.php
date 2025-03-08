@@ -16,11 +16,12 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\Field;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\FieldOptionRequest as StoreRequest;
 use App\Http\Requests\Admin\FieldOptionRequest as UpdateRequest;
+use App\Models\Field;
 use App\Models\FieldOption;
+use Illuminate\Http\RedirectResponse;
 
 class FieldOptionController extends PanelController
 {
@@ -67,9 +68,9 @@ class FieldOptionController extends PanelController
 		*/
 		// COLUMNS
 		$this->xPanel->addColumn([
-			'name'  => 'id',
-			'label' => '',
-			'type'  => 'checkbox',
+			'name'      => 'id',
+			'label'     => '',
+			'type'      => 'checkbox',
 			'orderable' => false,
 		]);
 		$this->xPanel->addColumn([
@@ -94,13 +95,13 @@ class FieldOptionController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

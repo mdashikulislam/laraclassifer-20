@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\ReportTypeRequest as StoreRequest;
 use App\Http\Requests\Admin\ReportTypeRequest as UpdateRequest;
 use App\Models\ReportType;
+use Illuminate\Http\RedirectResponse;
 
 class ReportTypeController extends PanelController
 {
@@ -43,9 +44,9 @@ class ReportTypeController extends PanelController
 		*/
 		// COLUMNS
 		$this->xPanel->addColumn([
-			'name'  => 'id',
-			'label' => '',
-			'type'  => 'checkbox',
+			'name'      => 'id',
+			'label'     => '',
+			'type'      => 'checkbox',
 			'orderable' => false,
 		]);
 		$this->xPanel->addColumn([
@@ -64,13 +65,13 @@ class ReportTypeController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

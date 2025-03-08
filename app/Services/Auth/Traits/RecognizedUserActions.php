@@ -17,8 +17,8 @@
 namespace App\Services\Auth\Traits;
 
 use App\Models\Post;
-use App\Models\Scopes\VerifiedScope;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use App\Services\Auth\Traits\RecognizedUserActions\CompleteMissingAuthData;
 

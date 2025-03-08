@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Update\Traits;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 trait CleanUpTrait
 {
@@ -97,7 +98,7 @@ trait CleanUpTrait
 			
 			// Re-create the cache directory (If not exists)
 			$this->createCacheDir($cacheDir);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// Re-create the cache directory (If not exists)
 			$result = $this->createCacheDir($cacheDir);
 			if (!$result) {

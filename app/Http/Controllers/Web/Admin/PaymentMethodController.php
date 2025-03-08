@@ -16,11 +16,12 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Models\Country;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\PaymentMethodRequest as StoreRequest;
 use App\Http\Requests\Admin\PaymentMethodRequest as UpdateRequest;
+use App\Models\Country;
 use App\Models\PaymentMethod;
+use Illuminate\Http\RedirectResponse;
 
 class PaymentMethodController extends PanelController
 {
@@ -123,13 +124,13 @@ class PaymentMethodController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

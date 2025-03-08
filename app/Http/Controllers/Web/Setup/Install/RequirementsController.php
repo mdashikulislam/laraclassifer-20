@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Setup\Install\Traits\CheckerTrait;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
+use Throwable;
 
 class RequirementsController extends BaseController
 {
@@ -81,7 +82,7 @@ class RequirementsController extends BaseController
 				'setup.install.requirements',
 				compact('components', 'permissions', 'checkComponents', 'checkPermissions')
 			);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// Installation starting failed
 			// Clear cache and config again
 			Artisan::call('cache:clear');

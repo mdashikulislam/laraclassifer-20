@@ -17,8 +17,6 @@
 namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create;
 
 use App\Helpers\Services\Referrer;
-use App\Services\Payment\HasPaymentTrigger;
-use App\Services\Payment\Promotion\SingleStepPayment;
 use App\Http\Controllers\Web\Front\Auth\Traits\ShowReSendVerificationCodeButton;
 use App\Http\Controllers\Web\Front\Payment\HasPaymentRedirection;
 use App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\BaseController as MultiStepsBaseController;
@@ -26,6 +24,8 @@ use App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create\Traits\Cl
 use App\Http\Controllers\Web\Front\Post\CreateOrEdit\MultiSteps\Create\Traits\SubmitTrait;
 use App\Http\Controllers\Web\Front\Post\CreateOrEdit\Traits\PricingPageUrlTrait;
 use App\Observers\Traits\PictureTrait;
+use App\Services\Payment\HasPaymentTrigger;
+use App\Services\Payment\Promotion\SingleStepPayment;
 use App\Services\PostService;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
 

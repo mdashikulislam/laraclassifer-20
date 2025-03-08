@@ -16,8 +16,6 @@
 
 namespace App\Services;
 
-use App\Services\Payment\Promotion\MultiStepsPayment;
-use App\Services\Payment\Subscription\SubscriptionPayment;
 use App\Http\Requests\Front\PackageRequest;
 use App\Http\Resources\EntityCollection;
 use App\Http\Resources\PaymentResource;
@@ -28,6 +26,8 @@ use App\Models\Scopes\StrictActiveScope;
 use App\Models\Scopes\ValidPeriodScope;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
+use App\Services\Payment\Promotion\MultiStepsPayment;
+use App\Services\Payment\Subscription\SubscriptionPayment;
 use Illuminate\Http\JsonResponse;
 
 class PaymentService extends BaseService

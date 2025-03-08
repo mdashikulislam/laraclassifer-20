@@ -16,6 +16,8 @@
 
 namespace App\Http\Controllers\Web\Admin\Traits\InlineRequest;
 
+use Illuminate\Http\JsonResponse;
+
 trait SectionTrait
 {
 	/**
@@ -25,7 +27,7 @@ trait SectionTrait
 	 * @param $column
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	protected function updateSectionData($section, $column): \Illuminate\Http\JsonResponse
+	protected function updateSectionData($section, $column): JsonResponse
 	{
 		$isValidCondition = ($this->table == 'sections' && $column == 'active' && !empty($section));
 		if (!$isValidCondition) {

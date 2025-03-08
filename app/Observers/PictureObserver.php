@@ -20,6 +20,7 @@ use App\Models\Language;
 use App\Models\Picture;
 use App\Models\Scopes\ActiveScope;
 use App\Observers\Traits\PictureTrait;
+use Throwable;
 
 class PictureObserver
 {
@@ -90,7 +91,7 @@ class PictureObserver
 					cache()->forget('post.with.lazyLoading.' . $picture->post_id . '.' . $language->code);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

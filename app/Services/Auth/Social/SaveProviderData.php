@@ -17,7 +17,6 @@
 namespace App\Services\Auth\Social;
 
 use App\Helpers\Common\Ip;
-use App\Services\Auth\Traits\RecognizedUserActions;
 use App\Http\Resources\UserResource;
 use App\Models\Blacklist;
 use App\Models\Permission;
@@ -27,10 +26,12 @@ use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use App\Notifications\SendPasswordAndVerificationInfo;
 use App\Notifications\UserNotification;
+use App\Services\Auth\Traits\RecognizedUserActions;
 use Illuminate\Http\JsonResponse;
-use Laravel\Socialite\Contracts\User as SocialiteUser;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
+use Laravel\Socialite\Contracts\User as SocialiteUser;
+use Throwable;
 
 trait SaveProviderData
 {
@@ -109,7 +110,7 @@ trait SaveProviderData
 					// Send Generated Password by Email
 					try {
 						$user->notify(new SendPasswordAndVerificationInfo($user, $randomPassword));
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 					}
 					
 					// Update Listings created by this email
@@ -128,7 +129,7 @@ trait SaveProviderData
 							if ($admins->count() > 0) {
 								Notification::send($admins, new UserNotification($user));
 							}
-						} catch (\Throwable $e) {
+						} catch (Throwable $e) {
 						}
 					}
 					
@@ -152,7 +153,7 @@ trait SaveProviderData
 			}
 			
 			return $this->loginUser($user, $provider);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
 				$message = $this->userNotSavedError ?? '';

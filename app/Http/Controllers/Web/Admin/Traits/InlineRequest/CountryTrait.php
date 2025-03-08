@@ -21,6 +21,7 @@ use App\Models\City;
 use App\Models\Post;
 use App\Models\SubAdmin1;
 use App\Models\SubAdmin2;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -36,7 +37,7 @@ trait CountryTrait
 	 * @return \Illuminate\Http\JsonResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	protected function updateCountryData($country, $column): \Illuminate\Http\JsonResponse
+	protected function updateCountryData($country, $column): JsonResponse
 	{
 		$isValidCondition = ($this->table == 'countries' && $column == 'active' && !empty($country));
 		if (!$isValidCondition) {

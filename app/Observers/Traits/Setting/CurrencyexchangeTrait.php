@@ -19,6 +19,7 @@ namespace App\Observers\Traits\Setting;
 use App\Models\Currency;
 use App\Providers\AppService\ConfigTrait\CurrencyexchangeConfig;
 use Illuminate\Support\Facades\DB;
+use Throwable;
 
 trait CurrencyexchangeTrait
 {
@@ -63,7 +64,7 @@ trait CurrencyexchangeTrait
 	{
 		try {
 			cache()->forget('update.currencies.rates');
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

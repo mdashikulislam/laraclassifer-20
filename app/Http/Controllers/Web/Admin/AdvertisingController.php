@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\Request as StoreRequest;
 use App\Http\Requests\Admin\Request as UpdateRequest;
 use App\Models\Advertising;
+use Illuminate\Http\RedirectResponse;
 
 class AdvertisingController extends PanelController
 {
@@ -90,45 +91,45 @@ class AdvertisingController extends PanelController
 		if (request()->segment(4) == 'edit' && !empty($entity)) {
 			if ($entity->integration != 'autoFit') {
 				$this->xPanel->addField([
-					'name'              => 'is_responsive',
-					'label'             => trans('admin.is_responsive_label'),
-					'type'              => 'checkbox_switch',
-					'hint'              => trans('admin.is_responsive_hint'),
-					'wrapperAttributes' => [
+					'name'    => 'is_responsive',
+					'label'   => trans('admin.is_responsive_label'),
+					'type'    => 'checkbox_switch',
+					'hint'    => trans('admin.is_responsive_hint'),
+					'wrapper' => [
 						'class' => 'col-md-6',
 					],
 				]);
 				$this->xPanel->addField([
-					'name'              => 'separator_1',
-					'type'              => 'custom_html',
-					'value'             => '<hr>',
-					'wrapperAttributes' => [
+					'name'    => 'separator_1',
+					'type'    => 'custom_html',
+					'value'   => '<hr>',
+					'wrapper' => [
 						'class' => 'col-md-12',
 					],
 				]);
 				$this->xPanel->addField([
-					'name'              => 'tracking_code_medium',
-					'label'             => trans('admin.Tracking Code') . " (" . trans('admin.Tablet Format') . ")",
-					'type'              => 'textarea',
-					'attributes'        => [
+					'name'       => 'tracking_code_medium',
+					'label'      => trans('admin.Tracking Code') . " (" . trans('admin.Tablet Format') . ")",
+					'type'       => 'textarea',
+					'attributes' => [
 						'placeholder' => trans('admin.Enter the advertising code here'),
 						'rows'        => 10,
 					],
-					'hint'              => trans('admin.tracking_code_medium_hint') . ' ' . trans('admin.tracking_code_responsive_note'),
-					'wrapperAttributes' => [
+					'hint'       => trans('admin.tracking_code_medium_hint') . ' ' . trans('admin.tracking_code_responsive_note'),
+					'wrapper'    => [
 						'class' => 'col-md-12',
 					],
 				]);
 				$this->xPanel->addField([
-					'name'              => 'tracking_code_small',
-					'label'             => trans('admin.Tracking Code') . " (" . trans('admin.Phone Format') . ")",
-					'type'              => 'textarea',
-					'attributes'        => [
+					'name'       => 'tracking_code_small',
+					'label'      => trans('admin.Tracking Code') . " (" . trans('admin.Phone Format') . ")",
+					'type'       => 'textarea',
+					'attributes' => [
 						'placeholder' => trans('admin.Enter the advertising code here'),
 						'rows'        => 10,
 					],
-					'hint'              => trans('admin.tracking_code_small_hint') . ' ' . trans('admin.tracking_code_responsive_note'),
-					'wrapperAttributes' => [
+					'hint'       => trans('admin.tracking_code_small_hint') . ' ' . trans('admin.tracking_code_responsive_note'),
+					'wrapper'    => [
 						'class' => 'col-md-12',
 					],
 				]);
@@ -141,13 +142,13 @@ class AdvertisingController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

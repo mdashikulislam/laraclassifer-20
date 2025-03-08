@@ -17,9 +17,10 @@
 namespace App\Http\Controllers\Web\Admin\Traits;
 
 use App\Http\Controllers\Web\Admin\Traits\InlineRequest\CountryTrait;
-use App\Http\Controllers\Web\Admin\Traits\InlineRequest\SectionTrait;
 use App\Http\Controllers\Web\Admin\Traits\InlineRequest\PayableTrait;
 use App\Http\Controllers\Web\Admin\Traits\InlineRequest\PaymentTrait;
+use App\Http\Controllers\Web\Admin\Traits\InlineRequest\SectionTrait;
+use Illuminate\Http\JsonResponse;
 
 trait InlineRequestTrait
 {
@@ -28,10 +29,12 @@ trait InlineRequestTrait
 	// Types of column allowed to be updated on other conditions:
 	// tinyint, date, datetime and timestamp
 	protected array $tinyintColumnTypes = ['tinyint'];
+	
 	protected array $dateColumTypes = ['date', 'datetime', 'timestamp'];
 	
 	// Result Info
 	protected bool $success = true;
+	
 	protected ?string $message = null;
 	
 	/**
@@ -42,7 +45,7 @@ trait InlineRequestTrait
 	 * @return \Illuminate\Http\JsonResponse
 	 * @throws \App\Exceptions\Custom\CustomException
 	 */
-	protected function updateData($model, $column): \Illuminate\Http\JsonResponse
+	protected function updateData($model, $column): JsonResponse
 	{
 		$this->message = trans('admin.action_performed_successfully');
 		
@@ -95,7 +98,7 @@ trait InlineRequestTrait
 	 * @param $column
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	protected function responseSuccess($model, $column): \Illuminate\Http\JsonResponse
+	protected function responseSuccess($model, $column): JsonResponse
 	{
 		$columnValue = $model->{$column};
 		
@@ -125,7 +128,7 @@ trait InlineRequestTrait
 	 * @param int $status
 	 * @return \Illuminate\Http\JsonResponse
 	 */
-	protected function responseError(string $error, int $status = 500): \Illuminate\Http\JsonResponse
+	protected function responseError(string $error, int $status = 500): JsonResponse
 	{
 		return ajaxResponse()->json(['message' => $error], $status);
 	}

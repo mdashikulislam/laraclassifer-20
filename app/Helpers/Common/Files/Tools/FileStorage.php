@@ -17,6 +17,7 @@
 namespace App\Helpers\Common\Files\Tools;
 
 use Illuminate\Filesystem\FilesystemAdapter;
+use Throwable;
 
 class FileStorage
 {
@@ -48,7 +49,7 @@ class FileStorage
 					if (str_ends_with($directory, $directoryName)) {
 						try {
 							$disk->deleteDirectory($directory);
-						} catch (\Throwable $e) {
+						} catch (Throwable $e) {
 							return false;
 						}
 					} else {
@@ -95,7 +96,7 @@ class FileStorage
 			if (preg_match($pattern, $path)) {
 				try {
 					$disk->delete($path);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					return false;
 				}
 				
@@ -156,7 +157,7 @@ class FileStorage
 		if ($empty) {
 			try {
 				$disk->deleteDirectory($path);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -201,7 +202,7 @@ class FileStorage
 			if (in_array(basename($file), $filenames)) {
 				try {
 					$disk->delete($file);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		}
@@ -229,7 +230,7 @@ class FileStorage
 		
 		try {
 			$fileType = ($disk->mimeType($path) === 'directory') ? 'directory' : 'file';
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// dd($e->getMessage() . ' - ' . $path); // debug!
 		}
 		
@@ -238,7 +239,7 @@ class FileStorage
 				// Check only non-empty file
 				$size = $disk->size($path);
 				$fileType = (is_numeric($size) && $size > 0) ? 'file' : null;
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				// The $disk->size(...) method provide fatal error for directories
 				$fileType = 'directory';
 			}

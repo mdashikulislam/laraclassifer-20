@@ -24,6 +24,7 @@ use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Mailer\Transport;
 use Symfony\Component\Mailer\Transport\Smtp\EsmtpTransport;
 use Symfony\Component\Mime\Email;
+use Throwable;
 
 /*
  * WARNING: This cannot be used directly,
@@ -73,7 +74,7 @@ trait EmailTest
 					$message = trans('admin.mail_to_missing');
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 		}
 		
@@ -152,7 +153,7 @@ trait EmailTest
 				
 				$mailer->send($email);
 				
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$message = $e->getMessage();
 				if (!empty($message)) {
 					$message .= ' (DNS)';
@@ -176,7 +177,7 @@ trait EmailTest
 				
 				$mailer->send($email);
 				
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$message = $e->getMessage();
 			}
 		}

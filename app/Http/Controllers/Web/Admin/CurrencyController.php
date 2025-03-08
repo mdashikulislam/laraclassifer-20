@@ -20,6 +20,7 @@ use App\Http\Controllers\Web\Admin\Panel\PanelController;
 use App\Http\Requests\Admin\CurrencyRequest as StoreRequest;
 use App\Http\Requests\Admin\CurrencyRequest as UpdateRequest;
 use App\Models\Currency;
+use Illuminate\Http\RedirectResponse;
 
 class CurrencyController extends PanelController
 {
@@ -126,43 +127,43 @@ class CurrencyController extends PanelController
 			],
 		], 'create');
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'symbol',
-			'label'             => trans('admin.symbol_label'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'symbol',
+			'label'      => trans('admin.symbol_label'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.symbol_hint'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'html_entities',
-			'label'             => trans('admin.symbol_html_entities_label'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'html_entities',
+			'label'      => trans('admin.symbol_html_entities_label'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.symbol_html_entities_hint'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'in_left',
-			'label'             => trans('admin.Symbol in left'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'in_left',
+			'label'   => trans('admin.Symbol in left'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -172,15 +173,15 @@ class CurrencyController extends PanelController
 			$driverName = config('currencyexchange.drivers.' . $driver . '.label', $driver);
 			
 			$this->xPanel->addField([
-				'name'              => 'rate',
-				'label'             => trans('currencyexchange::messages.rate_label'),
-				'type'              => 'number',
-				'attributes'        => [
+				'name'       => 'rate',
+				'label'      => trans('currencyexchange::messages.rate_label'),
+				'type'       => 'number',
+				'attributes' => [
 					'step' => 'any',
 				],
-				'prefix'            => '1 ' . $currencyBase . ' =',
-				'hint'              => trans('currencyexchange::messages.rate_hint', ['currency' => $currencyBase, 'driver' => $driverName]),
-				'wrapperAttributes' => [
+				'prefix'     => '1 ' . $currencyBase . ' =',
+				'hint'       => trans('currencyexchange::messages.rate_hint', ['currency' => $currencyBase, 'driver' => $driverName]),
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			]);
@@ -193,52 +194,52 @@ class CurrencyController extends PanelController
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'decimal_places',
-			'label'             => trans('admin.Decimal Places'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'decimal_places',
+			'label'      => trans('admin.Decimal Places'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the decimal places'),
 			],
-			'hint'              => trans('admin.Number after decimal'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.Number after decimal'),
+			'wrapper'    => [
 				'class' => 'col-md-4',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'decimal_separator',
-			'label'             => trans('admin.Decimal Separator'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'decimal_separator',
+			'label'      => trans('admin.Decimal Separator'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the decimal separator'),
 				'maxlength'   => 1,
 			],
-			'hint'              => trans('admin.decimal_separator_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.decimal_separator_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-4',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'thousand_separator',
-			'label'             => trans('admin.Thousand Separator'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'thousand_separator',
+			'label'      => trans('admin.Thousand Separator'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the thousand separator'),
 				'maxlength'   => 1,
 			],
-			'hint'              => trans('admin.thousand_separator_hint'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.thousand_separator_hint'),
+			'wrapper'    => [
 				'class' => 'col-md-4',
 			],
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 }

@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Update\Traits;
 
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
 trait ApiTrait
 {
@@ -28,7 +29,6 @@ trait ApiTrait
 	 */
 	private function checkPurchaseCode(): bool
 	{
-		return true;
 		// Make sure that the website is properly installed
 		if (!appEnvFileExists()) {
 			return false;
@@ -53,7 +53,7 @@ trait ApiTrait
 				 */
 				$response = Http::withoutVerifying()->timeout(30)->retry(2, 5000)->get($endpoint)->throw();
 				$data = $response->json();
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				$endpoint = (str_starts_with($endpoint, 'https:'))
 					? str_replace('https:', 'http:', $endpoint)
 					: str_replace('http:', 'https:', $endpoint);
@@ -61,7 +61,7 @@ trait ApiTrait
 				try {
 					$response = Http::withoutVerifying()->timeout(30)->retry(2, 5000)->get($endpoint)->throw();
 					$data = $response->json();
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$data['message'] = parseHttpRequestError($e);
 				}
 			}

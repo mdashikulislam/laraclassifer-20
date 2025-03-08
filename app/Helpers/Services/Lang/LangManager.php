@@ -90,7 +90,7 @@ class LangManager
 		$languages = [];
 		
 		if (!empty($this->includedLanguagesFiles)) {
-			foreach($this->includedLanguagesFiles as $code) {
+			foreach ($this->includedLanguagesFiles as $code) {
 				$path = $this->path . $code;
 				if (file_exists($path) && is_dir($path)) {
 					$languages[] = $code;

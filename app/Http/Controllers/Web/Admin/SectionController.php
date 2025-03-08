@@ -16,11 +16,13 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
-use App\Http\Controllers\Web\Admin\Traits\SettingsTrait;
-use App\Models\Section;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use App\Http\Controllers\Web\Admin\Traits\SettingsTrait;
 use App\Http\Requests\Admin\Request as StoreRequest;
 use App\Http\Requests\Admin\Request as UpdateRequest;
+use App\Models\Section;
+use Illuminate\Http\RedirectResponse;
+use Throwable;
 
 class SectionController extends PanelController
 {
@@ -111,7 +113,7 @@ class SectionController extends PanelController
 		// ...
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		return parent::storeCrud($request);
 	}
@@ -155,7 +157,7 @@ class SectionController extends PanelController
 	 * @param $key
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function find($key): \Illuminate\Http\RedirectResponse
+	public function find($key): RedirectResponse
 	{
 		$section = Section::where('key', $key)->first();
 		if (empty($section)) {
@@ -177,7 +179,7 @@ class SectionController extends PanelController
 	 * @param $action
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function resetAll($action): \Illuminate\Http\RedirectResponse
+	public function resetAll($action): RedirectResponse
 	{
 		// Reset the homepage sections reorder
 		if ($action == 'reorder') {
@@ -221,7 +223,7 @@ class SectionController extends PanelController
 				
 				$this->disk->delete($matchingFiles);
 				
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			
 			$message = trans('admin.sections_value_reset_successfully');

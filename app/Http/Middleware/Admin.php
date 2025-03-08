@@ -22,6 +22,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 class Admin
 {
@@ -30,7 +31,7 @@ class Admin
 	 *
 	 * @param \Illuminate\Http\Request $request
 	 * @param \Closure $next
-	 * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|mixed
+	 * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|mixed
 	 */
 	public function handle(Request $request, Closure $next)
 	{
@@ -58,7 +59,7 @@ class Admin
 						return $next($request);
 					}
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return $next($request);
 			}
 			

@@ -18,6 +18,7 @@ namespace App\Providers\AppService;
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 trait SymlinkTrait
 {
@@ -37,7 +38,7 @@ trait SymlinkTrait
 			if (isRealDirectory($symlinkPath)) {
 				File::deleteDirectory($symlinkPath);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$defaultMessage = 'Error occurred while deleting the "' . $symlinkPath . '" folder which should be a symbolic link. ';
 			$defaultMessage .= 'Please make sure the apache user has permissions to perform this action.';
 			
@@ -59,7 +60,7 @@ trait SymlinkTrait
 					symlink('../storage/app/public', './storage');
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $this->getSymlinkErrorMessage($e->getMessage());
 			flash($message)->error();
 		}

@@ -17,24 +17,24 @@
 return [
 	
 	'php'           => '8.2',
-	'app'           => '16.0.0',
+	'app'           => '16.0.2',
 	// Plugins minimum version required
 	'compatibility' => [
 		'adyen'            => '2.2.1',
 		'cashfree'         => '2.2.1',
-		'currencyexchange' => '4.2.8',
+		'currencyexchange' => '4.2.9',
 		'detectadsblocker' => '2.0.2',
-		'domainmapping'    => '5.3.4',
+		'domainmapping'    => '5.3.6',
 		'flutterwave'      => '2.2.1',
 		'iyzico'           => '2.2.1',
-		'offlinepayment'   => '4.1.2',
+		'offlinepayment'   => '4.1.3',
 		'paystack'         => '2.2.1',
 		'payu'             => '3.2.1',
 		'razorpay'         => '2.2.1',
-		'reviews'          => '4.3.4',
+		'reviews'          => '4.3.5',
 		'stripe'           => '3.2.1',
 		'twocheckout'      => '3.2.1',
-		'watermark'        => '3.1.3',
+		'watermark'        => '3.1.5',
 	],
 
 ];

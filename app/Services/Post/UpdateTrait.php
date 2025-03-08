@@ -17,15 +17,16 @@
 namespace App\Services\Post;
 
 use App\Helpers\Common\Date;
-use App\Services\Post\Update\MultiStepsForm;
-use App\Services\Post\Update\SingleStepForm;
 use App\Http\Requests\Front\PostRequest\LimitationCompliance;
 use App\Http\Resources\PostResource;
 use App\Models\Package;
 use App\Models\Post;
 use App\Notifications\PostArchived;
 use App\Notifications\PostRepublished;
+use App\Services\Post\Update\MultiStepsForm;
+use App\Services\Post\Update\SingleStepForm;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 trait UpdateTrait
 {
@@ -68,7 +69,7 @@ trait UpdateTrait
 			// Send Confirmation Email or SMS
 			try {
 				$post->notify(new PostArchived($post, $archivedPostsExpiration));
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return apiResponse()->error($e->getMessage());
 			}
 			
@@ -154,7 +155,7 @@ trait UpdateTrait
 			// Send Confirmation Email or SMS
 			try {
 				$post->notify(new PostRepublished($post));
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return apiResponse()->error($e->getMessage());
 			}
 			

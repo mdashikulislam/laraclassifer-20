@@ -23,6 +23,7 @@ use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
 use App\Notifications\SendPasswordAndVerificationInfo;
 use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 trait AutoRegistrationTrait
 {
@@ -126,7 +127,7 @@ trait AutoRegistrationTrait
 		// Send Generated Password by Email or SMS
 		try {
 			$user->notify(new SendPasswordAndVerificationInfo($user, $randomPassword));
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$data['success'] = false;
 			$data['message'] = $e->getMessage();
 		}

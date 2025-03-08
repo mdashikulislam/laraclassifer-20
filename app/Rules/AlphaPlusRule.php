@@ -51,20 +51,21 @@ class AlphaPlusRule implements ValidationRule
 	/**
 	 * Determine if the validation rule passes.
 	 *
-	 * @param  string  $attribute
-	 * @param  mixed  $value
+	 * @param string $attribute
+	 * @param mixed $value
 	 * @return bool
 	 */
 	public function passes(string $attribute, mixed $value): bool
 	{
 		$pattern = '/^[a-zA-Z' . preg_quote($this->additionalChars, '/') . ']+$/';
+		
 		return preg_match($pattern, $value);
 	}
 	
 	/**
 	 * Format additional characters as a comma-separated string.
 	 *
-	 * @param  string  $additionalChars
+	 * @param string $additionalChars
 	 * @return string
 	 */
 	protected function formatAdditionalChars(string $additionalChars): string

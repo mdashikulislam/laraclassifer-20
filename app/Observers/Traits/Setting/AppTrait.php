@@ -173,7 +173,7 @@ trait AppTrait
 			
 			$languages = Language::query()->withoutGlobalScopes([ActiveScope::class])->get();
 			if ($languages->count() > 0) {
-				foreach($languages as $language) {
+				foreach ($languages as $language) {
 					$language->date_format = null;
 					$language->datetime_format = null;
 					$language->save();
@@ -182,7 +182,7 @@ trait AppTrait
 			
 			$countries = Country::query()->withoutGlobalScopes([ActiveScope::class, LocalizedScope::class])->get();
 			if ($countries->count() > 0) {
-				foreach($countries as $country) {
+				foreach ($countries as $country) {
 					$country->date_format = null;
 					$country->datetime_format = null;
 					$country->save();

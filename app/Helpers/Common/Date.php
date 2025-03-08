@@ -17,7 +17,9 @@
 namespace App\Helpers\Common;
 
 use Carbon\CarbonInterface;
+use DateTimeZone;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 /*
  * The system locale needs to be set in the 'AppServiceProvider'
@@ -61,9 +63,9 @@ class Date
 		
 		try {
 			$timeZones = !empty($countryCode)
-				? \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, $countryCode)
-				: \DateTimeZone::listIdentifiers();
-		} catch (\Throwable $e) {
+				? DateTimeZone::listIdentifiers(DateTimeZone::PER_COUNTRY, $countryCode)
+				: DateTimeZone::listIdentifiers();
+		} catch (Throwable $e) {
 		}
 		
 		if (empty($timeZones)) {
@@ -116,7 +118,7 @@ class Date
 				} else {
 					$value = $value->translatedFormat($dateFormat);
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -497,7 +499,7 @@ class Date
 		
 		try {
 			$date = Carbon::parse($value);
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 			return false;
 		}
 		

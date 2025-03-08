@@ -16,9 +16,11 @@
 
 namespace App\Http\Controllers\Web\Front\Auth;
 
-use App\Services\Auth\Social\SaveProviderData;
 use App\Http\Controllers\Web\Front\FrontController;
+use App\Services\Auth\Social\SaveProviderData;
+use Illuminate\Http\RedirectResponse;
 use Laravel\Socialite\Facades\Socialite;
+use Throwable;
 
 class SocialController extends FrontController
 {
@@ -83,7 +85,7 @@ class SocialController extends FrontController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\RedirectResponse
 	 */
-	public function redirectToProvider(): \Symfony\Component\HttpFoundation\RedirectResponse|\Illuminate\Http\RedirectResponse
+	public function redirectToProvider(): \Symfony\Component\HttpFoundation\RedirectResponse|RedirectResponse
 	{
 		// Get the Provider and verify that if it's supported
 		$provider = request()->segment(2);
@@ -114,7 +116,7 @@ class SocialController extends FrontController
 			
 			return Socialite::driver($serviceKey)->redirect();
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
 				$message = $this->serviceError;
@@ -130,7 +132,7 @@ class SocialController extends FrontController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function handleProviderCallback(): \Illuminate\Http\RedirectResponse
+	public function handleProviderCallback(): RedirectResponse
 	{
 		// Get the Provider and verify that if it's supported
 		$provider = request()->segment(2);
@@ -165,7 +167,7 @@ class SocialController extends FrontController
 				
 				return redirect()->to($this->loginPath);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 			if (empty($message)) {
 				$message = $this->serviceError;

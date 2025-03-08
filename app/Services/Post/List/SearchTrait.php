@@ -17,10 +17,10 @@
 namespace App\Services\Post\List;
 
 use App\Helpers\Services\Search\PostQueries;
+use App\Models\CategoryField;
 use App\Services\Post\List\Search\CategoryTrait;
 use App\Services\Post\List\Search\LocationTrait;
 use App\Services\Post\List\Search\SidebarTrait;
-use App\Models\CategoryField;
 use Illuminate\Http\JsonResponse;
 use Larapen\LaravelDistance\Libraries\mysql\DistanceHelper;
 

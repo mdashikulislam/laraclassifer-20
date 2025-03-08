@@ -19,6 +19,7 @@ namespace App\Http\Requests\Admin\SettingRequest;
 use App\Helpers\Common\DBTool;
 use App\Http\Requests\Admin\Request;
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 /*
  * Use request() instead of $this since this form request can be called from another
@@ -147,7 +148,7 @@ class SecurityRequest extends Request
 			$fields = array_merge($fields, $otherFields);
 			
 			$fields = collect($fields)->unique()->toArray();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return $fields;

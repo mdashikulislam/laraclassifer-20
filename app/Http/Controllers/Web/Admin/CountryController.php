@@ -24,6 +24,7 @@ use App\Http\Requests\Admin\CountryRequest as StoreRequest;
 use App\Http\Requests\Admin\CountryRequest as UpdateRequest;
 use App\Models\Country;
 use App\Models\Currency;
+use Illuminate\Http\RedirectResponse;
 
 class CountryController extends PanelController
 {
@@ -141,95 +142,95 @@ class CountryController extends PanelController
 		
 		// FIELDS
 		$this->xPanel->addField([
-			'name'              => 'code',
-			'label'             => trans('admin.Code'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'code',
+			'label'      => trans('admin.Code'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the country code'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		], 'create');
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the country name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'capital',
-			'label'             => trans('admin.Capital') . ' (' . trans('admin.Optional') . ')',
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'capital',
+			'label'      => trans('admin.Capital') . ' (' . trans('admin.Optional') . ')',
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Capital'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'continent_code',
-			'label'             => trans('admin.Continent'),
-			'type'              => 'select2_from_array',
-			'options'           => $this->getContinentList(),
-			'allows_null'       => true,
-			'wrapperAttributes' => [
+			'name'        => 'continent_code',
+			'label'       => trans('admin.Continent'),
+			'type'        => 'select2_from_array',
+			'options'     => $this->getContinentList(),
+			'allows_null' => true,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'tld',
-			'label'             => trans('admin.TLD') . ' (' . trans('admin.Optional') . ')',
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'tld',
+			'label'      => trans('admin.TLD') . ' (' . trans('admin.Optional') . ')',
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the country tld'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone',
-			'label'             => trans('admin.Calling code'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'phone',
+			'label'      => trans('admin.Calling code'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the country calling code'),
 				'class'       => 'form-control m-phone',
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'currency_code',
-			'label'             => trans('admin.Currency Code'),
-			'type'              => 'select2_from_array',
-			'options'           => $this->getCurrencyList(),
-			'allows_null'       => true,
-			'hint'              => trans('admin.Default country currency'),
-			'wrapperAttributes' => [
+			'name'        => 'currency_code',
+			'label'       => trans('admin.Currency Code'),
+			'type'        => 'select2_from_array',
+			'options'     => $this->getCurrencyList(),
+			'allows_null' => true,
+			'hint'        => trans('admin.Default country currency'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		// Check the Currency Exchange plugin data
 		if (config('plugins.currencyexchange.installed')) {
 			$this->xPanel->addField([
-				'name'              => 'currencies',
-				'label'             => trans("currencyexchange::messages.Currencies") . ' (' . trans('currencyexchange::messages.Optional') . ')',
-				'type'              => 'text',
-				'attributes'        => [
+				'name'       => 'currencies',
+				'label'      => trans("currencyexchange::messages.Currencies") . ' (' . trans('currencyexchange::messages.Optional') . ')',
+				'type'       => 'text',
+				'attributes' => [
 					'placeholder' => trans('currencyexchange::messages.eg_currencies_field'),
 				],
-				'hint'              => trans('currencyexchange::messages.currencies_codes_list_menu_per_country_hint', [
+				'hint'       => trans('currencyexchange::messages.currencies_codes_list_menu_per_country_hint', [
 					'url' => admin_url('currencies'),
 				]),
-				'wrapperAttributes' => [
+				'wrapper'    => [
 					'class' => 'col-md-6',
 				],
 			]);
@@ -243,45 +244,45 @@ class CountryController extends PanelController
 			'hint'   => trans('admin.Choose a picture from your computer') . '<br>' . trans('admin.country_background_image_info'),
 		]);
 		$this->xPanel->addField([
-			'name'              => 'languages',
-			'label'             => trans('admin.country_spoken_languages_label'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'languages',
+			'label'      => trans('admin.country_spoken_languages_label'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.eg_languages_field'),
 			],
-			'hint'              => trans('admin.country_spoken_languages_hint', ['url' => admin_url('languages')]),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.country_spoken_languages_hint', ['url' => admin_url('languages')]),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'time_zone',
-			'label'             => t('preferred_time_zone_label'),
-			'type'              => 'select2_from_array',
-			'options'           => Date::getTimeZones(),
-			'allows_null'       => true,
-			'hint'              => t('preferred_time_zone_hint'),
-			'wrapperAttributes' => [
+			'name'        => 'time_zone',
+			'label'       => t('preferred_time_zone_label'),
+			'type'        => 'select2_from_array',
+			'options'     => Date::getTimeZones(),
+			'allows_null' => true,
+			'hint'        => t('preferred_time_zone_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		
 		$dateFormatHint = (config('settings.app.php_specific_date_format')) ? 'php_date_format_hint' : 'iso_date_format_hint';
 		$this->xPanel->addField([
-			'name'              => 'date_format',
-			'label'             => trans('admin.date_format_label'),
-			'type'              => 'text',
-			'hint'              => trans('admin.' . $dateFormatHint) . ' ' . trans('admin.country_date_format_hint_help'),
-			'wrapperAttributes' => [
+			'name'    => 'date_format',
+			'label'   => trans('admin.date_format_label'),
+			'type'    => 'text',
+			'hint'    => trans('admin.' . $dateFormatHint) . ' ' . trans('admin.country_date_format_hint_help'),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'datetime_format',
-			'label'             => trans('admin.datetime_format_label'),
-			'type'              => 'text',
-			'hint'              => trans('admin.' . $dateFormatHint) . ' ' . trans('admin.country_date_format_hint_help'),
-			'wrapperAttributes' => [
+			'name'    => 'datetime_format',
+			'label'   => trans('admin.datetime_format_label'),
+			'type'    => 'text',
+			'hint'    => trans('admin.' . $dateFormatHint) . ' ' . trans('admin.country_date_format_hint_help'),
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -292,31 +293,31 @@ class CountryController extends PanelController
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'admin_type', // enum
-			'label'             => trans('admin.admin_division_type_label'),
-			'type'              => 'select2_from_array',
-			'options'           => enumCountryAdminTypes(),
-			'default'           => 0,
-			'hint'              => trans('admin.admin_division_type_hint', [
+			'name'    => 'admin_type', // enum
+			'label'   => trans('admin.admin_division_type_label'),
+			'type'    => 'select2_from_array',
+			'options' => enumCountryAdminTypes(),
+			'default' => 0,
+			'hint'    => trans('admin.admin_division_type_hint', [
 				'moreCities'     => t('more_cities'),
 				'none'           => trans('admin.none'),
 				'adminDivision1' => trans('admin.admin_division1'),
 				'adminDivision2' => trans('admin.admin_division2'),
 			]),
-			'wrapperAttributes' => [
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
 		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		$request = $this->uploadFile($request);
 		
@@ -343,7 +344,7 @@ class CountryController extends PanelController
 				? $request->file($param['attribute'])
 				: $request->input($param['attribute']);
 			
-			$request->request->set($param['attribute'], Upload::image($param['destPath'], $file, $param));
+			$request->request->set($param['attribute'], Upload::image($file, $param['destPath'], $param));
 		}
 		
 		return $request;

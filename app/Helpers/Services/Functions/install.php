@@ -34,7 +34,7 @@ function createTheInstalledFile(bool $stopOnException = false): void
 	if (!file_exists($filePath)) {
 		try {
 			file_put_contents($filePath, $content);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	
@@ -43,7 +43,7 @@ function createTheInstalledFile(bool $stopOnException = false): void
 			$fp = fopen($filePath, 'w');
 			fwrite($fp, $content);
 			fclose($fp);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			if ($stopOnException) {
 				throw new CustomException($e->getMessage());
 			}

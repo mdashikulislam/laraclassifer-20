@@ -26,6 +26,7 @@ use App\Providers\AppService\ConfigTrait\SecurityConfig;
 use App\Providers\AppService\ConfigTrait\SkinConfig;
 use App\Providers\AppService\ConfigTrait\SmsConfig;
 use App\Providers\AppService\ConfigTrait\SocialAuthConfig;
+use Throwable;
 
 trait ConfigTrait
 {
@@ -100,7 +101,7 @@ trait ConfigTrait
 			} else {
 				config()->set('appLang.code', config('app.locale'));
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			config()->set('appLang.code', config('app.locale'));
 		}
 	}
@@ -132,7 +133,7 @@ trait ConfigTrait
 					}
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			config()->set('settings.error', true);
 			config()->set('settings.message', getExceptionMessage($e));
 			config()->set('settings.app.logo', config('larapen.media.logo'));

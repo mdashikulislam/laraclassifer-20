@@ -17,6 +17,7 @@
 namespace App\Observers;
 
 use App\Models\MetaTag;
+use Throwable;
 
 class MetaTagObserver
 {
@@ -54,6 +55,7 @@ class MetaTagObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {}
+		} catch (Throwable $e) {
+		}
 	}
 }

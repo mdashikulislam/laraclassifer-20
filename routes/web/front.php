@@ -435,7 +435,8 @@ Route::namespace('Browsing')
 		Route::controller(BrowsingCategoryController::class)
 			->group(function ($router) {
 				$router->pattern('id', '[0-9]+');
-				Route::post('categories/select', 'getCategoriesHtml');
+				Route::post('categories/select', 'getCategoriesHtml'); // To remove!
+				Route::get('categories/select', 'getCategoriesHtml');
 				Route::post('categories/{id}/fields', 'getCustomFieldsHtml');
 			});
 		

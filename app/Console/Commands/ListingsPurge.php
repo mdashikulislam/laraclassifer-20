@@ -22,16 +22,17 @@ if (file_exists($iniConfigFile)) {
 	include_once $iniConfigFile;
 }
 
-use App\Models\Scopes\VerifiedScope;
+use App\Models\Country;
+use App\Models\Post;
 use App\Models\Scopes\ActiveScope;
 use App\Models\Scopes\ReviewedScope;
+use App\Models\Scopes\VerifiedScope;
 use App\Notifications\PostArchived;
 use App\Notifications\PostDeleted;
 use App\Notifications\PostWilBeDeleted;
-use App\Models\Post;
-use App\Models\Country;
 use Illuminate\Console\Command;
 use Illuminate\Support\Carbon;
+use Throwable;
 
 class ListingsPurge extends Command
 {
@@ -264,7 +265,7 @@ class ListingsPurge extends Command
 					try {
 						// Send Notification Email to the Author
 						$post->notify(new PostArchived($post, $this->archivedPostsExpiration));
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$msg = $e->getMessage() . PHP_EOL;
 						$this->cmdLogger($msg);
 					}
@@ -315,7 +316,7 @@ class ListingsPurge extends Command
 				if (empty($post->deletion_mail_sent_at) || $daysSinceListingDeletionMailHasBeenSent >= $intervalOfSending) {
 					try {
 						$post->notify(new PostWilBeDeleted($post, $daysEarlier));
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						$msg = $e->getMessage() . PHP_EOL;
 						$this->cmdLogger($msg);
 					}
@@ -333,7 +334,7 @@ class ListingsPurge extends Command
 				try {
 					// Send Notification Email to the Author
 					$post->notify(new PostDeleted($post));
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					$msg = $e->getMessage() . PHP_EOL;
 					$this->cmdLogger($msg);
 				}

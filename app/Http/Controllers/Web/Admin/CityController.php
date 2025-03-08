@@ -25,12 +25,16 @@ use App\Models\Country;
 use App\Models\Scopes\ActiveScope;
 use App\Models\SubAdmin1;
 use App\Models\SubAdmin2;
+use Illuminate\Http\RedirectResponse;
 
 class CityController extends PanelController
 {
 	public $parentEntity = null;
+	
 	public $countryCode = null;
+	
 	public $admin1Code = null;
+	
 	public $admin2Code = null;
 	
 	public function setup()
@@ -275,59 +279,59 @@ class CityController extends PanelController
 		}
 		
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Enter the country name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'latitude',
-			'label'             => trans('admin.Latitude'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'latitude',
+			'label'      => trans('admin.Latitude'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Latitude'),
 			],
-			'hint'              => trans('admin.In decimal degrees'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.In decimal degrees'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'longitude',
-			'label'             => trans('admin.Longitude'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'longitude',
+			'label'      => trans('admin.Longitude'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Longitude'),
 			],
-			'hint'              => trans('admin.In decimal degrees'),
-			'wrapperAttributes' => [
+			'hint'       => trans('admin.In decimal degrees'),
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'population',
-			'label'             => trans('admin.Population'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'population',
+			'label'      => trans('admin.Population'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Population'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'time_zone',
-			'label'             => trans('admin.time_zone_label'),
-			'type'              => 'select2_from_array',
-			'options'           => Date::getTimeZones(),
-			'allows_null'       => true,
-			'hint'              => trans('admin.time_zone_hint'),
-			'wrapperAttributes' => [
+			'name'        => 'time_zone',
+			'label'       => trans('admin.time_zone_label'),
+			'type'        => 'select2_from_array',
+			'options'     => Date::getTimeZones(),
+			'allows_null' => true,
+			'hint'        => trans('admin.time_zone_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -338,12 +342,12 @@ class CityController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		return parent::storeCrud();
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		return parent::updateCrud();
 	}
@@ -376,7 +380,7 @@ class CityController extends PanelController
 	private function subAdmin1s(): array
 	{
 		// Get the Administrative Divisions
-		$admins = SubAdmin1::query()->inCountry( $this->countryCode)->get();
+		$admins = SubAdmin1::query()->inCountry($this->countryCode)->get();
 		
 		$tab = [];
 		if ($admins->count() > 0) {

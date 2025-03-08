@@ -17,13 +17,13 @@
 namespace App\Services\Payment\Subscription;
 
 use App\Helpers\Services\Payment as PaymentHelper;
-use App\Services\Payment\HasPaymentTrigger;
-use App\Services\Payment\RetrievePackageFeatures;
 use App\Http\Requests\Front\PackageRequest;
 use App\Http\Resources\UserResource;
 use App\Models\Package;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
+use App\Services\Payment\HasPaymentTrigger;
+use App\Services\Payment\RetrievePackageFeatures;
 
 trait SubscriptionPayment
 {

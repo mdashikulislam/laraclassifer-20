@@ -41,7 +41,7 @@ function isValidMobileNumber(?string $phone, ?string $countryCode = null): bool
 				|| $phoneUtil->getNumberType($phoneObj) === PhoneNumberType::FIXED_LINE_OR_MOBILE
 			)
 		);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$isValid = false;
 	}
 	
@@ -74,7 +74,7 @@ function isPossibleMobileNumber(?string $phone, ?string $countryCode = null): bo
 				|| $phoneUtil->getNumberType($phoneObj) === PhoneNumberType::FIXED_LINE_OR_MOBILE
 			)
 		);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$isPossibleNumber = false;
 	}
 	
@@ -106,7 +106,7 @@ function isValidPhoneNumber(?string $phone, ?string $countryCode = null): bool
 				|| $phoneUtil->getNumberType($phoneObj) === PhoneNumberType::UNKNOWN
 			)
 		);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$isValid = false;
 	}
 	
@@ -141,7 +141,7 @@ function isPossiblePhoneNumber(?string $phone, ?string $countryCode = null): boo
 				|| $phoneUtil->getNumberType($phoneObj) === PhoneNumberType::UNKNOWN
 			)
 		);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		$isPossibleNumber = false;
 	}
 	
@@ -165,7 +165,7 @@ function phoneNational(?string $phone, ?string $countryCode = null): ?string
 		$phoneUtil = PhoneNumberUtil::getInstance();
 		$phoneObj = $phoneUtil->parse($phone, $countryCode);
 		$phone = $phoneUtil->format($phoneObj, PhoneNumberFormat::NATIONAL);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		// Keep the default value
 	}
 	
@@ -192,7 +192,7 @@ function phoneE164(?string $phone, ?string $countryCode = null): ?string
 		$phoneUtil = PhoneNumberUtil::getInstance();
 		$phoneObj = $phoneUtil->parse($phone, $countryCode);
 		$phone = $phoneUtil->format($phoneObj, PhoneNumberFormat::E164);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		// Keep the default value
 	}
 	
@@ -217,7 +217,7 @@ function phoneIntl(?string $phone, ?string $countryCode = null): ?string
 		$phoneUtil = PhoneNumberUtil::getInstance();
 		$phoneObj = $phoneUtil->parse($phone, $countryCode);
 		$phone = $phoneUtil->format($phoneObj, PhoneNumberFormat::INTERNATIONAL);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		// Keep the default value
 	}
 	
@@ -236,7 +236,7 @@ function getCountryDialCode($countryCode): ?int
 		$phoneUtil = PhoneNumberUtil::getInstance();
 		
 		return $phoneUtil->getCountryCodeForRegion($countryCode);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return null;
@@ -274,7 +274,7 @@ function getExamplePhoneNumber(?string $countryCode = null, string|int|null $typ
 		if (!is_null($phoneObj)) {
 			$phone = $phoneUtil->format($phoneObj, PhoneNumberFormat::NATIONAL);
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return $phone;

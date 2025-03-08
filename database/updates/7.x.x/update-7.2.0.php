@@ -151,7 +151,7 @@ try {
 		'adjacentTable' => 'categories',
 		'nestedTable'   => 'categories',
 	];
-	$transformer = new \App\Helpers\Common\Categories\AdjacentToNested($params);
+	$transformer = new \App\Helpers\Common\HierarchicalData\Library\AdjacentToNested($params);
 	$transformer->getAndSetAdjacentItemsIds();
 	$transformer->convertChildrenRecursively(0);
 	$transformer->setNodesDepth();

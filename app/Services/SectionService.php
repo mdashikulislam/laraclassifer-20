@@ -23,6 +23,7 @@ use App\Models\Section;
 use App\Services\Section\SectionDataTrait;
 use App\Services\Section\SectionSettingTrait;
 use Illuminate\Http\JsonResponse;
+use Throwable;
 
 class SectionService extends BaseService
 {
@@ -52,7 +53,7 @@ class SectionService extends BaseService
 						->where('country_code', '=', $countryCode)
 						->orderBy('lft')
 						->get();
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 			
@@ -101,7 +102,7 @@ class SectionService extends BaseService
 						? $this->{$settingMethod}($section->value)
 						: $section->value;
 					$sectionsList[$key]['lft'] = $section->lft;
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					return apiResponse()->error($e->getMessage());
 				}
 			}
@@ -140,7 +141,7 @@ class SectionService extends BaseService
 						$section->withoutGlobalScopes([ActiveScope::class]);
 					}
 					$section = $section->where('country_code', '=', $countryCode)->where('key', $key)->first();
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 			
@@ -178,7 +179,7 @@ class SectionService extends BaseService
 				? $this->{$settingMethod}($section->value)
 				: $section->value;
 			$sectionArray['lft'] = $section->lft;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return apiResponse()->error($e->getMessage());
 		}
 		

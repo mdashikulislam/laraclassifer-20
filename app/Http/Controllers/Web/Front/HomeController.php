@@ -18,6 +18,7 @@ namespace App\Http\Controllers\Web\Front;
 
 use App\Services\SectionService;
 use Larapen\LaravelMetaTags\Facades\MetaTag;
+use Throwable;
 
 class HomeController extends FrontController
 {
@@ -112,7 +113,7 @@ class HomeController extends FrontController
 					'height' => (int)config('settings.social_share.og_image_height', 630),
 				]);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		view()->share('og', $this->og);
 	}

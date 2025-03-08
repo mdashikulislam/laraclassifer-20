@@ -22,7 +22,9 @@ use App\Models\Country;
 use App\Models\Post;
 use App\Models\SubAdmin1;
 use App\Models\SubAdmin2;
+use extras\plugins\domainmapping\app\Models\Domain;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 class CountryObserver
 {
@@ -93,11 +95,11 @@ class CountryObserver
 		
 		if (config('plugins.domainmapping.installed')) {
 			try {
-				$domain = \extras\plugins\domainmapping\app\Models\Domain::where('country_code', '=', $country->code)->first();
+				$domain = Domain::where('country_code', '=', $country->code)->first();
 				if (!empty($domain)) {
 					$domain->delete();
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		
@@ -144,7 +146,7 @@ class CountryObserver
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	

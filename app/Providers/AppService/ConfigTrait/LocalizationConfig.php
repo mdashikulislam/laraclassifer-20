@@ -17,6 +17,7 @@
 namespace App\Providers\AppService\ConfigTrait;
 
 use App\Helpers\Common\GeoIP;
+use Throwable;
 
 trait LocalizationConfig
 {
@@ -140,7 +141,7 @@ trait LocalizationConfig
 					$message = 'Error occurred, but the error message is not a string.';
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$message = $e->getMessage();
 		}
 		

@@ -17,10 +17,10 @@
 namespace App\Services\Auth\Helpers\AuthenticatesUsers;
 
 use App\Helpers\Common\Num;
+use Illuminate\Auth\Events\Lockout;
+use Illuminate\Cache\RateLimiter;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Cache\RateLimiter;
-use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Validation\ValidationException;
 

@@ -22,6 +22,8 @@ namespace App\Helpers\Common;
  * by calling this method: systemLocale()->setLocale($locale);
  */
 
+use Throwable;
+
 class Num
 {
 	/**
@@ -400,7 +402,7 @@ class Num
 		// Apply the currency rate
 		try {
 			$value = $value * $currencyRate;
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			// Debug
 		}
 		

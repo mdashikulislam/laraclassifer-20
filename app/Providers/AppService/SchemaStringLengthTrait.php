@@ -17,6 +17,7 @@
 namespace App\Providers\AppService;
 
 use Illuminate\Support\Facades\Schema;
+use Throwable;
 
 trait SchemaStringLengthTrait
 {
@@ -72,7 +73,7 @@ trait SchemaStringLengthTrait
 		 */
 		try {
 			Schema::defaultStringLength(191);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

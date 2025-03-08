@@ -18,6 +18,7 @@ namespace App\Helpers\Services;
 
 use App\Helpers\Common\Files\Storage\StorageDisk;
 use Illuminate\Contracts\Filesystem\Filesystem;
+use Throwable;
 
 class ThumbnailParams
 {
@@ -62,7 +63,7 @@ class ThumbnailParams
 		
 		try {
 			$url = $this->disk->url($filePath) . getPictureVersion();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$url = url('common/file?path=' . $filePath) . getPictureVersion(true);
 		}
 		

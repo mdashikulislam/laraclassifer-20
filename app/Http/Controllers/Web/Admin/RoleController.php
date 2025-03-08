@@ -16,11 +16,13 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use App\Http\Requests\Admin\Request;
 use App\Http\Requests\Admin\RoleRequest as StoreRequest;
 use App\Http\Requests\Admin\RoleRequest as UpdateRequest;
 use App\Models\Permission;
 use App\Models\Role;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use Illuminate\Http\RedirectResponse;
 
 class RoleController extends PanelController
 {
@@ -91,36 +93,37 @@ class RoleController extends PanelController
 		}
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
-		$this->setRoleDefaultPermissions();
+		$request = $this->setRoleDefaultPermissions($request);
 		
 		// Otherwise, changes won't have an effect
 		cache()->forget('spatie.permission.cache');
 		
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
-		$this->setRoleDefaultPermissions();
+		$request = $this->setRoleDefaultPermissions($request);
 		
 		// Otherwise, changes won't have an effect
 		cache()->forget('spatie.permission.cache');
 		
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	/**
 	 * Set role's default (or required) permissions
+	 *
+	 * @param \App\Http\Requests\Admin\Request $request
+	 * @return \App\Http\Requests\Admin\Request
 	 */
-	public function setRoleDefaultPermissions(): void
+	public function setRoleDefaultPermissions(Request $request): Request
 	{
 		// Get request permissions
-		$permissionIds = request()->input('permissions');
-		$permissionIds = collect($permissionIds)->map(function ($item, $key) {
-			return (int)$item;
-		})->toArray();
+		$permissionIds = $request->input('permissions');
+		$permissionIds = collect($permissionIds)->map(fn ($item) => (int)$item)->toArray();
 		
 		// Set staff default permissions
 		// Give the minimum admin panel permissions to the role.
@@ -132,7 +135,7 @@ class RoleController extends PanelController
 		}
 		
 		// Set the Super Admin default permissions (If needed)
-		$role = Role::find(request()->segment(3));
+		$role = Role::find($request->segment(3));
 		if (!empty($role)) {
 			// Get the Super Admin role
 			$superAdminRole = Role::getSuperAdminRole();
@@ -150,6 +153,9 @@ class RoleController extends PanelController
 		}
 		
 		// Update the request value
-		request()->request->set('permissions', $permissionIds);
+		// $request->request->set('permissions', $permissionIds);
+		$request->merge(['permissions' => $permissionIds]);
+		
+		return $request;
 	}
 }

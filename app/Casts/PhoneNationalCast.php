@@ -38,9 +38,7 @@ class PhoneNationalCast implements CastsAttributes
 		
 		$value = !empty($value)
 			? $value
-			: (
-				(isset($model->phone) && !empty($model->phone)) ? $model->phone : null
-			);
+			: ((isset($model->phone) && !empty($model->phone)) ? $model->phone : null);
 		
 		return phoneNational($value, $countryCode);
 	}

@@ -18,7 +18,7 @@ namespace App\Http\Controllers\Web\Setup\Update\Traits;
 
 use App\Helpers\Common\PhpArrayFile;
 use App\Models\Setting;
-use Illuminate\Support\Facades\File;
+use Throwable;
 
 trait RoutesTrait
 {
@@ -72,7 +72,7 @@ trait RoutesTrait
 					// Create or Update the "config/routes.php" file
 					$filePath = config_path('routes.php');
 					PhpArrayFile::writeFile($filePath, $origRoutes);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		}

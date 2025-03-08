@@ -27,9 +27,11 @@ use App\Models\Permission;
 use App\Models\Role;
 use App\Models\Scopes\VerifiedScope;
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Throwable;
 
 class UserController extends PanelController
 {
@@ -69,7 +71,7 @@ class UserController extends PanelController
 				if ($users->count() > 0) {
 					$usersIds = $users->keyBy('id')->keys()->toArray();
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			
 			// Exclude 'super-admin' role's users from list
@@ -362,140 +364,140 @@ class UserController extends PanelController
 		]);
 		
 		$this->xPanel->addField([
-			'label'             => trans('admin.Gender'),
-			'name'              => 'gender_id',
-			'type'              => 'select2_from_array',
-			'options'           => $this->gender(),
-			'allows_null'       => false,
-			'wrapperAttributes' => [
+			'label'       => trans('admin.Gender'),
+			'name'        => 'gender_id',
+			'type'        => 'select2_from_array',
+			'options'     => $this->gender(),
+			'allows_null' => false,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'email',
-			'label'             => trans('admin.Email'),
-			'type'              => 'email',
-			'attributes'        => [
+			'name'       => 'email',
+			'label'      => trans('admin.Email'),
+			'type'       => 'email',
+			'attributes' => [
 				'placeholder' => trans('admin.Email'),
 			],
-			'prefix'            => '<i class="fa-regular fa-envelope"></i>',
-			'wrapperAttributes' => [
+			'prefix'     => '<i class="fa-regular fa-envelope"></i>',
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'username',
-			'label'             => t('Username'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'username',
+			'label'      => t('Username'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => t('Username'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$phoneCountry = (!empty($entity) && isset($entity->phone_country)) ? strtolower($entity->phone_country) : 'us';
 		$this->xPanel->addField([
-			'name'              => 'phone',
-			'label'             => trans('admin.Phone'),
-			'type'              => 'intl_tel_input',
-			'phone_country'     => $phoneCountry,
-			'wrapperAttributes' => [
+			'name'          => 'phone',
+			'label'         => trans('admin.Phone'),
+			'type'          => 'intl_tel_input',
+			'phone_country' => $phoneCountry,
+			'wrapper'       => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone_hidden',
-			'label'             => trans('admin.Phone hidden'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'phone_hidden',
+			'label'   => trans('admin.Phone hidden'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'password',
-			'label'             => trans('admin.Password'),
-			'type'              => 'password',
-			'attributes'        => [
+			'name'       => 'password',
+			'label'      => trans('admin.Password'),
+			'type'       => 'password',
+			'attributes' => [
 				'placeholder'  => trans('admin.Password'),
 				'autocomplete' => 'new-password',
 			],
-			'prefix'            => '<i class="fa-solid fa-lock"></i>',
-			'wrapperAttributes' => [
+			'prefix'     => '<i class="fa-solid fa-lock"></i>',
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		], 'create');
 		$this->xPanel->addField([
-			'label'             => mb_ucfirst(trans('admin.country')),
-			'name'              => 'country_code',
-			'model'             => 'App\Models\Country',
-			'entity'            => 'country',
-			'attribute'         => 'name',
-			'type'              => 'select2',
-			'wrapperAttributes' => [
+			'label'     => mb_ucfirst(trans('admin.country')),
+			'name'      => 'country_code',
+			'model'     => 'App\Models\Country',
+			'entity'    => 'country',
+			'attribute' => 'name',
+			'type'      => 'select2',
+			'wrapper'   => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'time_zone',
-			'label'             => t('preferred_time_zone_label'),
-			'type'              => 'select2_from_array',
-			'options'           => Date::getTimeZones(),
-			'allows_null'       => true,
-			'hint'              => t('preferred_time_zone_info_lite'),
-			'wrapperAttributes' => [
+			'name'        => 'time_zone',
+			'label'       => t('preferred_time_zone_label'),
+			'type'        => 'select2_from_array',
+			'options'     => Date::getTimeZones(),
+			'allows_null' => true,
+			'hint'        => t('preferred_time_zone_info_lite'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'auth_field',
-			'label'             => t('auth_field_label'),
-			'type'              => 'select2_from_array',
-			'options'           => getAuthFields(),
-			'allows_null'       => true,
-			'default'           => getAuthField($entity),
-			'hint'              => t('auth_field_hint'),
-			'wrapperAttributes' => [
+			'name'        => 'auth_field',
+			'label'       => t('auth_field_label'),
+			'type'        => 'select2_from_array',
+			'options'     => getAuthFields(),
+			'allows_null' => true,
+			'default'     => getAuthField($entity),
+			'hint'        => t('auth_field_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => true,
+			'newline'     => true,
 		]);
 		
 		$this->xPanel->addField([
-			'name'              => 'email_verified_at',
-			'label'             => trans('admin.Verified Email'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'email_verified_at',
+			'label'   => trans('admin.Verified Email'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone_verified_at',
-			'label'             => trans('admin.Verified Phone'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'phone_verified_at',
+			'label'   => trans('admin.Verified Phone'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'blocked',
-			'label'             => trans('admin.Blocked'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'blocked',
+			'label'   => trans('admin.Blocked'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
-			'newline'           => !empty($entity),
+			'newline' => !empty($entity),
 		]);
 		
 		if (!empty($entity)) {
@@ -509,10 +511,10 @@ class UserController extends PanelController
 				$ipLink = $emptyIp;
 			}
 			$this->xPanel->addField([
-				'name'              => 'create_from_ip',
-				'type'              => 'custom_html',
-				'value'             => '<h5>' . $label . ' ' . $ipLink . '</h5>',
-				'wrapperAttributes' => [
+				'name'    => 'create_from_ip',
+				'type'    => 'custom_html',
+				'value'   => '<h5>' . $label . ' ' . $ipLink . '</h5>',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
 			], 'update');
@@ -525,13 +527,13 @@ class UserController extends PanelController
 				$ipLink = $emptyIp;
 			}
 			$this->xPanel->addField([
-				'name'              => 'latest_update_ip',
-				'type'              => 'custom_html',
-				'value'             => '<h5>' . $label . ' ' . $ipLink . '</h5>',
-				'wrapperAttributes' => [
+				'name'    => 'latest_update_ip',
+				'type'    => 'custom_html',
+				'value'   => '<h5>' . $label . ' ' . $ipLink . '</h5>',
+				'wrapper' => [
 					'class' => 'col-md-6',
 				],
-				'newline'           => true,
+				'newline' => true,
 			], 'update');
 			
 			if (!empty($entity->email) || !empty($entity->phone)) {
@@ -557,10 +559,10 @@ class UserController extends PanelController
 				
 				$btnLink = '<a href="' . $btnUrl . '" class="btn btn-danger confirm-simple-action"' . $tooltip . '>' . $btnText . '</a>';
 				$this->xPanel->addField([
-					'name'              => 'ban_button',
-					'type'              => 'custom_html',
-					'value'             => $btnLink,
-					'wrapperAttributes' => [
+					'name'    => 'ban_button',
+					'type'    => 'custom_html',
+					'value'   => $btnLink,
+					'wrapper' => [
 						'style' => 'text-align:center;',
 					],
 				], 'update');
@@ -611,7 +613,7 @@ class UserController extends PanelController
 	}
 	
 	/**
-	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 * @return \Illuminate\View\View
 	 */
 	public function account()
 	{
@@ -627,111 +629,111 @@ class UserController extends PanelController
 			'hint'   => t('file_types', ['file_types' => getAllowedFileFormatsHint('image')]),
 		]);
 		$this->xPanel->addField([
-			'label'             => trans('admin.Gender'),
-			'name'              => 'gender_id',
-			'type'              => 'select2_from_array',
-			'options'           => $this->gender(),
-			'allows_null'       => false,
-			'wrapperAttributes' => [
+			'label'       => trans('admin.Gender'),
+			'name'        => 'gender_id',
+			'type'        => 'select2_from_array',
+			'options'     => $this->gender(),
+			'allows_null' => false,
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'name',
-			'label'             => trans('admin.Name'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'name',
+			'label'      => trans('admin.Name'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => trans('admin.Name'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'auth_field',
-			'label'             => t('auth_field_label'),
-			'type'              => 'select2_from_array',
-			'options'           => getAuthFields(),
-			'allows_null'       => true,
-			'default'           => getAuthField($authUser),
-			'hint'              => t('auth_field_hint'),
-			'wrapperAttributes' => [
+			'name'        => 'auth_field',
+			'label'       => t('auth_field_label'),
+			'type'        => 'select2_from_array',
+			'options'     => getAuthFields(),
+			'allows_null' => true,
+			'default'     => getAuthField($authUser),
+			'hint'        => t('auth_field_hint'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'username',
-			'label'             => t('Username'),
-			'type'              => 'text',
-			'attributes'        => [
+			'name'       => 'username',
+			'label'      => t('Username'),
+			'type'       => 'text',
+			'attributes' => [
 				'placeholder' => t('Username'),
 			],
-			'wrapperAttributes' => [
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'email',
-			'label'             => trans('admin.Email'),
-			'type'              => 'email',
-			'attributes'        => [
+			'name'       => 'email',
+			'label'      => trans('admin.Email'),
+			'type'       => 'email',
+			'attributes' => [
 				'placeholder' => trans('admin.Email'),
 			],
-			'prefix'            => '<i class="fa-regular fa-envelope"></i>',
-			'wrapperAttributes' => [
+			'prefix'     => '<i class="fa-regular fa-envelope"></i>',
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'password',
-			'label'             => trans('admin.Password'),
-			'type'              => 'password',
-			'attributes'        => [
+			'name'       => 'password',
+			'label'      => trans('admin.Password'),
+			'type'       => 'password',
+			'attributes' => [
 				'placeholder'  => trans('admin.Password'),
 				'autocomplete' => 'new-password',
 			],
-			'prefix'            => '<i class="fa-solid fa-lock"></i>',
-			'wrapperAttributes' => [
+			'prefix'     => '<i class="fa-solid fa-lock"></i>',
+			'wrapper'    => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$phoneCountry = (!empty($authUser) && isset($authUser->phone_country)) ? strtolower($authUser->phone_country) : 'us';
 		$this->xPanel->addField([
-			'name'              => 'phone',
-			'label'             => trans('admin.Phone'),
-			'type'              => 'intl_tel_input',
-			'phone_country'     => $phoneCountry,
-			'wrapperAttributes' => [
+			'name'          => 'phone',
+			'label'         => trans('admin.Phone'),
+			'type'          => 'intl_tel_input',
+			'phone_country' => $phoneCountry,
+			'wrapper'       => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'phone_hidden',
-			'label'             => trans('admin.Phone hidden'),
-			'type'              => 'checkbox_switch',
-			'wrapperAttributes' => [
+			'name'    => 'phone_hidden',
+			'label'   => trans('admin.Phone hidden'),
+			'type'    => 'checkbox_switch',
+			'wrapper' => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'label'             => mb_ucfirst(trans('admin.country')),
-			'name'              => 'country_code',
-			'model'             => 'App\Models\Country',
-			'entity'            => 'country',
-			'attribute'         => 'name',
-			'type'              => 'select2',
-			'wrapperAttributes' => [
+			'label'     => mb_ucfirst(trans('admin.country')),
+			'name'      => 'country_code',
+			'model'     => 'App\Models\Country',
+			'entity'    => 'country',
+			'attribute' => 'name',
+			'type'      => 'select2',
+			'wrapper'   => [
 				'class' => 'col-md-6',
 			],
 		]);
 		$this->xPanel->addField([
-			'name'              => 'time_zone',
-			'label'             => t('preferred_time_zone_label'),
-			'type'              => 'select2_from_array',
-			'options'           => Date::getTimeZones(),
-			'allows_null'       => true,
-			'hint'              => t('admin_preferred_time_zone_info_lite'),
-			'wrapperAttributes' => [
+			'name'        => 'time_zone',
+			'label'       => t('preferred_time_zone_label'),
+			'type'        => 'select2_from_array',
+			'options'     => Date::getTimeZones(),
+			'allows_null' => true,
+			'hint'        => t('admin_preferred_time_zone_info_lite'),
+			'wrapper'     => [
 				'class' => 'col-md-6',
 			],
 		]);
@@ -744,14 +746,14 @@ class UserController extends PanelController
 		}
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		$request = $this->handleInput($request);
 		
 		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		$request = $this->handleInput($request);
 		$request = $this->uploadPhoto($request);
@@ -760,7 +762,7 @@ class UserController extends PanelController
 		
 		// Is the admin user's own account?
 		// If from self account form?
-		$isTheAdminOwnAccount = ($authUser->getAuthIdentifier() == request()->segment(3));
+		$isTheAdminOwnAccount = ($authUser->getAuthIdentifier() == $request->segment(3));
 		$isFromSelfAccountForm = str_contains(url()->previous(), admin_uri('account'));
 		
 		// Prevent user's role removal
@@ -784,8 +786,8 @@ class UserController extends PanelController
 		// Handle password input fields
 		// Remove 'password_confirmation' field & Encrypt password if specified
 		$request->request->remove('password_confirmation');
-		if (request()->filled('password')) {
-			$request->request->set('password', Hash::make(request()->input('password')));
+		if ($request->filled('password')) {
+			$request->request->set('password', Hash::make($request->input('password')));
 		} else {
 			$request->request->remove('password');
 		}
@@ -809,14 +811,14 @@ class UserController extends PanelController
 		$user = null;
 		
 		// update
-		$userId = request()->segment(3);
+		$userId = $request->segment(3);
 		if (!empty($userId) && is_numeric($userId)) {
 			$user = User::find($userId);
 		}
 		
 		// create
 		if (empty($user)) {
-			$userId = request()->input('user_id');
+			$userId = $request->input('user_id');
 			if (!empty($userId) && is_numeric($userId)) {
 				$user = User::find($userId);
 			}
@@ -834,8 +836,11 @@ class UserController extends PanelController
 					'ratio'    => config('larapen.media.resize.namedOptions.avatar.ratio', '1'),
 					'upsize'   => config('larapen.media.resize.namedOptions.avatar.upsize', '0'),
 				];
-				$photoPath = Upload::image($param['destPath'], $file, $param);
-				$request->request->set($attribute, $photoPath);
+				try {
+					$photoPath = Upload::image($file, $param['destPath'], $param);
+					$request->request->set($attribute, $photoPath);
+				} catch (Throwable $e) {
+				}
 			}
 		}
 		
@@ -863,8 +868,8 @@ class UserController extends PanelController
 	private function isAdminUser(Request $request): bool
 	{
 		$isAdmin = false;
-		if (request()->filled('roles')) {
-			$rolesIds = request()->input('roles');
+		if ($request->filled('roles')) {
+			$rolesIds = $request->input('roles');
 			foreach ($rolesIds as $rolesId) {
 				$role = Role::find($rolesId);
 				if (!empty($role)) {
@@ -880,8 +885,8 @@ class UserController extends PanelController
 			}
 		}
 		
-		if (request()->filled('permissions')) {
-			$permissionIds = request()->input('permissions');
+		if ($request->filled('permissions')) {
+			$permissionIds = $request->input('permissions');
 			foreach ($permissionIds as $permissionId) {
 				$permission = Permission::find($permissionId);
 				if (in_array($permission->name, Permission::getStaffPermissions())) {

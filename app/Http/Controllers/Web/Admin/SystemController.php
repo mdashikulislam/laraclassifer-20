@@ -18,8 +18,8 @@ namespace App\Http\Controllers\Web\Admin;
 
 use App\Helpers\Common\DBTool;
 use App\Helpers\Common\DBTool\DBEncoding;
-use App\Http\Controllers\Web\Setup\Install\Traits\CheckerTrait;
 use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use App\Http\Controllers\Web\Setup\Install\Traits\CheckerTrait;
 
 class SystemController extends PanelController
 {

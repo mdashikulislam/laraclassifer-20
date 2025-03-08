@@ -20,6 +20,7 @@ use App\Exceptions\Custom\CustomException;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 class ScribeUpdater
 {
@@ -77,7 +78,7 @@ class ScribeUpdater
 				
 				unset($buffer);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			logger()->error(getExceptionMessage($e));
 		}
 	}
@@ -138,7 +139,7 @@ class ScribeUpdater
 				
 				File::replace($path, $buffer);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			logger()->error(getExceptionMessage($e));
 		}
 	}
@@ -175,7 +176,7 @@ class ScribeUpdater
 						if (!empty($pattern) && !empty($replacement)) {
 							$buffer = preg_replace($pattern, $replacement, $buffer);
 						}
-					} catch (\Throwable $e) {
+					} catch (Throwable $e) {
 						logger()->error(getExceptionMessage($e));
 					}
 				}
@@ -183,7 +184,7 @@ class ScribeUpdater
 				// Save the new buffer
 				File::replace($path, $buffer);
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			logger()->error(getExceptionMessage($e));
 		}
 	}
@@ -214,7 +215,7 @@ class ScribeUpdater
 					if (!empty($matches[$tokenIndex]) && is_array($matches[$tokenIndex])) {
 						$docAppApiTokensFound = array_merge($docAppApiTokensFound, $matches[$tokenIndex]);
 					}
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 					logger()->error(getExceptionMessage($e));
 				}
 			}

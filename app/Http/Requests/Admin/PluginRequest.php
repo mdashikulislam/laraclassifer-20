@@ -17,10 +17,11 @@
 namespace App\Http\Requests\Admin;
 
 use App\Rules\PurchaseCodeRule;
+use stdClass;
 
 class PluginRequest extends Request
 {
-	protected array|\stdClass|null $plugin = null;
+	protected array|stdClass|null $plugin = null;
 	
 	/**
 	 * Get the validation rules that apply to the request.

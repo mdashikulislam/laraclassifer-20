@@ -22,6 +22,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\Web\Front\Traits\HasIntlTelInput;
 use Illuminate\Contracts\Filesystem\Filesystem;
 use Illuminate\Routing\Controllers\Middleware;
+use Throwable;
 
 class FileController extends Controller
 {
@@ -70,7 +71,7 @@ class FileController extends Controller
 		
 		try {
 			$out = $response::create($this->disk, $filePath);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			abort(400, $e->getMessage());
 		}
 		
@@ -150,7 +151,7 @@ class FileController extends Controller
 			$out .= view('front.common.css.style', ['disk' => $this->disk])->render();
 			$out .= view('front.common.css.ribbons', ['disk' => $this->disk, 'displayKey' => $displayKey])->render();
 			$out = preg_replace('|</?style[^>]*>|i', '', $out);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$out .= '/* === CSS Error Found === */' . "\n";
 		}
 		

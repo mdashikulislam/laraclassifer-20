@@ -16,8 +16,8 @@
 
 namespace App\Helpers\Common\Response;
 
-use App\Http\Resources\EmptyResource;
 use App\Http\Resources\EmptyCollection;
+use App\Http\Resources\EmptyResource;
 use Error;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -25,6 +25,7 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
+use Throwable;
 
 class Api
 {
@@ -56,7 +57,7 @@ class Api
 				->json($data, $status, $headers, JSON_UNESCAPED_UNICODE)
 				->setStatusCode($status, $statusText);
 			
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			return $this->internalError(getExceptionMessage($e));
 		}
 	}

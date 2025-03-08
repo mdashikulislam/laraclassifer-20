@@ -67,7 +67,7 @@ class ExceptionOccurred extends BaseNotification
 		$mailMessage->line('<br><h4>----- Trace -----</h4>');
 		$traceOut = '';
 		$trace = $this->content['trace'] ?? [];
-		foreach($trace as $value) {
+		foreach ($trace as $value) {
 			$class = $value['class'] ?? $default;
 			$function = $value['function'] ?? $default;
 			$file = $value['file'] ?? $default;

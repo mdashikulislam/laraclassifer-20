@@ -97,7 +97,7 @@ class ResourceHints
 		
 		$out = '';
 		if (!empty($entries)) {
-			foreach($entries as $entry) {
+			foreach ($entries as $entry) {
 				if (
 					(!empty($entry['href']) && is_string($entry['href']))
 					&& (!empty($entry['as']) && is_string($entry['as']))
@@ -136,7 +136,7 @@ class ResourceHints
 		
 		$out = '';
 		if (!empty($entries)) {
-			foreach($entries as $entry) {
+			foreach ($entries as $entry) {
 				if (is_string($entry)) {
 					$out .= '<link rel="prefetch" href="' . $entry . '">';
 					// $out .=  "\n";
@@ -160,7 +160,7 @@ class ResourceHints
 		
 		$out = '';
 		if (!empty($entries)) {
-			foreach($entries as $entry) {
+			foreach ($entries as $entry) {
 				if (is_string($entry)) {
 					$out .= '<link rel="prerender" href="' . $entry . '">';
 					// $out .=  "\n";
@@ -184,7 +184,7 @@ class ResourceHints
 		
 		$out = '';
 		if (!empty($entries)) {
-			foreach($entries as $entry) {
+			foreach ($entries as $entry) {
 				$out .= '<link rel="preconnect" href="' . $entry . '">';
 				if (!empty($entry['href']) && is_string($entry['href'])) {
 					if (isset($entry['crossorigin'])) {
@@ -218,7 +218,7 @@ class ResourceHints
 		
 		$out = '';
 		if (!empty($entries)) {
-			foreach($entries as $entry) {
+			foreach ($entries as $entry) {
 				if (is_string($entry)) {
 					$entry = str_replace(['http://', 'https://'], '', $entry);
 					$out .= '<link rel="dns-prefetch" href="//' . $entry . '">';

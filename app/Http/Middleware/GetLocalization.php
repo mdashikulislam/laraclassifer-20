@@ -65,7 +65,7 @@ class GetLocalization
 	{
 		// Language
 		$langObj = new LanguageHelper();
-		$lang    = $langObj->find();
+		$lang = $langObj->find();
 		
 		// Country
 		$countryObj = new CountryHelper();
@@ -76,7 +76,7 @@ class GetLocalization
 		}
 		
 		// Get selected country & the user's IP country
-		$country   = $countryObj->country;
+		$country = $countryObj->country;
 		$ipCountry = $countryObj->ipCountry;
 		
 		// Session: Set Country Code

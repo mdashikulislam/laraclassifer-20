@@ -20,7 +20,9 @@ use Carbon\CarbonInterval;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\VonageMessage;
 use NotificationChannels\Twilio\TwilioChannel;
+use NotificationChannels\Twilio\TwilioMessage;
 use NotificationChannels\Twilio\TwilioSmsMessage;
+use Throwable;
 
 class ResetPasswordNotification extends BaseNotification
 {
@@ -42,7 +44,7 @@ class ResetPasswordNotification extends BaseNotification
 		$passwordTimeout = ($passwordTimeout < 1) ? 1 : $passwordTimeout;
 		try {
 			$this->expireTimeString = CarbonInterval::seconds($passwordTimeout)->cascade()->forHumans();
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$this->expireTimeString = $passwordTimeout . ' minute(s)';
 		}
 	}
@@ -81,7 +83,7 @@ class ResetPasswordNotification extends BaseNotification
 		return (new VonageMessage())->content($this->getSmsMessage())->unicode();
 	}
 	
-	public function toTwilio($notifiable): TwilioSmsMessage|\NotificationChannels\Twilio\TwilioMessage
+	public function toTwilio($notifiable): TwilioSmsMessage|TwilioMessage
 	{
 		return (new TwilioSmsMessage())->content($this->getSmsMessage());
 	}

@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components;
 
 use App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components\Extension\ImageTrait;
+use Imagick;
 
 trait ExtensionTrait
 {
@@ -122,7 +123,7 @@ trait ExtensionTrait
 			return null;
 		}
 		
-		$v = \Imagick::getVersion();
+		$v = Imagick::getVersion();
 		$versionString = $v['versionString'] ?? '';
 		
 		if ($strict) {

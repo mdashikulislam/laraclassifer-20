@@ -17,18 +17,18 @@
 namespace App\Http\Controllers\Web\Front\Post\CreateOrEdit\SingleStep;
 
 use App\Helpers\Services\Referrer;
-use App\Services\Payment\HasPaymentTrigger;
-use App\Services\Payment\HasPaymentReferrers;
-use App\Services\Payment\Promotion\SingleStepPayment;
 use App\Http\Controllers\Web\Front\Auth\Traits\ShowReSendVerificationCodeButton;
+use App\Http\Controllers\Web\Front\FrontController;
 use App\Http\Controllers\Web\Front\Payment\HasPaymentRedirection;
 use App\Http\Controllers\Web\Front\Post\CreateOrEdit\Traits\PricingPageUrlTrait;
 use App\Http\Requests\Front\PostRequest;
-use App\Models\Post;
 use App\Models\Package;
+use App\Models\Post;
 use App\Models\Scopes\ReviewedScope;
 use App\Models\Scopes\VerifiedScope;
-use App\Http\Controllers\Web\Front\FrontController;
+use App\Services\Payment\HasPaymentReferrers;
+use App\Services\Payment\HasPaymentTrigger;
+use App\Services\Payment\Promotion\SingleStepPayment;
 use App\Services\PostService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\RedirectResponse;

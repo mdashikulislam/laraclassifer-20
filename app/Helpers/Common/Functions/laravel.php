@@ -23,8 +23,10 @@ use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\PendingRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Traits\Macroable;
 use Prologue\Alerts\Facades\Alert;
 
 /**
@@ -111,7 +113,7 @@ function isTranslatableModel($model): bool
 		if ($isTranslatableModel) {
 			$isTranslatable = true;
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 		return false;
 	}
 	
@@ -125,7 +127,7 @@ function isTranslatableModel($model): bool
  * @param string|\Closure $column
  * @return bool
  */
-function isTranslatableColumn($model, string|\Closure $column): bool
+function isTranslatableColumn($model, string|Closure $column): bool
 {
 	if (!is_string($column)) return false;
 	
@@ -166,7 +168,7 @@ function updateAppKeyWithArtisan(): void
 		// Generating a new App Key, removes|clears
 		// (or invalidates) all the sessions and cookies
 		Artisan::call('key:generate', ['--force' => true]);
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 }
 
@@ -837,14 +839,14 @@ function parseHttpRequestError($exceptionOrResponse): string
 		if (method_exists($exceptionOrResponse, 'reason')) {
 			try {
 				$responseErrorMessage = $exceptionOrResponse->reason();
-			} catch (\Exception $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		if (empty($responseErrorMessage)) {
 			if (method_exists($exceptionOrResponse, 'json')) {
 				try {
 					$responseErrorMessage = $exceptionOrResponse->json();
-				} catch (\Exception $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		}
@@ -852,7 +854,7 @@ function parseHttpRequestError($exceptionOrResponse): string
 			if (method_exists($exceptionOrResponse, 'body')) {
 				try {
 					$responseErrorMessage = $exceptionOrResponse->body();
-				} catch (\Exception $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		}
@@ -879,7 +881,7 @@ function parseHttpRequestError($exceptionOrResponse): string
  */
 function getHttpStatusCodes(): array
 {
-	$statusTexts = \Illuminate\Http\Response::$statusTexts;
+	$statusTexts = Response::$statusTexts;
 	$statusTexts[419] = getHttp419ExceptionMessage();
 	
 	return $statusTexts;
@@ -1076,7 +1078,7 @@ function notification(
 			// Levels: info, success, error, warning
 			flash($message)->$level();
 		}
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 }
 
@@ -1105,7 +1107,7 @@ function doesClassUse($class, $trait, bool $recursively = false): bool
 	
 	if ($recursively) {
 		try {
-			$reflectionClass = new \ReflectionClass($class);
+			$reflectionClass = new ReflectionClass($class);
 			while ($reflectionClass) {
 				$traits = $reflectionClass->getTraitNames();
 				if (in_array($trait, $traits)) {
@@ -1114,7 +1116,7 @@ function doesClassUse($class, $trait, bool $recursively = false): bool
 				
 				$reflectionClass = $reflectionClass->getParentClass();
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		return false;
@@ -1148,7 +1150,7 @@ function staticMethodExists($class, string $method): bool
 		$reflectionMethod = new \ReflectionMethod($class, $method);
 		
 		return $reflectionMethod->isStatic();
-	} catch (\Throwable $e) {
+	} catch (Throwable $e) {
 	}
 	
 	return false;
@@ -1162,7 +1164,7 @@ function staticMethodExists($class, string $method): bool
  */
 function isMacroable($class): bool
 {
-	$trait = \Illuminate\Support\Traits\Macroable::class;
+	$trait = Macroable::class;
 	
 	$usesMacroableTrait = doesClassUse($class, $trait);
 	$macroFunctionExists = staticMethodExists($class, 'macro');
@@ -1186,7 +1188,7 @@ function isMacroable($class): bool
 			$classFullName = str($classFullName)->start('\\')->toString();
 			
 			$macroableCanBeBypassed = in_array($classFullName, $bypassMacroableCheckFor);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 	
@@ -1222,4 +1224,28 @@ function getServiceData(?JsonResponse $data, bool $assoc = true): array
 	$data = $data->getData($assoc);
 	
 	return is_array($data) ? $data : [];
+}
+
+/**
+ * Normalize filename
+ * Note: The $originalName and $name are without file extension
+ *
+ * @param string $originalName
+ * @param string|null $name
+ * @return string
+ */
+function normalizeFilename(string $originalName, ?string $name = null): string
+{
+	$filename = !empty($name) ? $name : $originalName;
+	$filename = str($filename)->slug()->take(100)->trim('-')->toString();
+	
+	try {
+		$randomInt = random_int(1, 9999);
+	} catch (\Throwable $e) {
+		$randomInt = rand(1, 9999);
+	}
+	
+	$filename = $filename . '-' . $randomInt . time();
+	
+	return str($filename)->trim('-')->toString();
 }

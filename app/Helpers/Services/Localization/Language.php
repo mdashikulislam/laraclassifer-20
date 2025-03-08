@@ -17,10 +17,11 @@
 namespace App\Helpers\Services\Localization;
 
 use App\Helpers\Common\Arr;
-use App\Models\Language as LanguageModel;
 use App\Helpers\Services\Localization\Helpers\Country as CountryHelper;
+use App\Models\Language as LanguageModel;
 use App\Models\Scopes\ActiveScope;
 use Illuminate\Support\Collection;
+use Throwable;
 
 class Language
 {
@@ -239,7 +240,7 @@ class Language
 			// Get the Language details
 			$lang = self::$languages->has($langCode) ? self::$languages->get($langCode) : [];
 			$lang = collect($lang);
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$lang = collect($defaultLang);
 		}
 		
@@ -275,7 +276,7 @@ class Language
 				
 				return $languages->orderBy('lft')->get();
 			});
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 			$locale = config('app.locale');
 			$languages[$locale] = [
 				'code' => $locale,

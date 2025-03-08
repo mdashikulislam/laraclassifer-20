@@ -19,6 +19,8 @@ namespace App\Http\Controllers\Web\Setup\Install\Traits\Db;
 use App\Helpers\Common\DBTool;
 use App\Helpers\Common\DBTool\DBEncoding;
 use Illuminate\Support\Facades\DB;
+use PDO;
+use Throwable;
 
 trait CharsetTrait
 {
@@ -27,7 +29,7 @@ trait CharsetTrait
 	 * @param array $databaseInfo
 	 * @return array
 	 */
-	private function setDatabaseConnectionCharsetAndCollation(?\PDO $pdo = null, array $databaseInfo = []): array
+	private function setDatabaseConnectionCharsetAndCollation(?PDO $pdo = null, array $databaseInfo = []): array
 	{
 		// Try to get PDO connexion
 		try {
@@ -41,7 +43,7 @@ trait CharsetTrait
 					$pdo = DB::connection()->getPdo();
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		// Get default charset & collation

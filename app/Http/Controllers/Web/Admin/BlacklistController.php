@@ -16,13 +16,14 @@
 
 namespace App\Http\Controllers\Web\Admin;
 
+use App\Http\Controllers\Web\Admin\Panel\PanelController;
+use App\Http\Requests\Admin\BlacklistRequest as StoreRequest;
+use App\Http\Requests\Admin\BlacklistRequest as UpdateRequest;
 use App\Models\Blacklist;
 use App\Models\Permission;
 use App\Models\Post;
 use App\Models\User;
-use App\Http\Controllers\Web\Admin\Panel\PanelController;
-use App\Http\Requests\Admin\BlacklistRequest as StoreRequest;
-use App\Http\Requests\Admin\BlacklistRequest as UpdateRequest;
+use Illuminate\Http\RedirectResponse;
 
 class BlacklistController extends PanelController
 {
@@ -107,24 +108,24 @@ class BlacklistController extends PanelController
 		]);
 	}
 	
-	public function store(StoreRequest $request)
+	public function store(StoreRequest $request): RedirectResponse
 	{
 		// Check admin users (Don't ban admin users)
 		if ($this->isAnAdminUser()) {
 			return redirect()->back();
 		}
 		
-		return parent::storeCrud();
+		return parent::storeCrud($request);
 	}
 	
-	public function update(UpdateRequest $request)
+	public function update(UpdateRequest $request): RedirectResponse
 	{
 		// Check admin users (Don't ban admin users)
 		if ($this->isAnAdminUser()) {
 			return redirect()->back();
 		}
 		
-		return parent::updateCrud();
+		return parent::updateCrud($request);
 	}
 	
 	/**
@@ -132,7 +133,7 @@ class BlacklistController extends PanelController
 	 *
 	 * @return \Illuminate\Http\RedirectResponse
 	 */
-	public function banUser(): \Illuminate\Http\RedirectResponse
+	public function banUser(): RedirectResponse
 	{
 		// Get email address
 		$email = request()->input('email');

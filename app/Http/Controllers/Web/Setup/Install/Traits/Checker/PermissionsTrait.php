@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Setup\Install\Traits\Checker;
 
 use Illuminate\Support\Facades\File;
+use Throwable;
 
 trait PermissionsTrait
 {
@@ -169,7 +170,7 @@ trait PermissionsTrait
 			if (!File::exists($fullPath)) {
 				try {
 					File::makeDirectory($fullPath, 0777, true);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 			
@@ -215,7 +216,7 @@ trait PermissionsTrait
 			if (!File::exists($fullPath)) {
 				try {
 					File::makeDirectory($fullPath, 0777, true);
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 			

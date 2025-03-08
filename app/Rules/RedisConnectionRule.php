@@ -17,6 +17,7 @@
 namespace App\Rules;
 
 use Closure;
+use Exception;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Support\Facades\Redis;
 
@@ -37,8 +38,8 @@ class RedisConnectionRule implements ValidationRule
 	/**
 	 * Determine if the Redis connection is valid.
 	 *
-	 * @param  string  $attribute
-	 * @param  mixed  $value
+	 * @param string $attribute
+	 * @param mixed $value
 	 * @return bool
 	 */
 	public function passes(string $attribute, mixed $value): bool
@@ -50,7 +51,7 @@ class RedisConnectionRule implements ValidationRule
 			// Attempt to ping the Redis server
 			Redis::ping();
 			
-		} catch (\Exception $e) {
+		} catch (Exception $e) {
 			$message = $e->getMessage();
 			if (!empty($message)) {
 				$this->errorMessage .= ' ERROR: <span class="fw-bold">' . $message . '</span>';

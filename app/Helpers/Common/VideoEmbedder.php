@@ -17,6 +17,8 @@
 namespace App\Helpers\Common;
 
 use Illuminate\Support\Number;
+use ReflectionClass;
+use ReflectionMethod;
 
 class VideoEmbedder
 {
@@ -173,8 +175,8 @@ class VideoEmbedder
 	 */
 	public static function getPlatforms(): string
 	{
-		$platforms = collect((new \ReflectionClass(__CLASS__))->getMethods())
-			->map(function (\ReflectionMethod $item) {
+		$platforms = collect((new ReflectionClass(__CLASS__))->getMethods())
+			->map(function (ReflectionMethod $item) {
 				$method = $item->getName();
 				$from = 'get';
 				$to = 'EmbedCode';

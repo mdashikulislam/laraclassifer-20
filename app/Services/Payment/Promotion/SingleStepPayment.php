@@ -17,8 +17,8 @@
 namespace App\Services\Payment\Promotion;
 
 use App\Helpers\Services\Payment as PaymentHelper;
-use App\Services\Payment\RetrievePackageFeatures;
 use App\Models\Package;
+use App\Services\Payment\RetrievePackageFeatures;
 
 trait SingleStepPayment
 {

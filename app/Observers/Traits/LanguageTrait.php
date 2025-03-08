@@ -71,7 +71,7 @@ trait LanguageTrait
 			(!DBTool::isMariaDB() && DBTool::isMySqlMinVersion('5.7'))
 			|| (DBTool::isMariaDB() && DBTool::isMySqlMinVersion('10.2.3'))
 		);
-		if (! $jsonMethodsAreAvailable) {
+		if (!$jsonMethodsAreAvailable) {
 			return;
 		}
 		

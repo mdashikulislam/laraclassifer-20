@@ -18,7 +18,7 @@ namespace App\Helpers\Common\Response;
 
 use Illuminate\Http\JsonResponse;
 
-Class Ajax
+class Ajax
 {
 	/**
 	 * @param array|null $data

@@ -20,6 +20,7 @@ use App\Helpers\Common\Files\Storage\StorageDisk;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Messages\VonageMessage;
 use NotificationChannels\Twilio\TwilioChannel;
+use NotificationChannels\Twilio\TwilioMessage;
 use NotificationChannels\Twilio\TwilioSmsMessage;
 
 class ReplySent extends BaseNotification
@@ -125,7 +126,7 @@ class ReplySent extends BaseNotification
 		return (new VonageMessage())->content($this->getSmsMessage())->unicode();
 	}
 	
-	public function toTwilio($notifiable): TwilioSmsMessage|\NotificationChannels\Twilio\TwilioMessage
+	public function toTwilio($notifiable): TwilioSmsMessage|TwilioMessage
 	{
 		return (new TwilioSmsMessage())->content($this->getSmsMessage());
 	}

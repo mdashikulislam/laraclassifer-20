@@ -18,5 +18,5 @@ namespace App\Http\Requests\Admin;
 
 class ForgotPasswordRequest extends \App\Http\Requests\Front\ForgotPasswordRequest
 {
-    // ...
+	// ...
 }

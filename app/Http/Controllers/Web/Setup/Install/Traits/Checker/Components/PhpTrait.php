@@ -17,6 +17,7 @@
 namespace App\Http\Controllers\Web\Setup\Install\Traits\Checker\Components;
 
 use App\Helpers\Common\Num;
+use Throwable;
 
 trait PhpTrait
 {
@@ -38,7 +39,7 @@ trait PhpTrait
 			if (isset($array['require']['php'])) {
 				$version = $array['require']['php'];
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 		
 		if (empty($version)) {
@@ -64,13 +65,13 @@ trait PhpTrait
 		if (empty($path)) {
 			try {
 				$path = exec('whereis php');
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 			
 			if (empty($path)) {
 				try {
 					$path = exec('which php');
-				} catch (\Throwable $e) {
+				} catch (Throwable $e) {
 				}
 			}
 		}
@@ -108,7 +109,7 @@ trait PhpTrait
 		if (!empty($phpBinaryPath)) {
 			try {
 				exec($phpBinaryPath . ' --version', $version);
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 			}
 		}
 		

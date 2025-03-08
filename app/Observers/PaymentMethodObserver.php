@@ -17,11 +17,10 @@
 namespace App\Observers;
 
 use App\Models\Country;
-use App\Models\Payment;
 use App\Models\PaymentMethod;
 use App\Models\Scopes\ActiveScope;
 use App\Models\Scopes\LocalizedScope;
-use App\Models\Scopes\StrictActiveScope;
+use Throwable;
 
 class PaymentMethodObserver
 {
@@ -118,7 +117,7 @@ class PaymentMethodObserver
 					cache()->forget($cacheId);
 				}
 			}
-		} catch (\Throwable $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

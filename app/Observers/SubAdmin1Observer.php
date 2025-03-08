@@ -19,6 +19,7 @@ namespace App\Observers;
 use App\Models\City;
 use App\Models\SubAdmin1;
 use App\Models\SubAdmin2;
+use Throwable;
 
 class SubAdmin1Observer
 {
@@ -81,7 +82,7 @@ class SubAdmin1Observer
 	{
 		try {
 			cache()->flush();
-		} catch (\Exception $e) {
+		} catch (Throwable $e) {
 		}
 	}
 }

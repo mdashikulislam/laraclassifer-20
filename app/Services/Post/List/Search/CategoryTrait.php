@@ -16,8 +16,8 @@
 
 namespace App\Services\Post\List\Search;
 
-use App\Services\Category\CategoryBy;
 use App\Models\Category;
+use App\Services\Category\CategoryBy;
 
 trait CategoryTrait
 {

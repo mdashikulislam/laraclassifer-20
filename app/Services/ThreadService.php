@@ -17,8 +17,6 @@
 namespace App\Services;
 
 use App\Helpers\Common\Files\Upload;
-use App\Services\Auth\Traits\RecognizedUserActions\CompleteMissingAuthData;
-use App\Services\Thread\UpdateByTypeTrait;
 use App\Http\Requests\Front\ReplyMessageRequest;
 use App\Http\Requests\Front\SendMessageRequest;
 use App\Http\Resources\EntityCollection;
@@ -31,11 +29,14 @@ use App\Models\ThreadParticipant;
 use App\Models\User;
 use App\Notifications\ReplySent;
 use App\Notifications\SellerContacted;
+use App\Services\Auth\Traits\RecognizedUserActions\CompleteMissingAuthData;
+use App\Services\Thread\UpdateByTypeTrait;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Notification;
+use Throwable;
 
 class ThreadService extends BaseService
 {
@@ -214,7 +215,7 @@ class ThreadService extends BaseService
 			if ($request->hasFile('file_path')) {
 				// Upload File
 				$destPath = 'files/' . strtolower($post->country_code) . '/' . $post->id . '/applications';
-				$message->file_path = Upload::file($destPath, $request->file('file_path'));
+				$message->file_path = Upload::file($request->file('file_path'), $destPath);
 				
 				$message->save();
 			}
@@ -262,7 +263,7 @@ class ThreadService extends BaseService
 		if (isset($messageArray['post_id'], $messageArray['email'], $messageArray['name'], $messageArray['body'])) {
 			try {
 				$post->notify(new SellerContacted($post, $messageArray));
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return apiResponse()->internalError($e->getMessage());
 			}
 		}
@@ -336,7 +337,7 @@ class ThreadService extends BaseService
 			if (!empty($thread->post)) {
 				$post = $thread->post;
 				$destPath = 'files/' . strtolower($post->country_code) . '/' . $post->id . '/applications';
-				$message->file_path = Upload::file($destPath, $request->file('file_path'));
+				$message->file_path = Upload::file($request->file('file_path'), $destPath);
 				
 				$message->save();
 			}
@@ -413,7 +414,7 @@ class ThreadService extends BaseService
 						}
 					}
 				}
-			} catch (\Throwable $e) {
+			} catch (Throwable $e) {
 				return apiResponse()->internalError($e->getMessage());
 			}
 		}
